@@ -5,8 +5,7 @@ l.load = function(game, env)
 
 	local request = HTTP:Get(url, function(res)
         if res.StatusCode ~= 200 then
-            error("Error when loading '" .. url .."'. Code: " .. res.StatusCode, 2)
-            return
+            error("Error when loading '" .. url .. "'. Code: " .. res.StatusCode, 2)
         end
 
         local main = load(res.Body:ToString(), nil, "bt", env)
