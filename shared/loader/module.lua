@@ -18,6 +18,9 @@ l.loadGame = function(self, game, env)
 end
 
 l.loadData = function(self, file, callback)
+    if self.env == nil then
+        error("loader:loadData() should be called with ':'!", 2)
+    end
     local url = "https://raw.githubusercontent.com/sysfab/nsfworks/main/" .. file
 
     local request = HTTP:Get(url, function(response)
@@ -32,10 +35,16 @@ l.loadData = function(self, file, callback)
 end
 
 l.loadText = function(self, file, callback)
+    if self.env == nil then
+        error("loader:loadText() should be called with ':'!", 2)
+    end
     self:loadData(file, function(data) callback(data:ToString()) end)
 end
 
 l.loadFunction = function(self, file, callback)
+    if self.env == nil then
+        error("loader:loadFunction() should be called with ':'!", 2)
+    end
     self:loadText(file, function(data) callback(load(data, nil, "bt", self.env)) end)
 end
 
