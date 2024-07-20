@@ -1,6 +1,8 @@
 local l = {}
 
 l.env = nil
+l.repo = "sysfab/nsfworks/main/"
+
 l.init = function(self, env)
     self.env = env
 end
@@ -18,7 +20,7 @@ l.loadData = function(self, file, callback)
     if self.env == nil then
         error("loader:loadData() should be called with ':'!", 2)
     end
-    local url = "https://raw.githubusercontent.com/sysfab/nsfworks/main/" .. file
+    local url = "https://raw.githubusercontent.com/" .. self.repo .. file
 
     local request = HTTP:Get(url, function(response)
         if response.StatusCode ~= 200 then
