@@ -1,21 +1,17 @@
 local l = {}
 
 l.env = nil
-l.loadGame = function(self, game, env)
+l.init = function(self, env)
     self.env = env
-    local url = "https://raw.githubusercontent.com/sysfab/nsfworks/main/games/" .. game .. "/main.lua"
-
-    local request = HTTP:Get(url, function(response)
-        if response.StatusCode ~= 200 then
-            error("Error when loading '" .. url .. "'. Code: " .. response.StatusCode, 2)
-        end
-
-        local main = load(response.Body:ToString(), nil, "bt", env)
-        rawset(env, "Main", main)
-    end)
-
-    return request
 end
+
+
+l.loadGame = function(self, game)
+    return self:loadFunction(game .. "/main.lua", function(main)
+        rawset(self.env, "Main", main)
+    end)
+end
+
 
 l.loadData = function(self, file, callback)
     if self.env == nil then
@@ -38,14 +34,15 @@ l.loadText = function(self, file, callback)
     if self.env == nil then
         error("loader:loadText() should be called with ':'!", 2)
     end
-    self:loadData(file, function(data) callback(data:ToString()) end)
+    return self:loadData(file, function(data) callback(data:ToString()) end)
 end
 
 l.loadFunction = function(self, file, callback)
     if self.env == nil then
         error("loader:loadFunction() should be called with ':'!", 2)
     end
-    self:loadText(file, function(data) callback(load(data, nil, "bt", self.env)) end)
+    return self:loadText(file, function(data) callback(load(data, nil, "bt", self.env)) end)
 end
+
 
 return l
