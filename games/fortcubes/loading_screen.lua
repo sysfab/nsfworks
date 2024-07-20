@@ -9,7 +9,7 @@ function loading.create(self)
         error("loading:create() - loading currently created.", 2)
     end
 
-    debug.log("Creating loading screnen...")
+    debug.log("Creating loading screen...")
     self.created = true
 
     self.listener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
