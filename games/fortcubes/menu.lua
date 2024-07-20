@@ -35,13 +35,13 @@ function menu.create(self)
         self.title.object.FontSize = 22 * 8.85
         self.title.pos = Number2(11, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-5)
         self.title2.object.FontSize = 22 * 8.85
-        self.title2.pos = Number2(11, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-5)
+        self.title2.pos = Number2(11, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-10)
     end
 
     debug.log("Menu() - Menu created.")
 end
 
-function menu.remove()
+function menu.remove(self)
     if self.created == nil then
         error("menu.remove() should be called with ':'!", 2)
     end
