@@ -9,7 +9,7 @@ function menu.create(self)
         error("menu:create() - menu currently created.", 2)
     end
 
-    debug.log("Creating menu...")
+    debug.log("Menu() - Creating menu...")
     self.created = true
 
     self.listener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
@@ -19,6 +19,7 @@ function menu.create(self)
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
+    self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
 
     -- -- ------  --  --------------------  --  ------ -- --
@@ -28,9 +29,16 @@ function menu.create(self)
             error("menu.update() should be called with ':'!", 2)
         end
 
-        self.titleBG.scale = Number2(Screen.Width/2 - 10, Screen.Height/4 - Screen.SafeArea.Top - 10)
+        self.titleBG.Width, self.titleBG.Height = Screen.Width/2 - 10, Screen.Height/4 - Screen.SafeArea.Top - 10
         self.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 5)
+        
+        self.title.object.FontSize = 22 * 8.85
+        self.title.pos = Number2(11, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-5)
+        self.title2.object.FontSize = 22 * 8.85
+        self.title2.pos = Number2(11, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-5)
     end
+
+    debug.log("Menu() - Menu created.")
 end
 
 function menu.remove()
@@ -41,12 +49,15 @@ function menu.remove()
         error("menu:remove() - menu currently removed.", 2)
     end
 
-    debug.log("Removing menu...")
+    debug.log("Menu() - Removing menu...")
     self.created = false
     self.listener:Remove()
 
     self.titleBG:remove()
     self.title:remove()
+    self.title2:remove()
+
+    debug.log("Menu() - Menu removed.")
 end
 
 return menu
