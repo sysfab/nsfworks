@@ -1,8 +1,8 @@
 debug.log("Main() - started")
 
 load = {
-	"loading_screen": "games/fortcubes/loading_screen.lua",
-	"menu": "games/fortcubes/menu.lua"
+	loading_screen = "games/fortcubes/loading_screen.lua",
+	menu = "games/fortcubes/menu.lua"
 }
 need_to_load = 0
 loaded = 0
