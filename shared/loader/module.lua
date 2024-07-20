@@ -44,7 +44,7 @@ l.loadJSON = function(self, file, callback)
     if self.env == nil then
         error("loader:loadJSON() should be called with ':'!", 2)
     end
-    return self:loadText(file, function(data) callback(JSON:Decode(data))) end)
+    return self:loadText(file, function(data) callback(JSON:Decode(data)) end)
 end
 
 l.loadFunction = function(self, file, callback)
