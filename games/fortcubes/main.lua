@@ -1,1 +1,1 @@
-debug.log("Game Started")
+debug.log("Main() - started")
