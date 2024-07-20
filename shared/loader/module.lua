@@ -7,7 +7,7 @@ end
 
 
 l.loadGame = function(self, game)
-    return self:loadFunction(game .. "/main.lua", function(main)
+    return self:loadFunction("games/" .. game .. "/main.lua", function(main)
         rawset(self.env, "Main", main)
     end)
 end
