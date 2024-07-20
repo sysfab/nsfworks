@@ -1,3 +1,6 @@
+-- Loader
+-- NSFWorks loader module (base of all games)
+
 local l = {}
 
 l.env = nil

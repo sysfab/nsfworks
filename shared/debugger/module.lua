@@ -1,3 +1,6 @@
+-- Debug
+-- Debugging module
+
 local debug = {}
 
 debug.enabled = false

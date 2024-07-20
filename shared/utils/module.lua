@@ -1,3 +1,6 @@
+-- Utils
+-- NSFWorks utils
+
 local utils = {}
 
 utils.init = function(env)
