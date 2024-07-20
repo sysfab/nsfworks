@@ -1,7 +1,7 @@
 local l = {}
 
 l.load = function(game, env)
-	url = "https://raw.githubusercontent.com/sysfab/nsfworks/main/games/" .. game .. "/main.lua"
+	local url = "https://raw.githubusercontent.com/sysfab/nsfworks/main/games/" .. game .. "/main.lua"
 
 	local request = HTTP:Get(url, function(res)
         if res.StatusCode ~= 200 then
