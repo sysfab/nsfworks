@@ -12,7 +12,7 @@ function loading.create(self)
     debug.log("Creating loading screnen...")
     self.created = true
 
-    self.listener = LocalEvent.Listen(LocalEvent.Name.ScreenDidResize, function()
+    self.listener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
         self:update()
     end)
 
