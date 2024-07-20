@@ -54,5 +54,12 @@ l.loadFunction = function(self, file, callback)
     return self:loadText(file, function(data) callback(load(data, nil, "bt", self.env)) end)
 end
 
+l.loadModule = function(self, file, callback)
+    if self.env == nil then
+        error("loader:loadModule() should be called with ':'!", 2)
+    end
+    return self:loadFunction(file, function(func) callback(func()) end)
+end
+
 
 return l
