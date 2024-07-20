@@ -12,7 +12,7 @@ function menu.create(self)
     debug.log("Creating menu...")
     self.created = true
 
-    self.listener = LocalEvent.Listen(LocalEvent.Name.ScreenDidResize, function()
+    self.listener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
         self:update()
     end)
 
