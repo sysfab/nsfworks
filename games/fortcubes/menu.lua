@@ -54,8 +54,11 @@ function menu.remove(self)
     self.listener:Remove()
 
     self.titleBG:remove()
+    self.titleBG = nil
     self.title:remove()
+    self.title = nil
     self.title2:remove()
+    self.title2 = nil
 
     debug.log("Menu() - Menu removed.")
 end
