@@ -1,6 +1,6 @@
 local loader = {}
 
-loader.Load = function(game, env, commit)
+loader.load = function(game, env, commit)
 	url = "https://raw.githubusercontent.com/sysfab/nsfworks/main/games/" .. game .. "/main.lua"
 	local request = HTTP:Get(url, function(res)
         if res.StatusCode ~= 200 then
