@@ -42,6 +42,8 @@ function menu.create(self)
             v.Color = self.theme.button.borderColor
         end
     end
+
+    -- MENU INITIALION
     
     self.screenWidth = math.max(640, Screen.Width)/1920
 
@@ -59,6 +61,8 @@ function menu.create(self)
     Camera.Rotation = Rotation(0, -0.2, 0)
     Camera.Position = Number3(-10, 5, 5)
     Camera.FOV = 30
+
+    loader:loadFunction("games/fortcubes/assets/ambience.lua", function(f) f() end)
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
