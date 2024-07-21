@@ -9,7 +9,7 @@ function loading.create(self)
         error("loading:create() - loading currently created.", 2)
     end
 
-    debug.log("Creating loading screen...")
+    debug.log("loading() - Creating loading screen...")
     self.created = true
 
     self.listener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
@@ -47,16 +47,16 @@ function loading.remove()
         error("loading:remove() - loading screen currently removed.", 2)
     end
 
-    debug.log("Removing loading screen...")
-
-    self.BG:remove()
-    self.Title:remove()
-
-    self.BG = nil
-    self.Title = nil
-
+    debug.log("loading() - Removing loading screen...")
     self.created = false
     self.listener:Remove()
+
+    self.BG:remove()
+    self.BG = nil
+    self.Title:remove()
+    self.Title = nil
+
+    debug.log("loading() - Loading screen removed...")
 end
 
 return loading
