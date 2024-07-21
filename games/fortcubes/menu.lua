@@ -74,6 +74,9 @@ function menu.create(self)
     menu.man1.Rotation.Y = -0.3
     menu.man2.Position = Number3(-10, -6, 37)
     menu.man2.Rotation.Y = -0.2
+    
+    menu.man1.Width, menu.man1.Height = 682/1.25/70, 1023/1.25/70
+    menu.man2.Width, menu.man2.Height = 682/1.25/70, 1023*1.25/70
 
     Object:Load("nsfworks.fortcubes_yard", function(s)
         menu.yard = Shape(s)
@@ -130,9 +133,6 @@ function menu.create(self)
         menu.title2.object.Scale.Y = menu.screenHeight * 8.85
         menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
 
-        menu.man1.Width, menu.man1.Height = menu.screenWidth * 682/1.25/70, menu.screenHeight * 1023/1.25/70
-        menu.man2.Width, menu.man2.Height = menu.screenWidth * 682/1.25/70, menu.screenHeight * 1023*1.25/70
-
         -- MAIN MENU -- BUTTONS
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
@@ -187,6 +187,8 @@ function menu.remove(self)
     self.man1 = nil
     self.man2:SetParent(nil)
     self.man2 = nil
+    self.yard:SetParent(nil)
+    self.yard = nil
 
     self.aboutUs:remove()
     self.aboutUs = nil
