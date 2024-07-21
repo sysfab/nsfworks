@@ -16,15 +16,44 @@ function menu.create(self)
         self:update()
     end)
 
+    self.theme = {
+        button = {
+            borders = true,
+            borderColor = Color(0, 0, 0, 127),
+            underline = false,
+            padding = true,
+            shadow = false,
+            sound = "button_1",
+            color = Color(100, 100, 100, 127),
+            colorPressed = Color(50, 50, 50, 127),
+            colorSelected = Color(50, 50, 50, 127),
+            colorDisabled = Color(100, 100, 100, 127/2),
+            textColor = Color(255, 255, 255, 255),
+            textColorDisabled = Color(255, 255, 255, 200),
+        }
+    }
+
+    function self.setBorders(button)
+        if button == nil or button.borders == nil then
+            error("menu.setBorders(button) 1st argument should be a button.")
+        end
+        for k, v in pairs(button.borders) do
+            v.Color = self.theme.button.borderColor
+        end
+    end
+
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
 
+    self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
+    self.setBorders(self.aboutUs)
+
     -- -- ------  --  --------------------  --  ------ -- --
 
-    function menu.update(self)
+    function self.update(self)
         if self.created == nil then
             error("menu.update() should be called with ':'!", 2)
         end
