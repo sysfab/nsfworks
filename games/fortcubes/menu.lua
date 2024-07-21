@@ -116,8 +116,8 @@ function menu.create(self)
 
         menu.man1.Width, menu.man1.Height = menu.screenWidth * 682/1.25, menu.screenHeight * 1023/1.25
         menu.man1.pos = Number2(Screen.Width/2-200, 0)
-        menu.man2.Width, menu.man2.Height = menu.screenWidth * 682/1.25+300, menu.screenHeight * 1023/1.25
-        menu.man2.pos = Number2(Screen.Width/2+300, -300)
+        menu.man2.Width, menu.man2.Height = menu.screenWidth * 682/1.25, menu.screenHeight * 1023*1.25
+        menu.man2.pos = Number2(Screen.Width-(menu.man2.Width+100)*menu.screenWidth, -300*menu.screenHeight)
 
         -- MAIN MENU -- BUTTONS
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
