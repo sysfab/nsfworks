@@ -5,7 +5,6 @@ local l = {}
 
 l.env = nil
 l.repo = "sysfab/nsfworks"
-l.branch = "" -- removed this shit, it doesn't work with commit hashes
 
 l.init = function(self, env)
     self.env = env
@@ -24,7 +23,7 @@ l.loadData = function(self, file, callback)
     if self.env == nil then
         error("loader:loadData() should be called with ':'!", 2)
     end
-    local url = "https://raw.githubusercontent.com/" .. self.repo .. "/" .. self.branch .. "/" .. file
+    local url = "https://raw.githubusercontent.com/" .. self.repo .. "/" .. file
 
     local request = HTTP:Get(url, function(response)
         if response.StatusCode ~= 200 then
