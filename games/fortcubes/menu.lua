@@ -97,8 +97,9 @@ function menu.create(self)
         end
         debug.log("menu() - Menu updated.")
 
-        menu.screenWidth = math.max(640, Screen.Width)/1920
-        menu.screenHeight = math.max(360, Screen.Height)/1080
+        menu.wh = math.min(Screen.Width, Screen.Height)
+        menu.screenWidth = math.max(640, menu.wh)/1920
+        menu.screenHeight = math.max(360, menu.wh)/1080
 
         if menu.screenWidth < 0.334 or menu.screenHeight < 0.445 then
             -- TODO: Add message that game cannot be played with this screen scale.
