@@ -129,13 +129,13 @@ function menu.create(self)
         menu.settings.content.Scale.Y = menu.screenHeight * 3
         menu.settings.content.pos = Number2(menu.settings.Width/2 - menu.settings.content.Width/2, menu.settings.Height/2 - menu.settings.content.Height/2)
 
-        menu.armory.pos = Number2(5, 5 + 85 * menu.screenHeight*1)
+        menu.armory.pos = Number2(5, 5 + 85 * menu.screenHeight*2)
         menu.armory.Width, menu.armory.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.armory.content.Scale.X = menu.screenWidth * 3
         menu.armory.content.Scale.Y = menu.screenHeight * 3
         menu.armory.content.pos = Number2(menu.armory.Width/2 - menu.armory.content.Width/2, menu.armory.Height/2 - menu.armory.content.Height/2)
 
-        menu.play.pos = Number2(5, 5 + 85 * menu.screenHeight*1)
+        menu.play.pos = Number2(5, 5 + 85 * menu.screenHeight*3)
         menu.play.Width, menu.play.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.play.content.Scale.X = menu.screenWidth * 3
         menu.play.content.Scale.Y = menu.screenHeight * 3
