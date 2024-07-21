@@ -37,26 +37,23 @@ function menu.create(self)
         if button == nil or button.borders == nil then
             error("menu.setBorders(button) 1st argument should be a button.")
         end
-        button.select = function(s)
-            if s.selected then
-                return
-            end
-            s.selected = true
-            self.setBorders(s)
-        end
-        button.unselect = function(s)
-            if s.selected then
-                return
-            end
-            s.selected = true
-            self.setBorders(s)
-        end
+
         for k, v in pairs(button.borders) do
             v.Color = self.theme.button.borderColor
         end
     end
     
     self.screenWidth = math.max(640, Screen.Width)/1920
+
+    self.object = Object()
+    self.object.Tick = function()
+        if self.aboutUs ~= nil then
+            self.setBorders(self.aboutUs)
+            self.setBorders(self.settings)
+            self.setBorders(self.armory)
+            self.setBorders(self.play)
+        end
+    end
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
@@ -69,16 +66,9 @@ function menu.create(self)
     -- MAIN MENU - BUTTONS
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
-    self.setBorders(self.aboutUs)
-
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
-    self.setBorders(self.settings)
-
     self.armory = ui:createButton("ARMORY", menu.theme.button)
-    self.setBorders(self.armory)
-
     self.play = ui:createButton("PLAY", menu.theme.button)
-    self.setBorders(self.play)
 
     -- -- ------  --  --------------------  --  ------ -- --
     function menu.update(menu)
