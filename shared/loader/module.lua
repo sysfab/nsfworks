@@ -5,7 +5,7 @@ local l = {}
 
 l.env = nil
 l.repo = "sysfab/nsfworks"
-l.branch = "main"
+l.branch = "" -- removed this shit, it doesn't work with commit hashes
 
 l.init = function(self, env)
     self.env = env
