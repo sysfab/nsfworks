@@ -74,10 +74,12 @@ function menu.create(self)
     menu.man1 = Quad() menu.man1:SetParent(World)
     menu.man2 = Quad() menu.man2:SetParent(World)
 
-    menu.man1.Position = Number3(-20, -2, 35)
+    menu.man1.Position = Number3(-20, -3, 35)
     menu.man1.Rotation.Y = -0.3
-    menu.man2.Position = Number3(-10, -6, 37)
+    menu.man1.Shadow = true
+    menu.man2.Position = Number3(-10, -7, 37)
     menu.man2.Rotation.Y = -0.2
+    menu.man2.Shadow = true
     
     menu.man1.Width, menu.man1.Height = 682/1.25/70, 1023/1.25/70
     menu.man2.Width, menu.man2.Height = 682/1.25/70, 1023*1.25/70
@@ -86,6 +88,7 @@ function menu.create(self)
         menu.yard = Shape(s)
         menu.yard:SetParent(World)
         menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
+        menu.yard.Shadow = true
     end)
 
     HTTP:Get("https://st2.depositphotos.com/1017228/12400/i/950/depositphotos_124008550-stock-photo-attractive-serious-young-man-standing.jpg", function(result)
