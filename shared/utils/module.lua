@@ -13,6 +13,10 @@ utils.init = function(env)
 	    local toMin, toMax = toRange[1], toRange[2]
 	    return (value - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin
 	end
+
+	env.minmax = function(min, max, value)
+		return math.max(math.min(value, max), min)
+	end
 end
 
 return utils
