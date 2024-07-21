@@ -18,7 +18,18 @@ debug.error = function(message, level)
 	level = level + 1
 
 	if debug.enabled == true then
-		error("[DEBUG]: "..tostring(message), level)
+		error("[DEBUG ERROR]: "..tostring(message), level)
+	end
+end
+
+debug.assert = function(condition, message, level)
+	if level == nil then
+		level = 1
+	end
+	level = level + 1
+
+	if debug.enabled == true then
+		error("[DEBUG ASSERT]: "..tostring(message), level)
 	end
 end
 
