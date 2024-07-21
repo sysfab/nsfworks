@@ -17,7 +17,7 @@ require("ambience"):set({
 	sun = {
 		color = Color(255,247,204),
 		intensity = 1.000000,
-		rotation = Number3(-1.096077, 2.635441, 0.000000),
+		rotation = Number3(1.096077, 0.235441, 0.000000),
 	},
 	ambient = {
 		skyLightFactor = 0.100000,
