@@ -41,6 +41,8 @@ function menu.create(self)
             v.Color = self.theme.button.borderColor
         end
     end
+    
+    self.screenWidth = math.max(640, Screen.Width)/1920
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
