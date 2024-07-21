@@ -62,6 +62,15 @@ function menu.create(self)
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
+    self.man1 = ui:createFrame(Color(255, 255, 255, 255))
+
+    HTTP:Get("https://st2.depositphotos.com/1017228/12400/i/950/depositphotos_124008550-stock-photo-attractive-serious-young-man-standing.jpg", function(result)
+        if result.StatusCode ~= 200 then
+            error("Bad response")
+        end
+        local texture = result.Body
+        menu.man1:setImage(texture)
+    end)
 
     -- MAIN MENU - BUTTONS
 
@@ -96,6 +105,9 @@ function menu.create(self)
         menu.title2.object.Scale.X = menu.screenWidth * 8.85
         menu.title2.object.Scale.Y = menu.screenHeight * 8.85
         menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
+
+        menu.man1.Width, menu.man1.Height = menu.screenWidth * 682, menu.screenHeight * 1023
+        menu.man1.pos = Number2(Screen.Width/2, 0)
 
         -- MAIN MENU -- BUTTONS
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
