@@ -4,7 +4,7 @@
 local l = {}
 
 l.env = nil
-l.repo = "sysfab/nsfworks"
+l.repo = "sysfab/nsfworks/main"
 
 l.init = function(self, env)
     self.env = env
