@@ -44,12 +44,19 @@ function menu.create(self)
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
+    -- MAIN MENU
+
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
 
+    -- MAIN MENU - BUTTONS
+
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
     self.setBorders(self.aboutUs)
+    self.aboutUs.onRelease = function(s)
+        self.setBorders(s)
+    end
 
     -- -- ------  --  --------------------  --  ------ -- --
 
@@ -58,18 +65,27 @@ function menu.create(self)
             error("menu.update() should be called with ':'!", 2)
         end
 
+        self.screenWidth = math.max(640, Screen.Width)/1920
+
+        debug.log("menu() - Menu updated.")
+
+        -- MAIN MENU
+
         self.titleBG.Width, self.titleBG.Height = Screen.Width/2 - 10+ 60, Screen.Height/4 - Screen.SafeArea.Top - 10
         self.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 5)
         
-        self.title.object.FontSize = 22 * 8.85
+        self.title.object.FontSize = 22 * 8.85 * self.screenWidth
         self.title.pos = Number2(11+30, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-5)
-        self.title2.object.FontSize = 22 * 8.85
+        self.title2.object.FontSize = 22 * 8.85 * self.screenWidth
         self.title2.pos = Number2(11+30, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-10)
+
+        -- MAIN MENU -- BUTTONS
+        self.aboutUs.pos = Number2(5, 5)
+        --self.aboutUs.Width, self.aboutUs.Height = 
     end
 
-    menu:update()
-
     debug.log("menu() - Menu created.")
+    menu:update()
 end
 
 function menu.remove(self)
