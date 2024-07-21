@@ -28,4 +28,5 @@ debug.log("main() - Loading " .. need_to_load .. " modules..")
 function doneLoading()
 	debug.log("main() - Loaded all modules")
 	menu:create()
+	Camera:SetParent(World)
 end
