@@ -76,8 +76,8 @@ function menu.create(self)
     menu.man1.Position = Number3(-20, -3, 35)
     menu.man1.Rotation.Y = -0.3
     menu.man1.Shadow = true
-    menu.man2.Position = Number3(-10, -7, 37)
-    menu.man2.Rotation.Y = -0.2
+    menu.man2.Position = Number3(-12, -7, 38)
+    menu.man2.Rotation.Y = 0.2
     menu.man2.Shadow = true
     
     menu.man1.Width, menu.man1.Height = 682/1.25/70, 1023/1.25/70
