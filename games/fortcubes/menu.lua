@@ -62,8 +62,8 @@ function menu.create(self)
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
-    self.man1 = ui:createFrame(Color(255, 255, 255, 255))
     self.man2 = ui:createFrame(Color(255, 255, 255, 255))
+    self.man1 = ui:createFrame(Color(255, 255, 255, 255))
 
     HTTP:Get("https://st2.depositphotos.com/1017228/12400/i/950/depositphotos_124008550-stock-photo-attractive-serious-young-man-standing.jpg", function(result)
         if result.StatusCode ~= 200 then
@@ -116,8 +116,8 @@ function menu.create(self)
 
         menu.man1.Width, menu.man1.Height = menu.screenWidth * 682/1.25, menu.screenHeight * 1023/1.25
         menu.man1.pos = Number2(Screen.Width/2-200, 0)
-        menu.man2.Width, menu.man1.Height = menu.screenWidth * 682/1.25, menu.screenHeight * 1023/1.25
-        menu.man2.pos = Number2(Screen.Width/2+300, 0)
+        menu.man2.Width, menu.man2.Height = menu.screenWidth * 682/1.25+300, menu.screenHeight * 1023/1.25
+        menu.man2.pos = Number2(Screen.Width/2+300, -300)
 
         -- MAIN MENU -- BUTTONS
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
