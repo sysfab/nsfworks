@@ -147,7 +147,18 @@ function menu.remove(self)
     self.title2:remove()
     self.title2 = nil
 
+    self.aboutUs:remove()
+    self.aboutUs = nil
+    self.settings:remove()
+    self.settings = nil
+    self.armory:remove()
+    self.armory = nil
+    self.play:remove()
+    self.play = nil
+
     debug.log("menu() - Menu removed.")
+
+    -- aboba
 end
 
 return menu
