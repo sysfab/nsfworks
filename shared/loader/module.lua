@@ -18,8 +18,8 @@ l.loadGame = function(self, game)
     end)
 end
 
-
-l.loadData = function(self, file, callback)
+-- DO NOT USE THIS FUNCTION, USE loadData
+l.load = function(self, file, callback)
     if self.env == nil then
         error("loader:loadData() should be called with ':'!", 2)
     end
@@ -27,7 +27,7 @@ l.loadData = function(self, file, callback)
 
     local request = HTTP:Get(url, function(response)
         if response.StatusCode ~= 200 then
-            error("Error when loading '" .. url .. "'. Code: " .. response.StatusCode, 2)
+            error("Error when loading '" .. url .. "'. Code: " .. response.StatusCode, 3)
         end
 
         callback(response.Body)
@@ -36,32 +36,40 @@ l.loadData = function(self, file, callback)
     return request
 end
 
+
+l.loadData = function(self, file, callback)
+    if self.env == nil then
+        error("loader:loadData() should be called with ':'!", 2)
+    end
+    return self:load(file, function(data) callback(data) end)
+end
+
 l.loadText = function(self, file, callback)
     if self.env == nil then
         error("loader:loadText() should be called with ':'!", 2)
     end
-    return self:loadData(file, function(data) callback(data:ToString()) end)
+    return self:load(file, function(data) callback(data:ToString()) end)
 end
 
 l.loadJSON = function(self, file, callback)
     if self.env == nil then
         error("loader:loadJSON() should be called with ':'!", 2)
     end
-    return self:loadText(file, function(data) callback(JSON:Decode(data)) end)
+    return self:load(file, function(data) callback(JSON:Decode(data:ToString())) end)
 end
 
 l.loadFunction = function(self, file, callback)
     if self.env == nil then
         error("loader:loadFunction() should be called with ':'!", 2)
     end
-    return self:loadText(file, function(data) callback(load(data, nil, "bt", self.env)) end)
+    return self:load(file, function(data) callback(load(data:ToString(), nil, "bt", self.env)) end)
 end
 
 l.loadModule = function(self, file, callback)
     if self.env == nil then
         error("loader:loadModule() should be called with ':'!", 2)
     end
-    return self:loadFunction(file, function(func) callback(func()) end)
+    return self:load(file, function(data) callback(load(data:ToString(), nil, "bt", self.env)()) end)
 end
 
 
