@@ -37,6 +37,20 @@ function menu.create(self)
         if button == nil or button.borders == nil then
             error("menu.setBorders(button) 1st argument should be a button.")
         end
+        button.select = function(s)
+            if s.selected then
+                return
+            end
+            s.selected = true
+            self.setBorders(s)
+        end
+        button.unselect = function(s)
+            if s.selected then
+                return
+            end
+            s.selected = true
+            self.setBorders(s)
+        end
         for k, v in pairs(button.borders) do
             v.Color = self.theme.button.borderColor
         end
@@ -56,39 +70,15 @@ function menu.create(self)
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
     self.setBorders(self.aboutUs)
-    self.aboutUs.onRelease = function(s)
-        self.setBorders(s)
-    end
-    self.aboutUs.onPress = function(s)
-        self.setBorders(s)
-    end
 
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
     self.setBorders(self.settings)
-    self.settings.onRelease = function(s)
-        self.setBorders(s)
-    end
-    self.settings.onPress = function(s)
-        self.setBorders(s)
-    end
 
     self.armory = ui:createButton("ARMORY", menu.theme.button)
     self.setBorders(self.armory)
-    self.armory.onRelease = function(s)
-        self.setBorders(s)
-    end
-    self.armory.onPress = function(s)
-        self.setBorders(s)
-    end
 
     self.play = ui:createButton("PLAY", menu.theme.button)
     self.setBorders(self.play)
-    self.play.onRelease = function(s)
-        self.setBorders(s)
-    end
-    self.play.onPress = function(s)
-        self.setBorders(s)
-    end
 
     -- -- ------  --  --------------------  --  ------ -- --
     function menu.update(menu)
