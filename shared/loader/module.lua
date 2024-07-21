@@ -4,7 +4,8 @@
 local l = {}
 
 l.env = nil
-l.repo = "sysfab/nsfworks/main/"
+l.repo = "sysfab/nsfworks"
+l.branch = "main"
 
 l.init = function(self, env)
     self.env = env
@@ -13,8 +14,8 @@ end
 
 l.loadGame = function(self, game)
     return self:loadFunction("games/" .. game .. "/main.lua", function(main)
-        rawset(self.env, "Main", main)
-        self.env.Main()
+        rawset(self.env, "main", main)
+        self.env.main()
     end)
 end
 
@@ -23,7 +24,7 @@ l.loadData = function(self, file, callback)
     if self.env == nil then
         error("loader:loadData() should be called with ':'!", 2)
     end
-    local url = "https://raw.githubusercontent.com/" .. self.repo .. file
+    local url = "https://raw.githubusercontent.com/" .. self.repo .. "/" .. self.branch .. "/" .. file
 
     local request = HTTP:Get(url, function(response)
         if response.StatusCode ~= 200 then
