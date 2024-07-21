@@ -72,6 +72,24 @@ function menu.create(self)
         self.setBorders(s)
     end
 
+    self.armory = ui:createButton("ARMORY", menu.theme.button)
+    self.setBorders(self.armory)
+    self.armory.onRelease = function(s)
+        self.setBorders(s)
+    end
+    self.armory.onPress = function(s)
+        self.setBorders(s)
+    end
+
+    self.play = ui:createButton("PLAY", menu.theme.button)
+    self.setBorders(self.play)
+    self.play.onRelease = function(s)
+        self.setBorders(s)
+    end
+    self.play.onPress = function(s)
+        self.setBorders(s)
+    end
+
     -- -- ------  --  --------------------  --  ------ -- --
     function menu.update(menu)
         if menu.created == nil then
@@ -110,6 +128,18 @@ function menu.create(self)
         menu.settings.content.Scale.X = menu.screenWidth * 3
         menu.settings.content.Scale.Y = menu.screenHeight * 3
         menu.settings.content.pos = Number2(menu.settings.Width/2 - menu.settings.content.Width/2, menu.settings.Height/2 - menu.settings.content.Height/2)
+
+        menu.armory.pos = Number2(5, 5 + 85 * menu.screenHeight*1)
+        menu.armory.Width, menu.armory.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.armory.content.Scale.X = menu.screenWidth * 3
+        menu.armory.content.Scale.Y = menu.screenHeight * 3
+        menu.armory.content.pos = Number2(menu.armory.Width/2 - menu.armory.content.Width/2, menu.armory.Height/2 - menu.armory.content.Height/2)
+
+        menu.play.pos = Number2(5, 5 + 85 * menu.screenHeight*1)
+        menu.play.Width, menu.play.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.play.content.Scale.X = menu.screenWidth * 3
+        menu.play.content.Scale.Y = menu.screenHeight * 3
+        menu.play.content.pos = Number2(menu.play.Width/2 - menu.play.content.Width/2, menu.play.Height/2 - menu.play.content.Height/2)
     end
 
 
