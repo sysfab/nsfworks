@@ -56,8 +56,9 @@ function menu.create(self)
     end
 
     Camera:SetModeFree()
-    Camera.Rotation = Rotation(-0.2, 0, 0)
+    Camera.Rotation = Rotation(0, -0.2, 0)
     Camera.Position = Number3(-10, 5, 5)
+    Camera.FOV = 30
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
