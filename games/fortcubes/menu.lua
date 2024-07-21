@@ -19,7 +19,6 @@ function menu.create(self)
     self.theme = {
         button = {
             borders = true,
-            borderColor = Color(0, 0, 0, 127),
             underline = false,
             padding = true,
             shadow = false,
@@ -39,7 +38,7 @@ function menu.create(self)
         end
 
         for k, v in pairs(button.borders) do
-            v.Color = self.theme.button.borderColor
+            v.Color = Color(0, 0, 0, 127)
         end
     end
 
