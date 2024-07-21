@@ -62,28 +62,28 @@ function menu.create(self)
 
     -- -- ------  --  --------------------  --  ------ -- --
 
-    function self.update(self)
-        if self.created == nil then
+    function menu.update(menu)
+        if menu.created == nil then
             error("menu.update() should be called with ':'!", 2)
         end
 
-        self.screenWidth = math.max(640, Screen.Width)/1920
+        menu.screenWidth = math.max(640, Screen.Width)/1920
 
         debug.log("menu() - Menu updated.")
 
         -- MAIN MENU
 
-        self.titleBG.Width, self.titleBG.Height = Screen.Width/2 - 10+ 60, Screen.Height/4 - Screen.SafeArea.Top - 10
-        self.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 5)
+        menu.titleBG.Width, menu.titleBG.Height = Screen.Width/2 - 10+ 60, Screen.Height/4 - Screen.SafeArea.Top - 10
+        menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
         
-        self.title.object.FontSize = 22 * 8.85 * self.screenWidth
-        self.title.pos = Number2(11+30, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-5)
-        self.title2.object.FontSize = 22 * 8.85 * self.screenWidth
-        self.title2.pos = Number2(11+30, Screen.Height - Screen.SafeArea.Top - self.titleBG.Height - 32+72/2-10)
+        menu.title.object.Scale = 8.85 * menu.screenWidth
+        menu.title.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2-5)
+        menu.title2.object.Scale = 8.85 * menu.screenWidth
+        menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2-10)
 
         -- MAIN MENU -- BUTTONS
-        self.aboutUs.pos = Number2(5, 5)
-        --self.aboutUs.Width, self.aboutUs.Height = 
+        menu.aboutUs.pos = Number2(5, 5)
+        --menu.aboutUs.Width, menu.aboutUs.Height = 
     end
 
     debug.log("menu() - Menu created.")
