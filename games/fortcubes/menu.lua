@@ -59,32 +59,59 @@ function menu.create(self)
     self.aboutUs.onRelease = function(s)
         self.setBorders(s)
     end
+    self.aboutUs.onPress = function(s)
+        self.setBorders(s)
+    end
+
+    self.settings = ui:createButton("SETTINGS", menu.theme.button)
+    self.setBorders(self.settings)
+    self.settings.onRelease = function(s)
+        self.setBorders(s)
+    end
+    self.settings.onPress = function(s)
+        self.setBorders(s)
+    end
 
     -- -- ------  --  --------------------  --  ------ -- --
-
     function menu.update(menu)
         if menu.created == nil then
             error("menu.update() should be called with ':'!", 2)
         end
+        debug.log("menu() - Menu updated.")
 
         menu.screenWidth = math.max(640, Screen.Width)/1920
+        menu.screenHeight = math.max(360, Screen.Height)/1080
 
-        debug.log("menu() - Menu updated.")
+        if menu.screenWidth < 0.334 or menu.screenHeight < 0.445 then
+            -- TODO: Add message that game cannot be played with this screen scale.
+        end
 
         -- MAIN MENU
 
-        menu.titleBG.Width, menu.titleBG.Height = Screen.Width/2 - 10+ 60, Screen.Height/4 - Screen.SafeArea.Top - 10
+        menu.titleBG.Width, menu.titleBG.Height = menu.screenWidth * 1010, menu.screenHeight * 220
         menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
         
-        menu.title.object.Scale = 8.85 * menu.screenWidth
-        menu.title.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2-5)
-        menu.title2.object.Scale = 8.85 * menu.screenWidth
-        menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2-10)
+        menu.title.object.Scale.X = menu.screenWidth * 8.85
+        menu.title.object.Scale.Y = menu.screenHeight * 8.85
+        menu.title.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+10)
+        menu.title2.object.Scale.X = menu.screenWidth * 8.85
+        menu.title2.object.Scale.Y = menu.screenHeight * 8.85
+        menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
 
         -- MAIN MENU -- BUTTONS
-        menu.aboutUs.pos = Number2(5, 5)
-        --menu.aboutUs.Width, menu.aboutUs.Height = 
+        menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.aboutUs.content.Scale.X = menu.screenWidth * 3
+        menu.aboutUs.content.Scale.Y = menu.screenHeight * 3
+        menu.aboutUs.content.pos = Number2(menu.aboutUs.Width/2 - menu.aboutUs.content.Width/2, menu.aboutUs.Height/2 - menu.aboutUs.content.Height/2)
+
+        menu.settings.pos = Number2(5, 5 + 85 * menu.screenHeight*1)
+        menu.settings.Width, menu.settings.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.settings.content.Scale.X = menu.screenWidth * 3
+        menu.settings.content.Scale.Y = menu.screenHeight * 3
+        menu.settings.content.pos = Number2(menu.settings.Width/2 - menu.settings.content.Width/2, menu.settings.Height/2 - menu.settings.content.Height/2)
     end
+
 
     debug.log("menu() - Menu created.")
     menu:update()
