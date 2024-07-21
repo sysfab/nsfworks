@@ -1,4 +1,4 @@
-debug.log("Main() - started")
+debug.log("main() - started")
 
 load = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
@@ -11,7 +11,7 @@ for key, value in pairs(load) do
 	need_to_load = need_to_load + 1
 
 	loader:loadModule(value, function(module)
-		debug.log("Main() - Loaded '".. key .."'")
+		debug.log("main() - Loaded '".. key .."'")
 		_ENV[key] = module
 		loaded = loaded + 1
 		if loaded >= need_to_load then
@@ -19,10 +19,10 @@ for key, value in pairs(load) do
 		end
 	end)
 end
-debug.log("Main() - Loading " .. need_to_load .. " modules..")
+debug.log("main() - Loading " .. need_to_load .. " modules..")
 
 -- Done loding 'Main' function of main function
 function doneLoading()
-	debug.log("Main() - Loaded all modules")
+	debug.log("main() - Loaded all modules")
 	menu:create()
 end
