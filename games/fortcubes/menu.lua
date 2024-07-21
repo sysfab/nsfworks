@@ -9,7 +9,7 @@ function menu.create(self)
         error("menu:create() - menu currently created.", 2)
     end
 
-    debug.log("Menu() - Creating menu...")
+    debug.log("menu() - Creating menu...")
     self.created = true
 
     self.listener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
@@ -40,7 +40,7 @@ function menu.create(self)
 
     menu:update()
 
-    debug.log("Menu() - Menu created.")
+    debug.log("menu() - Menu created.")
 end
 
 function menu.remove(self)
@@ -51,7 +51,7 @@ function menu.remove(self)
         error("menu:remove() - menu currently removed.", 2)
     end
 
-    debug.log("Menu() - Removing menu...")
+    debug.log("menu() - Removing menu...")
     self.created = false
     self.listener:Remove()
 
@@ -62,7 +62,7 @@ function menu.remove(self)
     self.title2:remove()
     self.title2 = nil
 
-    debug.log("Menu() - Menu removed.")
+    debug.log("menu() - Menu removed.")
 end
 
 return menu
