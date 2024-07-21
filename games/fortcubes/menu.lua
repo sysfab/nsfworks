@@ -98,7 +98,7 @@ function menu.create(self)
         debug.log("menu() - Menu updated.")
 
         menu.wh = math.min(Screen.Width, Screen.Height)
-        menu.screenWidth = math.max(640, menu.wh)/1920
+        menu.screenWidth = math.max(640, menu.wh)/1920*2
         menu.screenHeight = math.max(360, menu.wh)/1080
 
         if menu.screenWidth < 0.334 or menu.screenHeight < 0.445 then
