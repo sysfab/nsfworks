@@ -71,6 +71,7 @@ function menu.create(self)
     Camera.Rotation = Rotation(0, -0.2, 0)
     Camera.Position = Number3(-10, 5, 5)
     Camera.FOV = 30
+    local avatar = require("avatar")
 
     loader:loadFunction("games/fortcubes/assets/ambience.lua", function(f) f() end)
 
@@ -91,16 +92,11 @@ function menu.create(self)
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
     self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
-    menu.man1 = Quad() menu.man1:SetParent(World)
+    menu.man1 = avatar:get(Player.Username) menu.man1:SetParent(World)
     menu.man2 = Quad() menu.man2:SetParent(World)
     menu.man3 = Quad() menu.man3:SetParent(World)
     menu.man4 = Quad() menu.man4:SetParent(World)
 
-    menu.man1.t = 0
-    menu.man1.Tick = function()
-        menu.man1.t = menu.man1.t + 1
-        menu.man1.Height = 1023/1.25/70 + math.sin(menu.man1.t * 0.03)*0.5
-    end
     menu.man2.t = 0
     menu.man2.Tick = function()
         menu.man2.t = menu.man2.t + 1.25
@@ -110,18 +106,17 @@ function menu.create(self)
     menu.man1.Position = Number3(-20, -3, 35)
     menu.man1.Rotation.Y = -0.3
     menu.man1.Shadow = true
+
     menu.man2.Position = Number3(-12, -7, 38)
     menu.man2.Rotation.Y = 0.2
     menu.man2.Shadow = true
-
     menu.man3.Position = Number3(10, -3, -40)
     menu.man4.Rotation.Y = math.pi+0.1
     menu.man3.Shadow = true
     menu.man4.Position = Number3(7, -3, -40)
     menu.man4.Rotation.Y = math.pi+0.2
     menu.man4.Shadow = true
-    
-    menu.man1.Width, menu.man1.Height = 682/1.25/70, 1023/1.25/70
+
     menu.man2.Width, menu.man2.Height = 682/1.25/70, 1023*1.25/70
     menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
     menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
@@ -133,13 +128,7 @@ function menu.create(self)
         menu.yard.Shadow = true
     end)
 
-    HTTP:Get("https://st2.depositphotos.com/1017228/12400/i/950/depositphotos_124008550-stock-photo-attractive-serious-young-man-standing.jpg", function(result)
-        if result.StatusCode ~= 200 then
-            error("Bad response")
-        end
-        local texture = result.Body
-        menu.man1.Image = texture
-    end)
+    
     HTTP:Get("https://img.freepik.com/free-photo/handsome-man-with-pistol_144627-4202.jpg", function(result)
         if result.StatusCode ~= 200 then
             error("Bad response")
