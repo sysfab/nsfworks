@@ -71,6 +71,8 @@ function menu.create(self)
         "menu", "about us", "settings", "armory"
     }
     self.currentMenu = "menu"
+    self.vineboom = AudioSource("gun_shot_1")
+    self.vineboom:SetParent(Camera)
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
@@ -149,6 +151,14 @@ function menu.create(self)
         local texture = result.Body
         menu.man4.Image = texture
     end)
+    HTTP:Get("https://www.myinstants.com/media/sounds/vine-boom.mp3", function(result)
+        if result.StatusCode ~= 200 then
+            error("Bad response")
+        end
+        local sound = result.Body
+        self.vineboom.Sound = result.Body
+    end)
+    
 
     -- MAIN MENU - BUTTONS
 
@@ -223,6 +233,8 @@ function menu.show(self, name)
     end
 
     if name == "menu" then
+        Camera.Rotation = Rotation(0, -0.2, 0)
+        Camera.Position = Number3(-10, 5, 5)
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.aboutUs.content.Scale.X = menu.screenWidth * 3
@@ -259,6 +271,9 @@ function menu.show(self, name)
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
     elseif name == "about us" then
+        self.vineboom:Play()
+        Camera.Rotation.Y = 2.85
+        Camera.Position = Number3(1, 5, -8)
         menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
