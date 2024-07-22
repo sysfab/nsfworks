@@ -58,6 +58,13 @@ function menu.create(self)
             self.setBorders(self.play)
             self.setBorders(self.back)
         end
+        if self.currentMenu == "menu" then
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.1)
+            Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.1)
+        elseif self.currentMenu == "about us" then
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.1)
+            Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.1)
+        end
     end
 
     Camera:SetModeFree()
@@ -233,8 +240,6 @@ function menu.show(self, name)
     end
 
     if name == "menu" then
-        Camera.Rotation = Rotation(0, -0.2, 0)
-        Camera.Position = Number3(-10, 5, 5)
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.aboutUs.content.Scale.X = menu.screenWidth * 3
@@ -272,8 +277,6 @@ function menu.show(self, name)
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
     elseif name == "about us" then
         self.vineboom:Play()
-        Camera.Rotation.Y = 2.85
-        Camera.Position = Number3(1, 5, -8)
         menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
