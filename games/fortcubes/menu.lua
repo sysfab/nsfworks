@@ -66,6 +66,7 @@ function menu.create(self)
     self.menus = {
         "menu", "about us", "settings", "armory"
     }
+    self.currentMenu = "menu"
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
