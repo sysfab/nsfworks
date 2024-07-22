@@ -89,6 +89,7 @@ function menu.create(self)
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
+    self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
     menu.man1 = Quad() menu.man1:SetParent(World)
     menu.man2 = Quad() menu.man2:SetParent(World)
@@ -220,11 +221,12 @@ function menu.create(self)
         menu.title2.object.Scale.Y = menu.screenHeight * 8.85
         menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
 
-        menu.versionBG.Width = menu.version.Width + 10
+        menu.versionBG.Width = menu.version.Width * 2
         menu.versionBG.Height = menu.version.Height + 6
         menu.versionBG.pos = Number2(menu.titleBG.pos.X + menu.titleBG.Width - menu.versionBG.Width, menu.titleBG.pos.Y-menu.versionBG.Height)
 
-        menu.version.pos = Number2(menu.versionBG.pos.X + 5, menu.versionBG.pos.Y + 3)
+        menu.version.pos = Number2(menu.versionBG.pos.X + menu.versionBG.Width/2 - menu.version.Width/2, menu.versionBG.pos.Y + 3)
+        menu.version2.pos = menu.version.pos - Number2(0, 5)
 
         -- MAIN MENU -- BUTTONS
         for k, v in pairs(self.menus) do
