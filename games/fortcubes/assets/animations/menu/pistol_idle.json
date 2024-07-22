@@ -1,0 +1,560 @@
+{
+    "animations": {
+        "default": {
+            "maxTime": 24,
+            "loopEnd": 24,
+            "playSpeed": 12,
+            "loopStart": 0,
+            "shapes": {
+                "LeftArm11": {
+                    "frames": {
+                        "12_": {
+                            "position": {
+                                "_z": 2.28984,
+                                "_y": 0.984208,
+                                "_x": -4.90712
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0.50496,
+                                "_edirty": false,
+                                "_y": 0.130092,
+                                "_x": -0.710606,
+                                "_ex": 5.28487,
+                                "_ey": 0.569635,
+                                "_w": -0.472366,
+                                "_ez": 1.65168
+                            }
+                        },
+                        "24_": {
+                            "position": {
+                                "_z": 2.28984,
+                                "_y": 0.984207,
+                                "_x": -4.90712
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0.503461,
+                                "_edirty": false,
+                                "_y": 0.135776,
+                                "_x": -0.705236,
+                                "_ex": 5.28487,
+                                "_ey": 0.569635,
+                                "_w": -0.480348,
+                                "_ez": 1.62914
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": 2.28984,
+                                "_y": 0.984207,
+                                "_x": -4.90712
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0.503461,
+                                "_edirty": false,
+                                "_y": 0.135776,
+                                "_x": -0.705236,
+                                "_ex": 5.28487,
+                                "_ey": 0.569635,
+                                "_w": -0.480348,
+                                "_ez": 1.62914
+                            }
+                        }
+                    },
+                    "name": "LeftArm11"
+                },
+                "RightFoot6": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": -0.499998,
+                                "_y": -3,
+                                "_x": 0
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0.0153416,
+                                "_edirty": false,
+                                "_y": 0.21368,
+                                "_x": 0.00335614,
+                                "_ex": 0.430508,
+                                "_ey": 0.0345652,
+                                "_w": 0.976777,
+                                "_ez": 0.0144299
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": -0.499998,
+                                "_y": -3,
+                                "_x": 0
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": 0.0153416,
+                                "_edirty": false,
+                                "_y": 0.21368,
+                                "_x": 0.00335614,
+                                "_ex": 0.430508,
+                                "_ey": 0.0345652,
+                                "_w": 0.976777,
+                                "_ez": 0.0144299
+                            }
+                        }
+                    },
+                    "name": "RightFoot6"
+                },
+                "RightHand10": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": 0,
+                                "_y": 0,
+                                "_x": 4
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0.02925,
+                                "_edirty": false,
+                                "_y": -0.00339441,
+                                "_x": 0.115221,
+                                "_ex": 6.28319,
+                                "_ey": 6.22428,
+                                "_w": -0.992903,
+                                "_ez": 6.05213
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": 0,
+                                "_y": 0,
+                                "_x": 4
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": 0.02925,
+                                "_edirty": false,
+                                "_y": -0.00339441,
+                                "_x": 0.115221,
+                                "_ex": 6.28319,
+                                "_ey": 6.22428,
+                                "_w": -0.992903,
+                                "_ez": 6.05213
+                            }
+                        }
+                    },
+                    "name": "RightHand10"
+                },
+                "Body1": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": 0,
+                                "_y": 12,
+                                "_x": 0
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": 0,
+                                "_ex": 0,
+                                "_ey": 0,
+                                "_w": 1,
+                                "_ez": 0
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": 0,
+                                "_y": 12,
+                                "_x": 0
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": 0,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": 0,
+                                "_ex": 0,
+                                "_ey": 0,
+                                "_w": 1,
+                                "_ez": 0
+                            }
+                        }
+                    },
+                    "name": "Body1"
+                },
+                "LeftHand12": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": -9.53674e-07,
+                                "_y": -9.53674e-07,
+                                "_x": -4
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0.0480578,
+                                "_edirty": false,
+                                "_y": 0.0305144,
+                                "_x": -0.180256,
+                                "_ex": 6.20585,
+                                "_ey": 0.0837296,
+                                "_w": -0.981971,
+                                "_ez": 0.359848
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": -9.53674e-07,
+                                "_y": -9.53674e-07,
+                                "_x": -4
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": -0.0480578,
+                                "_edirty": false,
+                                "_y": 0.0305144,
+                                "_x": -0.180256,
+                                "_ex": 6.20585,
+                                "_ey": 0.0837296,
+                                "_w": -0.981971,
+                                "_ez": 0.359848
+                            }
+                        }
+                    },
+                    "name": "LeftHand12"
+                },
+                "RightArm9": {
+                    "frames": {
+                        "12_": {
+                            "position": {
+                                "_z": 0.656342,
+                                "_y": 1.17998,
+                                "_x": 4.80812
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0.44986,
+                                "_edirty": false,
+                                "_y": 0.241653,
+                                "_x": 0.58918,
+                                "_ex": 5.29916,
+                                "_ey": 5.75585,
+                                "_w": -0.626176,
+                                "_ez": 5.06063
+                            }
+                        },
+                        "24_": {
+                            "position": {
+                                "_z": 0.656342,
+                                "_y": 1.17998,
+                                "_x": 4.80812
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0.453235,
+                                "_edirty": false,
+                                "_y": 0.244831,
+                                "_x": 0.587867,
+                                "_ex": 5.28902,
+                                "_ey": 5.74909,
+                                "_w": -0.623737,
+                                "_ez": 5.06628
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": 0.656342,
+                                "_y": 1.17998,
+                                "_x": 4.80812
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0.453235,
+                                "_edirty": false,
+                                "_y": 0.244831,
+                                "_x": 0.587867,
+                                "_ex": 5.28902,
+                                "_ey": 5.74909,
+                                "_w": -0.623737,
+                                "_ez": 5.06628
+                            }
+                        }
+                    },
+                    "name": "RightArm9"
+                },
+                "EyeLidLeft4": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": 5.1,
+                                "_y": 5.1,
+                                "_x": -4
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": 0,
+                                "_ex": 0,
+                                "_ey": 0,
+                                "_w": 1,
+                                "_ez": 0
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": 5.1,
+                                "_y": 5.1,
+                                "_x": -4
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": 0,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": 0,
+                                "_ex": 0,
+                                "_ey": 0,
+                                "_w": 1,
+                                "_ez": 0
+                            }
+                        }
+                    },
+                    "name": "EyeLidLeft4"
+                },
+                "RightLeg5": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": -1.90735e-06,
+                                "_y": -6,
+                                "_x": 2.5
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0,
+                                "_edirty": false,
+                                "_y": 0.204156,
+                                "_x": -0,
+                                "_ex": 5.87198,
+                                "_ey": 0,
+                                "_w": -0.978938,
+                                "_ez": 0
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": -1.90735e-06,
+                                "_y": -6,
+                                "_x": 2.5
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": -0,
+                                "_edirty": false,
+                                "_y": 0.204156,
+                                "_x": -0,
+                                "_ex": 5.87198,
+                                "_ey": 0,
+                                "_w": -0.978938,
+                                "_ez": 0
+                            }
+                        }
+                    },
+                    "name": "RightLeg5"
+                },
+                "LeftFoot8": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": -0.500006,
+                                "_y": -3,
+                                "_x": 0
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0.0464896,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": -0,
+                                "_ex": 0,
+                                "_ey": 6.19017,
+                                "_w": -0.998919,
+                                "_ez": 0
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": -0.500006,
+                                "_y": -3,
+                                "_x": 0
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": 0.0464896,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": -0,
+                                "_ex": 0,
+                                "_ey": 6.19017,
+                                "_w": -0.998919,
+                                "_ez": 0
+                            }
+                        }
+                    },
+                    "name": "LeftFoot8"
+                },
+                "LeftLeg7": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": -1,
+                                "_y": -6,
+                                "_x": -2.5
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0.0700036,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": -0,
+                                "_ex": 0,
+                                "_ey": 6.14306,
+                                "_w": -0.997547,
+                                "_ez": 0
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": -1,
+                                "_y": -6,
+                                "_x": -2.5
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": 0.0700036,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": -0,
+                                "_ex": 0,
+                                "_ey": 6.14306,
+                                "_w": -0.997547,
+                                "_ez": 0
+                            }
+                        }
+                    },
+                    "name": "LeftLeg7"
+                },
+                "EyeLidRight3": {
+                    "frames": {
+                        "24_": {
+                            "position": {
+                                "_z": 5.1,
+                                "_y": 5.1,
+                                "_x": 4
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": 0,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": 0,
+                                "_ex": 0,
+                                "_ey": 0,
+                                "_w": 1,
+                                "_ez": 0
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": 5.1,
+                                "_y": 5.1,
+                                "_x": 4
+                            },
+                            "interpolation": "linear",
+                            "rotation": {
+                                "_z": 0,
+                                "_edirty": false,
+                                "_y": 0,
+                                "_x": 0,
+                                "_ex": 0,
+                                "_ey": 0,
+                                "_w": 1,
+                                "_ez": 0
+                            }
+                        }
+                    },
+                    "name": "EyeLidRight3"
+                },
+                "Head2": {
+                    "frames": {
+                        "12_": {
+                            "position": {
+                                "_z": 0.499995,
+                                "_y": 6,
+                                "_x": 0
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0.206097,
+                                "_edirty": false,
+                                "_y": 0.108076,
+                                "_x": -0.0181599,
+                                "_ex": 0.204111,
+                                "_ey": 5.8571,
+                                "_w": 0.972375,
+                                "_ez": 6.20154
+                            }
+                        },
+                        "24_": {
+                            "position": {
+                                "_z": 0.499995,
+                                "_y": 6,
+                                "_x": 0
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0.205875,
+                                "_edirty": false,
+                                "_y": 0.0969819,
+                                "_x": -0.0205083,
+                                "_ex": 0.181381,
+                                "_ey": 5.85899,
+                                "_w": 0.973545,
+                                "_ez": 6.2019
+                            }
+                        },
+                        "0_": {
+                            "position": {
+                                "_z": 0.499995,
+                                "_y": 6,
+                                "_x": 0
+                            },
+                            "interpolation": "quadraticInOut",
+                            "rotation": {
+                                "_z": -0.205876,
+                                "_edirty": false,
+                                "_y": 0.0969818,
+                                "_x": -0.0205087,
+                                "_ex": 0.181381,
+                                "_ey": 5.85899,
+                                "_w": 0.973544,
+                                "_ez": 6.2019
+                            }
+                        }
+                    },
+                    "name": "Head2"
+                }
+            }
+        }
+    },
+    "shape": "nsfworks",
+    "shapeType": "player"
+}
