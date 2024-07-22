@@ -13,7 +13,8 @@ debug.log("main() - config loaded")
 
 load = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
-	menu = "games/fortcubes/menu.lua"
+	menu = "games/fortcubes/menu.lua",
+	game = "games/fortcubes/game.lua"
 }
 
 for key, value in pairs(load) do
