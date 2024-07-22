@@ -11,6 +11,10 @@ set("VERSION", "v0.0")
 debug.log("main() - config loaded")
 
 
+Client.DirectionalPad = function() end
+Client.AnalogPad = function() end
+
+
 load = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua",
