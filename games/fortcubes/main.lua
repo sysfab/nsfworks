@@ -1,5 +1,12 @@
 debug.log("main() - started")
 
+debug.enabled = true
+Camera:SetParent(nil)
+ui = uikit_loader()
+
+utils.init(_ENV)
+loader:init(_ENV)
+
 function set(key, value)
 	rawset(_ENV, key, value)
 end
