@@ -73,6 +73,17 @@ function menu.create(self)
     menu.man1 = Quad() menu.man1:SetParent(World)
     menu.man2 = Quad() menu.man2:SetParent(World)
 
+    menu.man1.t = 0
+    menu.man1.Tick = function()
+        menu.man1.t = menu.man1.t + 1
+        menu.man1.Height = 1023/1.25/70 + math.sin(menu.man1.t * 0.03)*0.5
+    end
+    menu.man2.t = 0
+    menu.man2.Tick = function()
+        menu.man2.t = menu.man2.t + 1.25
+        menu.man2.Height = 1023*1.25/70 + math.sin(menu.man2.t * 0.03)*0.5
+    end
+
     menu.man1.Position = Number3(-20, -3, 35)
     menu.man1.Rotation.Y = -0.3
     menu.man1.Shadow = true
