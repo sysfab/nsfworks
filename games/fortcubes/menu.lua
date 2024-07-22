@@ -19,7 +19,6 @@ function menu.create(self)
     self.theme = {
         button = {
             borders = true,
-            borderColor = Color(0, 0, 0, 127),
             underline = false,
             padding = true,
             shadow = false,
@@ -39,11 +38,16 @@ function menu.create(self)
         end
 
         for k, v in pairs(button.borders) do
-            v.Color = self.theme.button.borderColor
+            v.Color = Color(0, 0, 0, 127)
         end
     end
+
+    -- MENU INITIALION
     
     self.screenWidth = math.max(640, Screen.Width)/1920
+    self.screenHeight = math.max(360, Screen.Height)/1080
+
+    self.screenWidth = math.min(self.screenWidth, self.screenHeight)
 
     self.object = Object()
     self.object.Tick = function()
@@ -52,8 +56,30 @@ function menu.create(self)
             self.setBorders(self.settings)
             self.setBorders(self.armory)
             self.setBorders(self.play)
+            self.setBorders(self.back)
+        end
+        if self.currentMenu == "menu" then
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.25)
+            Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.2)
+        elseif self.currentMenu == "about us" then
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.25)
+            Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
         end
     end
+
+    Camera:SetModeFree()
+    Camera.Rotation = Rotation(0, -0.2, 0)
+    Camera.Position = Number3(-10, 5, 5)
+    Camera.FOV = 30
+
+    loader:loadFunction("games/fortcubes/assets/ambience.lua", function(f) f() end)
+
+    self.menus = {
+        "menu", "about us", "settings", "armory"
+    }
+    self.currentMenu = "menu"
+    self.vineboom = AudioSource("gun_shot_1")
+    self.vineboom:SetParent(Camera)
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
@@ -62,33 +88,112 @@ function menu.create(self)
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
-    self.man2 = ui:createFrame(Color(255, 255, 255, 255))
-    self.man1 = ui:createFrame(Color(255, 255, 255, 255))
+    menu.man1 = Quad() menu.man1:SetParent(World)
+    menu.man2 = Quad() menu.man2:SetParent(World)
+    menu.man3 = Quad() menu.man3:SetParent(World)
+    menu.man4 = Quad() menu.man4:SetParent(World)
+
+    menu.man1.t = 0
+    menu.man1.Tick = function()
+        menu.man1.t = menu.man1.t + 1
+        menu.man1.Height = 1023/1.25/70 + math.sin(menu.man1.t * 0.03)*0.5
+    end
+    menu.man2.t = 0
+    menu.man2.Tick = function()
+        menu.man2.t = menu.man2.t + 1.25
+        menu.man2.Height = 1023*1.25/70 + math.sin(menu.man2.t * 0.03)*0.5
+    end
+
+    menu.man1.Position = Number3(-20, -3, 35)
+    menu.man1.Rotation.Y = -0.3
+    menu.man1.Shadow = true
+    menu.man2.Position = Number3(-12, -7, 38)
+    menu.man2.Rotation.Y = 0.2
+    menu.man2.Shadow = true
+
+    menu.man3.Position = Number3(10, -3, -40)
+    menu.man4.Rotation.Y = math.pi+0.1
+    menu.man3.Shadow = true
+    menu.man4.Position = Number3(7, -3, -40)
+    menu.man4.Rotation.Y = math.pi+0.2
+    menu.man4.Shadow = true
+    
+    menu.man1.Width, menu.man1.Height = 682/1.25/70, 1023/1.25/70
+    menu.man2.Width, menu.man2.Height = 682/1.25/70, 1023*1.25/70
+    menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
+    menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
+
+    Object:Load("nsfworks.fortcubes_yard", function(s)
+        menu.yard = Shape(s)
+        menu.yard:SetParent(World)
+        menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
+        menu.yard.Shadow = true
+    end)
 
     HTTP:Get("https://st2.depositphotos.com/1017228/12400/i/950/depositphotos_124008550-stock-photo-attractive-serious-young-man-standing.jpg", function(result)
         if result.StatusCode ~= 200 then
             error("Bad response")
         end
         local texture = result.Body
-        menu.man1:setImage(texture)
+        menu.man1.Image = texture
     end)
     HTTP:Get("https://img.freepik.com/free-photo/handsome-man-with-pistol_144627-4202.jpg", function(result)
         if result.StatusCode ~= 200 then
             error("Bad response")
         end
         local texture = result.Body
-        menu.man2:setImage(texture)
+        menu.man2.Image = texture
     end)
+    HTTP:Get("https://img.freepik.com/premium-photo/tall-muscular-man-stands-confidently-beach-his-face-illuminated-by-setting-sun_846204-736.jpg", function(result)
+        if result.StatusCode ~= 200 then
+            error("Bad response")
+        end
+        local texture = result.Body
+        menu.man3.Image = texture
+    end)
+    HTTP:Get("https://c4.wallpaperflare.com/wallpaper/859/261/313/fate-series-fate-apocrypha-fate-grand-order-astolfo-fate-apocrypha-rider-of-black-fate-apocrypha-hd-wallpaper-preview.jpg", function(result)
+        if result.StatusCode ~= 200 then
+            error("Bad response")
+        end
+        local texture = result.Body
+        menu.man4.Image = texture
+    end)
+    HTTP:Get("https://www.myinstants.com/media/sounds/vine-boom.mp3", function(result)
+        if result.StatusCode ~= 200 then
+            error("Bad response")
+        end
+        local sound = result.Body
+        self.vineboom.Sound = result.Body
+    end)
+    
 
     -- MAIN MENU - BUTTONS
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
+    self.aboutUs.onRelease = function(s)
+        menu.currentMenu = "about us"
+        menu:update()
+    end
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
+    self.settings.onRelease = function(s)
+        menu.currentMenu = "settings"
+        menu:update()
+    end
     self.armory = ui:createButton("ARMORY", menu.theme.button)
+    self.armory.onRelease = function(s)
+        menu.currentMenu = "armory"
+        menu:update()
+    end
     self.play = ui:createButton("PLAY", menu.theme.button)
 
+    self.back = ui:createButton("BACK", menu.theme.button)
+    self.back.onRelease = function(s)
+        menu.currentMenu = "menu"
+        menu:update()
+    end
+
     -- -- ------  --  --------------------  --  ------ -- --
-    function menu.update(menu)
+    function menu.update(self)
         if menu.created == nil then
             error("menu.update() should be called with ':'!", 2)
         end
@@ -114,12 +219,27 @@ function menu.create(self)
         menu.title2.object.Scale.Y = menu.screenHeight * 8.85
         menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
 
-        menu.man1.Width, menu.man1.Height = menu.screenWidth * 682/1.25, menu.screenHeight * 1023/1.25
-        menu.man1.pos = Number2(Screen.Width/2-200, 0)
-        menu.man2.Width, menu.man2.Height = menu.screenWidth * 682/1.25, menu.screenHeight * 1023*1.25
-        menu.man2.pos = Number2(Screen.Width-(menu.man2.Width+100)*menu.screenWidth, -300*menu.screenHeight)
-
         -- MAIN MENU -- BUTTONS
+        for k, v in pairs(self.menus) do
+            menu:hide(v)
+        end
+        menu:show(menu.currentMenu)
+    end
+
+
+    debug.log("menu() - Menu created.")
+    menu:update()
+end
+
+function menu.show(self, name)
+    if self.created == nil then
+        error("menu.show(name) should be called with ':'!", 2)
+    end
+    if type(name) ~= "string" then
+        error("menu:show(name) - 1st argument should be a string.", 2)
+    end
+
+    if name == "menu" then
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.aboutUs.content.Scale.X = menu.screenWidth * 3
@@ -143,11 +263,48 @@ function menu.create(self)
         menu.play.content.Scale.X = menu.screenWidth * 3
         menu.play.content.Scale.Y = menu.screenHeight * 3
         menu.play.content.pos = Number2(menu.play.Width/2 - menu.play.content.Width/2, menu.play.Height/2 - menu.play.content.Height/2)
+    elseif name == "armory" then
+        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.back.content.Scale.X = menu.screenWidth * 3
+        menu.back.content.Scale.Y = menu.screenHeight * 3
+        menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
+    elseif name == "settings" then
+        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.back.content.Scale.X = menu.screenWidth * 3
+        menu.back.content.Scale.Y = menu.screenHeight * 3
+        menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
+    elseif name == "about us" then
+        self.vineboom:Play()
+        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.back.content.Scale.X = menu.screenWidth * 3
+        menu.back.content.Scale.Y = menu.screenHeight * 3
+        menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
+    end
+end
+
+function menu.hide(self, name)
+    if self.created == nil then
+        error("menu.hide(name) should be called with ':'!", 2)
+    end
+    if type(name) ~= "string" then
+        error("menu:hide(name) - 1st argument should be a string.", 2)
     end
 
-
-    debug.log("menu() - Menu created.")
-    menu:update()
+    if name == "menu" then
+        self.aboutUs.pos.X = -1000
+        self.settings.pos.X = -1000
+        self.armory.pos.X = -1000
+        self.play.pos.X = -1000
+    elseif name == "armory" then
+        self.back.pos.X = -1000
+    elseif name == "settings" then
+        self.back.pos.X = -1000
+    elseif name == "about us" then
+        self.back.pos.X = -1000
+    end
 end
 
 function menu.remove(self)
@@ -168,6 +325,13 @@ function menu.remove(self)
     self.title = nil
     self.title2:remove()
     self.title2 = nil
+
+    self.man1:SetParent(nil)
+    self.man1 = nil
+    self.man2:SetParent(nil)
+    self.man2 = nil
+    self.yard:SetParent(nil)
+    self.yard = nil
 
     self.aboutUs:remove()
     self.aboutUs = nil
