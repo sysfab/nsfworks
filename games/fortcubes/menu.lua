@@ -59,11 +59,11 @@ function menu.create(self)
             self.setBorders(self.back)
         end
         if self.currentMenu == "menu" then
-            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.1)
-            Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.1)
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.25)
+            Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.2)
         elseif self.currentMenu == "about us" then
-            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.1)
-            Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.1)
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.25)
+            Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
         end
     end
 
