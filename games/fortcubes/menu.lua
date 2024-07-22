@@ -45,6 +45,9 @@ function menu.create(self)
     -- MENU INITIALION
     
     self.screenWidth = math.max(640, Screen.Width)/1920
+    self.screenHeight = math.max(360, Screen.Height)/1080
+
+    self.screenWidth = math.min(self.screenWidth, self.screenHeight)
 
     self.object = Object()
     self.object.Tick = function()
