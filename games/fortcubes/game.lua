@@ -4,20 +4,20 @@ game.controls = {}
 game.controls.created = false
 game.controls.screenResize = function(controls)
 	controls.moveJoystick:setPos(Number2(10, 10))
-	controls.moveJoystick:setPos(Number2(Screen.Width-10, 10))
+	controls.shootJoystick:setPos(Number2(Screen.Width-10, 10))
 end
 game.controls.create = function(controls)
 	controls.moveJoystick = joysticks.create({
 		pos = {10, 10}, -- position on screen.
 		scale = 1.1, -- scale multiplier, 1 = 160 pixels.
-		color = Color(255, 255, 255, 127), -- color of joystick's insides.
-		borderColor = Color(255, 255, 255, 255) -- color of joystick's border.
+		color = Color(200, 200, 255, 127), -- color of joystick's insides.
+		borderColor = Color(200, 200, 255, 255) -- color of joystick's border.
 	})
 	controls.shootJoystick = joysticks.create({
 		pos = {Screen.Width-10, 10}, -- position on screen.
 		scale = 1.1, -- scale multiplier, 1 = 160 pixels.
-		color = Color(255, 255, 255, 127), -- color of joystick's insides.
-		borderColor = Color(255, 255, 255, 255) -- color of joystick's border.
+		color = Color(255, 200, 200, 127), -- color of joystick's insides.
+		borderColor = Color(255, 200, 200, 255) -- color of joystick's border.
 	})
 end
 game.controls.remove = function(controls)
@@ -39,6 +39,7 @@ game.create = function(self)
     end)
 end
 game.remove = function(self)
+	self.screenResizeListener:Remove()
 	self.controls:remove()
 	self.created = false
 end
