@@ -155,7 +155,15 @@ function menu.create(self)
         menu:update()
     end
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
+    self.settings.onRelease = function(s)
+        menu.currentMenu = "settings"
+        menu:update()
+    end
     self.armory = ui:createButton("ARMORY", menu.theme.button)
+    self.armory.onRelease = function(s)
+        menu.currentMenu = "armory"
+        menu:update()
+    end
     self.play = ui:createButton("PLAY", menu.theme.button)
 
     self.back = ui:createButton("BACK", menu.theme.button)
