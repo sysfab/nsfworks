@@ -223,10 +223,10 @@ function menu.create(self)
 
         menu.versionBG.Width = menu.version.Width * 2
         menu.versionBG.Height = menu.version.Height + 6
-        menu.versionBG.pos = Number2(menu.titleBG.pos.X + menu.titleBG.Width - menu.versionBG.Width, menu.titleBG.pos.Y-menu.versionBG.Height)
+        menu.versionBG.pos = Number2(Screen.Width-Screen.SafeArea.Right-menu.versionBG.Width, 0)
 
         menu.version.pos = Number2(menu.versionBG.pos.X + menu.versionBG.Width/2 - menu.version.Width/2, menu.versionBG.pos.Y + 3)
-        menu.version2.pos = Number2(menu.version.pos.X, menu.version.pos.Y - 5)
+        menu.version2.pos = Number2(menu.version.pos.X, menu.version.pos.Y - 2)
 
         -- MAIN MENU -- BUTTONS
         for k, v in pairs(self.menus) do
