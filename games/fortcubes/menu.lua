@@ -334,12 +334,21 @@ function menu.remove(self)
     self.title = nil
     self.title2:remove()
     self.title2 = nil
+    self.versionBG:remove()
+    self.versionBG = nil
+    self.version2:remove()
+    self.version2 = nil
+    self.version:remove()
+    self.version = nil
 
     self.man1:SetParent(nil)
+    self.man1.Tick = nil
     self.man1 = nil
     self.man2:SetParent(nil)
+    self.man2.Tick = nil
     self.man2 = nil
     self.yard:SetParent(nil)
+    self.yard.Tick = nil
     self.yard = nil
 
     self.aboutUs:remove()
