@@ -226,7 +226,7 @@ function menu.create(self)
         menu.versionBG.pos = Number2(menu.titleBG.pos.X + menu.titleBG.Width - menu.versionBG.Width, menu.titleBG.pos.Y-menu.versionBG.Height)
 
         menu.version.pos = Number2(menu.versionBG.pos.X + menu.versionBG.Width/2 - menu.version.Width/2, menu.versionBG.pos.Y + 3)
-        menu.version2.pos = menu.version.pos - Number2(0, 5)
+        menu.version2.pos = Number2(menu.version.pos.X, menu.version.pos.Y - 5)
 
         -- MAIN MENU -- BUTTONS
         for k, v in pairs(self.menus) do
