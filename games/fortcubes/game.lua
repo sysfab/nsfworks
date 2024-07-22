@@ -3,8 +3,12 @@ local game = {}
 game.controls = {}
 game.controls.created = false
 game.controls.screenResize = function(controls)
-	controls.moveJoystick:setPos(Number2(10, 10))
-	controls.shootJoystick:setPos(Number2(Screen.Width-10, 10))
+	if controls.moveJoystick.loaded == true then
+		controls.moveJoystick:setPos(Number2(10, 10))
+	end
+	if controls.shootJoystick.loaded == true then
+		controls.shootJoystick:setPos(Number2(Screen.Width-10, 10))
+	end
 end
 game.controls.create = function(controls)
 	controls.moveJoystick = joysticks.create({
@@ -22,6 +26,7 @@ game.controls.create = function(controls)
 end
 game.controls.remove = function(controls)
 	game.controls.moveJoystick:remove()
+	game.controls.shootJoystick:remove()
 end
 
 game.created = false
