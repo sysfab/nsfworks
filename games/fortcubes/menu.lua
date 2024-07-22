@@ -190,7 +190,7 @@ function menu.create(self)
     self.play = ui:createButton("PLAY", menu.theme.button)
     self.play.onRelease = function(s)
         menu:remove()
-        game:start()
+        game:create()
     end
 
     self.back = ui:createButton("BACK", menu.theme.button)
