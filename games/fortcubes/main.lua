@@ -1,5 +1,16 @@
 debug.log("main() - started")
 
+function set(key, value)
+	rawset(_ENV, key, value)
+end
+
+
+-- CONFIG
+set("VERSION", "v0.0")
+
+debug.log("main() - config loaded")
+
+
 load = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua"
