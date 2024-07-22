@@ -63,6 +63,10 @@ function menu.create(self)
 
     loader:loadFunction("games/fortcubes/assets/ambience.lua", function(f) f() end)
 
+    self.menus = {
+        "menu", "about us", "settings", "armory"
+    }
+
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
     -- MAIN MENU
@@ -72,6 +76,8 @@ function menu.create(self)
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
     menu.man1 = Quad() menu.man1:SetParent(World)
     menu.man2 = Quad() menu.man2:SetParent(World)
+    menu.man3 = Quad() menu.man3:SetParent(World)
+    menu.man4 = Quad() menu.man4:SetParent(World)
 
     menu.man1.t = 0
     menu.man1.Tick = function()
@@ -90,9 +96,18 @@ function menu.create(self)
     menu.man2.Position = Number3(-12, -7, 38)
     menu.man2.Rotation.Y = 0.2
     menu.man2.Shadow = true
+
+    menu.man3.Position = Number3(10, -3, -40)
+    menu.man4.Rotation.Y = math.pi+0.1
+    menu.man3.Shadow = true
+    menu.man4.Position = Number3(7, -3, -40)
+    menu.man4.Rotation.Y = math.pi+0.2
+    menu.man4.Shadow = true
     
     menu.man1.Width, menu.man1.Height = 682/1.25/70, 1023/1.25/70
     menu.man2.Width, menu.man2.Height = 682/1.25/70, 1023*1.25/70
+    menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
+    menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
 
     Object:Load("nsfworks.fortcubes_yard", function(s)
         menu.yard = Shape(s)
@@ -115,16 +130,34 @@ function menu.create(self)
         local texture = result.Body
         menu.man2.Image = texture
     end)
+    HTTP:Get("https://img.freepik.com/premium-photo/tall-muscular-man-stands-confidently-beach-his-face-illuminated-by-setting-sun_846204-736.jpg", function(result)
+        if result.StatusCode ~= 200 then
+            error("Bad response")
+        end
+        local texture = result.Body
+        menu.man3.Image = texture
+    end)
+    HTTP:Get("https://c4.wallpaperflare.com/wallpaper/859/261/313/fate-series-fate-apocrypha-fate-grand-order-astolfo-fate-apocrypha-rider-of-black-fate-apocrypha-hd-wallpaper-preview.jpg", function(result)
+        if result.StatusCode ~= 200 then
+            error("Bad response")
+        end
+        local texture = result.Body
+        menu.man4.Image = texture
+    end)
 
     -- MAIN MENU - BUTTONS
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
+    self.aboutUs.onRelease = function(s)
+        menu.currentMenu = "about us"
+        menu:update()
+    end
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
     self.armory = ui:createButton("ARMORY", menu.theme.button)
     self.play = ui:createButton("PLAY", menu.theme.button)
 
     -- -- ------  --  --------------------  --  ------ -- --
-    function menu.update(menu)
+    function menu.update(self)
         if menu.created == nil then
             error("menu.update() should be called with ':'!", 2)
         end
@@ -151,6 +184,26 @@ function menu.create(self)
         menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
 
         -- MAIN MENU -- BUTTONS
+        for k, v in pairs(self.menus) do
+            menu:hide(v)
+        end
+        menu:show(menu.currentMenu)
+    end
+
+
+    debug.log("menu() - Menu created.")
+    menu:update()
+end
+
+function menu.show(self, name)
+    if self.created == nil then
+        error("menu.show(name) should be called with ':'!", 2)
+    end
+    if type(name) ~= "string" then
+        error("menu:show(name) - 1st argument should be a string.", 2)
+    end
+
+    if name == "menu" then
         menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.aboutUs.content.Scale.X = menu.screenWidth * 3
@@ -174,11 +227,27 @@ function menu.create(self)
         menu.play.content.Scale.X = menu.screenWidth * 3
         menu.play.content.Scale.Y = menu.screenHeight * 3
         menu.play.content.pos = Number2(menu.play.Width/2 - menu.play.content.Width/2, menu.play.Height/2 - menu.play.content.Height/2)
+    elseif name == "about us" then
+
+    end
+end
+
+function menu.hide(self, name)
+    if self.created == nil then
+        error("menu.hide(name) should be called with ':'!", 2)
+    end
+    if type(name) ~= "string" then
+        error("menu:hide(name) - 1st argument should be a string.", 2)
     end
 
+    if name == "menu" then
+        self.aboutUs.pos.X = -1000
+        self.settings.pos.X = -1000
+        self.armory.pos.X = -1000
+        self.play.pos.X = -1000
+    elseif name == "about us" then
 
-    debug.log("menu() - Menu created.")
-    menu:update()
+    end
 end
 
 function menu.remove(self)
