@@ -53,6 +53,7 @@ function menu.create(self)
             self.setBorders(self.settings)
             self.setBorders(self.armory)
             self.setBorders(self.play)
+            self.setBorders(self.back)
         end
     end
 
@@ -234,6 +235,18 @@ function menu.show(self, name)
         menu.play.content.Scale.X = menu.screenWidth * 3
         menu.play.content.Scale.Y = menu.screenHeight * 3
         menu.play.content.pos = Number2(menu.play.Width/2 - menu.play.content.Width/2, menu.play.Height/2 - menu.play.content.Height/2)
+    elseif name == "armory" then
+        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.back.content.Scale.X = menu.screenWidth * 3
+        menu.back.content.Scale.Y = menu.screenHeight * 3
+        menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
+    elseif name == "settings" then
+        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+        menu.back.content.Scale.X = menu.screenWidth * 3
+        menu.back.content.Scale.Y = menu.screenHeight * 3
+        menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
     elseif name == "about us" then
         menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
@@ -256,6 +269,10 @@ function menu.hide(self, name)
         self.settings.pos.X = -1000
         self.armory.pos.X = -1000
         self.play.pos.X = -1000
+    elseif name == "armory" then
+        self.back.pos.X = -1000
+    elseif name == "settings" then
+        self.back.pos.X = -1000
     elseif name == "about us" then
         self.back.pos.X = -1000
     end
