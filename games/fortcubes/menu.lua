@@ -93,42 +93,11 @@ function menu.create(self)
     self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
 
-    loader:loadText("games/fortcubes/assets/animations/menu/pistol_idle.json", function(data)
-        nanimator.import(data, "menu_idle")
+    menu.loadModels()
 
-        menu.man1 = avatar:get(Player.Username) menu.man1:SetParent(World)
-        menu.man1.Animations.Idle:Stop()
-        menu.man1.Position = Number3(-14, 2.63, 35)
-        menu.man1.Rotation.Y = 0.4+math.pi
-        menu.man1.Shadow = true
-        menu.man1.Scale = 0.3
-
-        Object:Load("voxels.silver_pistol", function(s)
-            menu.man1.pistol = Shape(s)
-            menu.man1.pistol:SetParent(menu.man1:GetChild(4):GetChild(1))
-            menu.man1.pistol.Scale = 0.65
-            menu.man1.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
-            menu.man1.pistol.LocalPosition = Number3(8, -1, 3)
-        end)
-
-        nanimator.add(menu.man1, "menu_idle")
-        menu.man1:setLoop(true)
-        menu.man1:nanPlay("menu_idle", "default")
-    end)
-
-    menu.man2 = Quad() menu.man2:SetParent(World)
     menu.man3 = Quad() menu.man3:SetParent(World)
     menu.man4 = Quad() menu.man4:SetParent(World)
 
-    menu.man2.t = 0
-    menu.man2.Tick = function()
-        menu.man2.t = menu.man2.t + 1.25
-        menu.man2.Height = 1023*1.25/70 + math.sin(menu.man2.t * 0.03)*0.5
-    end
-
-    menu.man2.Position = Number3(-12, -7, 38)
-    menu.man2.Rotation.Y = 0.2
-    menu.man2.Shadow = true
     menu.man3.Position = Number3(10, -3, -40)
     menu.man4.Rotation.Y = math.pi+0.1
     menu.man3.Shadow = true
@@ -136,7 +105,6 @@ function menu.create(self)
     menu.man4.Rotation.Y = math.pi+0.2
     menu.man4.Shadow = true
 
-    menu.man2.Width, menu.man2.Height = 682/1.25/70, 1023*1.25/70
     menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
     menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
 
@@ -147,14 +115,6 @@ function menu.create(self)
         menu.yard.Shadow = true
     end)
 
-    
-    HTTP:Get("https://img.freepik.com/free-photo/handsome-man-with-pistol_144627-4202.jpg", function(result)
-        if result.StatusCode ~= 200 then
-            error("Bad response")
-        end
-        local texture = result.Body
-        menu.man2.Image = texture
-    end)
     HTTP:Get("https://img.freepik.com/premium-photo/tall-muscular-man-stands-confidently-beach-his-face-illuminated-by-setting-sun_846204-736.jpg", function(result)
         if result.StatusCode ~= 200 then
             error("Bad response")
@@ -358,9 +318,11 @@ function menu.remove(self)
         self.man1.Tick = nil
         self.man1 = nil
     end
-    self.man2:SetParent(nil)
-    self.man2.Tick = nil
-    self.man2 = nil
+    if self.man2 ~= nil then
+        self.man2:SetParent(nil)
+        self.man2.Tick = nil
+        self.man2 = nil
+    end
     self.yard:SetParent(nil)
     self.yard.Tick = nil
     self.yard = nil
@@ -377,6 +339,53 @@ function menu.remove(self)
     debug.log("menu() - Menu removed.")
 
     -- aboba
+end
+
+menu.loadModels = function()
+    loader:loadText("games/fortcubes/assets/animations/menu/pistol_idle.json", function(data)
+        nanimator.import(data, "menu_idle")
+
+        menu.man1 = avatar:get(Player.Username) menu.man1:SetParent(World)
+        menu.man1.Animations.Idle:Stop()
+        menu.man1.Position = Number3(-14, 2.63, 35)
+        menu.man1.Rotation.Y = 0.4+math.pi
+        menu.man1.Shadow = true
+        menu.man1.Scale = 0.3
+
+        Object:Load("voxels.silver_pistol", function(s)
+            menu.man1.pistol = Shape(s)
+            menu.man1.pistol:SetParent(menu.man1:GetChild(4):GetChild(1))
+            menu.man1.pistol.Scale = 0.65
+            menu.man1.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
+            menu.man1.pistol.LocalPosition = Number3(8, -1, 3)
+        end)
+
+        nanimator.add(menu.man1, "menu_idle")
+        menu.man1:setLoop(true)
+        menu.man1:nanPlay("menu_idle", "default")
+    end)
+    loader:loadText("games/fortcubes/assets/animations/menu/shotgun_idle.json", function(data)
+        nanimator.import(data, "menu2_idle")
+
+        menu.man2 = avatar:get(Player.Username) menu.man2:SetParent(World)
+        menu.man2.Animations.Idle:Stop()
+        menu.man2.Position = Number3(-10, 2.63, 35)
+        menu.man2.Rotation.Y = 0.4+math.pi
+        menu.man2.Shadow = true
+        menu.man2.Scale = 0.3
+
+        Object:Load("flafilez.water_nichirin", function(s)
+            menu.man2.pistol = Shape(s)
+            menu.man2.pistol:SetParent(menu.man1:GetChild(4):GetChild(1))
+            menu.man2.pistol.Scale = 0.65
+            menu.man2.pistol.LocalRotation = Rotation(0, 0 ,0)
+            menu.man2.pistol.LocalPosition = Number3(0, 0 ,0)
+        end)
+
+        nanimator.add(menu.man1, "menu2_idle")
+        menu.man1:setLoop(true)
+        menu.man1:nanPlay("shotgun_idle", "default")
+    end)
 end
 
 return menu
