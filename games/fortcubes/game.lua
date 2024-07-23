@@ -18,7 +18,7 @@ game.connection.disconnect = function(connection)
 	e:SendTo(Server)
 	connection.connected = false
 end
-game.connection.onEvent = function(e)
+game.connection.onEvent = function(connection, e)
 	crystal.ParseEvent(e, {
 
 		connected = function(event)
