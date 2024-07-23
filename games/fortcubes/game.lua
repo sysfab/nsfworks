@@ -84,7 +84,9 @@ end
 game.remove = function(self)
 	self.screenResizeListener:Remove()
 	self.eventListener:Remove()
-	self.mobileControls:remove()
+	if self.mobileControls.created then
+		self.mobileControls:remove()
+	end
 	self.connection:disconnect()
 	self.created = false
 end
