@@ -41,7 +41,7 @@ function loading.create(self)
     end
 end
 
-function loading.remove()
+function loading.remove(self)
     if self.created == nil then
         error("loading.remove() should be called with ':'!", 2)
     end
