@@ -32,11 +32,13 @@ end
 game.created = false
 game.screenResize = function(self)
 	if self.created ~= true then return end
-	self.controls:screenResize()
+
+	if self.controls ~= nil then
+		self.controls:screenResize()
+	end
 end
 game.create = function(self)
 	self.created = true
-	self.controls:create()
 	self:screenResize()
 
 	self.screenResizeListener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
