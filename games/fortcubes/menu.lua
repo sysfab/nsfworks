@@ -65,6 +65,7 @@ function menu.create(self)
             Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.25)
             Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
         end
+        menu.music.Volume = lerp(menu.music.Volume, 0.3, 0.005)
     end
 
     Camera:SetModeFree()
@@ -79,8 +80,6 @@ function menu.create(self)
         "menu", "about us", "settings", "armory"
     }
     self.currentMenu = "menu"
-    self.vineboom = AudioSource("gun_shot_1")
-    self.vineboom:SetParent(Camera)
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
@@ -129,14 +128,15 @@ function menu.create(self)
         local texture = result.Body
         menu.man4.Image = texture
     end)
-    HTTP:Get("https://www.myinstants.com/media/sounds/vine-boom.mp3", function(result)
-        if result.StatusCode ~= 200 then
-            error("Bad response")
-        end
-        local sound = result.Body
-        self.vineboom.Sound = result.Body
+    loader.loadData("https://www.myinstants.com/media/sounds/vine-boom.mp3", function(data)
+        local sound = data
+        menu.music = AudioSource("gun_shot_1")
+        menu.music:SetParent(Camera)
+        menu.music.Sound = sound
+        menu.music.Loop = true
+        menu.music.Volume = 0
+        menu.music:Play()
     end)
-    
 
     -- MAIN MENU - BUTTONS
 
@@ -257,7 +257,6 @@ function menu.show(self, name)
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
     elseif name == "about us" then
-        self.vineboom:Play()
         menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
@@ -377,7 +376,7 @@ menu.loadModels = function(self)
         Object:Load("flafilez.water_nichirin",function(s)
             menu.man2.katana = s
             menu.man2.katana:SetParent(menu.man2:GetChild(4):GetChild(1))
-            menu.man2.katana.Scale = 0.65
+            menu.man2.katana.Scale = 1
             menu.man2.katana.LocalRotation = Rotation(-math.pi/2, 0 ,-0.3)
             menu.man2.katana.LocalPosition = Number3(3, 0 ,0)
         end)
