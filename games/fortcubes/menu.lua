@@ -435,17 +435,17 @@ menu.loadModels = function(self)
 
         menu.nanskip = menu.avatar:get("nanskip") menu.nanskip:SetParent(World)
         menu.nanskip.Animations.Idle:Stop()
-        menu.nanskip.Position = Number3(5, 3.6, -40)
-        menu.nanskip.Rotation.Y = 0.4
+        menu.nanskip.Position = Number3(13, 2.63, -37)
+        menu.nanskip.Rotation.Y = -0.4
         menu.nanskip.Shadow = true
         menu.nanskip.Scale = 0.3
 
         Object:Load("nanskip.toolgun",function(s)
             menu.nanskip.toolgun = s
             menu.nanskip.toolgun:SetParent(menu.nanskip:GetChild(4):GetChild(1))
-            menu.nanskip.toolgun.Scale = 0.5
-            menu.nanskip.toolgun.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
-            menu.nanskip.toolgun.LocalPosition = Number3(8, -1, 3)
+            menu.nanskip.toolgun.Scale = 1
+            menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
+            menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
         end)
         
         self.ha:applyToDescendants(menu.nanskip, {includeRoot = true}, function(s)
