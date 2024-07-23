@@ -144,7 +144,7 @@ function menu.create(self)
         menu.music:Play()
         debug.log("music downloaded")
     end)
-    -- піся
+    
     -- MAIN MENU - BUTTONS
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
