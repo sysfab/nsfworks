@@ -65,8 +65,10 @@ game.world.create = function(world, scale)
 	world.map = MutableShape()
 	for x = 1, scale do
 		for y = 1, scale do
-			local plus = perlin.get(x*0.1, y*0.1)*40
-			local block = Block(Color(math.floor(96+plus), math.floor(179+plus), math.floor(96+plus), 255), Number3(x, 0, y))
+			local a = perlin.get(x*0.1, y*0.1)*30
+			local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
+			local plus = (a + b) / 2
+			local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
 
 			world.map:AddBlock(block)
 		end
