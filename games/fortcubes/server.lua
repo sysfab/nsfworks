@@ -11,7 +11,7 @@ end
 
 Server.DidReceiveEvent = function(e)
 	crystal.ParseEvent(e, {
-		"_" = function(event)
+		["_"] = function(event)
 			debug.log("server() - got unknown event: "..tostring(event.action))
 		end
 	})
