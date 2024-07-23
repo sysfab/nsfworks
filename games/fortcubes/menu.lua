@@ -65,7 +65,9 @@ function menu.create(self)
             Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.25)
             Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
         end
-        menu.music.Volume = lerp(menu.music.Volume, 0.3, 0.005)
+        if menu.music ~= nil then
+            menu.music.Volume = lerp(menu.music.Volume, 0.3, 0.005)
+        end
     end
 
     Camera:SetModeFree()
