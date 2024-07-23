@@ -103,12 +103,9 @@ function menu.create(self)
 
     menu:loadModels()
 
-    menu.man3 = Quad() menu.man3:SetParent(World)
     menu.man4 = Quad() menu.man4:SetParent(World)
 
-    menu.man3.Position = Number3(10, -3, -40)
     menu.man4.Rotation.Y = math.pi+0.1
-    menu.man3.Shadow = true
     menu.man4.Position = Number3(7, -3, -40)
     menu.man4.Rotation.Y = math.pi+0.2
     menu.man4.Shadow = true
@@ -116,14 +113,6 @@ function menu.create(self)
     menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
     menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
 
-
-    HTTP:Get("https://img.freepik.com/premium-photo/tall-muscular-man-stands-confidently-beach-his-face-illuminated-by-setting-sun_846204-736.jpg", function(result)
-        if result.StatusCode ~= 200 then
-            error("Bad response")
-        end
-        local texture = result.Body
-        menu.man3.Image = texture
-    end)
     HTTP:Get("https://c4.wallpaperflare.com/wallpaper/859/261/313/fate-series-fate-apocrypha-fate-grand-order-astolfo-fate-apocrypha-rider-of-black-fate-apocrypha-hd-wallpaper-preview.jpg", function(result)
         if result.StatusCode ~= 200 then
             error("Bad response")
@@ -333,6 +322,12 @@ function menu.remove(self)
         self.man2.Tick = nil
         self.man2 = nil
     end
+    if self.sysfab ~= nil then
+        self.sysfab:nanStop()
+        self.sysfab:SetParent(nil)
+        self.sysfab.Tick = nil
+        self.sysfab = nil
+    end
     self.yard:SetParent(nil)
     self.yard.Tick = nil
     self.yard = nil
@@ -395,6 +390,28 @@ menu.loadModels = function(self)
         nanimator.add(menu.man2, "menu2_idle")
         menu.man2:setLoop(true)
         menu.man2:nanPlay("menu2_idle", "default")
+    end)
+    loader:loadText("games/fortcubes/assets/animations/menu/sysfab.json", function(data)
+        nanimator.import(data, "sysfab")
+
+        menu.sysfab = self.avatar:get("fab3kleuuu") menu.sysfab:SetParent(World)
+        menu.sysfab.Animations.Idle:Stop()
+        menu.sysfab.Position = Number3(10, -3, -40)
+        menu.sysfab.Rotation.Y = -0.6
+        menu.sysfab.Shadow = true
+        menu.sysfab.Scale = 0.3
+
+        Object:Load("fab3kleuuu.lua_block",function(s)
+            menu.sysfab.luablock = s
+            menu.sysfab.luablock:SetParent(menu.sysfab)
+            menu.sysfab.luablock.Scale = 1
+            menu.sysfab.luablock.LocalRotation = Rotation(0, 0, 0)
+            menu.sysfab.luablock.LocalPosition = Number3(0, 0 ,0)
+        end)
+
+        nanimator.add(menu.sysfab, "sysfab")
+        menu.sysfab:setLoop(true)
+        menu.sysfab:nanPlay("sysfab", "default")
     end)
     Object:Load("nsfworks.fortcubes_yard", function(s)
         menu.yard = Shape(s)
