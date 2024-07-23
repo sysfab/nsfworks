@@ -29,7 +29,9 @@ debug.assert = function(condition, message, level)
 	level = level + 1
 
 	if debug.enabled == true then
-		error("[DEBUG ASSERT]: "..tostring(message), level)
+		if not condition then
+			error("[DEBUG ASSERT]: "..tostring(message), level)
+		end
 	end
 end
 
