@@ -77,6 +77,7 @@ function menu.create(self)
         end
         if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and loading_screen.created then
             loading_screen:remove()
+            menu:update()
         end
     end
 
@@ -125,27 +126,32 @@ function menu.create(self)
     -- MAIN MENU - BUTTONS
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
+    self.aboutUs.pos = Number2(-1000, -1000)
     self.aboutUs.onRelease = function(s)
         menu.currentMenu = "about us"
         menu:update()
     end
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
+    self.settings.pos = Number2(-1000, -1000)
     self.settings.onRelease = function(s)
         menu.currentMenu = "settings"
         menu:update()
     end
     self.armory = ui:createButton("ARMORY", menu.theme.button)
+    self.armory.pos = Number2(-1000, -1000)
     self.armory.onRelease = function(s)
         menu.currentMenu = "armory"
         menu:update()
     end
     self.play = ui:createButton("PLAY", menu.theme.button)
+    self.play.pos = Number2(-1000, -1000)
     self.play.onRelease = function(s)
         menu:remove()
         game:create()
     end
 
     self.back = ui:createButton("BACK", menu.theme.button)
+    self.back.pos = Number2(-1000, -1000)
     self.back.onRelease = function(s)
         menu.currentMenu = "menu"
         menu:update()
@@ -193,7 +199,6 @@ function menu.create(self)
 
 
     debug.log("menu() - Menu created.")
-    menu:update()
 end
 
 function menu.show(self, name)
@@ -344,6 +349,8 @@ function menu.remove(self)
     self.armory = nil
     self.play:remove()
     self.play = nil
+    self.back:remove()
+    self.back = nil
 
     debug.log("menu() - Menu removed.")
 
