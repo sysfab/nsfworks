@@ -137,7 +137,7 @@ function menu.create(self)
         menu.music.Volume = 0
         menu.music:Play()
     end)
-
+    -- піся
     -- MAIN MENU - BUTTONS
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
