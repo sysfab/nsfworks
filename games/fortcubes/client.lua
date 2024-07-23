@@ -19,7 +19,7 @@ Client.DirectionalPad = function() end
 Client.AnalogPad = function() end
 
 
-loadingBG = ui:createFrame(Color(30, 30, 30, 255))
+loadingBG = ui:createFrame(Color(0, 0, 0, 255))
 loadingBG.parentDidResize = function(_)
 	loadingBG.Width = Screen.Width
 	loadingBG.Height = Screen.Height
@@ -57,6 +57,7 @@ function doneLoading()
 
 	loadingBG:remove()
 	loadingBG = nil
+	loading_screen:create()
 
 	menu:create()
 	Camera:SetParent(World)

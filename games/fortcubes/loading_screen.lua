@@ -18,7 +18,7 @@ function loading.create(self)
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
 
-    self.BG = ui:createFrame(Color(0, 0, 0, 0))
+    self.BG = ui:createFrame(Color(0, 0, 0, 255))
     self.Title = ui:createText("Loading...", Color(255, 255, 255, 255))
 
     -- -- ------  --  --------------------  --  ------ -- --
@@ -33,6 +33,8 @@ function loading.create(self)
 
         self.Title.pos = Number2(Screen.Width/2-self.Title.Width/2, Screen.Height/2-self.Title.Height/2)
     end
+
+    self:update()
     
     function self.setText(self, text)
         self.Title.Text = text
