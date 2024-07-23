@@ -104,6 +104,7 @@ function menu.create(self)
     menu:loadModels()
 
     menu.man4 = Quad() menu.man4:SetParent(World)
+    menu.man4.Color.A = 0
 
     menu.man4.Rotation.Y = math.pi+0.1
     menu.man4.Position = Number3(7, -3, -40)
@@ -321,11 +322,13 @@ function menu.remove(self)
         self.man2.Tick = nil
         self.man2 = nil
     end
-    if self.sysfab ~= nil then
-        self.sysfab:nanStop()
-        self.sysfab:SetParent(nil)
-        self.sysfab.Tick = nil
-        self.sysfab = nil
+    if menu.sysfab ~= nil then
+        menu.sysfab:nanStop()
+        menu.sysfab.luablock:SetParent(nil)
+        menu.sysfab.luablock = nil
+        menu.sysfab:SetParent(nil)
+        menu.sysfab.Tick = nil
+        menu.sysfab = nil
     end
     self.yard:SetParent(nil)
     self.yard.Tick = nil
@@ -393,19 +396,19 @@ menu.loadModels = function(self)
     loader:loadText("games/fortcubes/assets/animations/menu/sysfab.json", function(data)
         nanimator.import(data, "sysfab")
 
-        menu.sysfab = self.avatar:get("fab3kleuuu") menu.sysfab:SetParent(World)
+        menu.sysfab = menu.avatar:get("fab3kleuuu") menu.sysfab:SetParent(World)
         menu.sysfab.Animations.Idle:Stop()
-        menu.sysfab.Position = Number3(10, -3, -40)
-        menu.sysfab.Rotation.Y = -0.6
+        menu.sysfab.Position = Number3(5, 3.6, -40)
+        menu.sysfab.Rotation.Y = 0.4
         menu.sysfab.Shadow = true
         menu.sysfab.Scale = 0.3
 
         Object:Load("fab3kleuuu.lua_block",function(s)
             menu.sysfab.luablock = s
-            menu.sysfab.luablock:SetParent(menu.sysfab)
-            menu.sysfab.luablock.Scale = 1
-            menu.sysfab.luablock.LocalRotation = Rotation(0, 0, 0)
-            menu.sysfab.luablock.LocalPosition = Number3(0, 0 ,0)
+            menu.sysfab.luablock:SetParent(World)
+            menu.sysfab.luablock.Scale = Number3(0.3, 0.3, 0.3)
+            menu.sysfab.luablock.Position = Number3(5, 0.3, -40)
+            menu.sysfab.luablock.Rotation = Rotation(0, 0.3, 0)
         end)
 
         nanimator.add(menu.sysfab, "sysfab")
