@@ -140,6 +140,8 @@ function menu.create(self)
         menu.music.Sound = sound
         menu.music.Loop = true
         menu.music.Volume = 0.0001
+        menu.music:Stop()
+        menu.music:Play()
         debug.log("music downloaded")
     end)
     -- піся
