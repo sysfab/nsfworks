@@ -71,7 +71,7 @@ function menu.create(self)
     Camera.Rotation = Rotation(0, -0.2, 0)
     Camera.Position = Number3(-10, 5, 5)
     Camera.FOV = 30
-    local avatar = require("avatar")
+    self.avatar = require("avatar")
 
     loader:loadFunction("games/fortcubes/assets/ambience.lua", function(f) f() end)
 
@@ -341,11 +341,11 @@ function menu.remove(self)
     -- aboba
 end
 
-menu.loadModels = function()
+menu.loadModels = function(self)
     loader:loadText("games/fortcubes/assets/animations/menu/pistol_idle.json", function(data)
         nanimator.import(data, "menu_idle")
 
-        menu.man1 = avatar:get(Player.Username) menu.man1:SetParent(World)
+        menu.man1 = self.avatar:get(Player.Username) menu.man1:SetParent(World)
         menu.man1.Animations.Idle:Stop()
         menu.man1.Position = Number3(-14, 2.63, 35)
         menu.man1.Rotation.Y = 0.4+math.pi
