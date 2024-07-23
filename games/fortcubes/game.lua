@@ -1,8 +1,8 @@
 local game = {}
 
-game.controls = {}
-game.controls.created = false
-game.controls.screenResize = function(controls)
+game.mobileControls = {}
+game.mobileControls.created = false
+game.mobileControls.screenResize = function(controls)
 	if controls.moveJoystick.loaded == true then
 		controls.moveJoystick:setPos(Number2(10, 10))
 	end
@@ -10,7 +10,7 @@ game.controls.screenResize = function(controls)
 		controls.shootJoystick:setPos(Number2(Screen.Width-10-176, 10))
 	end
 end
-game.controls.create = function(controls)
+game.mobileControls.create = function(controls)
 	controls.moveJoystick = joysticks.create({
 		pos = {10, 10}, -- position on screen.
 		scale = 1.1, -- scale multiplier, 1 = 160 pixels.
@@ -24,17 +24,19 @@ game.controls.create = function(controls)
 		borderColor = Color(255, 100, 100, 255) -- color of joystick's border.
 	})
 end
-game.controls.remove = function(controls)
-	game.controls.moveJoystick:remove()
-	game.controls.shootJoystick:remove()
+game.mobileControls.remove = function(controls)
+	controls.moveJoystick:remove()
+	controls.shootJoystick:remove()
+	controls.moveJoystick = nil
+	controls.shootJoystick = nil
 end
 
 game.created = false
 game.screenResize = function(self)
 	if self.created ~= true then return end
 
-	if self.controls ~= nil then
-		self.controls:screenResize()
+	if self.mobileControls ~= nil then
+		self.mobileControls:screenResize()
 	end
 end
 game.create = function(self)
@@ -47,7 +49,7 @@ game.create = function(self)
 end
 game.remove = function(self)
 	self.screenResizeListener:Remove()
-	self.controls:remove()
+	self.mobileControls:remove()
 	self.created = false
 end
 
