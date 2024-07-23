@@ -370,16 +370,16 @@ menu.loadModels = function(self)
         menu.man2 = self.avatar:get(Player.Username) menu.man2:SetParent(World)
         menu.man2.Animations.Idle:Stop()
         menu.man2.Position = Number3(-7, 2.63, 37)
-        menu.man2.Rotation.Y = 0.4+math.pi
+        menu.man2.Rotation.Y = -0.4+math.pi
         menu.man2.Shadow = true
         menu.man2.Scale = 0.3
 
-        Object:Load("flafilez.water_nichirin", function(s)
-            menu.man2.pistol = Shape(s)
-            menu.man2.pistol:SetParent(menu.man2:GetChild(4):GetChild(1))
-            menu.man2.pistol.Scale = 0.65
-            menu.man2.pistol.LocalRotation = Rotation(0, 0 ,0)
-            menu.man2.pistol.LocalPosition = Number3(0, 0 ,0)
+        Object:Load("flafilez.water_nichirin",function(s)
+            menu.man2.katana = Shape(s, {includeChidlren=true})
+            menu.man2.katana:SetParent(menu.man2:GetChild(4):GetChild(1))
+            menu.man2.katana.Scale = 0.65
+            menu.man2.katana.LocalRotation = Rotation(0, math.pi/2 ,0)
+            menu.man2.katana.LocalPosition = Number3(0, 0 ,0)
         end)
 
         nanimator.add(menu.man2, "menu2_idle")
