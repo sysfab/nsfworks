@@ -67,6 +67,9 @@ function menu.create(self)
         end
         if menu.music ~= nil then
             menu.music.Volume = lerp(menu.music.Volume, 0.7, 0.005)
+            if not menu.music.IsPlaying then
+                menu.music:Play()
+            end
         end
     end
 
@@ -137,7 +140,6 @@ function menu.create(self)
         menu.music.Sound = sound
         menu.music.Loop = true
         menu.music.Volume = 0.0001
-        menu.music:Play()
     end)
     -- піся
     -- MAIN MENU - BUTTONS
