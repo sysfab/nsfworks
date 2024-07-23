@@ -75,7 +75,7 @@ function menu.create(self)
                 menu.music.Volume = lerp(menu.music.Volume, 0, 0.05)
             end
         end
-        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil then
+        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and loading_screen.created then
             loading_screen:remove()
         end
     end
