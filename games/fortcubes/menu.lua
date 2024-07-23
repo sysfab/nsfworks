@@ -66,9 +66,13 @@ function menu.create(self)
             Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
         end
         if menu.music ~= nil then
-            menu.music.Volume = lerp(menu.music.Volume, 0.7, 0.005)
-            if not menu.music.IsPlaying then
-                menu.music:Play()
+            if menu.created == true then
+                menu.music.Volume = lerp(menu.music.Volume, 0.7, 0.005)
+                if not menu.music.IsPlaying then
+                    menu.music:Play()
+                end
+            else
+                menu.music.Volume = lerp(menu.music.Volume, 0, 0.005)
             end
         end
     end
