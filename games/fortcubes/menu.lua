@@ -104,14 +104,6 @@ function menu.create(self)
 
     menu:loadModels()
 
-    HTTP:Get("https://c4.wallpaperflare.com/wallpaper/859/261/313/fate-series-fate-apocrypha-fate-grand-order-astolfo-fate-apocrypha-rider-of-black-fate-apocrypha-hd-wallpaper-preview.jpg", function(result)
-        if result.StatusCode ~= 200 then
-            error("Bad response")
-        end
-        local texture = result.Body
-        menu.man4.Image = texture
-    end)
-
     loader:loadData("games/fortcubes/assets/menuTheme.mp3", function(data)
         local sound = data
         menu.music = AudioSource("gun_shot_1")
