@@ -19,6 +19,14 @@ Client.DirectionalPad = function() end
 Client.AnalogPad = function() end
 
 
+loadingBG = ui:createFrame(Color(30, 30, 30, 255))
+loadingBG.parentDidResize = function(_)
+	loadingBG.Width = Screen.Width
+	loadingBG.Height = Screen.Height
+end
+loadingBG.parentDidResize()
+
+
 load = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua",
@@ -46,6 +54,10 @@ debug.log("client() - Loading " .. need_to_load .. " modules..")
 
 function doneLoading()
 	debug.log("client() - Loaded all modules")
+
+	loadingBG:remove()
+	loadingBG = nil
+
 	menu:create()
 	Camera:SetParent(World)
 end
