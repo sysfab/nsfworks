@@ -11,13 +11,6 @@ l.init = function(self, env)
 end
 
 
-l.loadGame = function(self, game)
-    return self:loadFunction("games/" .. game .. "/main.lua", function(main)
-        rawset(self.env, "main", main)
-        self.env.main()
-    end)
-end
-
 -- DO NOT USE THIS FUNCTION, USE loadData
 l.load = function(self, file, callback)
     if self.env == nil then
@@ -63,13 +56,6 @@ l.loadFunction = function(self, file, callback)
         error("loader:loadFunction() should be called with ':'!", 2)
     end
     return self:load(file, function(data) callback(load(data:ToString(), nil, "bt", self.env)) end)
-end
-
-l.loadModule = function(self, file, callback)
-    if self.env == nil then
-        error("loader:loadModule() should be called with ':'!", 2)
-    end
-    return self:load(file, function(data) callback(load(data:ToString(), nil, "bt", self.env)()) end)
 end
 
 

@@ -29,10 +29,10 @@ for key, value in pairs(load) do
 	if need_to_load == nil then need_to_load = 0 end
 	need_to_load = need_to_load + 1
 
-	loader:loadModule(value, function(module)
+	loader:loadFunction(value, function(module)
 		debug.log("main() - Loaded '".. key .."'")
 
-		_ENV[key] = module
+		_ENV[key] = module()
 
 		if loaded == nil then loaded = 0 end
 		loaded = loaded + 1
