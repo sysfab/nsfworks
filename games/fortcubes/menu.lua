@@ -384,7 +384,7 @@ menu.loadModels = function(self)
 
         nanimator.add(menu.man2, "menu2_idle")
         menu.man2:setLoop(true)
-        menu.man2:nanPlay("shotgun_idle", "default")
+        menu.man2:nanPlay("menu2_idle", "default")
     end)
 end
 
