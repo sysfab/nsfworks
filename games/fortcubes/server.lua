@@ -19,8 +19,8 @@ end
 
 Server.OnPlayerLeave = function(player)
 	debug.log("server() - player leaved [" .. player.Username .. "]")
-	if players[event.Sender] ~= nil then
-		players[event.Sender] = nil
+	if players[player.Username] ~= nil then
+		players[player.Username] = nil
 		debug.log("server() - removed player entry for '".. player.Username .."'")
 	end
 end
@@ -30,19 +30,19 @@ Server.DidReceiveEvent = function(e)
 
 	connect = function(event)
 		debug.log("server() - connecting '".. event.Sender.Username .."'")
-		if players[event.Sender] == nil then
-			players[event.Sender] = {kills = 0, deaths = 0}
+		if players[event.Sender.Username] == nil then
+			players[event.Sender.Username] = {kills = 0, deaths = 0}
 			debug.log("server() - created player entry for '".. event.Sender.Username .."'")
-		end
 
-		local r = crystal.Event("connected", {players = players, game = game})
-		r:SendTo(event.Sender.Username)
+			local r = crystal.Event("connected", {players = players, game = game})
+			r:SendTo(event.Sender)
+		end
 	end,
 
 	disconnect = function(event)
 		debug.log("server() - disconnecting '".. event.Sender.Username .."'")
-		if players[event.Sender] ~= nil then
-			players[event.Sender] = nil
+		if players[event.Sender.Username] ~= nil then
+			players[event.Sender.Username] = nil
 			debug.log("server() - removed player entry for '".. event.Sender.Username .."'")
 		end
 	end,
