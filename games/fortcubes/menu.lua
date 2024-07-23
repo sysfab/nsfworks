@@ -112,11 +112,12 @@ function menu.create(self)
     menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
     menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
 
-    Object:Load("nsfworks.fortcubes_yard", function(s)
-        menu.yard = Shape(s)
-        menu.yard:SetParent(World)
-        menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
-        menu.yard.Shadow = true
+    loader:loadData("games/fortcubes/assets/sky_1.jpg", function(data)
+        local texture = data
+        menu.sky = Quad()
+        menu.sky:SetParent(World)
+        menu.sky.Width, menu.sky.Height = 1920, 1080
+        menu.sky.Image = texture
     end)
 
     HTTP:Get("https://img.freepik.com/premium-photo/tall-muscular-man-stands-confidently-beach-his-face-illuminated-by-setting-sun_846204-736.jpg", function(result)
@@ -391,6 +392,12 @@ menu.loadModels = function(self)
         nanimator.add(menu.man2, "menu2_idle")
         menu.man2:setLoop(true)
         menu.man2:nanPlay("menu2_idle", "default")
+    end)
+    Object:Load("nsfworks.fortcubes_yard", function(s)
+        menu.yard = Shape(s)
+        menu.yard:SetParent(World)
+        menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
+        menu.yard.Shadow = true
     end)
 end
 
