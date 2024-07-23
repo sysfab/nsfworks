@@ -110,7 +110,6 @@ function menu.create(self)
     menu.man4.Rotation.Y = math.pi+0.2
     menu.man4.Shadow = true
 
-    menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
     menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
 
     HTTP:Get("https://c4.wallpaperflare.com/wallpaper/859/261/313/fate-series-fate-apocrypha-fate-grand-order-astolfo-fate-apocrypha-rider-of-black-fate-apocrypha-hd-wallpaper-preview.jpg", function(result)
