@@ -488,10 +488,6 @@ menu.loadModels = function(self)
         menu.yard.Shadow = true
     end)
 
-    for k, v in pairs(menu.bushes) do
-        v:SetParent(nil)
-        v = nil
-    end
     Object:Load("nanskip.bush_1_alternate", function(s)
         local bushes = {
             {pos = Number3(-9, 1, 60), rot = Rotation(0, -math.pi-0.6, 0), scale = 0.45},
