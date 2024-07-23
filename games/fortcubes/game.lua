@@ -66,7 +66,7 @@ game.world.create = function(world, scale)
 	for x = 1, scale do
 		for y = 1, scale do
 			local plus = perlin.get(x*0.01, y*0.01)
-			local block = Block(Color(96+plus, 179+plus, 96+plus, 255), Number3(x, 0, y))
+			local block = Block(Color(math.floor(96+plus), math.floor(179+plus), math.floor(96+plus), 255), Number3(x, 0, y))
 
 			world.map:AddBlock(block)
 		end
@@ -98,7 +98,7 @@ game.create = function(self)
     end)
 
     self.connection:connect()
-	self.world:create(200)
+	self.world:create(100)
 end
 game.remove = function(self)
 	self.screenResizeListener:Remove()
