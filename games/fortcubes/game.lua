@@ -60,6 +60,24 @@ game.mobileControls.remove = function(controls)
 	controls.shootJoystick = nil
 end
 
+game.world = {}
+game.world.create = function(world, scale)
+	world.map = MutableShape()
+	for x = 1, scale do
+		for y = 1, scale do
+			local plus = perlin.get(x*0.01, y*0.01)
+			local block = Block(Color(96+plus, 179+plus, 96+plus, 255), Number3(x, 0, y))
+
+			world.map:AddBlock(block)
+		end
+	end
+	world.map:SetParent(World)
+end
+game.world.remove = function(world)
+	world.map:SetParent(nil)
+	world.map = nil
+end
+
 game.created = false
 game.screenResize = function(self)
 	if self.created ~= true then return end
@@ -80,6 +98,7 @@ game.create = function(self)
     end)
 
     self.connection:connect()
+	self.world:create(200)
 end
 game.remove = function(self)
 	self.screenResizeListener:Remove()
@@ -88,6 +107,7 @@ game.remove = function(self)
 		self.mobileControls:remove()
 	end
 	self.connection:disconnect()
+	self.world:remove()
 	self.created = false
 end
 
