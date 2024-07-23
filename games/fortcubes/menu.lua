@@ -362,6 +362,10 @@ function menu.remove(self)
         v:SetParent(nil)
         v = nil
     end
+    for k, v in pairs(menu.trees) do
+        v:SetParent(nil)
+        v = nil
+    end
 
     debug.log("menu() - Menu removed.")
 
@@ -504,6 +508,20 @@ menu.loadModels = function(self)
             {pos = Number3(-45, 0.75, 57), rot = Rotation(0, -2.5, 0), scale = 0.5},
             {pos = Number3(-52, 0.85, 60), rot = Rotation(0, 1.2, 0), scale = 0.57},
 
+            {pos = Number3(30, 0.8, 120), rot = Rotation(0, -0.2+math.pi, 0), scale = 1},
+            {pos = Number3(20, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
+            {pos = Number3(10, 0.8, 120), rot = Rotation(0, -0.2, 0), scale = 1},
+            {pos = Number3(0, 0.8, 120), rot = Rotation(0, -0.8+math.pi, 0), scale = 1},
+            {pos = Number3(-10, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
+            {pos = Number3(-20, 0.8, 120), rot = Rotation(0, -0.6, 0), scale = 1},
+            {pos = Number3(-30, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
+            {pos = Number3(-40, 0.85, 120), rot = Rotation(0, 0.4, 0), scale = 1},
+            {pos = Number3(-50, 0.8, 120), rot = Rotation(0, -0.4+math.pi, 0), scale = 1},
+            {pos = Number3(-60, 0.9, 120), rot = Rotation(0, -0.1+2, 0), scale = 1},
+            {pos = Number3(-70, 0.85, 120), rot = Rotation(0, 0.4, 0), scale = 1},
+            {pos = Number3(-80, 0.8, 120), rot = Rotation(0, -0.2, 0), scale = 1},
+            {pos = Number3(-90, 0.8, 120), rot = Rotation(0, -0.4+math.pi, 0), scale = 1},
+
             {pos = Number3(-35, 0, -44), rot = Rotation(0, 0.4, 0), scale = 0.5},
             {pos = Number3(-28, 0, -46), rot = Rotation(0, -0.7, 0), scale = 0.45},
             {pos = Number3(-21, 0, -48), rot = Rotation(0, 0, 0), scale = 0.52},
@@ -518,6 +536,26 @@ menu.loadModels = function(self)
             {pos = Number3(36, 0, -40), rot = Rotation(0, 0.4, 0), scale = 0.48},
             {pos = Number3(40, 0, -35), rot = Rotation(0, -0.7, 0), scale = 0.5},
             {pos = Number3(44, 0, -29), rot = Rotation(0, 0.3, 0), scale = 0.45},
+
+            {pos = Number3(-35, 0, -100), rot = Rotation(0, 0.4, 0), scale = 1},
+            {pos = Number3(-28, 0, -100), rot = Rotation(0, -0.7, 0), scale = 1},
+            {pos = Number3(-21, 0, -90), rot = Rotation(0, 0, 0), scale = 1},
+            {pos = Number3(-14, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
+            {pos = Number3(-7, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
+            {pos = Number3(0, 0, -100), rot = Rotation(0, -0.7, 0), scale = 1},
+            {pos = Number3(7, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
+            {pos = Number3(14, 0, -100), rot = Rotation(0, 0.4, 0), scale = 1},
+            {pos = Number3(21, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
+            {pos = Number3(28, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
+            {pos = Number3(32, 0, -100), rot = Rotation(0, 0, 0), scale = 1},
+            {pos = Number3(36, 0, -90), rot = Rotation(0, 0.4, 0), scale = 1},
+            {pos = Number3(40, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
+            {pos = Number3(44, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
+            {pos = Number3(50, 0, -100), rot = Rotation(0, 0, 0), scale = 1},
+            {pos = Number3(57, 0, -90), rot = Rotation(0, 0.4, 0), scale = 1},
+            {pos = Number3(64, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
+            {pos = Number3(72, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
+            {pos = Number3(79, 0, -90), rot = Rotation(0, 0.3, 0), scale = 1},
         }
 
         menu.bushes = {}
@@ -531,6 +569,63 @@ menu.loadModels = function(self)
             bush.Pivot.Y = 0
 
             table.insert(menu.bushes, bush)
+        end
+    end)
+
+    Object:Load("nanskip.tree_2", function(s)
+        local trees = {
+            {pos = Number3(-49, 0, 60), rot = Rotation(0, 0.2, 0), scale = 0.75},
+            {pos = Number3(-42, -0.5, 65), rot = Rotation(0, -2.9, 0), scale = 0.65},
+            {pos = Number3(-31, -1, 65), rot = Rotation(0, -0.3, 0), scale = 0.7},
+            {pos = Number3(-22, -0.5, 70), rot = Rotation(0, -1.2, 0), scale = 0.85},
+            {pos = Number3(-10, -1, 70), rot = Rotation(0, -2.9, 0), scale = 0.65},
+            {pos = Number3(0, -1.5, 65), rot = Rotation(0, 0.2, 0), scale = 0.75},
+            {pos = Number3(8, -0.5, 70), rot = Rotation(0, 0, 0), scale = 0.8},
+
+            {pos = Number3(-63, -2-2, 80), rot = Rotation(0, 0.3, 0), scale = 0.75},
+            {pos = Number3(-56, -2-2, 80), rot = Rotation(0, -0.3, 0), scale = 0.8},
+            {pos = Number3(-45, 0-2, 80), rot = Rotation(0, -1.2, 0), scale = 0.75},
+            {pos = Number3(-40, -2, 85), rot = Rotation(0, 0.2, 0), scale = 0.75},
+            {pos = Number3(-29, -1-2, 85), rot = Rotation(0, 0, 0), scale = 0.7},
+            {pos = Number3(-25, -0.5-2, 90), rot = Rotation(0, 0, 0), scale = 0.85},
+            {pos = Number3(-16, 0-2, 90), rot = Rotation(0, -2.9, 0), scale = 0.85},
+            {pos = Number3(-5, -1.5-2, 85), rot = Rotation(0, 0.2, 0), scale = 0.75},
+            {pos = Number3(2, -0.5-2, 80), rot = Rotation(0, -0.3, 0), scale = 0.8},
+
+            {pos = Number3(-17, -3, -70), rot = Rotation(0, -0.2, 0), scale = 0.75},
+            {pos = Number3(-8, -4, -70), rot = Rotation(0, 1.2, 0), scale = 0.85},
+            {pos = Number3(0, -2, -70), rot = Rotation(0, 0.4, 0), scale = 0.95},
+            {pos = Number3(9, -3, -70), rot = Rotation(0, 2.5, 0), scale = 0.75},
+            {pos = Number3(18, -3, -70), rot = Rotation(0, 0, 0), scale = 0.85},
+            {pos = Number3(25, -4, -70), rot = Rotation(0, -0.2, 0), scale = 0.75},
+            {pos = Number3(34, -3, -67), rot = Rotation(0, 1.2, 0), scale = 0.7},
+            {pos = Number3(42, -3, -67), rot = Rotation(0, 0.4, 0), scale = 0.85},
+            {pos = Number3(50, -2, -63), rot = Rotation(0, 2.5, 0), scale = 0.75},
+            {pos = Number3(57, -3, -63), rot = Rotation(0, -0.2, 0), scale = 0.7},
+
+            {pos = Number3(-17+3, -3, -80), rot = Rotation(0, -1.2, 0), scale = 0.75},
+            {pos = Number3(-8+7, -3, -80), rot = Rotation(0, 2.52, 0), scale = 0.85},
+            {pos = Number3(0+2, -4, -80), rot = Rotation(0, 0.1, 0), scale = 0.95},
+            {pos = Number3(9+7, -3, -80), rot = Rotation(0, 2.5, 0), scale = 0.75},
+            {pos = Number3(18+7, -2, -80), rot = Rotation(0, 0, 0), scale = 0.85},
+            {pos = Number3(25+5, -4, -80), rot = Rotation(0, -0.2, 0), scale = 0.75},
+            {pos = Number3(34+3, -3, -78), rot = Rotation(0, 1.2, 0), scale = 0.7},
+            {pos = Number3(42+1, -3, -78), rot = Rotation(0, 0.4, 0), scale = 0.85},
+            {pos = Number3(50+2, -4, -74), rot = Rotation(0, 0.1, 0), scale = 0.75},
+            {pos = Number3(57+7, -2, -74), rot = Rotation(0, -0.2, 0), scale = 0.7},
+        }
+
+        menu.tree = {}
+        for k, v in pairs(trees) do
+            local tree = Shape(s, {includeChildren = true})
+            tree.Position = v.pos
+            tree.Rotation = v.rot
+            tree.Scale = v.scale
+            tree:SetParent(World)
+            tree.Shadow = true
+            tree.Pivot.Y = 0
+
+            table.insert(menu.trees, tree)
         end
     end)
 end
