@@ -82,6 +82,7 @@ function menu.create(self)
     Camera.Position = Number3(-10, 5, 5)
     Camera.FOV = 30
     self.avatar = require("avatar")
+    self.ha = require("hierarchyactions")
 
     loader:loadFunction("games/fortcubes/assets/ambience.lua", function(f) f() end)
 
@@ -102,16 +103,6 @@ function menu.create(self)
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
 
     menu:loadModels()
-
-    menu.man4 = Quad() menu.man4:SetParent(World)
-    menu.man4.Color.A = 0
-
-    menu.man4.Rotation.Y = math.pi+0.1
-    menu.man4.Position = Number3(7, -3, -40)
-    menu.man4.Rotation.Y = math.pi+0.2
-    menu.man4.Shadow = true
-
-    menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
 
     HTTP:Get("https://c4.wallpaperflare.com/wallpaper/859/261/313/fate-series-fate-apocrypha-fate-grand-order-astolfo-fate-apocrypha-rider-of-black-fate-apocrypha-hd-wallpaper-preview.jpg", function(result)
         if result.StatusCode ~= 200 then
@@ -367,6 +358,12 @@ menu.loadModels = function(self)
             menu.man1.pistol.LocalPosition = Number3(8, -1, 3)
         end)
 
+        self.ha:applyToDescendants(menu.man1, {includeRoot = true}, function(s)
+            if type(s) == "Shape" or type(s) == "MutableShape" then
+                s.Shadow = true
+            end
+        end)
+
         nanimator.add(menu.man1, "menu_idle")
         menu.man1:setLoop(true)
         menu.man1:nanPlay("menu_idle", "default")
@@ -380,6 +377,12 @@ menu.loadModels = function(self)
         menu.man2.Rotation.Y = -0.6+math.pi
         menu.man2.Shadow = true
         menu.man2.Scale = 0.3
+
+        self.ha:applyToDescendants(menu.man2, {includeRoot = true}, function(s)
+            if type(s) == "Shape" or type(s) == "MutableShape" then
+                s.Shadow = true
+            end
+        end)
 
         Object:Load("flafilez.water_nichirin",function(s)
             menu.man2.katana = s
@@ -402,6 +405,12 @@ menu.loadModels = function(self)
         menu.sysfab.Rotation.Y = 0.4
         menu.sysfab.Shadow = true
         menu.sysfab.Scale = 0.3
+
+        self.ha:applyToDescendants(menu.sysfab, {includeRoot = true}, function(s)
+            if type(s) == "Shape" or type(s) == "MutableShape" then
+                s.Shadow = true
+            end
+        end)
 
         Object:Load("fab3kleuuu.lua_block",function(s)
             menu.sysfab.luablock = s
