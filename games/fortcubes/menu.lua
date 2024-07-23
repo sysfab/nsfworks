@@ -71,10 +71,6 @@ function menu.create(self)
                 menu.music:Play()
             end
         end
-        if menu.sky ~= nil then
-            menu.sky.Backward = Camera.Forward
-            menu.sky.Position = Camera.Forward*150 + Camera.Right*80 + Camera.Down*50
-        end
     end
 
     Camera:SetModeFree()
@@ -116,15 +112,6 @@ function menu.create(self)
     menu.man3.Width, menu.man3.Height = 682/1.25/70, 1023/1.25/70
     menu.man4.Width, menu.man4.Height = 682/1.25/70, 1023/1.25/70
 
-    loader:loadData("games/fortcubes/assets/sky_1.jpg", function(data)
-        local texture = data
-        menu.sky = Quad()
-        menu.sky.Color.A = 127
-        menu.sky:SetParent(World)
-        menu.sky.Width, menu.sky.Height = 1920, 1080
-        menu.sky.Scale = 0.1
-        menu.sky.Image = texture
-    end)
 
     HTTP:Get("https://img.freepik.com/premium-photo/tall-muscular-man-stands-confidently-beach-his-face-illuminated-by-setting-sun_846204-736.jpg", function(result)
         if result.StatusCode ~= 200 then
