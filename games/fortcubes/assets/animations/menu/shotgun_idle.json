@@ -407,7 +407,7 @@
                         "0_": {
                             "interpolation": "linear",
                             "position": {
-                                "_y": 12,
+                                "_y": 0,
                                 "_x": 0,
                                 "_z": 0
                             },
@@ -425,7 +425,7 @@
                         "64_": {
                             "interpolation": "linear",
                             "position": {
-                                "_y": 12,
+                                "_y": 0,
                                 "_x": 0,
                                 "_z": 0
                             },
