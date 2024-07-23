@@ -93,7 +93,7 @@ function menu.create(self)
     self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
 
-    menu.loadModels()
+    menu:loadModels()
 
     menu.man3 = Quad() menu.man3:SetParent(World)
     menu.man4 = Quad() menu.man4:SetParent(World)
@@ -367,7 +367,7 @@ menu.loadModels = function(self)
     loader:loadText("games/fortcubes/assets/animations/menu/shotgun_idle.json", function(data)
         nanimator.import(data, "menu2_idle")
 
-        menu.man2 = avatar:get(Player.Username) menu.man2:SetParent(World)
+        menu.man2 = self.avatar:get(Player.Username) menu.man2:SetParent(World)
         menu.man2.Animations.Idle:Stop()
         menu.man2.Position = Number3(-10, 2.63, 35)
         menu.man2.Rotation.Y = 0.4+math.pi
