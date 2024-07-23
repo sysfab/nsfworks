@@ -1,5 +1,2 @@
 debug.enabled = true
-
-Server.Tick = function()
-	debug.log("server() - online")
-end
+debug.log("server() - online")
