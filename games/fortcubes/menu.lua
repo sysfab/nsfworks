@@ -130,7 +130,7 @@ function menu.create(self)
         local texture = result.Body
         menu.man4.Image = texture
     end)
-    loader:loadData("https://www.myinstants.com/media/sounds/vine-boom.mp3", function(data)
+    loader:loadData("games/fortcubes/assets/menuTheme.mp3", function(data)
         local sound = data
         menu.music = AudioSource("gun_shot_1")
         menu.music:SetParent(Camera)
