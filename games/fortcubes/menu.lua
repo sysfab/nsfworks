@@ -373,7 +373,7 @@ menu.loadModels = function(self)
     loader:loadText("games/fortcubes/assets/animations/menu/shotgun_idle.json", function(data)
         nanimator.import(data, "menu2_idle")
 
-        menu.man2 = self.avatar:get(Player.Username) menu.man2:SetParent(World)
+        menu.man2 = self.avatar:get("nsfworker1") menu.man2:SetParent(World)
         menu.man2.Animations.Idle:Stop()
         menu.man2.Position = Number3(-7, 2.63, 37)
         menu.man2.Rotation.Y = -0.6+math.pi
