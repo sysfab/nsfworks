@@ -133,6 +133,7 @@ function menu.create(self)
         local texture = result.Body
         menu.man4.Image = texture
     end)
+    
     loader:loadData("games/fortcubes/assets/menuTheme.mp3", function(data)
         local sound = data
         menu.music = AudioSource("gun_shot_1")
@@ -144,7 +145,7 @@ function menu.create(self)
         menu.music:Play()
         debug.log("music downloaded")
     end)
-    
+
     -- MAIN MENU - BUTTONS
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
