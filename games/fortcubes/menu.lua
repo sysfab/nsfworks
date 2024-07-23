@@ -99,7 +99,7 @@ function menu.create(self)
     menu.man1.Shadow = true
     menu.man1.Scale = 0.3
 
-    loader:loadText("games/fortcubes/animations/menu/pistol_idle.json", function(data)
+    loader:loadText("games/fortcubes/assets/animations/menu/pistol_idle.json", function(data)
         nanimator.import(data, "menu_idle")
         nanimator.add(menu.man1.Body, "menu_idle")
         menu.man1.Body:setLoop(true)
