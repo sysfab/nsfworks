@@ -321,8 +321,8 @@ function menu.remove(self)
     if menu.nanskip ~= nil then
         menu.nanskip:nanStop()
         menu.nanskip.nanplayer = nil
-        menu.nanskip.luablock:SetParent(nil)
-        menu.nanskip.luablock = nil
+        menu.nanskip.toolgun:SetParent(nil)
+        menu.nanskip.toolgun = nil
         menu.nanskip:SetParent(nil)
         menu.nanskip.Tick = nil
         menu.nanskip = nil
