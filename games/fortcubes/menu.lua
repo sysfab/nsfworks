@@ -318,11 +318,17 @@ function menu.remove(self)
     self.version = nil
 
     if self.man1 ~= nil then
+        self.man1.pistol:SetParent(nil)
+        self.man1.pistol = nil
+        self.man1:nanStop()
         self.man1:SetParent(nil)
         self.man1.Tick = nil
         self.man1 = nil
     end
     if self.man2 ~= nil then
+        self.man2.katana:SetParent(nil)
+        self.man2.katana = nil
+        self.man2:nanStop()
         self.man2:SetParent(nil)
         self.man2.Tick = nil
         self.man2 = nil
