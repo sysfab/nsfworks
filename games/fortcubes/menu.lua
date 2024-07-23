@@ -297,6 +297,7 @@ function menu.remove(self)
         self.man1.pistol:SetParent(nil)
         self.man1.pistol = nil
         self.man1:nanStop()
+        self.man1.nanplayer:remove()
         self.man1:SetParent(nil)
         self.man1.Tick = nil
         self.man1 = nil
@@ -305,13 +306,14 @@ function menu.remove(self)
         self.man2.katana:SetParent(nil)
         self.man2.katana = nil
         self.man2:nanStop()
+        self.man2.nanplayer:remove()
         self.man2:SetParent(nil)
         self.man2.Tick = nil
         self.man2 = nil
     end
     if menu.sysfab ~= nil then
         menu.sysfab:nanStop()
-        menu.sysfab.nanplayer = nil
+        menu.sysfab.nanplayer:remove()
         menu.sysfab.luablock:SetParent(nil)
         menu.sysfab.luablock = nil
         menu.sysfab:SetParent(nil)
@@ -320,7 +322,7 @@ function menu.remove(self)
     end
     if menu.nanskip ~= nil then
         menu.nanskip:nanStop()
-        menu.nanskip.nanplayer = nil
+        menu.nanskip.nanplayer:remove()
         menu.nanskip.toolgun:SetParent(nil)
         menu.nanskip.toolgun = nil
         menu.nanskip:SetParent(nil)
