@@ -19,7 +19,7 @@ game.connection.disconnect = function(connection)
 	connection.connected = false
 end
 game.connection.onEvent = function(e)
-	crystal.parseEvent(e, {
+	crystal.ParseEvent(e, {
 
 		connected = function(event)
 			debug.log("game() - connected")
