@@ -152,7 +152,7 @@
                         "24_": {
                             "position": {
                                 "_z": 0,
-                                "_y": 12,
+                                "_y": 0,
                                 "_x": 0
                             },
                             "interpolation": "quadraticInOut",
@@ -170,7 +170,7 @@
                         "0_": {
                             "position": {
                                 "_z": 0,
-                                "_y": 12,
+                                "_y": 0,
                                 "_x": 0
                             },
                             "interpolation": "linear",
