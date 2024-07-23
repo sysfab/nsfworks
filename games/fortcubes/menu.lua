@@ -92,15 +92,17 @@ function menu.create(self)
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
     self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
-    menu.man1 = avatar:get(Player.Username) menu.man1:SetParent(World)
-    menu.man1.Animations.Idle:Stop()
-    menu.man1.Position = Number3(-14, 2.63, 35)
-    menu.man1.Rotation.Y = 0.4+math.pi
-    menu.man1.Shadow = true
-    menu.man1.Scale = 0.3
 
     loader:loadText("games/fortcubes/assets/animations/menu/pistol_idle.json", function(data)
         nanimator.import(data, "menu_idle")
+
+        menu.man1 = avatar:get(Player.Username) menu.man1:SetParent(World)
+        menu.man1.Animations.Idle:Stop()
+        menu.man1.Position = Number3(-14, 2.63, 35)
+        menu.man1.Rotation.Y = 0.4+math.pi
+        menu.man1.Shadow = true
+        menu.man1.Scale = 0.3
+
         nanimator.add(menu.man1, "menu_idle")
         menu.man1:setLoop(true)
         menu.man1:nanPlay("menu_idle", "default")
@@ -343,9 +345,11 @@ function menu.remove(self)
     self.version:remove()
     self.version = nil
 
-    self.man1:SetParent(nil)
-    self.man1.Tick = nil
-    self.man1 = nil
+    if self.man1 ~= nil then
+        self.man1:SetParent(nil)
+        self.man1.Tick = nil
+        self.man1 = nil
+    end
     self.man2:SetParent(nil)
     self.man2.Tick = nil
     self.man2 = nil
