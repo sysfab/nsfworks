@@ -71,6 +71,10 @@ function menu.create(self)
                 menu.music:Play()
             end
         end
+        if menu.sky ~= nil then
+            menu.sky.Backward = Camera.Forward
+            menu.sky.Position = Camera.Forward*150 + Camera.Right*80 + Camera.Down*50
+        end
     end
 
     Camera:SetModeFree()
@@ -115,8 +119,10 @@ function menu.create(self)
     loader:loadData("games/fortcubes/assets/sky_1.jpg", function(data)
         local texture = data
         menu.sky = Quad()
+        menu.sky.Color.A = 127
         menu.sky:SetParent(World)
         menu.sky.Width, menu.sky.Height = 1920, 1080
+        menu.sky.Scale = 0.1
         menu.sky.Image = texture
     end)
 
