@@ -307,23 +307,23 @@ function menu.remove(self)
     self.version:remove()
     self.version = nil
 
-    if self.man1 ~= nil then
-        self.man1.pistol:SetParent(nil)
-        self.man1.pistol = nil
-        self.man1:nanStop()
-        self.man1.nanplayer:remove()
-        self.man1:SetParent(nil)
-        self.man1.Tick = nil
-        self.man1 = nil
+    if menu.man1 ~= nil then
+        menu.man1.pistol:SetParent(nil)
+        menu.man1.pistol = nil
+        menu.man1:nanStop()
+        menu.man1.nanplayer:remove()
+        menu.man1:SetParent(nil)
+        menu.man1.Tick = nil
+        menu.man1 = nil
     end
-    if self.man2 ~= nil then
-        self.man2.katana:SetParent(nil)
-        self.man2.katana = nil
-        self.man2:nanStop()
-        self.man2.nanplayer:remove()
-        self.man2:SetParent(nil)
-        self.man2.Tick = nil
-        self.man2 = nil
+    if menu.man2 ~= nil then
+        menu.man2.katana:SetParent(nil)
+        menu.man2.katana = nil
+        menu.man2:nanStop()
+        menu.man2.nanplayer:remove()
+        menu.man2:SetParent(nil)
+        menu.man2.Tick = nil
+        menu.man2 = nil
     end
     if menu.sysfab ~= nil then
         menu.sysfab:nanStop()
@@ -357,6 +357,11 @@ function menu.remove(self)
     self.play = nil
     self.back:remove()
     self.back = nil
+
+    for k, v in pairs(menu.bushes) do
+        v:SetParent(nil)
+        v = nil
+    end
 
     debug.log("menu() - Menu removed.")
 
@@ -481,6 +486,56 @@ menu.loadModels = function(self)
         menu.yard:SetParent(World)
         menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
         menu.yard.Shadow = true
+    end)
+
+    for k, v in pairs(menu.bushes) do
+        v:SetParent(nil)
+        v = nil
+    end
+    Object:Load("nanskip.bush_1_alternate", function(s)
+        local bushes = {
+            {pos = Number3(-9, 1, 60), rot = Rotation(0, -math.pi-0.6, 0), scale = 0.45},
+            {pos = Number3(-1, 0.9, 64), rot = Rotation(0, 0.2, 0), scale = 0.58},
+            {pos = Number3(5, 1, 65), rot = Rotation(0, -0.9, 0), scale = 0.46},
+            {pos = Number3(9, 0.85, 69), rot = Rotation(0, 0.1, 0), scale = 0.52},
+            {pos = Number3(16, 1, 72), rot = Rotation(0, -0.7, 0), scale = 0.53},
+            {pos = Number3(-15, 0.8, 58), rot = Rotation(0, -0.2+math.pi, 0), scale = 0.45},
+            {pos = Number3(-20, 0.9, 63), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 0.5},
+            {pos = Number3(-25, 0.85, 67), rot = Rotation(0, 0.4, 0), scale = 0.45},
+            {pos = Number3(-30, 0.78, 59), rot = Rotation(0, -0.5, 0), scale = 0.55},
+            {pos = Number3(-36, 0.75, 61), rot = Rotation(0, 0.3, 0), scale = 0.45},
+            {pos = Number3(-40, 0.95, 58), rot = Rotation(0, -1.5, 0), scale = 0.47},
+            {pos = Number3(-45, 0.75, 57), rot = Rotation(0, -2.5, 0), scale = 0.5},
+            {pos = Number3(-52, 0.85, 60), rot = Rotation(0, 1.2, 0), scale = 0.57},
+
+            {pos = Number3(-35, 0, -44), rot = Rotation(0, 0.4, 0), scale = 0.5},
+            {pos = Number3(-28, 0, -46), rot = Rotation(0, -0.7, 0), scale = 0.45},
+            {pos = Number3(-21, 0, -48), rot = Rotation(0, 0, 0), scale = 0.52},
+            {pos = Number3(-14, 0, -50), rot = Rotation(0, -0.3, 0), scale = 0.48},
+            {pos = Number3(-7, 0, -50), rot = Rotation(0, 0.3, 0), scale = 0.45},
+            {pos = Number3(0, 0, -50), rot = Rotation(0, -0.7, 0), scale = 0.5},
+            {pos = Number3(7, 0, -50), rot = Rotation(0, -0.3, 0), scale = 0.52},
+            {pos = Number3(14, 0, -50), rot = Rotation(0, 0.4, 0), scale = 0.45},
+            {pos = Number3(21, 0, -50), rot = Rotation(0, -0.7, 0), scale = 0.52},
+            {pos = Number3(28, 0, -48), rot = Rotation(0, -0.3, 0), scale = 0.5},
+            {pos = Number3(32, 0, -45), rot = Rotation(0, 0, 0), scale = 0.45},
+            {pos = Number3(36, 0, -40), rot = Rotation(0, 0.4, 0), scale = 0.48},
+            {pos = Number3(40, 0, -35), rot = Rotation(0, -0.7, 0), scale = 0.5},
+            {pos = Number3(44, 0, -29), rot = Rotation(0, 0.3, 0), scale = 0.45},
+        }
+
+        menu.bushes = {}
+        for k, v in pairs(bushes) do
+            local bush = Shape(s)
+            bush.Position = v.pos
+            bush.Rotation = v.rot
+            bush.Scale = v.scale
+            bush:SetParent(World)
+            bush.Shadow = true
+            bush.Pivot.Y = 0
+
+            table.insert(menu.bushes, bush)
+        end
     end)
 end
 
