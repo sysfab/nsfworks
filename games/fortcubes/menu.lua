@@ -101,9 +101,9 @@ function menu.create(self)
 
     loader:loadText("games/fortcubes/assets/animations/menu/pistol_idle.json", function(data)
         nanimator.import(data, "menu_idle")
-        nanimator.add(menu.man1.Body, "menu_idle")
-        menu.man1.Body:setLoop(true)
-        menu.man1.Body:nanPlay("menu_idle", "default")
+        nanimator.add(menu.man1, "menu_idle")
+        menu.man1:setLoop(true)
+        menu.man1:nanPlay("menu_idle", "default")
     end)
 
     menu.man2 = Quad() menu.man2:SetParent(World)
