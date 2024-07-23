@@ -100,11 +100,17 @@ function menu.create(self)
     -- MAIN MENU
 
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
+    self.titleBG.pos = Number2(-1000, -1000)
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
+    self.title2.pos = Number2(-1000, -1000)
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
+    self.title.pos = Number2(-1000, -1000)
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
+    self.versionBG.pos = Number2(-1000, -1000)
     self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
+    self.version2.pos = Number2(-1000, -1000)
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
+    self.version.pos = Number2(-1000, -1000)
 
     menu:loadModels()
 
