@@ -615,7 +615,7 @@ menu.loadModels = function(self)
             {pos = Number3(57+7, -2, -74), rot = Rotation(0, -0.2, 0), scale = 0.7},
         }
 
-        menu.tree = {}
+        menu.trees = {}
         for k, v in pairs(trees) do
             local tree = Shape(s, {includeChildren = true})
             tree.Position = v.pos
