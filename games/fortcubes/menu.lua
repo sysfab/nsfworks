@@ -133,16 +133,15 @@ function menu.create(self)
         local texture = result.Body
         menu.man4.Image = texture
     end)
-    
+
     loader:loadData("games/fortcubes/assets/menuTheme.mp3", function(data)
         local sound = data
         menu.music = AudioSource("gun_shot_1")
         menu.music:SetParent(Camera)
         menu.music.Sound = sound
+        menu.music:Play()
         menu.music.Loop = true
         menu.music.Volume = 0.0001
-        menu.music:Stop()
-        menu.music:Play()
         debug.log("music downloaded")
     end)
 
