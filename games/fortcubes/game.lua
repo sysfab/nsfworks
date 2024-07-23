@@ -1,5 +1,34 @@
 local game = {}
 
+game.connection = {}
+game.connection.connected = false
+
+game.connection.connect = function(connection)
+	if connection.connected == false then
+		debug.log("game() - connecting...")
+		local e = crystal.Event("connect", {})
+		e:SendTo(Server)
+	else
+		debug.error("game() - trying to connect when already connected", 2)
+	end
+end
+game.connection.disconnect = function(connection)
+	debug.log("game() - disconnecting...")
+	local e = crystal.Event("disconnect", {})
+	e:SendTo(Server)
+	connection.connected = false
+end
+game.connection.onEvent = function(e)
+	crystal.parseEvent(e, {
+
+		connected = function(event)
+			debug.log("game() - connected")
+			game.connection.connected = true
+		end
+
+	})
+end
+
 game.mobileControls = {}
 game.mobileControls.created = false
 game.mobileControls.screenResize = function(controls)
@@ -43,13 +72,20 @@ game.create = function(self)
 	self.created = true
 	self:screenResize()
 
-	self.screenResizeListener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
-        self:screenResize()
+	self.screenResizeListener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function(...)
+        self:screenResize(...)
     end)
+    self.eventListener = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(...)
+        self.connection:onEvent(...)
+    end)
+
+    self.connection:connect()
 end
 game.remove = function(self)
 	self.screenResizeListener:Remove()
+	self.eventListener:Remove()
 	self.mobileControls:remove()
+	self.connection:disconnect()
 	self.created = false
 end
 
