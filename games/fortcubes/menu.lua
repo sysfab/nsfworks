@@ -93,6 +93,19 @@ function menu.create(self)
     self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
     menu.man1 = avatar:get(Player.Username) menu.man1:SetParent(World)
+    menu.man1.Animations.Idle:Stop()
+    menu.man1.Position = Number3(-14, 2.63, 35)
+    menu.man1.Rotation.Y = 0.4+math.pi
+    menu.man1.Shadow = true
+    menu.man1.Scale = 0.3
+
+    loader.loadText("games/fortcubes/animations/menu/pistol_idle.json", function(data)
+        nanimator.import(data, "menu_idle")
+        nanimator.add(menu.man1.Body, "menu_idle")
+        menu.man1.Body:setLoop(true)
+        menu.man1.Body:nanPlay("menu_idle", "default")
+    end)
+
     menu.man2 = Quad() menu.man2:SetParent(World)
     menu.man3 = Quad() menu.man3:SetParent(World)
     menu.man4 = Quad() menu.man4:SetParent(World)
@@ -102,10 +115,6 @@ function menu.create(self)
         menu.man2.t = menu.man2.t + 1.25
         menu.man2.Height = 1023*1.25/70 + math.sin(menu.man2.t * 0.03)*0.5
     end
-
-    menu.man1.Position = Number3(-20, -3, 35)
-    menu.man1.Rotation.Y = -0.3
-    menu.man1.Shadow = true
 
     menu.man2.Position = Number3(-12, -7, 38)
     menu.man2.Rotation.Y = 0.2
