@@ -103,6 +103,14 @@ function menu.create(self)
         menu.man1.Shadow = true
         menu.man1.Scale = 0.3
 
+        Object:Load("voxels.silver_pistol", function(s)
+            menu.man1.pistol = Shape(s)
+            menu.man1.pistol:SetParent(menu.man1:GetChild(4):GetChild(1))
+            menu.man1.pistol.Scale = 0.65
+            menu.man1.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
+            menu.man1.pistol.LocalPosition = Number3(8, -1, 3)
+        end)
+
         nanimator.add(menu.man1, "menu_idle")
         menu.man1:setLoop(true)
         menu.man1:nanPlay("menu_idle", "default")
