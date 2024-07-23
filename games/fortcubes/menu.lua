@@ -140,6 +140,7 @@ function menu.create(self)
         menu.music.Sound = sound
         menu.music.Loop = true
         menu.music.Volume = 0.0001
+        debug.log("music downloaded")
     end)
     -- піся
     -- MAIN MENU - BUTTONS
