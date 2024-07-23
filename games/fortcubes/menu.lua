@@ -72,7 +72,7 @@ function menu.create(self)
                     menu.music:Play()
                 end
             else
-                menu.music.Volume = lerp(menu.music.Volume, 0, 0.005)
+                menu.music.Volume = lerp(menu.music.Volume, 0, 0.05)
             end
         end
     end
