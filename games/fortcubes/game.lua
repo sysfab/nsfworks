@@ -282,11 +282,11 @@ game.controls.analogPad = function(dx, dy, isJoy)
 	if isJoy ~= true then
 		local wh = Screen.Width/Screen.Height
 
-		dx = dx/wh
-		dy = dy
+		dx = (dx-0.5)*2
+		dy = (dy-0.5)*2
 	end
 
-	Player.Forward = Player.Position + Number3(dx, 0, dy)
+	Player.Forward = Number3(dx, 0, dy)*25
 end
 game.controls.directionalPad = function(dx, dy)
 	Player.Motion = Number3(dx, 0, dy)*50
