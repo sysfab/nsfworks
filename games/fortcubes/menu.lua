@@ -98,15 +98,6 @@ function menu.create(self)
                 menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.back.Width-5, 0.3)
                 menu.backsx = lerp(menu.backsx, 5, 0.3)
             end
-            if menu.closing then
-                if menu.blackPanel.alpha ~= nil then
-                    menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3))
-                end
-            else
-                if menu.blackPanel.alpha ~= nil then
-                    menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
-                end
-            end
             if menu.currentMenu ~= "menu" then
                 menu.back.pos.X = menu.backsx
             end
@@ -114,11 +105,22 @@ function menu.create(self)
             menu.settings.pos.X = menu.mainbuttonsx
             menu.play.pos.X = menu.mainbuttonsx
             menu.armory.pos.X = menu.mainbuttonsx
-            menu.blackPanel.Color.A = menu.blackPanel.alpha
             if menu.currentMenu ~= "settings" and menu.book.left ~= nil then
                 menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05)
                 menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05)
             end
+        end
+        if menu.closing then
+            if menu.blackPanel.alpha ~= nil then
+                menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3))
+            end
+        else
+            if menu.blackPanel.alpha ~= nil then
+                menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
+            end
+        end
+        if menu.blackPanel ~= nil and menu.blackPanel.alpha ~= nil then
+            menu.blackPanel.Color.A = menu.blackPanel.alpha
         end
         if menu.music ~= nil then
             if menu.created == true then
@@ -169,9 +171,6 @@ function menu.create(self)
     self.version2.pos = Number2(-1000, -1000)
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
     self.version.pos = Number2(-1000, -1000)
-
-    self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
-    self.blackPanel.alpha = 0
 
     menu:loadModels()
 
@@ -247,6 +246,9 @@ function menu.create(self)
         menu.play:enable()
         menu.armory:enable()
     end
+    
+    self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
+    self.blackPanel.alpha = 0
 
     -- -- ------  --  --------------------  --  ------ -- --
     function menu.update(self)
@@ -385,9 +387,9 @@ function menu.remove(self)
     self.created = false
     self.listener:Remove()
 
-    menu.closing = true
-
     Timer(0.5, false, function()
+        self.object.Tick = nil
+        self.object = nil
         self.titleBG:remove()
         self.titleBG = nil
         self.title:remove()
