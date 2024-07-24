@@ -190,10 +190,10 @@ game.mobileControls.create = function(controls)
 		game.controls.directionalPad(controls.moveJoystick.x, controls.moveJoystick.y)
 	end
 	controls.shootJoystick.onDrag = function()
-		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y)
+		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
 	end
 	controls.shootJoystick.onRelease = function()
-		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y)
+		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
 	end
 
 	controls.created = true
@@ -262,13 +262,13 @@ game.controls.create = function(controls)
 	else
 		Client.DirectionalPad = controls.directionalPad
 		Pointer.Drag = function(pe)
-			controls.analogPad(pe.DX, pe.DY)
+			controls.analogPad(pe.X, pe.Y)
 		end
 		Pointer.Down = function(pe)
-			controls.analogPad(pe.DX, pe.DY)
+			controls.analogPad(pe.X, pe.Y)
 		end
 		Pointer.Up = function(pe)
-			controls.analogPad(pe.DX, pe.DY)
+			controls.analogPad(pe.X, pe.Y)
 		end
 	end
 end
@@ -278,8 +278,15 @@ game.controls.remove = function(controls)
 	Pointer.Down = nil
 	Pointer.Up = nil
 end
-game.controls.analogPad = function(dx, dy)
-	Player.Rotation = Number3(0, dx+dy, 0)
+game.controls.analogPad = function(dx, dy, isJoy)
+	if isJoy ~= true then
+		local wh = Screen.Width/Screen.Height
+
+		dx = dx/wh
+		dy = dy
+	end
+
+	Player.Forward = Player.Position + Number3(dx, 0, dy)
 end
 game.controls.directionalPad = function(dx, dy)
 	Player.Motion = Number3(dx, 0, dy)*50
