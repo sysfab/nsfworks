@@ -91,6 +91,7 @@ game.ui.create = function(u)
     u.toMenu = ui:createButton("To Menu", u.theme.button)
     u.toMenu.pos = Number2(-1000, -1000)
     u.toMenu.onRelease = function(s)
+    	u.toMenu:disable()
         game:remove(function() menu:create() menu:update() end)
     end
 
