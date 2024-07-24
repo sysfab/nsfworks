@@ -266,7 +266,7 @@ function menu.create(self)
         menu.screenWidth = math.min(640, menu.wh)/1920
         menu.screenHeight = math.min(360, menu.wh)/1080
 
-        local coff = 0.5+(Screen.Width*Screen.Height)/(1920*1080)*0.5
+        local coff = (0.5+(Screen.Width*Screen.Height)/(1920*1080)*0.5)*3
         menu.screenWidth = menu.screenWidth * coff
         menu.screenHeight = menu.screenHeight * coff
 
