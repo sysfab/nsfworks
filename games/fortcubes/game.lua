@@ -24,6 +24,10 @@ game.connection.onEvent = function(connection, e)
 		connected = function(event)
 			debug.log("game() - connected")
 			game.connection.connected = true
+		end,
+
+		["_"] = function(event)
+			debug.log("game() - got unknown event: '".. event.action .."'")
 		end
 
 	})
@@ -182,6 +186,7 @@ end
 
 game.world = {}
 game.world.create = function(world, scale)
+	debug.log("game() - Generating world...")
 	world.map = MutableShape()
 	for x = 1, scale do
 		for y = 1, scale do
@@ -194,10 +199,25 @@ game.world.create = function(world, scale)
 		end
 	end
 	world.map:SetParent(World)
+
+	Player:SetParent(World)
 end
 game.world.remove = function(world)
 	world.map:SetParent(nil)
 	world.map = nil
+
+	Player:SetParent(nil)
+end
+
+game.camera = {}
+game.camera.created = false
+game.camera.create = function(camera)
+	Camera:SetModeFree()
+
+	camera.created = true
+end
+game.camera.remove = function(camera)
+	camera.created = false
 end
 
 game.created = false
@@ -211,7 +231,10 @@ game.screenResize = function(self)
 end
 game.create = function(self)
 	self.created = true
+	self.world:create(100)
+	self.camera:create()
 	self.ui:create()
+	self.mobileControls:create()
 	self:screenResize()
 
 	self.screenResizeListener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function(...)
@@ -222,7 +245,7 @@ game.create = function(self)
     end)
 
     self.connection:connect()
-	self.world:create(100)
+    debug.log("game() - created")
 end
 game.remove = function(self, callback)
 	self.screenResizeListener:Remove()
@@ -231,9 +254,11 @@ game.remove = function(self, callback)
 		self.mobileControls:remove()
 	end
 	self.connection:disconnect()
+	self.camera:remove()
 	self.world:remove()
 	self.ui:remove(callback)
 	self.created = false
+	debug.log("game() - removed")
 end
 
 
