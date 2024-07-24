@@ -31,7 +31,9 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		["_"] = function(event)
-			debug.log("game() - got unknown event: '".. event.action .."'")
+			if event.action ~= nil then
+				debug.log("game() - got unknown event: '".. event.action .."'")
+			end
 		end
 
 	})
