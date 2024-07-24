@@ -277,6 +277,10 @@ function menu.create(self)
             error("menu.update() should be called with ':'!", 2)
         end
 
+        for k, v in pairs(Players) do
+            v.IsHidden = true
+        end
+
         menu.wh = math.max(Screen.Width, Screen.Height)
         menu.screenWidth = math.min(640, menu.wh)/1920
         menu.screenHeight = math.min(360, menu.wh)/1080
@@ -497,6 +501,9 @@ function menu.remove(self)
         end
 
         debug.log("menu() - Menu removed.")
+        for k, v in pairs(Players) do
+            v.IsHidden = false
+        end
         game:create()
 
     end)
