@@ -163,10 +163,10 @@ game.mobileControls = {}
 game.mobileControls.created = false
 game.mobileControls.screenResize = function(controls)
 	if controls.moveJoystick.loaded == true then
-		controls.moveJoystick:setPos(Number2(10, 10))
+		controls.moveJoystick:setPos(Number2(10+48, 10+48))
 	end
 	if controls.shootJoystick.loaded == true then
-		controls.shootJoystick:setPos(Number2(Screen.Width-10-176, 10))
+		controls.shootJoystick:setPos(Number2(Screen.Width-10-176, 10+48))
 	end
 end
 game.mobileControls.create = function(controls)
