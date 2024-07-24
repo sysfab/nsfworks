@@ -214,9 +214,17 @@ game.camera.created = false
 game.camera.create = function(camera)
 	Camera:SetModeFree()
 
+	camera.object = Object()
+	camera.object.Tick = function()
+		Camera.Position = Player.Position + Number3(0, 40, 0)
+		Camera.Rotation = Player.Down
+	end
+
 	camera.created = true
 end
 game.camera.remove = function(camera)
+	camera.object.Tick = nil
+	camera.object = nil
 	camera.created = false
 end
 
