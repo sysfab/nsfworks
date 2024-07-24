@@ -273,12 +273,6 @@ game.controls.create = function(controls)
 	end
 end
 game.controls.remove = function(controls)
-	if isJoy == true then
-		local d = Number2(dx, dy)
-		d:Normalize()
-		dx = d.X
-		dy = d.Y
-	end
 	Client.DirectionalPad = nil
 	Pointer.Drag = nil
 	Pointer.Down = nil
@@ -299,7 +293,13 @@ game.controls.analogPad = function(dx, dy, isJoy)
 
 	Player.Forward = Number3(dx, 0, dy)*25
 end
-game.controls.directionalPad = function(dx, dy)
+game.controls.directionalPad = function(dx, dy, isJoy)
+	if isJoy == true then
+		local d = Number2(dx, dy)
+		d:Normalize()
+		dx = d.X
+		dy = d.Y
+	end
 	Player.Motion = Number3(dx, 0, dy)*50
 end
 
