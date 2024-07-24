@@ -91,15 +91,19 @@ function menu.create(self)
             menu.titleBG.pos.Y = menu.titleBG.posy
             menu.title.pos.Y = menu.title.posy
             menu.title2.pos.Y = menu.title2.posy
-            if menu.currentMenu == "menu" then
+            if menu.currentMenu == "menu" and not menu.closing then
                 menu.mainbuttonsx = lerp(menu.mainbuttonsx, 5, 0.3)
                 menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3)
-            elseif menu.currentMenu ~= "menu" then
+            elseif menu.currentMenu ~= "menu" and not menu.closing then
                 menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.back.Width-5, 0.3)
                 menu.backsx = lerp(menu.backsx, 5, 0.3)
             end
-            if menu.currentMenu ~= "menu" then
+            if menu.currentMenu ~= "menu" and not menu.closing then
                 menu.back.pos.X = menu.backsx
+            end
+            if menu.closing then
+                menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.back.Width-5, 0.3)
+                menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3)
             end
             menu.aboutUs.pos.X = menu.mainbuttonsx
             menu.settings.pos.X = menu.mainbuttonsx
