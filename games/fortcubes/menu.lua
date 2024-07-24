@@ -91,10 +91,14 @@ function menu.create(self)
             menu.title2.pos.Y = menu.title2.posy
             if menu.closing then
                 menu.buttonsx = lerp(menu.buttonsx, -menu.play.Width-5, 0.3)
-                menu.blackPanel.alpha = math.cell(lerp(menu.blackPanel.alpha, 255, 0.3))
+                if menu.blackPanel.alpha ~= nil then
+                    menu.blackPanel.alpha = math.cell(lerp(menu.blackPanel.alpha, 255, 0.3))
+                end
             else
                 menu.buttonsx = lerp(menu.buttonsx, 5, 0.3)
-                menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
+                if menu.blackPanel.alpha ~= nil then
+                    menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
+                end
             end
             menu.back.pos.X = menu.buttonsx
             menu.aboutUs.pos.X = menu.buttonsx
@@ -157,6 +161,7 @@ function menu.create(self)
     self.version.pos = Number2(-1000, -1000)
 
     self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
+    self.blackPanel.alpha = 0
 
     menu:loadModels()
 
