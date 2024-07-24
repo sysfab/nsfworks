@@ -58,38 +58,34 @@ function menu.create(self)
             menu.setBorders(menu.play)
             menu.setBorders(menu.back)
         end
-        if menu.currentMenu == "menu" then
-            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.35)
-            Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.3)
-            Camera.FOV = lerp(Camera.FOV, 30, 0.1)
-            menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
+        if menu.created then
+            if menu.currentMenu == "menu" then
+                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.35)
+                Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.3)
+                Camera.FOV = lerp(Camera.FOV, 30, 0.1)
+                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
+                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
+                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
+            elseif menu.currentMenu == "about us" then
+                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.35)
+                Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
+                Camera.FOV = lerp(Camera.FOV, 27, 0.1)
+                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
+                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
+                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
+            elseif menu.currentMenu == "settings" then
+                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.31, 0), 0.35)
+                Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.2)
+                Camera.FOV = lerp(Camera.FOV, 23, 0.1)
+                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3)
+                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3)
+                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3)
+                menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.1)
+                menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.1)
+            end
             menu.titleBG.pos.Y = menu.titleBG.posy
-            menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
             menu.title.pos.Y = menu.title.posy
-            menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
             menu.title2.pos.Y = menu.title2.posy
-        elseif menu.currentMenu == "about us" then
-            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.35)
-            Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
-            Camera.FOV = lerp(Camera.FOV, 27, 0.1)
-            menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
-            menu.titleBG.pos.Y = menu.titleBG.posy
-            menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
-            menu.title.pos.Y = menu.title.posy
-            menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
-            menu.title2.pos.Y = menu.title2.posy
-        elseif menu.currentMenu == "settings" then
-            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.3, 0), 0.35)
-            Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.2)
-            Camera.FOV = lerp(Camera.FOV, 23, 0.1)
-            menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3)
-            menu.titleBG.pos.Y = menu.titleBG.posy
-            menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3)
-            menu.title.pos.Y = menu.title.posy
-            menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3)
-            menu.title2.pos.Y = menu.title2.posy
-            menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.1)
-            menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.1)
         end
         if menu.music ~= nil then
             if menu.created == true then
