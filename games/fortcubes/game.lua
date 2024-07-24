@@ -179,6 +179,20 @@ game.mobileControls.create = function(controls)
 		color = Color(255, 100, 100, 127), -- color of joystick's insides.
 		borderColor = Color(255, 100, 100, 255) -- color of joystick's border.
 	})
+
+	controls.moveJoystick.onDrag = function()
+		game.controls.directionalPad(controls.moveJoystick.x, controls.moveJoystick.y)
+	end
+	controls.moveJoystick.onRelease = function()
+		game.controls.directionalPad(controls.moveJoystick.x, controls.moveJoystick.y)
+	end
+	controls.shootJoystick.onDrag = function()
+		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y)
+	end
+	controls.shootJoystick.onRelease = function()
+		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y)
+	end
+
 	controls.created = true
 end
 game.mobileControls.remove = function(controls)
@@ -261,12 +275,10 @@ game.controls.remove = function(controls)
 	Pointer.Up = nil
 end
 game.controls.analogPad = function(dx, dy)
-	debug.log("game() - analog pad "..dx.." "..dy)
 	Player.Rotation = Number3(0, dx+dy, 0)
 end
 game.controls.directionalPad = function(dx, dy)
-	debug.log("game() - directional pad "..dx.." "..dy)
-	Player.Motion = Number3(dx, 0, dy)
+	Player.Motion = Number3(dx, 0, dy)*50
 end
 
 game.created = false
