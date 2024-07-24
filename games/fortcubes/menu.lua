@@ -52,7 +52,9 @@ function menu.create(self)
     menu.mainbuttonsx = 0
     menu.backsx = 0
 
-    menu.object = Object()
+    if menu.object == nil then
+        menu.object = Object()
+    end
     menu.object.Tick = function()
         if menu.aboutUs ~= nil then
             menu.setBorders(menu.aboutUs)
@@ -394,8 +396,6 @@ function menu.remove(self)
         self.created = false
         self.listener:Remove()
 
-        self.object.Tick = nil
-        self.object = nil
         self.titleBG:remove()
         self.titleBG = nil
         self.title:remove()
