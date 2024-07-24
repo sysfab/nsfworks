@@ -193,7 +193,7 @@ game.mobileControls.create = function(controls)
 		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
 	end
 	controls.shootJoystick.onRelease = function()
-		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
+		--game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
 	end
 
 	controls.created = true
@@ -265,7 +265,7 @@ game.controls.create = function(controls)
 			controls.analogPad(pe.X, pe.Y)
 		end
 		Pointer.Down = function(pe)
-			controls.analogPad(pe.X, pe.Y)
+			--controls.analogPad(pe.X, pe.Y)
 		end
 		Pointer.Up = function(pe)
 			controls.analogPad(pe.X, pe.Y)
