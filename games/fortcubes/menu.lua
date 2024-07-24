@@ -102,7 +102,7 @@ function menu.create(self)
                 menu.back.pos.X = menu.backsx
             end
             if menu.closing then
-                menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.back.Width-5, 0.3)
+                menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.play.Width-5, 0.3)
                 menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3)
             end
             menu.aboutUs.pos.X = menu.mainbuttonsx
@@ -252,7 +252,7 @@ function menu.create(self)
     end
     
     self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
-    self.blackPanel.alpha = 0
+    self.blackPanel.alpha = 255
 
     -- -- ------  --  --------------------  --  ------ -- --
     function menu.update(self)
