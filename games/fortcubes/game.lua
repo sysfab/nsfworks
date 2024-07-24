@@ -284,6 +284,11 @@ game.controls.analogPad = function(dx, dy, isJoy)
 
 		dx = (dx-0.5)*2
 		dy = (dy-0.5)*2
+	else
+		local d = Number2(dx, dy)
+		d:Normalize()
+		dx = d.X
+		dy = d.Y
 	end
 
 	Player.Forward = Number3(dx, 0, dy)*25
