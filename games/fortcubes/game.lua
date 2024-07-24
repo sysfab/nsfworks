@@ -229,7 +229,8 @@ game.camera.remove = function(camera)
 end
 
 game.controls = {}
-game.controls.init = function(controls)
+game.controls.shooting = false
+game.controls.create = function(controls)
 	if Client.IsMobile == true then
 		Client.DirectionalPad = nil
 		Pointer.Drag = nil
@@ -237,10 +238,22 @@ game.controls.init = function(controls)
 		Pointer.Up = nil
 	else
 		Client.DirectionalPad = controls.directionalPad
-		Pointer.Drag = function(pe) controls.analogPad(pe.DX, pe.DY) end
-		Pointer.Down = function(pe) controls.analogPad(pe.DX, pe.DY) end
-		Pointer.Up = function(pe) controls.analogPad(pe.DX, pe.DY) end
+		Pointer.Drag = function(pe)
+			controls.analogPad(pe.DX, pe.DY)
+		end
+		Pointer.Down = function(pe)
+			controls.analogPad(pe.DX, pe.DY)
+		end
+		Pointer.Up = function(pe)
+			controls.analogPad(pe.DX, pe.DY)
+		end
 	end
+end
+game.controls.remove = function(controls)
+	Client.DirectionalPad = nil
+	Pointer.Drag = nil
+	Pointer.Down = nil
+	Pointer.Up = nil
 end
 game.controls.analogPad = function(dx, dy)
 	debug.log("game() - analog pad "..dx.." "..dy)
@@ -265,7 +278,7 @@ game.create = function(self)
 	self.world:create(100)
 	self.camera:create()
 	self.ui:create()
-	self.controls:init()
+	self.controls:create()
 	self.mobileControls:create()
 	self:screenResize()
 
@@ -280,6 +293,7 @@ game.create = function(self)
     debug.log("game() - created")
 end
 game.remove = function(self, callback)
+	self.controls:remove()
 	self.screenResizeListener:Remove()
 	self.eventListener:Remove()
 	if self.mobileControls.created then
