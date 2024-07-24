@@ -237,9 +237,9 @@ game.controls.init = function()
 		Pointer.Up = nil
 	else
 		Client.DirectionalPad = game.controls.directionalPad
-		game.controls.analogPad
-		game.controls.analogPad
-		game.controls.analogPad
+		Pointer.Drag = game.controls.analogPad
+		Pointer.Down = game.controls.analogPad
+		Pointer.Up = game.controls.analogPad
 	end
 end
 game.controls.analogPad = function(dx, dy)
