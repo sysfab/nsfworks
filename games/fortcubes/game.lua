@@ -23,6 +23,9 @@ game.connection.onEvent = function(connection, e)
 
 		connected = function(event)
 			debug.log("game() - connected")
+
+			Player.Position = Number3(event.data.posX*game.world.map.Width, 1, event.data.posY*game.world.map.Depth)*game.world.map.Scale
+
 			game.connection.connected = true
 		end,
 

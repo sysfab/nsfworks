@@ -34,7 +34,7 @@ Server.DidReceiveEvent = function(e)
 			players[event.Sender.Username] = {kills = 0, deaths = 0}
 			debug.log("server() - created player entry for '".. event.Sender.Username .."'")
 
-			local r = crystal.Event("connected", {players = players, game = game})
+			local r = crystal.Event("connected", {players = players, game = game, posX = math.random(20, 80)/100, posY = math.random(20, 80)/100})
 			r:SendTo(event.Sender)
 		end
 	end,
