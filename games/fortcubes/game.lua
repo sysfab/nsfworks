@@ -59,10 +59,14 @@ game.ui.create = function(u)
         end
     end
 
-    u.screenWidth = math.max(640, Screen.Width)/1920
-    u.screenHeight = math.max(360, Screen.Height)/1080
+    u.wh = math.max(Screen.Width, Screen.Height)
+    u.screenWidth = math.min(640, u.wh)/1920
+    u.screenHeight = math.min(360, u.wh)/1080
 
-    u.screenWidth = math.min(u.screenWidth, u.screenHeight)
+    local coff = (0.5+(Screen.Width*Screen.Height)/(1920*1080)*0.5)*3
+    menu.screenWidth = menu.screenWidth * coff
+    menu.screenHeight = menu.screenHeight * coff
+
     if u.object == nil then
         u.object = Object()
     end
