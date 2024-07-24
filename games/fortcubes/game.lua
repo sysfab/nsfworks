@@ -318,7 +318,11 @@ game.create = function(self)
 	self.camera:create()
 	self.ui:create()
 	self.controls:create()
-	self.mobileControls:create()
+
+	if Client.IsMobile then
+		self.mobileControls:create()
+	end
+
 	self:screenResize()
 
 	self.screenResizeListener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function(...)
