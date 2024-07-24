@@ -485,6 +485,9 @@ function menu.remove(self)
         self.back:remove()
         self.back = nil
 
+        self.workinprogress:SetParent(nil)
+        self.workinprogress = nil
+
         for k, v in pairs(menu.bushes) do
             v:SetParent(nil)
             v = nil
