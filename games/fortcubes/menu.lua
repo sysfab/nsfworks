@@ -89,6 +89,13 @@ function menu.create(self)
                     menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05)
                     menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.05)
                 end
+            elseif menu.currentMenu == "armory" then
+                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, math.pi/2-0.5, 0), 0.15)
+                Camera.Position:Lerp(Camera.Position, Number3(-12.46, 6.89, -14.66), 0.1)
+                Camera.FOV = lerp(Camera.FOV, 15, 0.1)
+                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3)
+                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3)
+                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3)
             end
             menu.titleBG.pos.Y = menu.titleBG.posy
             menu.title.pos.Y = menu.title.posy
@@ -899,6 +906,22 @@ menu.loadModels = function(self)
             tree.Pivot.Y = 0
 
             table.insert(menu.trees, tree)
+        end
+    end)
+
+    HTTP:Get("https://cdn.pixabay.com/photo/2012/04/01/18/55/work-in-progress-24027_1280.png", function(res)
+        if res.StatusCode ~= 200 then
+            error("Error on downloading work in progress image: " .. res.StatusCode)
+        end
+
+        if menu.created then
+            menu.workinprogress = Quad()
+            menu.workinprogress.Color.A = 254
+            menu.workinprogress.Image = res.Body
+            menu.workinprogress.Width, menu.workinprogress.Height = 10, 10
+            menu.workinprogress.Position = Number3(40, 2, 20)
+            menu.workinprogress.Rotation = Rotation(0, math.pi/2-0.5, 0)
+            menu.workinprogress:SetParent(World)
         end
     end)
 end
