@@ -180,9 +180,12 @@ function menu.create(self)
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
     self.version.pos = Number2(-1000, -1000)
 
+    debug.log("menu() - Loading models...")
+
     menu:loadModels()
 
     if menu.music == nil then
+        debug.log("menu() - Downloading music...")
         loader:loadData("games/fortcubes/assets/menuTheme.mp3", function(data)
             if menu.music == nil then
                 local sound = data
