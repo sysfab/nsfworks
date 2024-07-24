@@ -92,19 +92,19 @@ function menu.create(self)
             menu.title2.pos.Y = menu.title2.posy
             if menu.closing then
                 menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.play.Width-5, 0.3)
-                menu.buttonsx = lerp(menu.buttonsx, -menu.back.Width-5, 0.3)
+                menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3)
                 if menu.blackPanel.alpha ~= nil then
                     menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3))
                 end
             elseif menu.closing or menu.currentMenu ~= "menu" then
                 menu.mainbuttonsx = lerp(menu.mainbuttonsx, 5, 0.3)
-                menu.buttonsx = lerp(menu.buttonsx, -menu.back.Width-5, 0.3)
+                menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3)
                 if menu.blackPanel.alpha ~= nil then
                     menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
                 end
             end
             if menu.currentMenu ~= "menu" then
-                menu.back.pos.X = menu.buttonsx
+                menu.back.pos.X = menu.backsx
             end
             menu.aboutUs.pos.X = menu.mainbuttonsx
             menu.settings.pos.X = menu.mainbuttonsx
