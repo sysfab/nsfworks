@@ -266,7 +266,7 @@ game.controls.analogPad = function(dx, dy)
 end
 game.controls.directionalPad = function(dx, dy)
 	debug.log("game() - directional pad "..dx.." "..dy)
-	Player.Rotation = Number3(0, dx+dy, 0)
+	Player.Motion = Number3(dx, 0, dy)
 end
 
 game.created = false
