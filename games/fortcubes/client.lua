@@ -20,6 +20,7 @@ debug.log("client() - config loaded")
 
 Client.DirectionalPad = nil
 Client.AnalogPad = nil
+Pointer.Drag = nil
 
 
 loadingBG = ui:createFrame(Color(0, 0, 0, 255))
