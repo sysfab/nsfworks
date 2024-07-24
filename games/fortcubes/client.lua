@@ -15,8 +15,8 @@ set("VERSION", "v0.0")
 debug.log("client() - config loaded")
 
 
-Client.DirectionalPad = function() end
-Client.AnalogPad = function() end
+Client.DirectionalPad = nil
+Client.AnalogPad = nil
 
 
 loadingBG = ui:createFrame(Color(0, 0, 0, 255))

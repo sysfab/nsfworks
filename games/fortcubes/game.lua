@@ -23,11 +23,6 @@ game.connection.onEvent = function(connection, e)
 
 		connected = function(event)
 			debug.log("game() - connected")
-
-			debug.log(event.data.posX)
-			debug.log(event.data.posY)
-			debug.log(event.data)
-			debug.log(event)
 			
 			Player.Position = Number3(event.data.posX*game.world.map.Width, 1, event.data.posY*game.world.map.Depth)*game.world.map.Scale
 
@@ -285,7 +280,7 @@ game.screenResize = function(self)
 end
 game.create = function(self)
 	self.created = true
-	self.world:create(100)
+	self.world:create(128)
 	self.camera:create()
 	self.ui:create()
 	self.controls:create()
