@@ -741,11 +741,12 @@ menu.loadModels = function(self)
             table.insert(menu.bushes, bush)
         end
     end)
-
+--[[
     for k, v in pairs(menu.trees) do
         v:SetParent(nil)
         v = nil
     end
+]]
     Object:Load("nanskip.tree_2", function(s)
         local trees = {
             {pos = Number3(-49, 0, 60), rot = Rotation(0, 0.2, 0), scale = 0.75},
