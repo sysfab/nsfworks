@@ -384,10 +384,12 @@ function menu.remove(self)
     end
 
     debug.log("menu() - Removing menu...")
-    self.created = false
-    self.listener:Remove()
+    self.closing = true
 
     Timer(0.5, false, function()
+        self.created = false
+        self.listener:Remove()
+
         self.object.Tick = nil
         self.object = nil
         self.titleBG:remove()
