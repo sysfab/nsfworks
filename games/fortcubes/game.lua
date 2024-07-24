@@ -184,10 +184,10 @@ game.mobileControls.create = function(controls)
 	})
 
 	controls.moveJoystick.onDrag = function()
-		game.controls.directionalPad(controls.moveJoystick.x, controls.moveJoystick.y)
+		game.controls.directionalPad(controls.moveJoystick.x, controls.moveJoystick.y, true)
 	end
 	controls.moveJoystick.onRelease = function()
-		game.controls.directionalPad(controls.moveJoystick.x, controls.moveJoystick.y)
+		game.controls.directionalPad(controls.moveJoystick.x, controls.moveJoystick.y, true)
 	end
 	controls.shootJoystick.onDrag = function()
 		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
@@ -273,6 +273,12 @@ game.controls.create = function(controls)
 	end
 end
 game.controls.remove = function(controls)
+	if isJoy == true then
+		local d = Number2(dx, dy)
+		d:Normalize()
+		dx = d.X
+		dy = d.Y
+	end
 	Client.DirectionalPad = nil
 	Pointer.Drag = nil
 	Pointer.Down = nil
