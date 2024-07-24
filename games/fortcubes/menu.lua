@@ -48,7 +48,8 @@ function menu.create(self)
     self.screenHeight = math.max(360, Screen.Height)/1080
 
     self.screenWidth = math.min(self.screenWidth, self.screenHeight)
-    menu.buttonsx = 0
+    menu.mainbuttonsx = 0
+    menu.backsx = 0
 
     menu.object = Object()
     menu.object.Tick = function()
@@ -90,12 +91,14 @@ function menu.create(self)
             menu.title.pos.Y = menu.title.posy
             menu.title2.pos.Y = menu.title2.posy
             if menu.closing then
-                menu.buttonsx = lerp(menu.buttonsx, -menu.play.Width-5, 0.3)
+                menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.play.Width-5, 0.3)
+                menu.buttonsx = lerp(menu.buttonsx, -menu.back.Width-5, 0.3)
                 if menu.blackPanel.alpha ~= nil then
                     menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3))
                 end
-            else
-                menu.buttonsx = lerp(menu.buttonsx, 5, 0.3)
+            elseif menu.closing or menu.currentMenu ~= "menu" then
+                menu.mainbuttonsx = lerp(menu.mainbuttonsx, 5, 0.3)
+                menu.buttonsx = lerp(menu.buttonsx, -menu.back.Width-5, 0.3)
                 if menu.blackPanel.alpha ~= nil then
                     menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
                 end
@@ -103,10 +106,10 @@ function menu.create(self)
             if menu.currentMenu ~= "menu" then
                 menu.back.pos.X = menu.buttonsx
             end
-            menu.aboutUs.pos.X = menu.buttonsx
-            menu.settings.pos.X = menu.buttonsx
-            menu.play.pos.X = menu.buttonsx
-            menu.armory.pos.X = menu.buttonsx
+            menu.aboutUs.pos.X = menu.mainbuttonsx
+            menu.settings.pos.X = menu.mainbuttonsx
+            menu.play.pos.X = menu.mainbuttonsx
+            menu.armory.pos.X = menu.mainbuttonsx
             menu.blackPanel.Color.A = menu.blackPanel.alpha
             if menu.currentMenu ~= "settings" and menu.book.left ~= nil then
                 menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05)
@@ -207,7 +210,6 @@ function menu.create(self)
     self.play.pos = Number2(-1000, -1000)
     self.play.onRelease = function(s)
         menu:remove()
-        game:create()
     end
 
     self.back = ui:createButton("BACK", menu.theme.button)
@@ -436,6 +438,7 @@ function menu.remove(self)
         end
 
         debug.log("menu() - Menu removed.")
+        game:create()
 
     end)
 end
