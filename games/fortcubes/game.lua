@@ -130,9 +130,13 @@ game.ui.screenResize = function(u)
         error("menu.update() should be called with ':'!", 2)
     end
 
-    u.wh = math.min(Screen.Width, Screen.Height)
-    u.screenWidth = math.max(640, u.wh)/1920*2
-    u.screenHeight = math.max(360, u.wh)/1080
+    u.wh = math.max(Screen.Width, Screen.Height)
+    u.screenWidth = math.min(640, u.wh)/1920
+    u.screenHeight = math.min(360, u.wh)/1080
+
+    local coff = (0.5+(Screen.Width*Screen.Height)/(1920*1080)*0.5)*3
+    u.screenWidth = u.screenWidth * coff
+    u.screenHeight = u.screenHeight * coff
 
     u.blackPanel.Width = Screen.Width
     u.blackPanel.Height = Screen.Height
