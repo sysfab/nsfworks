@@ -49,21 +49,47 @@ function menu.create(self)
 
     self.screenWidth = math.min(self.screenWidth, self.screenHeight)
 
-    self.object = Object()
-    self.object.Tick = function()
-        if self.aboutUs ~= nil then
-            self.setBorders(self.aboutUs)
-            self.setBorders(self.settings)
-            self.setBorders(self.armory)
-            self.setBorders(self.play)
-            self.setBorders(self.back)
+    menu.object = Object()
+    menu.object.Tick = function()
+        if menu.aboutUs ~= nil then
+            menu.setBorders(menu.aboutUs)
+            menu.setBorders(menu.settings)
+            menu.setBorders(menu.armory)
+            menu.setBorders(menu.play)
+            menu.setBorders(menu.back)
         end
-        if self.currentMenu == "menu" then
-            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.25)
-            Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.2)
-        elseif self.currentMenu == "about us" then
-            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.25)
+        if menu.currentMenu == "menu" then
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.35)
+            Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.3)
+            Camera.FOV = lerp(Camera.FOV, 30, 0.1)
+            menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
+            menu.titleBG.pos.Y = menu.titleBG.posy
+            menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
+            menu.title.pos.Y = menu.title.posy
+            menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
+            menu.title2.pos.Y = menu.title2.posy
+        elseif menu.currentMenu == "about us" then
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.35)
             Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
+            Camera.FOV = lerp(Camera.FOV, 27, 0.1)
+            menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
+            menu.titleBG.pos.Y = menu.titleBG.posy
+            menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
+            menu.title.pos.Y = menu.title.posy
+            menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
+            menu.title2.pos.Y = menu.title2.posy
+        elseif menu.currentMenu == "settings" then
+            Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.3, 0), 0.35)
+            Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.2)
+            Camera.FOV = lerp(Camera.FOV, 23, 0.1)
+            menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3)
+            menu.titleBG.pos.Y = menu.titleBG.posy
+            menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3)
+            menu.title.pos.Y = menu.title.posy
+            menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3)
+            menu.title2.pos.Y = menu.title2.posy
+            menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.1)
+            menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.1)
         end
         if menu.music ~= nil then
             if menu.created == true then
@@ -101,10 +127,13 @@ function menu.create(self)
 
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
     self.titleBG.pos = Number2(-1000, -1000)
+    menu.titleBG.posy = 0
     self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
     self.title2.pos = Number2(-1000, -1000)
+    menu.title2.posy = 0
     self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
     self.title.pos = Number2(-1000, -1000)
+    menu.title.posy = 0
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
     self.versionBG.pos = Number2(-1000, -1000)
     self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
@@ -180,14 +209,14 @@ function menu.create(self)
         -- MAIN MENU
 
         menu.titleBG.Width, menu.titleBG.Height = menu.screenWidth * 1010, menu.screenHeight * 220
-        menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
+       -- menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
         
         menu.title.object.Scale.X = menu.screenWidth * 8.85
         menu.title.object.Scale.Y = menu.screenHeight * 8.85
-        menu.title.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+10)
+        --menu.title.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+10)
         menu.title2.object.Scale.X = menu.screenWidth * 8.85
         menu.title2.object.Scale.Y = menu.screenHeight * 8.85
-        menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
+        --menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
 
         menu.versionBG.Width = menu.version.Width * 2
         menu.versionBG.Height = menu.version.Height + 6
@@ -490,6 +519,18 @@ menu.loadModels = function(self)
         menu.yard:SetParent(World)
         menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
         menu.yard.Shadow = true
+    end)
+    Object:Load("nsfworks.fortcubes_settings", function(s)
+        menu.book = Shape(s, {includeChildren = true})
+        menu.book:SetParent(World)
+        menu.book.Scale = 0.75
+        menu.book.Position = Number3(-30, 7, -35)
+        menu.book.Rotation = Rotation(0, 0.8, 0)
+        menu.book.Shadow = true
+        menu.book.left = menu.book:GetChild(1)
+        menu.book.left.Shadow = true
+        menu.book.right = menu.book:GetChild(2)
+        menu.book.right.Shadow = true
     end)
 
     Object:Load("nanskip.bush_1_alternate", function(s)
