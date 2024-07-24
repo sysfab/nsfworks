@@ -623,7 +623,12 @@ menu.loadModels = function(self)
         menu.book.right = menu.book:GetChild(2)
         menu.book.right.Shadow = true
     end)
-
+--[[
+    for k, v in pairs(menu.bushes) do
+        v:SetParent(nil)
+        v = nil
+    end
+]]
     Object:Load("nanskip.bush_1_alternate", function(s)
         local bushes = {
             {pos = Number3(-9, 1, 60), rot = Rotation(0, -math.pi-0.6, 0), scale = 0.45},
@@ -726,6 +731,44 @@ menu.loadModels = function(self)
             {pos = Number3(-48, 0, -80), rot = Rotation(0, 0.24, 0), scale = 1},
             {pos = Number3(-41, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
             {pos = Number3(-36, 0, -100), rot = Rotation(0, 1.4, 0), scale = 1.1},
+
+            {pos = Number3(50, 1, -60), rot = Rotation(0, -0.2, 0), scale = 0.55},
+            {pos = Number3(54, 1, -54), rot = Rotation(0, -0.6, 0), scale = 0.62},
+            {pos = Number3(58, 1, -46), rot = Rotation(0, 1.7, 0), scale = 0.58},
+            {pos = Number3(62, 1, -38), rot = Rotation(0, -0.6, 0), scale = 0.62},
+            {pos = Number3(66, 1, -30), rot = Rotation(0, 2.4, 0), scale = 0.55},
+            {pos = Number3(70, 1, -22), rot = Rotation(0, -0, 0), scale = 0.6},
+            {pos = Number3(70, 0, -16), rot = Rotation(0, 0.2, 0), scale = 0.6},
+            {pos = Number3(70, 0, -8), rot = Rotation(0, 2.4, 0), scale = 0.58},
+            {pos = Number3(70, 0, 0), rot = Rotation(0, -1.7, 0), scale = 0.62},
+            {pos = Number3(68, 0, 8), rot = Rotation(0, 0, 0), scale = 0.62},
+            {pos = Number3(64, 0, 16), rot = Rotation(0, 0.2, 0), scale = 0.58},
+            {pos = Number3(60, 0, 22), rot = Rotation(0, -0.6, 0), scale = 0.55},
+            {pos = Number3(56, 0, 30), rot = Rotation(0, -2.4, 0), scale = 0.55},
+            {pos = Number3(52, 0, 38), rot = Rotation(0, -0.6, 0), scale = 0.6},
+            {pos = Number3(48, 0, 46), rot = Rotation(0, 0.2, 0), scale = 0.58},
+            {pos = Number3(40, 0, 54), rot = Rotation(0, -1.7, 0), scale = 0.62},
+            {pos = Number3(32, 0, 62), rot = Rotation(0, 2.4, 0), scale = 0.58},
+            {pos = Number3(24, 0, 70), rot = Rotation(0, -0.6, 0), scale = 0.55},
+
+            {pos = Number3(50, 1, -12*6.5), rot = Rotation(0, 0.2, 0), scale = 1},
+            {pos = Number3(55, 1, -12*6), rot = Rotation(0, -1, 0), scale = 1},
+            {pos = Number3(60, 1, -12*5.5), rot = Rotation(0, 2.1, 0), scale = 1},
+            {pos = Number3(70, 1, -12*5), rot = Rotation(0, -2.1, 0), scale = 1},
+            {pos = Number3(80, 1, -12*4), rot = Rotation(0, 0.2, 0), scale = 1},
+            {pos = Number3(90, 1, -12*3), rot = Rotation(0, 0, 0), scale = 1},
+            {pos = Number3(100, 1, -12*2), rot = Rotation(0, -1, 0), scale = 1},
+            {pos = Number3(100, 1, -12*1), rot = Rotation(0, 0.2, 0), scale = 1},
+            {pos = Number3(100, 1, 0), rot = Rotation(0, 0, 0), scale = 1},
+            {pos = Number3(100, 1, 12), rot = Rotation(0, -1, 0), scale = 1},
+            {pos = Number3(100, 1, 12*2), rot = Rotation(0, 2.1, 0), scale = 1},
+            {pos = Number3(90, 1, 12*3), rot = Rotation(0, 0, 0), scale = 1},
+            {pos = Number3(80, 1, 12*4), rot = Rotation(0, -1, 0), scale = 1},
+            {pos = Number3(70, 1, 12*5), rot = Rotation(0, 2.1, 0), scale = 1},
+            {pos = Number3(60, 1, 12*6), rot = Rotation(0, 0, 0), scale = 1},
+            {pos = Number3(50, 1, 12*7), rot = Rotation(0, -2.1, 0), scale = 1},
+            {pos = Number3(40, 1, 12*8), rot = Rotation(0, -1, 0), scale = 1},
+            {pos = Number3(40, 1, 12*9), rot = Rotation(0, 0, 0), scale = 1},
         }
 
         menu.bushes = {}
@@ -823,12 +866,26 @@ menu.loadModels = function(self)
             {pos = Number3(-130, -3, 35), rot = Rotation(0, 0.2, 0), scale = 0.95},
             {pos = Number3(-125, 0, 43), rot = Rotation(0, -0.2, 0), scale = 0.85},
             
-            {pos = Number3(50, 0, 50), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(55, 0, 45), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(60, 0, 40), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(65, 0, 35), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(70, 0, 30), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(75, 0, 25), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(20, 0, 74), rot = Rotation(0, 0.2, 0), scale = 0.8},
+            {pos = Number3(26, 0, 70), rot = Rotation(0, 0, 0), scale = 0.65},
+            {pos = Number3(33, 0, 68), rot = Rotation(0, 0, 0), scale = 0.7},
+            {pos = Number3(38, 0, 62), rot = Rotation(0, -1.1, 0), scale = 0.8},
+            {pos = Number3(44, 0, 56), rot = Rotation(0, 0.73, 0), scale = 0.65},
+            {pos = Number3(50, 0, 50), rot = Rotation(0, 0.73, 0), scale = 0.7},
+            {pos = Number3(58, 0, 42), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(66, 0, 34), rot = Rotation(0, -1.1, 0), scale = 0.8},
+            {pos = Number3(74, 0, 26), rot = Rotation(0, 0, 0), scale = 0.65},
+            {pos = Number3(76, 0, 18), rot = Rotation(0, -0.2, 0), scale = 0.75},
+            {pos = Number3(78, 0, 10), rot = Rotation(0, 1.1, 0), scale = 0.7},
+            {pos = Number3(80, 0, 2), rot = Rotation(0, -1.1, 0), scale = 0.75},
+            {pos = Number3(78, 0, -6), rot = Rotation(0, 0.73, 0), scale = 0.65},
+            {pos = Number3(78, 0, -14), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(76, 0, -22), rot = Rotation(0, 0.2, 0), scale = 0.8},
+            {pos = Number3(74, 0, -30), rot = Rotation(0, 0.73, 0), scale = 0.8},
+            {pos = Number3(70, 0, -38), rot = Rotation(0, -1.1, 0), scale = 0.7},
+            {pos = Number3(66, 0, -46), rot = Rotation(0, 0.73, 0), scale = 0.65},
+            {pos = Number3(60, 0, -52), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(62, 0, -58), rot = Rotation(0, -1.1, 0), scale = 0.7},
         }
 
         menu.trees = {}
