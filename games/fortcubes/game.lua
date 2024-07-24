@@ -29,6 +29,116 @@ game.connection.onEvent = function(connection, e)
 	})
 end
 
+game.ui = {}
+game.ui.created = false
+game.ui.create = function(u)
+	u.theme = {
+        button = {
+            borders = true,
+            underline = false,
+            padding = true,
+            shadow = false,
+            sound = "button_1",
+            color = Color(100, 100, 100, 127),
+            colorPressed = Color(50, 50, 50, 127),
+            colorSelected = Color(50, 50, 50, 127),
+            colorDisabled = Color(100, 100, 100, 127/2),
+            textColor = Color(255, 255, 255, 255),
+            textColorDisabled = Color(255, 255, 255, 200),
+        }
+    }
+    u.closing = false
+
+    function u.setBorders(button)
+        if button == nil or button.borders == nil then
+            error("game.ui.setBorders(button) 1st argument should be a button.")
+        end
+
+        for k, v in pairs(button.borders) do
+            v.Color = Color(0, 0, 0, 127)
+        end
+    end
+
+    u.screenWidth = math.max(640, Screen.Width)/1920
+    u.screenHeight = math.max(360, Screen.Height)/1080
+
+    u.screenWidth = math.min(u.screenWidth, u.screenHeight)
+    if u.object == nil then
+        u.object = Object()
+    end
+
+    u.object.Tick = function()
+        if u.toMenu ~= nil then
+            u.setBorders(u.toMenu)
+        end
+        if u.blackPanel ~= nil and u.blackPanel.alpha ~= nil then
+            u.blackPanel.Color.A = u.blackPanel.alpha
+        end
+        if u.closing then
+            if u.blackPanel.alpha ~= nil then
+                u.blackPanel.alpha = math.ceil(lerp(u.blackPanel.alpha, 255, 0.3))
+            end
+        else
+            if u.blackPanel.alpha ~= nil then
+                u.blackPanel.alpha = math.floor(lerp(u.blackPanel.alpha, 0, 0.3))
+            end
+        end
+    end
+
+    u.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
+    u.blackPanel.alpha = 255
+
+    u.toMenu = ui:createButton("To Menu", u.theme.button)
+    u.toMenu.pos = Number2(-1000, -1000)
+    u.toMenu.onRelease = function(s)
+        
+    end
+
+	u.created = true
+end
+game.ui.remove = function(u)
+    if u.created == nil then
+        error("game.ui.remove() should be called with ':'!", 2)
+    end
+    if not u.created then
+        error("game.ui:remove() - menu currently removed.", 2)
+    end
+
+    debug.log("game() - Removing game.ui...")
+    u.closing = true
+
+    Timer(0.5, false, function()
+        u.created = false
+
+        u.toMenu:remove()
+        u.toMenu = nil
+        
+        u.blackPanel:remove()
+        u.blackPanel = nil
+
+        debug.log("game() - game.ui removed.")
+    end)
+end
+game.ui.screenResize = function(u)
+	if u.created == nil then
+        error("menu.update() should be called with ':'!", 2)
+    end
+
+    u.wh = math.min(Screen.Width, Screen.Height)
+    u.screenWidth = math.max(640, u.wh)/1920*2
+    u.screenHeight = math.max(360, u.wh)/1080
+
+    u.blackPanel.Width = Screen.Width
+    u.blackPanel.Height = Screen.Height
+
+    u.toMenu.pos.Y = 5
+    u.toMenu.pos.X = 5
+    u.toMenu.Width, u.toMenu.Height = 380 * u.screenWidth, 80 * u.screenHeight
+    u.toMenu.content.Scale.X = u.screenWidth * 3
+    u.toMenu.content.Scale.Y = u.screenHeight * 3
+    u.toMenu.content.pos = Number2(u.toMenu.Width/2 - u.toMenu.content.Width/2, u.toMenu.Height/2 - u.toMenu.content.Height/2)
+end
+
 game.mobileControls = {}
 game.mobileControls.created = false
 game.mobileControls.screenResize = function(controls)
@@ -84,12 +194,14 @@ game.created = false
 game.screenResize = function(self)
 	if self.created ~= true then return end
 
+	self.ui:screenResize()
 	if self.mobileControls ~= nil then
 		self.mobileControls:screenResize()
 	end
 end
 game.create = function(self)
 	self.created = true
+	self.ui:create()
 	self:screenResize()
 
 	self.screenResizeListener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function(...)
@@ -105,6 +217,7 @@ end
 game.remove = function(self)
 	self.screenResizeListener:Remove()
 	self.eventListener:Remove()
+	self.ui:remove()
 	if self.mobileControls.created then
 		self.mobileControls:remove()
 	end
