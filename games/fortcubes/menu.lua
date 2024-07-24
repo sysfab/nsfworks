@@ -11,6 +11,7 @@ function menu.create(self)
 
     debug.log("menu() - Creating menu...")
     self.created = true
+    self.closing = false
 
     self.listener = LocalEvent:Listen(LocalEvent.Name.ScreenDidResize, function()
         self:update()
@@ -99,7 +100,11 @@ function menu.create(self)
             end
             if menu.closing then
                 if menu.blackPanel.alpha ~= nil then
-                    menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 255, 0.3))
+                    menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3))
+                end
+            else
+                if menu.blackPanel.alpha ~= nil then
+                    menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
                 end
             end
             if menu.currentMenu ~= "menu" then
