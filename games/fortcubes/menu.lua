@@ -209,14 +209,17 @@ function menu.create(self)
         -- MAIN MENU
 
         menu.titleBG.Width, menu.titleBG.Height = menu.screenWidth * 1010, menu.screenHeight * 220
-       -- menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
+        --menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
+        menu.titleBG.pos.X = 5
         
         menu.title.object.Scale.X = menu.screenWidth * 8.85
         menu.title.object.Scale.Y = menu.screenHeight * 8.85
         --menu.title.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+10)
+        menu.title.pos.X = 11+30 * menu.screenWidth
         menu.title2.object.Scale.X = menu.screenWidth * 8.85
         menu.title2.object.Scale.Y = menu.screenHeight * 8.85
         --menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
+        menu.title2.pos.X = 11+30 * menu.screenWidth
 
         menu.versionBG.Width = menu.version.Width * 2
         menu.versionBG.Height = menu.version.Height + 6
