@@ -91,7 +91,7 @@ function menu.create(self)
             menu.title.pos.Y = menu.title.posy
             menu.title2.pos.Y = menu.title2.posy
             if menu.currentMenu == "menu" then
-                menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.play.Width-5, 0.3)
+                menu.mainbuttonsx = lerp(menu.mainbuttonsx, 5, 0.3)
                 menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3)
             elseif menu.currentMenu ~= "menu" then
                 menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.back.Width-5, 0.3)
@@ -99,7 +99,7 @@ function menu.create(self)
             end
             if menu.closing then
                 if menu.blackPanel.alpha ~= nil then
-                    menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
+                    menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 255, 0.3))
                 end
             end
             if menu.currentMenu ~= "menu" then
@@ -192,23 +192,43 @@ function menu.create(self)
     self.aboutUs.onRelease = function(s)
         menu.currentMenu = "about us"
         menu:update()
+
+        menu.aboutUs:disable()
+        menu.settings:disable()
+        menu.play:disable()
+        menu.armory:disable()
     end
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
     self.settings.pos = Number2(-1000, -1000)
     self.settings.onRelease = function(s)
         menu.currentMenu = "settings"
         menu:update()
+
+        menu.aboutUs:disable()
+        menu.settings:disable()
+        menu.play:disable()
+        menu.armory:disable()
     end
     self.armory = ui:createButton("ARMORY", menu.theme.button)
     self.armory.pos = Number2(-1000, -1000)
     self.armory.onRelease = function(s)
         menu.currentMenu = "armory"
         menu:update()
+
+        menu.aboutUs:disable()
+        menu.settings:disable()
+        menu.play:disable()
+        menu.armory:disable()
     end
     self.play = ui:createButton("PLAY", menu.theme.button)
     self.play.pos = Number2(-1000, -1000)
     self.play.onRelease = function(s)
         menu:remove()
+
+        menu.aboutUs:disable()
+        menu.settings:disable()
+        menu.play:disable()
+        menu.armory:disable()
     end
 
     self.back = ui:createButton("BACK", menu.theme.button)
@@ -216,6 +236,11 @@ function menu.create(self)
     self.back.onRelease = function(s)
         menu.currentMenu = "menu"
         menu:update()
+
+        menu.aboutUs:enable()
+        menu.settings:enable()
+        menu.play:enable()
+        menu.armory:enable()
     end
 
     -- -- ------  --  --------------------  --  ------ -- --
