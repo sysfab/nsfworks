@@ -48,6 +48,7 @@ function menu.create(self)
     self.screenHeight = math.max(360, Screen.Height)/1080
 
     self.screenWidth = math.min(self.screenWidth, self.screenHeight)
+    menu.buttonsx = 0
 
     menu.object = Object()
     menu.object.Tick = function()
@@ -88,6 +89,18 @@ function menu.create(self)
             menu.titleBG.pos.Y = menu.titleBG.posy
             menu.title.pos.Y = menu.title.posy
             menu.title2.pos.Y = menu.title2.posy
+            if menu.closing then
+                menu.buttonsx = lerp(menu.buttonsx, -menu.play.Width-5, 0.3)
+                menu.blackPanel.alpha = math.cell(lerp(menu.blackPanel.alpha, 255, 0.3))
+            else
+                menu.buttonsx = lerp(menu.buttonsx, 5, 0.3)
+                menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
+            end
+            menu.back.pos.X = menu.buttonsx
+            menu.aboutUs.pos.X = menu.buttonsx
+            menu.settings.pos.X = menu.buttonsx
+            menu.play.pos.X = menu.buttonsx
+            menu.armory.pos.X = menu.buttonsx
             if menu.currentMenu ~= "settings" and menu.book.left ~= nil then
                 menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05)
                 menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05)
@@ -142,6 +155,8 @@ function menu.create(self)
     self.version2.pos = Number2(-1000, -1000)
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
     self.version.pos = Number2(-1000, -1000)
+
+    self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
 
     menu:loadModels()
 
@@ -230,6 +245,9 @@ function menu.create(self)
         menu.version.pos = Number2(menu.versionBG.pos.X + menu.versionBG.Width/2 - menu.version.Width/2, menu.versionBG.pos.Y + 3)
         menu.version2.pos = Number2(menu.version.pos.X, menu.version.pos.Y - 2)
 
+        menu.blackPanel.Width = Screen.Width
+        menu.blackPanel.Height = Screen.Height
+
         -- MAIN MENU -- BUTTONS
         for k, v in pairs(self.menus) do
             menu:hide(v)
@@ -250,43 +268,43 @@ function menu.show(self, name)
     end
 
     if name == "menu" then
-        menu.aboutUs.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.aboutUs.pos.Y = 5 + 85 * menu.screenHeight*0
         menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.aboutUs.content.Scale.X = menu.screenWidth * 3
         menu.aboutUs.content.Scale.Y = menu.screenHeight * 3
         menu.aboutUs.content.pos = Number2(menu.aboutUs.Width/2 - menu.aboutUs.content.Width/2, menu.aboutUs.Height/2 - menu.aboutUs.content.Height/2)
 
-        menu.settings.pos = Number2(5, 5 + 85 * menu.screenHeight*1)
+        menu.settings.pos.Y = 5 + 85 * menu.screenHeight*1
         menu.settings.Width, menu.settings.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.settings.content.Scale.X = menu.screenWidth * 3
         menu.settings.content.Scale.Y = menu.screenHeight * 3
         menu.settings.content.pos = Number2(menu.settings.Width/2 - menu.settings.content.Width/2, menu.settings.Height/2 - menu.settings.content.Height/2)
 
-        menu.armory.pos = Number2(5, 5 + 85 * menu.screenHeight*2)
+        menu.armory.pos.Y = 5 + 85 * menu.screenHeight*2
         menu.armory.Width, menu.armory.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.armory.content.Scale.X = menu.screenWidth * 3
         menu.armory.content.Scale.Y = menu.screenHeight * 3
         menu.armory.content.pos = Number2(menu.armory.Width/2 - menu.armory.content.Width/2, menu.armory.Height/2 - menu.armory.content.Height/2)
 
-        menu.play.pos = Number2(5, 5 + 85 * menu.screenHeight*3)
+        menu.play.pos.Y = 5 + 85 * menu.screenHeight*3
         menu.play.Width, menu.play.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.play.content.Scale.X = menu.screenWidth * 3
         menu.play.content.Scale.Y = menu.screenHeight * 3
         menu.play.content.pos = Number2(menu.play.Width/2 - menu.play.content.Width/2, menu.play.Height/2 - menu.play.content.Height/2)
     elseif name == "armory" then
-        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
     elseif name == "settings" then
-        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
     elseif name == "about us" then
-        menu.back.pos = Number2(5, 5 + 85 * menu.screenHeight*0)
+        menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
         menu.back.content.Scale.Y = menu.screenHeight * 3
@@ -328,85 +346,90 @@ function menu.remove(self)
     self.created = false
     self.listener:Remove()
 
-    self.titleBG:remove()
-    self.titleBG = nil
-    self.title:remove()
-    self.title = nil
-    self.title2:remove()
-    self.title2 = nil
-    self.versionBG:remove()
-    self.versionBG = nil
-    self.version2:remove()
-    self.version2 = nil
-    self.version:remove()
-    self.version = nil
+    menu.closing = true
 
-    if menu.man1 ~= nil then
-        menu.man1.pistol:SetParent(nil)
-        menu.man1.pistol = nil
-        menu.man1:nanStop()
-        menu.man1.nanplayer:remove()
-        menu.man1:SetParent(nil)
-        menu.man1.Tick = nil
-        menu.man1 = nil
-    end
-    if menu.man2 ~= nil then
-        menu.man2.katana:SetParent(nil)
-        menu.man2.katana = nil
-        menu.man2:nanStop()
-        menu.man2.nanplayer:remove()
-        menu.man2:SetParent(nil)
-        menu.man2.Tick = nil
-        menu.man2 = nil
-    end
-    if menu.sysfab ~= nil then
-        menu.sysfab:nanStop()
-        menu.sysfab.nanplayer:remove()
-        menu.sysfab.luablock:SetParent(nil)
-        menu.sysfab.luablock = nil
-        menu.sysfab:SetParent(nil)
-        menu.sysfab.Tick = nil
-        menu.sysfab = nil
-    end
-    if menu.nanskip ~= nil then
-        menu.nanskip:nanStop()
-        menu.nanskip.nanplayer:remove()
-        menu.nanskip.toolgun:SetParent(nil)
-        menu.nanskip.toolgun = nil
-        menu.nanskip:SetParent(nil)
-        menu.nanskip.Tick = nil
-        menu.nanskip = nil
-    end
-    self.yard:SetParent(nil)
-    self.yard.Tick = nil
-    self.yard = nil
-    self.book:SetParent(nil)
-    self.book.Tick = nil
-    self.book = nil
+    Timer(0.5, false, function()
+        self.titleBG:remove()
+        self.titleBG = nil
+        self.title:remove()
+        self.title = nil
+        self.title2:remove()
+        self.title2 = nil
+        self.versionBG:remove()
+        self.versionBG = nil
+        self.version2:remove()
+        self.version2 = nil
+        self.version:remove()
+        self.version = nil
+        self.blackPanel:remove()
+        self.blackPanel = nil
 
-    self.aboutUs:remove()
-    self.aboutUs = nil
-    self.settings:remove()
-    self.settings = nil
-    self.armory:remove()
-    self.armory = nil
-    self.play:remove()
-    self.play = nil
-    self.back:remove()
-    self.back = nil
+        if menu.man1 ~= nil then
+            menu.man1.pistol:SetParent(nil)
+            menu.man1.pistol = nil
+            menu.man1:nanStop()
+            menu.man1.nanplayer:remove()
+            menu.man1:SetParent(nil)
+            menu.man1.Tick = nil
+            menu.man1 = nil
+        end
+        if menu.man2 ~= nil then
+            menu.man2.katana:SetParent(nil)
+            menu.man2.katana = nil
+            menu.man2:nanStop()
+            menu.man2.nanplayer:remove()
+            menu.man2:SetParent(nil)
+            menu.man2.Tick = nil
+            menu.man2 = nil
+        end
+        if menu.sysfab ~= nil then
+            menu.sysfab:nanStop()
+            menu.sysfab.nanplayer:remove()
+            menu.sysfab.luablock:SetParent(nil)
+            menu.sysfab.luablock = nil
+            menu.sysfab:SetParent(nil)
+            menu.sysfab.Tick = nil
+            menu.sysfab = nil
+        end
+        if menu.nanskip ~= nil then
+            menu.nanskip:nanStop()
+            menu.nanskip.nanplayer:remove()
+            menu.nanskip.toolgun:SetParent(nil)
+            menu.nanskip.toolgun = nil
+            menu.nanskip:SetParent(nil)
+            menu.nanskip.Tick = nil
+            menu.nanskip = nil
+        end
+        self.yard:SetParent(nil)
+        self.yard.Tick = nil
+        self.yard = nil
+        self.book:SetParent(nil)
+        self.book.Tick = nil
+        self.book = nil
 
-    for k, v in pairs(menu.bushes) do
-        v:SetParent(nil)
-        v = nil
-    end
-    for k, v in pairs(menu.trees) do
-        v:SetParent(nil)
-        v = nil
-    end
+        self.aboutUs:remove()
+        self.aboutUs = nil
+        self.settings:remove()
+        self.settings = nil
+        self.armory:remove()
+        self.armory = nil
+        self.play:remove()
+        self.play = nil
+        self.back:remove()
+        self.back = nil
 
-    debug.log("menu() - Menu removed.")
+        for k, v in pairs(menu.bushes) do
+            v:SetParent(nil)
+            v = nil
+        end
+        for k, v in pairs(menu.trees) do
+            v:SetParent(nil)
+            v = nil
+        end
 
-    -- aboba
+        debug.log("menu() - Menu removed.")
+
+    end)
 end
 
 menu.loadModels = function(self)
