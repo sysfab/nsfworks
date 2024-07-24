@@ -217,7 +217,7 @@ game.camera.create = function(camera)
 	camera.object = Object()
 	camera.object.Tick = function()
 		Camera.Position = Player.Position + Number3(0, 40, 0)
-		Camera.Rotation = Player.Down
+		Camera.Forward = Player.Down
 	end
 
 	camera.created = true
