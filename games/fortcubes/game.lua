@@ -228,6 +228,29 @@ game.camera.remove = function(camera)
 	camera.created = false
 end
 
+game.controls = {}
+game.controls.init = function()
+	if Client.IsMobile == true then
+		Client.DirectionalPad = nil
+		Pointer.Drag = nil
+		Pointer.Down = nil
+		Pointer.Up = nil
+	else
+		Client.DirectionalPad = game.controls.directionalPad
+		game.controls.analogPad
+		game.controls.analogPad
+		game.controls.analogPad
+	end
+end
+game.controls.analogPad = function(dx, dy)
+	debug.log("game() - analog pad", dx, dy)
+	Player.Rotation = Number3(0, dx+dy, 0)
+end
+game.controls.directionalPad = function(dx, dy)
+	debug.log("game() - directional pad", dx, dy)
+	Player.Rotation = Number3(0, dx+dy, 0)
+end
+
 game.created = false
 game.screenResize = function(self)
 	if self.created ~= true then return end
