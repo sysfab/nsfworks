@@ -85,15 +85,15 @@ game.ui.create = function(u)
         end
     end
 
-    u.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
-    u.blackPanel.alpha = 255
-
     u.toMenu = ui:createButton("To Menu", u.theme.button)
     u.toMenu.pos = Number2(-1000, -1000)
     u.toMenu.onRelease = function(s)
     	u.toMenu:disable()
         game:remove(function() menu:create() menu:update() end)
     end
+
+    u.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
+    u.blackPanel.alpha = 255
 
 	u.created = true
 end
