@@ -141,7 +141,7 @@ game.ui.screenResize = function(u)
     u.blackPanel.Width = Screen.Width
     u.blackPanel.Height = Screen.Height
 
-    u.toMenu.Width, u.toMenu.Height = 380 * u.screenWidth * 0.7, 80 * u.screenHeight * 0.7
+    u.toMenu.Width, u.toMenu.Height = 380 * u.screenWidth * 0.7, 80 * u.screenHeight * 0.6
     u.toMenu.pos.Y = Screen.Height - Screen.SafeArea.Top - 5 - u.toMenu.Height
     u.toMenu.pos.X = 5
     u.toMenu.content.Scale.X = u.screenWidth * 2
