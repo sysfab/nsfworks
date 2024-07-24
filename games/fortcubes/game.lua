@@ -243,11 +243,11 @@ game.controls.init = function(controls)
 	end
 end
 game.controls.analogPad = function(dx, dy)
-	debug.log("game() - analog pad", dx, dy)
+	debug.log("game() - analog pad "..dx.." "..dy)
 	Player.Rotation = Number3(0, dx+dy, 0)
 end
 game.controls.directionalPad = function(dx, dy)
-	debug.log("game() - directional pad", dx, dy)
+	debug.log("game() - directional pad "..dx.." "..dy)
 	Player.Rotation = Number3(0, dx+dy, 0)
 end
 
