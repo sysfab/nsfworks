@@ -207,6 +207,7 @@ game.world = {}
 game.world.create = function(world, scale)
 	debug.log("game() - Generating world...")
 	world.map = MutableShape()
+	world.map.Physics = PhysicsMode.StaticPerBlock
 	for x = 1, scale do
 		for y = 1, scale do
 			local a = perlin.get(x*0.1, y*0.1)*30
