@@ -48,13 +48,13 @@ function menu.create(self)
     self.screenWidth = math.max(640, Screen.Width)/1920
     self.screenHeight = math.max(360, Screen.Height)/1080
 
-    menu.screenWidth = math.min(menu.screenWidth, menu.screenHeight)
     menu.mainbuttonsx = 0
     menu.backsx = 0
 
     if menu.object == nil then
         menu.object = Object()
     end
+    debug.log("menu() - Setting tick...")
     menu.object.Tick = function()
         if menu.aboutUs ~= nil then
             menu.setBorders(menu.aboutUs)
@@ -162,6 +162,8 @@ function menu.create(self)
 
     -- MAIN MENU
 
+    debug.log("menu() - Creating elements...")
+
     self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
     self.titleBG.pos = Number2(-1000, -1000)
     menu.titleBG.posy = 0
@@ -196,6 +198,8 @@ function menu.create(self)
     end
 
     -- MAIN MENU - BUTTONS
+
+    debug.log("menu() - Creating buttons...")
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
     self.aboutUs.pos = Number2(-1000, -1000)
@@ -257,6 +261,7 @@ function menu.create(self)
     self.blackPanel.alpha = 255
 
     -- -- ------  --  --------------------  --  ------ -- --
+    debug.log("menu() - Creating menu:update()...")
     function menu.update(self)
         if menu.created == nil then
             error("menu.update() should be called with ':'!", 2)
