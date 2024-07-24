@@ -1,6 +1,8 @@
 debug.enabled = true
 debug.log("client() - started")
 
+Player.Position = Number3(-1000, -1000, -1000)
+
 Camera:SetParent(nil)
 ui = uikit_loader()
 

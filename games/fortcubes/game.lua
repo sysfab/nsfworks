@@ -321,6 +321,7 @@ game.remove = function(self, callback)
 	self.world:remove()
 	self.ui:remove(callback)
 	self.created = false
+	Player.Position = Number3(-1000, -1000, -1000)
 	debug.log("game() - removed")
 end
 
