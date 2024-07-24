@@ -176,12 +176,14 @@ game.mobileControls.create = function(controls)
 		color = Color(255, 100, 100, 127), -- color of joystick's insides.
 		borderColor = Color(255, 100, 100, 255) -- color of joystick's border.
 	})
+	controls.created = true
 end
 game.mobileControls.remove = function(controls)
 	controls.moveJoystick:remove()
 	controls.shootJoystick:remove()
 	controls.moveJoystick = nil
 	controls.shootJoystick = nil
+	controls.created = false
 end
 
 game.world = {}
