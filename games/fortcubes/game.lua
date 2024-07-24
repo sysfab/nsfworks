@@ -91,12 +91,12 @@ game.ui.create = function(u)
     u.toMenu = ui:createButton("To Menu", u.theme.button)
     u.toMenu.pos = Number2(-1000, -1000)
     u.toMenu.onRelease = function(s)
-        
+        game:remove(function() menu:create() end)
     end
 
 	u.created = true
 end
-game.ui.remove = function(u)
+game.ui.remove = function(u, callback)
     if u.created == nil then
         error("game.ui.remove() should be called with ':'!", 2)
     end
@@ -117,6 +117,7 @@ game.ui.remove = function(u)
         u.blackPanel = nil
 
         debug.log("game() - game.ui removed.")
+        if callback ~= nil then callback() end
     end)
 end
 game.ui.screenResize = function(u)
@@ -214,15 +215,15 @@ game.create = function(self)
     self.connection:connect()
 	self.world:create(100)
 end
-game.remove = function(self)
+game.remove = function(self, callback)
 	self.screenResizeListener:Remove()
 	self.eventListener:Remove()
-	self.ui:remove()
 	if self.mobileControls.created then
 		self.mobileControls:remove()
 	end
 	self.connection:disconnect()
 	self.world:remove()
+	self.ui:remove(callback)
 	self.created = false
 end
 
