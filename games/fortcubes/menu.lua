@@ -48,7 +48,7 @@ function menu.create(self)
     self.screenWidth = math.max(640, Screen.Width)/1920
     self.screenHeight = math.max(360, Screen.Height)/1080
 
-    self.screenWidth = math.min(self.screenWidth, self.screenHeight)
+    menu.screenWidth = math.min(menu.screenWidth, menu.screenHeight)
     menu.mainbuttonsx = 0
     menu.backsx = 0
 
@@ -262,9 +262,13 @@ function menu.create(self)
             error("menu.update() should be called with ':'!", 2)
         end
 
-        menu.wh = math.min(Screen.Width, Screen.Height)
-        menu.screenWidth = math.max(640, menu.wh)/1920*2
-        menu.screenHeight = math.max(360, menu.wh)/1080
+        menu.wh = math.max(Screen.Width, Screen.Height)
+        menu.screenWidth = math.min(640, menu.wh)/1920
+        menu.screenHeight = math.min(360, menu.wh)/1080
+
+        local coff = 0.5+(Screen.Width*Screen.Height)/(1920*1080)*0.5
+        menu.screenWidth = menu.screenWidth * coff
+        menu.screenHeight = menu.screenHeight * coff
 
         if menu.screenWidth < 0.334 or menu.screenHeight < 0.445 then
             -- TODO: Add message that game cannot be played with this screen scale.
@@ -730,6 +734,10 @@ menu.loadModels = function(self)
         end
     end)
 
+    for k, v in pairs(menu.trees) do
+        v:SetParent(nil)
+        v = nil
+    end
     Object:Load("nanskip.tree_2", function(s)
         local trees = {
             {pos = Number3(-49, 0, 60), rot = Rotation(0, 0.2, 0), scale = 0.75},
@@ -805,6 +813,13 @@ menu.loadModels = function(self)
             {pos = Number3(-130, -2, 13), rot = Rotation(0, -1.1, 0), scale = 0.8},
             {pos = Number3(-130, -3, 35), rot = Rotation(0, 0.2, 0), scale = 0.95},
             {pos = Number3(-125, 0, 43), rot = Rotation(0, -0.2, 0), scale = 0.85},
+            
+            {pos = Number3(50, 0, 50), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(55, 0, 45), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(60, 0, 40), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(65, 0, 35), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(70, 0, 30), rot = Rotation(0, 0, 0), scale = 0.75},
+            {pos = Number3(75, 0, 25), rot = Rotation(0, 0, 0), scale = 0.75},
         }
 
         menu.trees = {}
