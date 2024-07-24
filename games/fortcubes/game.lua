@@ -172,13 +172,13 @@ end
 game.mobileControls.create = function(controls)
 	controls.moveJoystick = joysticks.create({
 		pos = {10, 10}, -- position on screen.
-		scale = 1.1, -- scale multiplier, 1 = 160 pixels.
+		scale = 0.8, -- scale multiplier, 1 = 160 pixels.
 		color = Color(100, 100, 255, 127), -- color of joystick's insides.
 		borderColor = Color(100, 100, 255, 255) -- color of joystick's border.
 	})
 	controls.shootJoystick = joysticks.create({
 		pos = {Screen.Width-10-176, 10}, -- position on screen.
-		scale = 1.1, -- scale multiplier, 1 = 160 pixels.
+		scale = 0.8, -- scale multiplier, 1 = 160 pixels.
 		color = Color(255, 100, 100, 127), -- color of joystick's insides.
 		borderColor = Color(255, 100, 100, 255) -- color of joystick's border.
 	})
