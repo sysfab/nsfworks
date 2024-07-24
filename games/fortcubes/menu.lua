@@ -92,7 +92,7 @@ function menu.create(self)
             if menu.closing then
                 menu.buttonsx = lerp(menu.buttonsx, -menu.play.Width-5, 0.3)
                 if menu.blackPanel.alpha ~= nil then
-                    menu.blackPanel.alpha = math.cell(lerp(menu.blackPanel.alpha, 255, 0.3))
+                    menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3))
                 end
             else
                 menu.buttonsx = lerp(menu.buttonsx, 5, 0.3)
@@ -100,11 +100,14 @@ function menu.create(self)
                     menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3))
                 end
             end
-            menu.back.pos.X = menu.buttonsx
+            if menu.currentMenu ~= "menu" then
+                menu.back.pos.X = menu.buttonsx
+            end
             menu.aboutUs.pos.X = menu.buttonsx
             menu.settings.pos.X = menu.buttonsx
             menu.play.pos.X = menu.buttonsx
             menu.armory.pos.X = menu.buttonsx
+            menu.blackPanel.Color.A = menu.blackPanel.alpha
             if menu.currentMenu ~= "settings" and menu.book.left ~= nil then
                 menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05)
                 menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05)
