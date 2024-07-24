@@ -2,7 +2,6 @@ local menu = {}
 menu.created = false
 
 function menu.create(self)
-    Player.Position = Number3(-1000, -1000, -1000)
     if self.created == nil then
         error("menu.create() should be called with ':'!", 2)
     end
