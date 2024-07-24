@@ -80,13 +80,15 @@ function menu.create(self)
                 menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3)
                 menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3)
-                menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05)
-                menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.05)
+                if menu.book.left ~= nil then
+                    menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05)
+                    menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.05)
+                end
             end
             menu.titleBG.pos.Y = menu.titleBG.posy
             menu.title.pos.Y = menu.title.posy
             menu.title2.pos.Y = menu.title2.posy
-            if menu.currentMenu ~= "settings" then
+            if menu.currentMenu ~= "settings" and menu.book.left ~= nil then
                 menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05)
                 menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05)
             end
