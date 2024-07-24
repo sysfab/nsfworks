@@ -60,32 +60,36 @@ function menu.create(self)
         end
         if menu.created then
             if menu.currentMenu == "menu" then
-                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.35)
-                Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.3)
+                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.15)
+                Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.1)
                 Camera.FOV = lerp(Camera.FOV, 30, 0.1)
                 menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
                 menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
             elseif menu.currentMenu == "about us" then
-                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.35)
-                Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.2)
+                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.15)
+                Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.1)
                 Camera.FOV = lerp(Camera.FOV, 27, 0.1)
                 menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3)
                 menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3)
             elseif menu.currentMenu == "settings" then
-                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.31, 0), 0.35)
-                Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.2)
+                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.31, 0), 0.15)
+                Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.1)
                 Camera.FOV = lerp(Camera.FOV, 23, 0.1)
                 menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3)
                 menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3)
-                menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.1)
-                menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.1)
+                menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05)
+                menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.05)
             end
             menu.titleBG.pos.Y = menu.titleBG.posy
             menu.title.pos.Y = menu.title.posy
             menu.title2.pos.Y = menu.title2.posy
+            if menu.currentMenu ~= "settings" then
+                menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05)
+                menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05)
+            end
         end
         if menu.music ~= nil then
             if menu.created == true then
@@ -374,6 +378,9 @@ function menu.remove(self)
     self.yard:SetParent(nil)
     self.yard.Tick = nil
     self.yard = nil
+    self.book:SetParent(nil)
+    self.book.Tick = nil
+    self.book = nil
 
     self.aboutUs:remove()
     self.aboutUs = nil
