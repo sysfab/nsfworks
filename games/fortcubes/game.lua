@@ -290,8 +290,10 @@ game.camera.create = function(camera)
 
 	camera.object = Object()
 	camera.object.Tick = function()
-		Camera.Position = Player.Position + Number3(0, 200, 0)
+		Camera.Position = Player.Position + Number3(0, 200, -195)
 		Camera.Forward = Player.Down
+		Camera.Rotation.X = Camera.Rotation.X - math.pi/4
+		Camera.FOV = 20
 	end
 
 	camera.created = true
@@ -363,9 +365,11 @@ game.screenResize = function(self)
 		self.mobileControls:screenResize()
 	end
 end
-game.tick = function(self)
 
+game.tick = function(self)
+	Player.Motion.Y = 0.01
 end
+
 game.create = function(self)
 	self.created = true
 	self.world:create(128)
