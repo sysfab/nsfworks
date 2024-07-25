@@ -317,9 +317,11 @@ game.mobileControls.create = function(controls)
 	end
 	controls.shootJoystick.onDrag = function()
 		game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
+		game.controls.shooting = true
 	end
 	controls.shootJoystick.onRelease = function()
 		--game.controls.analogPad(controls.shootJoystick.x, controls.shootJoystick.y, true)
+		game.controls.shooting = false
 	end
 
 	controls.created = true
@@ -392,12 +394,15 @@ game.controls.create = function(controls)
 		Client.DirectionalPad = controls.directionalPad
 		Pointer.Drag = function(pe)
 			controls.analogPad(pe.X, pe.Y)
+			game.controls.shooting = true
 		end
 		Pointer.Down = function(pe)
 			--controls.analogPad(pe.X, pe.Y)
+			game.controls.shooting = true
 		end
 		Pointer.Up = function(pe)
 			controls.analogPad(pe.X, pe.Y)
+			game.controls.shooting = false
 		end
 	end
 end
