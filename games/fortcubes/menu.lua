@@ -156,13 +156,22 @@ function menu.create(self)
         if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and menu.workinprogress ~= nil then
             if loading_screen.created then
                 loading_screen:remove()
+            end
+            if not menu.firstTick then
                 menu:update()
             end
+            menu.firstTick = true
+            menu.play:enable()
+            menu.aboutUs:enable()
+            menu.settings:enable()
+            menu.armory:enable()
         else
-            menu.play:disable()
-            menu.aboutUs:disable()
-            menu.settings:disable()
-            menu.armory:disable()
+            if menu.created then
+                menu.play:disable()
+                menu.aboutUs:disable()
+                menu.settings:disable()
+                menu.armory:disable()
+            end
         end
     end
 
@@ -426,6 +435,7 @@ function menu.remove(self)
 
     Timer(0.5, false, function()
         self.created = false
+        self.firstTick = nil
         self.listener:Remove()
 
         self.titleBG:remove()
