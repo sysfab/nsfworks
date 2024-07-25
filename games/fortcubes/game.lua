@@ -43,11 +43,18 @@ game.connection.onEvent = function(connection, e)
 		                    v.pistol = Shape(s)
 		                    v.pistol:SetParent(v.Body.RightArm.RightHand)
 		                    v.pistol.Scale = 0.65
+							v.pistol.Shadow = true
 		                    v.pistol.Physics = PhysicsMode.Disabled
-		                    v.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
+		                    v.pistol.LocalRotation = Rotation(math.pi-0.2, math.pi/2, math.pi/2)
 		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
 							rawset(v.Animations, "Walk", {})
 							v.Tick = function(self, dt)
+								self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
+								self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
+								self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
+								self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
+								self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
+
 								self.Body.isMoving = false
 								if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
 									self.Body.isMoving = true
@@ -86,6 +93,12 @@ game.connection.onEvent = function(connection, e)
 					p.pistol.parent = p
 					rawset(v.Animations, "Walk", {})
 					p.Tick = function(self, dt)
+						self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
+						self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
+						self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
+						self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
+						self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
+
 						self.Body.isMoving = false
 						if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
 							self.Body.isMoving = true
@@ -417,6 +430,7 @@ game.controls.directionalPad = function(dx, dy, isJoy)
 		dy = d.Y
 	end
 	Player.Motion = Number3(dx, 0, dy)*80
+	game.controls.move = {dx, dy}
 end
 
 game.created = false
@@ -431,6 +445,9 @@ end
 
 game.tick = function(self)
 	Player.Velocity.Y = Player.Velocity.Y + 0.01
+	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil then
+		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1], 0, game.controls.move[2]), 0.3)
+	end
 end
 
 game.create = function(self)
