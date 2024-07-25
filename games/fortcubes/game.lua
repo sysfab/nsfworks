@@ -51,6 +51,18 @@ game.connection.onEvent = function(connection, e)
 								v.Animations.Idle:Stop()
 								v.Animations.Walk:Stop()
 							end
+							v.Body:setLoop(true)
+							v.Body:setPlaySpeed(8)
+	
+							v.isMoving = false
+							if v.Motion.X ~= 0 or v.Motion.Z ~= 0 then
+								v.isMoving = true
+							end
+							if v.isMoving then
+								v.Body:nanPlay("player_walk")
+							else
+								v.Body:nanStop()
+							end
 		                end)
 		            end
 					if v.Body.nanplayer == nil then
@@ -78,6 +90,18 @@ game.connection.onEvent = function(connection, e)
 					p.Tick = function(self, dt)
 						p.Animations.Idle:Stop()
 						p.Animations.Walk:Stop()
+						p.Body:setLoop(true)
+						p.Body:setPlaySpeed(8)
+
+						p.isMoving = false
+						if p.Motion.X ~= 0 or p.Motion.Z ~= 0 then
+							p.isMoving = true
+						end
+						if p.isMoving then
+                            p.Body:nanPlay("player_walk")
+                        else
+							p.Body:nanStop()
+						end
 					end
                 end)
             end
