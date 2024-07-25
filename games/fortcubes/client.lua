@@ -36,7 +36,8 @@ loadingBG.parentDidResize()
 loadModules = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua",
-	game = "games/fortcubes/game.lua"
+	game = "games/fortcubes/game.lua",
+	settings = "games/fortcubes/settings.lua",
 }
 
 animations = {}
