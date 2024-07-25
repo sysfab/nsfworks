@@ -43,7 +43,7 @@ Server.DidReceiveEvent = function(e)
 		if players[event.Sender.Username] == nil then
 			for player, stats in pairs(players) do
 				if getPlayerByUsername(player) ~= nil then
-					local r = crystal.Event("new_connection", {player = player, stat = stats})
+					local r = crystal.Event("new_connection", {player = event.Sender.Username, stat = stats})
 					r:SendTo(getPlayerByUsername(player))
 				else
 					debug.error("server() - failed to find player "..player)
@@ -63,7 +63,7 @@ Server.DidReceiveEvent = function(e)
 		if players[event.Sender.Username] ~= nil then
 			for player, stats in pairs(players) do
 				if getPlayerByUsername(player) ~= nil then
-					local r = crystal.Event("new_disconnection", {player = player, stat = stats})
+					local r = crystal.Event("new_disconnection", {player = event.Sender.Username, stat = stats})
 					r:SendTo(getPlayerByUsername(player))
 				else
 					debug.error("server() - failed to find player "..player)
