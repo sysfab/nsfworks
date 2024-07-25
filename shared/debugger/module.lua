@@ -41,4 +41,12 @@ debug.assert = function(condition, message, level)
 	end
 end
 
+
+debug.export = function(self)
+	if self.error == nil then
+		error("debug.export() - should be called with ':'", 2)
+	end
+	return JSON:Encode(self.history)
+end
+
 return debug
