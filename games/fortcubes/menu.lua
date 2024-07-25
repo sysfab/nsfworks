@@ -504,19 +504,6 @@ function menu.remove(self)
         end
 
         debug.log("menu() - Menu removed.")
-        for k, v in pairs(Players) do
-            v.IsHidden = false
-            if v.pistol == nil then
-                Object:Load("voxels.silver_pistol", function(s)
-                    v.pistol = Shape(s)
-                    v.pistol:SetParent(v.Body.RightArm.RightHand)
-                    v.pistol.Scale = 0.65
-                    v.pistol.Physics = PhysicsMode.Disabled
-                    v.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
-                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
-                end)
-            end
-        end
         game:create()
 
     end)
