@@ -10,8 +10,8 @@ function resetGame()
 end
 
 function getPlayerByUsername(username)
-	for k, v in pairs(Players) do
-		if v.Username == username then
+	for k, v in pairs(event_players) do
+		if k == username then
 			return v
 		end
 	end
@@ -29,6 +29,7 @@ Server.OnPlayerLeave = function(player)
 	debug.log("server() - player leaved [" .. player.Username .. "]")
 	if players[player.Username] ~= nil then
 		players[player.Username] = nil
+		event_players[player.Username] = nil
 		debug.log("server() - removed player entry for '".. player.Username .."'")
 	end
 end
@@ -46,6 +47,7 @@ Server.DidReceiveEvent = function(e)
 				end
 			end
 			players[event.Sender.Username] = {kills = 0, deaths = 0}
+			event_players[event.Sender.Username] = event.Sender
 			debug.log("server() - created player entry for '".. event.Sender.Username .."'")
 
 			local r = crystal.Event("connected", {players = players, game = game, posX = math.random(20, 80)/100, posY = math.random(20, 80)/100})
@@ -63,6 +65,7 @@ Server.DidReceiveEvent = function(e)
 				end
 			end
 			players[event.Sender.Username] = nil
+			event_players[event.Sender.Username] = nil
 			debug.log("server() - removed player entry for '".. event.Sender.Username .."'")
 		end
 	end,
