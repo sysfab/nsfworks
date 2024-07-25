@@ -34,9 +34,19 @@ game.connection.onEvent = function(connection, e)
 			b.Rotation = Rotation(0, event.data.rot, 0)
 			b.Position = Number3(event.data.x, event.data.y, event.data.z)
 			b.Physics = PhysicsMode.Trigger
-			b.Tick = function()
-
+			b:GetChild(1).Physics = PhysicsMode.Trigger
+			b:SetParent(World)
+			b.lifeTime = 0.5
+			b.owner = event.Sender
+			b.Tick = function(self, dt)
+				b.lifeTime = b.lifeTime - dt
+				if b.lifeTime <= 0 then
+					b:SetParent(nil)
+					b.Tick = nil
+				end
 			end
+
+			debug.log("game() - created bullet")
 		end,
 
 		connected = function(event)
@@ -454,6 +464,11 @@ game.screenResize = function(self)
 end
 
 game.tick = function(self, dt)
+	Player.Velocity.Y = Player.Velocity.Y + 0.01
+	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting then
+		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
+	end
+
 	self.shootTimer = math.max(0, self.shootTimer - dt)
 	if self.controls.shooting then
 		if self.shootTimer == 0 then
@@ -462,11 +477,6 @@ game.tick = function(self, dt)
 
 			self.shootTimer = 0.5
 		end
-	end
-
-	Player.Velocity.Y = Player.Velocity.Y + 0.01
-	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting then
-		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
 	end
 end
 
