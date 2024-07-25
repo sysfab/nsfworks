@@ -445,8 +445,8 @@ end
 
 game.tick = function(self)
 	Player.Velocity.Y = Player.Velocity.Y + 0.01
-	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil then
-		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1], 0, game.controls.move[2]), 0.3)
+	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting then
+		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
 	end
 end
 
