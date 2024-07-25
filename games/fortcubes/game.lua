@@ -71,6 +71,11 @@ game.connection.onEvent = function(connection, e)
                     p.pistol.Physics = PhysicsMode.Disabled
                     p.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
                     p.pistol.LocalPosition = Number3(7, 0.2, 2)
+
+					p.Tick = function(self, dt)
+						p.Animations.Idle:Stop()
+						p.Animations.Walk:Stop()
+					end
                 end)
             end
 		end,
@@ -81,6 +86,7 @@ game.connection.onEvent = function(connection, e)
 			p.IsHidden = true
             if p.pistol ~= nil then
                 p.pistol:SetParent(nil)
+				p.pistol.Tick  = nil
                 p.pistol = nil
             end
 		end,
