@@ -33,33 +33,67 @@ end
 loadingBG.parentDidResize()
 
 
-load = {
+loadModules = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua",
 	game = "games/fortcubes/game.lua"
 }
 
-for key, value in pairs(load) do
-	if need_to_load == nil then need_to_load = 0 end
-	need_to_load = need_to_load + 1
+loadAnimations = {
+	player_walk = "games/fortcubes/assets/animations/game/walk.json",
+}
+
+loaded = 0
+need_to_load = 2
+
+for key, value in pairs(loadModules) do
+	if need_to_load_modules == nil then need_to_load_modules = 0 end
+	need_to_load_modules = need_to_load_modules + 1
 
 	loader:loadFunction(value, function(module)
 		debug.log("client() - Loaded '".. key .."'")
 
 		_ENV[key] = module()
 
-		if loaded == nil then loaded = 0 end
-		loaded = loaded + 1
+		if loaded_modules == nil then loaded_modules = 0 end
+		loaded_modules = loaded_modules + 1
 
-		if loaded >= need_to_load then
-			doneLoading()
+		if loaded_modules >= need_to_load_modules then
+			loaded = loaded + 1
+			if loaded == need_to_load then
+                doneLoading()
+				debug.log("client() - Loaded all modules.")
+            end
 		end
 	end)
 end
-debug.log("client() - Loading " .. need_to_load .. " modules..")
+debug.log("client() - Loading " .. need_to_load_modules.. " modules..")
+
+for key, value in pairs(loadAnimations) do
+	if need_to_load_animations == nil then need_to_load_animations = 0 end
+	need_to_load_animations = need_to_load_animations + 1
+
+	loader:loadText(value, function(text)
+		debug.log("client() - Loaded '".. key .."'")
+
+		_ENV[key] = text
+
+		if loaded_animations == nil then loaded_animations = 0 end
+		loaded_animations = loaded_animations + 1
+
+		if loaded_animations >= need_to_load_animations then
+			loaded = loaded + 1
+			if loaded == need_to_load then
+                doneLoading()
+				debug.log("client() - Loaded all animations.")
+            end
+		end
+	end)
+end
+debug.log("client() - Loading " .. need_to_load_animations .. " animations..")
 
 function doneLoading()
-	debug.log("client() - Loaded all modules")
+	debug.log("client() - Loaded all assets.")
 
 	loadingBG:remove()
 	loadingBG = nil
