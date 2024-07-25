@@ -116,7 +116,14 @@ for key, value in pairs(loadAnimations) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all animations.")
-			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			if loading_screen.created then
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			elseif loading_screen ~= nil then
+				loading_screen:create()
+				
+				loadingBG:remove()
+				loadingBG = nil
+			end
 		end
 	end)
 end
@@ -140,7 +147,14 @@ for key, value in pairs(loadShapes) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all shapes.")
-			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			if loading_screen.created then
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			elseif loading_screen ~= nil then
+				loading_screen:create()
+				
+				loadingBG:remove()
+				loadingBG = nil
+			end
 		end
 	end)
 end
@@ -164,7 +178,14 @@ for key, value in pairs(loadAudios) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all audios.")
-			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			if loading_screen.created then
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			elseif loading_screen ~= nil then
+				loading_screen:create()
+				
+				loadingBG:remove()
+				loadingBG = nil
+			end
 		end
 	end)
 end
