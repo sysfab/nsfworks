@@ -85,7 +85,14 @@ for key, value in pairs(loadModules) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all modules.")
-			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			if loading_screen.created then
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			elseif loading_screen ~= nil then
+				loading_screen:create()
+				
+				loadingBG:remove()
+				loadingBG = nil
+			end
 		end
 	end)
 end
@@ -165,10 +172,6 @@ debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
 
 function doneLoading()
 	debug.log("client() - Loaded all assets.")
-
-	loadingBG:remove()
-	loadingBG = nil
-	loading_screen:create()
 
 	menu:create()
 	Camera:SetParent(World)
