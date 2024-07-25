@@ -301,7 +301,7 @@ game.controls.directionalPad = function(dx, dy, isJoy)
 		dx = d.X
 		dy = d.Y
 	end
-	Player.Motion = Number3(dx, 0, dy)*50
+	Player.Motion = Number3(dx, 0, dy)*80
 end
 
 game.created = false
