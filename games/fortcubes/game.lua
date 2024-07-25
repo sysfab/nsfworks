@@ -73,7 +73,7 @@ game.connection.onEvent = function(connection, e)
 		new_disconnection = function(event)
 			debug.log("game() - disconnect of '".. event.data.player .. "'")
 			local p = getPlayerByUsername(event.data.player)
-			p.IsHidden = false
+			p.IsHidden = true
             if p.pistol ~= nil then
                 p.pistol:SetParent(nil)
                 p.pistol = nil
