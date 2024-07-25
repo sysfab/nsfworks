@@ -29,6 +29,16 @@ end
 game.connection.onEvent = function(connection, e)
 	crystal.ParseEvent(e, {
 
+		bullet = function(event)
+			local b = Shape(shapes.bullet, {includeChildren = true})
+			b.Rotation = Rotation(0, event.data.rot, 0)
+			b.Position = Number3(event.data.x, event.data.y, event.data.z)
+			b.Physics = PhysicsMode.Trigger
+			b.Tick = function()
+
+			end
+		end,
+
 		connected = function(event)
 			debug.log("game() - connected")
 			
@@ -443,7 +453,17 @@ game.screenResize = function(self)
 	end
 end
 
-game.tick = function(self)
+game.tick = function(self, dt)
+	self.shootTimer = math.max(0, self.shootTimer - dt)
+	if self.controls.shooting then
+		if self.shootTimer == 0 then
+			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.X, y = Player.Head.Y, z = Player.Head.Z})
+			e:SendTo(Players)
+			
+			self.shootTimer = 0.5
+		end
+	end
+
 	Player.Velocity.Y = Player.Velocity.Y + 0.01
 	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting then
 		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
@@ -451,6 +471,9 @@ game.tick = function(self)
 end
 
 game.create = function(self)
+
+	self.shootTimer = 0
+
 	self.created = true
 	self.world:create(128)
 	self.camera:create()
