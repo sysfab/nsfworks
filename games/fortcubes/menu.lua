@@ -153,9 +153,15 @@ function menu.create(self)
                 menu.music.Volume = lerp(menu.music.Volume, 0, 0.05*delta)
             end
         end
-        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and loading_screen.created then
+        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and loading_screen.created and menu.workinprogress ~= nil then
             loading_screen:remove()
             menu:update()
+        else
+            menu.play:disable()
+            menu.aboutUs:disable()
+            menu.settings:disable()
+            menu.armory:disable()
+            menu.back:disable()
         end
     end
 
@@ -650,6 +656,8 @@ menu.loadModels = function(self)
         menu.book.left.Shadow = true
         menu.book.right = menu.book:GetChild(2)
         menu.book.right.Shadow = true
+        
+
     end)
 --[[
     for k, v in pairs(menu.bushes) do
