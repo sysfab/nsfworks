@@ -5,6 +5,8 @@ Player.Position = Number3(-1000, -1000, -1000)
 multi = require("multi")
 
 Camera:SetParent(nil)
+Fov.On = false
+Clouds.On = false
 ui = uikit_loader()
 
 function set(key, value)
