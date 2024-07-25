@@ -210,7 +210,7 @@ function menu.create(self)
                 menu.music:Play()
                 menu.music.Loop = true
                 menu.music.Volume = 0.0001
-                debug.log("music downloaded")
+                debug.log("menu() - Downloaded music.")
             end
         end)
     end

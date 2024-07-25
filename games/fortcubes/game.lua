@@ -147,6 +147,32 @@ game.ui.create = function(u)
                 u.blackPanel.alpha = math.floor(lerp(u.blackPanel.alpha, 0, 0.3))
             end
         end
+		if u.music ~= nil then
+            if u.created == true then
+                u.music.Volume = lerp(u.music.Volume, 0.7, 0.005*delta)
+                if not u.music.IsPlaying then
+                    u.music:Play()
+                end
+            else
+                u.music.Volume = lerp(u.music.Volume, 0, 0.05*delta)
+            end
+        end
+    end
+
+	if u.music == nil then
+        debug.log("game() - Downloading music...")
+        loader:loadData("games/fortcubes/assets/gameTheme.mp3", function(data)
+            if u.music == nil then
+                local sound = data
+                u.music = AudioSource("gun_shot_1")
+                u.music:SetParent(Camera)
+                u.music.Sound = sound
+                u.music:Play()
+                u.music.Loop = true
+                u.music.Volume = 0.0001
+                debug.log("game() - Downloaded music.")
+            end
+        end)
     end
 
     u.toMenu = ui:createButton("To Menu", u.theme.button)
