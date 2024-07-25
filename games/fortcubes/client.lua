@@ -57,6 +57,7 @@ loadShapes = {
 	tree = "nanskip.tree_2",
 	toolgun = "nanskip.toolgun",
 	lua_block = "fab3kleuuu.lua_block",
+	bullet = "nanskip.ca_bullet",
 }
 
 audio = {}
