@@ -156,14 +156,13 @@ function menu.create(self)
         if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and menu.workinprogress ~= nil then
             if loading_screen.created then
                 loading_screen:remove()
+                menu:update()
             end
-            menu:update()
         else
             menu.play:disable()
             menu.aboutUs:disable()
             menu.settings:disable()
             menu.armory:disable()
-            menu.back:disable()
         end
     end
 
