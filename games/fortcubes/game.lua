@@ -411,7 +411,7 @@ game.screenResize = function(self)
 end
 
 game.tick = function(self)
-	Player.Motion.Y = 0.01
+	Player.Velocity.Y = Player.Velocity.Y + 0.01
 end
 
 game.create = function(self)
