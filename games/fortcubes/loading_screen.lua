@@ -38,6 +38,7 @@ function loading.create(self)
     
     function self.setText(self, text)
         self.Title.Text = text
+        self:update()
     end
 end
 
