@@ -114,7 +114,7 @@ game.connection.onEvent = function(connection, e)
                     p.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
                     p.pistol.LocalPosition = Number3(7, 0.2, 2)
 					p.pistol.parent = p
-					rawset(v.Animations, "Walk", {})
+					rawset(p.Animations, "Walk", {})
 					p.Tick = function(self, dt)
 						self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
 						self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
