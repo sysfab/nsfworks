@@ -131,7 +131,7 @@ game.ui.create = function(u)
         u.object = Object()
     end
 
-    u.object.Tick = function(dt)
+    u.object.Tick = function(self, dt)
 		local delta = dt*63
         if u.toMenu ~= nil then
             u.setBorders(u.toMenu)
