@@ -111,10 +111,10 @@ for key, value in pairs(loadShapes) do
 	if need_to_load_shapes == nil then need_to_load_shapes = 0 end
 	need_to_load_shapes = need_to_load_shapes + 1
 
-	loader:loadText(value, function(text)
+	Object:Load(value, function(shape)
 		debug.log("client() - Loaded '".. key .."'")
 
-		shapes[key] = text
+		shapes[key] = shape
 
 		if loaded_shapes == nil then loaded_shapes = 0 end
 		loaded_shapes = loaded_shapes + 1
