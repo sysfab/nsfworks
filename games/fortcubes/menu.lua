@@ -153,8 +153,10 @@ function menu.create(self)
                 menu.music.Volume = lerp(menu.music.Volume, 0, 0.05*delta)
             end
         end
-        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and loading_screen.created and menu.workinprogress ~= nil then
-            loading_screen:remove()
+        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and menu.workinprogress ~= nil then
+            if loading_screen.created then
+                loading_screen:remove()
+            end
             menu:update()
         else
             menu.play:disable()
@@ -382,7 +384,7 @@ function menu.show(self, name)
         menu.back.content.Scale.X = menu.screenWidth * 3
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
-        
+
         menu.aboutUs:disable()
         menu.settings:disable()
         menu.play:disable()
