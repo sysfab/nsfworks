@@ -194,6 +194,7 @@ debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
 
 function doneLoading()
 	debug.log("client() - Loaded all assets.")
+	settings:load()
 
 	menu:create()
 	Camera:SetParent(World)

@@ -34,7 +34,13 @@ function settings.load(self)
     local store = KeyValueStore("data: " .. Player.Username)
     store:Get("settings", function(success, result)
         if success then
-            settings.currentSettings = JSON:Decode(result)
+            if result == nil then
+                self.currentSettings = default_settings
+                debug.log("settings() - saved default settings.")
+                self:save()
+                return
+            end
+            self.currentSettings = JSON:Decode(result)
             debug.log("settings() - loaded.")
         else
             debug.log("settings() - load failed.")
