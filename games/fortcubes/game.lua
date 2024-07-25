@@ -53,6 +53,9 @@ game.connection.onEvent = function(connection, e)
 							end
 		                end)
 		            end
+					if v.Body.nanplayer == nil then
+						nanimator.add(v.Body, "player_walk")
+					end
 		        end
 	        end
 
@@ -78,6 +81,9 @@ game.connection.onEvent = function(connection, e)
 					end
                 end)
             end
+			if p.Body.nanplayer == nil then
+				nanimator.add(p.Body, "player_walk")
+			end
 		end,
 
 		new_disconnection = function(event)
@@ -414,6 +420,7 @@ game.create = function(self)
 	self.camera:create()
 	self.ui:create()
 	self.controls:create()
+	nanimator.import(animations.player_walk, "player_walk")
 
 	if Client.IsMobile then
 		self.mobileControls:create()
