@@ -48,16 +48,16 @@ game.connection.onEvent = function(connection, e)
 		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
 							rawset(v.Animations, "Walk", {})
 							v.Tick = function(self, dt)
-								self.parent.isMoving = false
-								if self.parent.Motion.X ~= 0 or self.parent.Motion.Z ~= 0 then
-									self.parent.isMoving = true
+								self.Body.isMoving = false
+								if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
+									self.Body.isMoving = true
 								end
 								if self.parent .isMoving then
-									self.parent:setLoop(true)
-									self.parent:setPlaySpeed(8)
-									self.parent:nanPlay("player_walk")
+									self.Body:setLoop(true)
+									self.Body:setPlaySpeed(8)
+									self.Body:nanPlay("player_walk")
 								else
-									self.parent:nanStop()
+									self.Body:nanStop()
 								end
 							end
 		                end)
@@ -86,16 +86,16 @@ game.connection.onEvent = function(connection, e)
 					p.pistol.parent = p
 					rawset(v.Animations, "Walk", {})
 					p.Tick = function(self, dt)
-						self.parent.isMoving = false
-						if self.parent.Motion.X ~= 0 or self.parent.Motion.Z ~= 0 then
-							self.parent.isMoving = true
+						self.Body.isMoving = false
+						if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
+							self.Body.isMoving = true
 						end
 						if self.parent .isMoving then
-							self.parent:setLoop(true)
-							self.parent:setPlaySpeed(8)
-							self.parent:nanPlay("player_walk")
+							self.Body:setLoop(true)
+							self.Body:setPlaySpeed(8)
+							self.Body:nanPlay("player_walk")
 						else
-							self.parent:nanStop()
+							self.Body:nanStop()
 						end
 					end
                 end)
