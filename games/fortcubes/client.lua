@@ -143,7 +143,7 @@ for key, value in pairs(loadAudios) do
 	loader:loadData(value, function(audio)
 		debug.log("client() - Loaded '".. key .."'")
 
-		audios[key] = audio
+		audio[key] = audio
 
 		if loaded_audios == nil then loaded_audios = 0 end
 		loaded_audios = loaded_audios + 1
