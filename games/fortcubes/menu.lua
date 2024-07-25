@@ -145,7 +145,7 @@ function menu.create(self)
         end
         if menu.music ~= nil then
             if menu.created == true then
-                menu.music.Volume = lerp(menu.music.Volume, settings.musicVolume*0.01, 0.005*delta)
+                menu.music.Volume = lerp(menu.music.Volume, settings.currentSettings.musicVolume*0.01, 0.005*delta)
                 if not menu.music.IsPlaying then
                     menu.music:Play()
                 end
