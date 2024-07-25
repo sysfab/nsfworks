@@ -457,9 +457,9 @@ game.tick = function(self, dt)
 	self.shootTimer = math.max(0, self.shootTimer - dt)
 	if self.controls.shooting then
 		if self.shootTimer == 0 then
-			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.X, y = Player.Head.Y, z = Player.Head.Z})
+			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X, y = Player.Head.Position.Y, z = Player.Head.Position.Z})
 			e:SendTo(Players)
-			
+
 			self.shootTimer = 0.5
 		end
 	end
