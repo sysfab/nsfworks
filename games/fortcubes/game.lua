@@ -199,7 +199,7 @@ game.ui.create = function(u)
         end
 		if u.music ~= nil then
             if u.created == true then
-                u.music.Volume = lerp(u.music.Volume, 0.7, 0.005*delta)
+                u.music.Volume = lerp(u.music.Volume, settings.musicVolume*0.01, 0.005*delta)
                 if not u.music.IsPlaying then
                     u.music:Play()
                 end

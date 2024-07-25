@@ -1,7 +1,7 @@
 local settings = {}
 local default_settings = {
-    musicVolume = 100,
-    soundVolume = 100,
+    musicVolume = 70,
+    soundVolume = 70,
 }
 
 settings.currentSettings = default_settings
