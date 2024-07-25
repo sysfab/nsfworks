@@ -31,13 +31,21 @@ game.connection.onEvent = function(connection, e)
 
 		bullet = function(event)
 			local b = Shape(shapes.bullet, {includeChildren = true})
+			b.owner = event.Sender
+
+			b:SetParent(World)
 			b.Rotation = Rotation(0, event.data.rot, 0)
-			b.Position = Number3(event.data.x, event.data.y, event.data.z)
+
+			if b.owner == Player then
+				b.Position = Number3(event.data.x, event.data.y, event.data.z)*0.5 + Player.Head.Position
+			else
+				b.Position = Number3(event.data.x, event.data.y, event.data.z)
+			end
+
 			b.Physics = PhysicsMode.Trigger
 			b:GetChild(1).Physics = PhysicsMode.Trigger
-			b:SetParent(World)
+
 			b.lifeTime = 0.5
-			b.owner = event.Sender
 			b.Tick = function(self, dt)
 				local dt_factor = dt*63
 				b.Position = b.Position + b.Forward * 4 * dt_factor
