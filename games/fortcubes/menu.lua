@@ -230,43 +230,23 @@ function menu.create(self)
     self.aboutUs.onRelease = function(s)
         menu.currentMenu = "about us"
         menu:update()
-
-        menu.aboutUs:disable()
-        menu.settings:disable()
-        menu.play:disable()
-        menu.armory:disable()
     end
     self.settings = ui:createButton("SETTINGS", menu.theme.button)
     self.settings.pos = Number2(-1000, -1000)
     self.settings.onRelease = function(s)
         menu.currentMenu = "settings"
         menu:update()
-
-        menu.aboutUs:disable()
-        menu.settings:disable()
-        menu.play:disable()
-        menu.armory:disable()
     end
     self.armory = ui:createButton("ARMORY", menu.theme.button)
     self.armory.pos = Number2(-1000, -1000)
     self.armory.onRelease = function(s)
         menu.currentMenu = "armory"
         menu:update()
-
-        menu.aboutUs:disable()
-        menu.settings:disable()
-        menu.play:disable()
-        menu.armory:disable()
     end
     self.play = ui:createButton("PLAY", menu.theme.button)
     self.play.pos = Number2(-1000, -1000)
     self.play.onRelease = function(s)
         menu:remove()
-
-        menu.aboutUs:disable()
-        menu.settings:disable()
-        menu.play:disable()
-        menu.armory:disable()
     end
 
     self.back = ui:createButton("BACK", menu.theme.button)
@@ -274,11 +254,6 @@ function menu.create(self)
     self.back.onRelease = function(s)
         menu.currentMenu = "menu"
         menu:update()
-
-        menu.aboutUs:enable()
-        menu.settings:enable()
-        menu.play:enable()
-        menu.armory:enable()
     end
     
     self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
@@ -374,24 +349,44 @@ function menu.show(self, name)
         menu.play.content.Scale.X = menu.screenWidth * 3
         menu.play.content.Scale.Y = menu.screenHeight * 3
         menu.play.content.pos = Number2(menu.play.Width/2 - menu.play.content.Width/2, menu.play.Height/2 - menu.play.content.Height/2)
+
+        menu.aboutUs:enable()
+        menu.settings:enable()
+        menu.play:enable()
+        menu.armory:enable()
     elseif name == "armory" then
         menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
+
+        menu.aboutUs:disable()
+        menu.settings:disable()
+        menu.play:disable()
+        menu.armory:disable()
     elseif name == "settings" then
         menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
+
+        menu.aboutUs:disable()
+        menu.settings:disable()
+        menu.play:disable()
+        menu.armory:disable()
     elseif name == "about us" then
         menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
         menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
         menu.back.content.Scale.X = menu.screenWidth * 3
         menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
+        
+        menu.aboutUs:disable()
+        menu.settings:disable()
+        menu.play:disable()
+        menu.armory:disable()
     end
 end
 
