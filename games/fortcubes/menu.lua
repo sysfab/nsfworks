@@ -126,6 +126,10 @@ function menu.create(self)
             for k, v in pairs(Players) do
                 v.IsHidden = true
             end
+        else
+            for k, v in pairs(Players) do
+                v.IsHidden = false
+            end
         end
         if menu.closing then
             if menu.blackPanel.alpha ~= nil then
