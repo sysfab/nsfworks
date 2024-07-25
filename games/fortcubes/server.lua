@@ -40,8 +40,10 @@ Server.DidReceiveEvent = function(e)
 		debug.log("server() - connecting '".. event.Sender.Username .."'")
 		if players[event.Sender.Username] == nil then
 			for player, stats in pairs(Players) do
-				local r = crystal.Event("new_connection", {player = player, stat = stats})
-				r:SendTo(getPlayerByUsername(player))
+				if getPlayerByUsername(player) ~= nil then
+					local r = crystal.Event("new_connection", {player = player, stat = stats})
+					r:SendTo(getPlayerByUsername(player))
+				end
 			end
 			players[event.Sender.Username] = {kills = 0, deaths = 0}
 			debug.log("server() - created player entry for '".. event.Sender.Username .."'")
@@ -55,8 +57,10 @@ Server.DidReceiveEvent = function(e)
 		debug.log("server() - disconnecting '".. event.Sender.Username .."'")
 		if players[event.Sender.Username] ~= nil then
 			for player, stats in pairs(Players) do
-				local r = crystal.Event("new_disconnection", {player = player, stat = stats})
-				r:SendTo(getPlayerByUsername(player))
+				if getPlayerByUsername(player) ~= nil then
+					local r = crystal.Event("new_disconnection", {player = player, stat = stats})
+					r:SendTo(getPlayerByUsername(player))
+				end
 			end
 			players[event.Sender.Username] = nil
 			debug.log("server() - removed player entry for '".. event.Sender.Username .."'")
