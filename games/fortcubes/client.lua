@@ -67,9 +67,6 @@ loadAudios = {
 loaded = 0
 need_to_load = 4
 
-loadedGlobal = 0
-need_to_loadGlobal = #loadModules + #loadAnimations + #loadShapes + #loadAudios
-
 for key, value in pairs(loadModules) do
 	if need_to_load_modules == nil then need_to_load_modules = 0 end
 	need_to_load_modules = need_to_load_modules + 1
@@ -81,7 +78,6 @@ for key, value in pairs(loadModules) do
 
 		if loaded_modules == nil then loaded_modules = 0 end
 		loaded_modules = loaded_modules + 1
-		loadedGlobal = loadedGlobal + 1
 
 		if loaded_modules >= need_to_load_modules then
 			loaded = loaded + 1
@@ -90,7 +86,7 @@ for key, value in pairs(loadModules) do
             end
 			debug.log("client() - Loaded all modules.")
 			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loadedGlobal .. "/" .. need_to_loadGlobal .. ")")
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
 				loading_screen:create()
 				
@@ -113,7 +109,6 @@ for key, value in pairs(loadAnimations) do
 
 		if loaded_animations == nil then loaded_animations = 0 end
 		loaded_animations = loaded_animations + 1
-		loadedGlobal = loadedGlobal + 1
 
 		if loaded_animations >= need_to_load_animations then
 			loaded = loaded + 1
@@ -122,7 +117,7 @@ for key, value in pairs(loadAnimations) do
             end
 			debug.log("client() - Loaded all animations.")
 			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loadedGlobal .. "/" .. need_to_loadGlobal .. ")")
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
 				loading_screen:create()
 				
@@ -145,7 +140,6 @@ for key, value in pairs(loadShapes) do
 
 		if loaded_shapes == nil then loaded_shapes = 0 end
 		loaded_shapes = loaded_shapes + 1
-		loadedGlobal = loadedGlobal + 1
 
 		if loaded_shapes >= need_to_load_shapes then
 			loaded = loaded + 1
@@ -154,7 +148,7 @@ for key, value in pairs(loadShapes) do
             end
 			debug.log("client() - Loaded all shapes.")
 			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loadedGlobal .. "/" .. need_to_loadGlobal .. ")")
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
 				loading_screen:create()
 				
@@ -177,7 +171,6 @@ for key, value in pairs(loadAudios) do
 
 		if loaded_audios == nil then loaded_audios = 0 end
 		loaded_audios = loaded_audios + 1
-		loadedGlobal = loadedGlobal + 1
 
 		if loaded_audios >= need_to_load_audios then
 			loaded = loaded + 1
@@ -186,7 +179,7 @@ for key, value in pairs(loadAudios) do
             end
 			debug.log("client() - Loaded all audios.")
 			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loadedGlobal .. "/" .. need_to_loadGlobal .. ")")
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
 				loading_screen:create()
 				
