@@ -514,118 +514,125 @@ function menu.remove(self)
 end
 
 menu.loadModels = function(self)
-    loader:loadText("games/fortcubes/assets/animations/menu/pistol_idle.json", function(data)
-        nanimator.import(data, "menu_idle")
 
-        menu.man1 = self.avatar:get(Player.Username) menu.man1:SetParent(World)
-        menu.man1.Animations.Idle:Stop()
-        menu.man1.Position = Number3(-14, 2.63, 35)
-        menu.man1.Rotation.Y = 0.4+math.pi
-        menu.man1.Shadow = true
-        menu.man1.Scale = 0.3
+    ---- MAN1 ANIMATION ----
 
-        Object:Load("voxels.silver_pistol", function(s)
-            menu.man1.pistol = Shape(s)
-            menu.man1.pistol:SetParent(menu.man1:GetChild(4):GetChild(1))
-            menu.man1.pistol.Scale = 0.65
-            menu.man1.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
-            menu.man1.pistol.LocalPosition = Number3(8, -1, 3)
-        end)
+    nanimator.import(animations.pistol_idle, "menu_idle")
 
-        self.ha:applyToDescendants(menu.man1, {includeRoot = true}, function(s)
-            if type(s) == "Shape" or type(s) == "MutableShape" then
-                s.Shadow = true
-            end
-        end)
+    menu.man1 = self.avatar:get(Player.Username) menu.man1:SetParent(World)
+    menu.man1.Animations.Idle:Stop()
+    menu.man1.Position = Number3(-14, 2.63, 35)
+    menu.man1.Rotation.Y = 0.4+math.pi
+    menu.man1.Shadow = true
+    menu.man1.Scale = 0.3
 
-        nanimator.add(menu.man1, "menu_idle")
-        menu.man1:setLoop(true)
-        menu.man1:nanPlay("menu_idle", "default")
+    Object:Load("voxels.silver_pistol", function(s)
+        menu.man1.pistol = Shape(s)
+        menu.man1.pistol:SetParent(menu.man1:GetChild(4):GetChild(1))
+        menu.man1.pistol.Scale = 0.65
+        menu.man1.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
+        menu.man1.pistol.LocalPosition = Number3(8, -1, 3)
     end)
-    loader:loadText("games/fortcubes/assets/animations/menu/shotgun_idle.json", function(data)
-        nanimator.import(data, "menu2_idle")
 
-        menu.man2 = self.avatar:get("nsfworker1") menu.man2:SetParent(World)
-        menu.man2.Animations.Idle:Stop()
-        menu.man2.Position = Number3(-7, 2.63, 37)
-        menu.man2.Rotation.Y = -0.6+math.pi
-        menu.man2.Shadow = true
-        menu.man2.Scale = 0.3
-
-        Object:Load("flafilez.water_nichirin",function(s)
-            menu.man2.katana = s
-            menu.man2.katana:SetParent(menu.man2:GetChild(4):GetChild(1))
-            menu.man2.katana.Scale = 1
-            menu.man2.katana.LocalRotation = Rotation(-math.pi/2, 0 ,-0.3)
-            menu.man2.katana.LocalPosition = Number3(3, 0 ,0)
-        end)
-
-        self.ha:applyToDescendants(menu.man2, {includeRoot = true}, function(s)
-            if type(s) == "Shape" or type(s) == "MutableShape" then
-                s.Shadow = true
-            end
-        end)
-
-        nanimator.add(menu.man2, "menu2_idle")
-        menu.man2:setLoop(true)
-        menu.man2:nanPlay("menu2_idle", "default")
+    self.ha:applyToDescendants(menu.man1, {includeRoot = true}, function(s)
+        if type(s) == "Shape" or type(s) == "MutableShape" then
+            s.Shadow = true
+        end
     end)
-    loader:loadText("games/fortcubes/assets/animations/menu/sysfab.json", function(data)
-        nanimator.import(data, "sysfab")
 
-        menu.sysfab = menu.avatar:get("fab3kleuuu") menu.sysfab:SetParent(World)
-        menu.sysfab.Animations.Idle:Stop()
-        menu.sysfab.Position = Number3(5, 3.6, -40)
-        menu.sysfab.Rotation.Y = 0.4
-        menu.sysfab.Shadow = true
-        menu.sysfab.Scale = 0.3
+    nanimator.add(menu.man1, "menu_idle")
+    menu.man1:setLoop(true)
+    menu.man1:nanPlay("menu_idle", "default")
 
-        Object:Load("fab3kleuuu.lua_block",function(s)
-            menu.sysfab.luablock = s
-            menu.sysfab.luablock:SetParent(World)
-            menu.sysfab.luablock.Scale = Number3(0.3, 0.3, 0.3)
-            menu.sysfab.luablock.Position = Number3(5, 0.3, -40)
-            menu.sysfab.luablock.Rotation = Rotation(0, 0.3, 0)
-        end)
+    ---- MAN2 ANIMATION ----
 
-        self.ha:applyToDescendants(menu.sysfab, {includeRoot = true}, function(s)
-            if type(s) == "Shape" or type(s) == "MutableShape" then
-                s.Shadow = true
-            end
-        end)
+    nanimator.import(animations.katana_idle, "menu2_idle")
 
-        nanimator.add(menu.sysfab, "sysfab")
-        menu.sysfab:setLoop(true)
-        menu.sysfab:nanPlay("sysfab", "default")
+    menu.man2 = self.avatar:get("nsfworker1") menu.man2:SetParent(World)
+    menu.man2.Animations.Idle:Stop()
+    menu.man2.Position = Number3(-7, 2.63, 37)
+    menu.man2.Rotation.Y = -0.6+math.pi
+    menu.man2.Shadow = true
+    menu.man2.Scale = 0.3
+
+    Object:Load("flafilez.water_nichirin",function(s)
+        menu.man2.katana = s
+        menu.man2.katana:SetParent(menu.man2:GetChild(4):GetChild(1))
+        menu.man2.katana.Scale = 1
+        menu.man2.katana.LocalRotation = Rotation(-math.pi/2, 0 ,-0.3)
+        menu.man2.katana.LocalPosition = Number3(3, 0 ,0)
     end)
-    loader:loadText("games/fortcubes/assets/animations/menu/nanskip.json", function(data)
-        nanimator.import(data, "nanskip")
 
-        menu.nanskip = menu.avatar:get("nanskip") menu.nanskip:SetParent(World)
-        menu.nanskip.Animations.Idle:Stop()
-        menu.nanskip.Position = Number3(13, 2.63, -37)
-        menu.nanskip.Rotation.Y = -0.4
-        menu.nanskip.Shadow = true
-        menu.nanskip.Scale = 0.3
-
-        Object:Load("nanskip.toolgun",function(s)
-            menu.nanskip.toolgun = s
-            menu.nanskip.toolgun:SetParent(menu.nanskip:GetChild(4):GetChild(1))
-            menu.nanskip.toolgun.Scale = 1
-            menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
-            menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
-        end)
-        
-        self.ha:applyToDescendants(menu.nanskip, {includeRoot = true}, function(s)
-            if type(s) == "Shape" or type(s) == "MutableShape" then
-                s.Shadow = true
-            end
-        end)
-
-        nanimator.add(menu.nanskip, "nanskip")
-        menu.nanskip:setLoop(true)
-        menu.nanskip:nanPlay("nanskip", "default")
+    self.ha:applyToDescendants(menu.man2, {includeRoot = true}, function(s)
+        if type(s) == "Shape" or type(s) == "MutableShape" then
+            s.Shadow = true
+        end
     end)
+
+    nanimator.add(menu.man2, "menu2_idle")
+    menu.man2:setLoop(true)
+    menu.man2:nanPlay("menu2_idle", "default")
+
+    ---- SYSFAB ANIMATION ----
+
+    nanimator.import(animations.sysfab, "sysfab")
+
+    menu.sysfab = menu.avatar:get("fab3kleuuu") menu.sysfab:SetParent(World)
+    menu.sysfab.Animations.Idle:Stop()
+    menu.sysfab.Position = Number3(5, 3.6, -40)
+    menu.sysfab.Rotation.Y = 0.4
+    menu.sysfab.Shadow = true
+    menu.sysfab.Scale = 0.3
+
+    Object:Load("fab3kleuuu.lua_block",function(s)
+        menu.sysfab.luablock = s
+        menu.sysfab.luablock:SetParent(World)
+        menu.sysfab.luablock.Scale = Number3(0.3, 0.3, 0.3)
+        menu.sysfab.luablock.Position = Number3(5, 0.3, -40)
+        menu.sysfab.luablock.Rotation = Rotation(0, 0.3, 0)
+    end)
+
+    self.ha:applyToDescendants(menu.sysfab, {includeRoot = true}, function(s)
+        if type(s) == "Shape" or type(s) == "MutableShape" then
+            s.Shadow = true
+        end
+    end)
+
+    nanimator.add(menu.sysfab, "sysfab")
+    menu.sysfab:setLoop(true)
+    menu.sysfab:nanPlay("sysfab", "default")
+
+    ---- NANSKIP ANIMATION ----
+
+    nanimator.import(animations.nanskip, "nanskip")
+
+    menu.nanskip = menu.avatar:get("nanskip") menu.nanskip:SetParent(World)
+    menu.nanskip.Animations.Idle:Stop()
+    menu.nanskip.Position = Number3(13, 2.63, -37)
+    menu.nanskip.Rotation.Y = -0.4
+    menu.nanskip.Shadow = true
+    menu.nanskip.Scale = 0.3
+
+    Object:Load("nanskip.toolgun",function(s)
+        menu.nanskip.toolgun = s
+        menu.nanskip.toolgun:SetParent(menu.nanskip:GetChild(4):GetChild(1))
+        menu.nanskip.toolgun.Scale = 1
+        menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
+        menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
+    end)
+    
+    self.ha:applyToDescendants(menu.nanskip, {includeRoot = true}, function(s)
+        if type(s) == "Shape" or type(s) == "MutableShape" then
+            s.Shadow = true
+        end
+    end)
+
+    nanimator.add(menu.nanskip, "nanskip")
+    menu.nanskip:setLoop(true)
+    menu.nanskip:nanPlay("nanskip", "default")
+
+    ---- END OF ANIMATIONS ----
+
     Object:Load("nsfworks.fortcubes_yard", function(s)
         menu.yard = Shape(s)
         menu.yard:SetParent(World)

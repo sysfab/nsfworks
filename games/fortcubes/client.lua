@@ -39,7 +39,12 @@ loadModules = {
 	game = "games/fortcubes/game.lua"
 }
 
+animations = {}
 loadAnimations = {
+	nanskip = "games/fortcubes/assets/animations/menu/nanskip.json",
+	sysfab = "games/fortcubes/assets/animations/menu/sysfab.json",
+	katana_idle = "games/fortcubes/assets/animations/menu/katana_idle.json",
+	pistol_idle = "games/fortcubes/assets/animations/menu/pistol_idle.json",
 	player_walk = "games/fortcubes/assets/animations/game/walk.json",
 }
 
@@ -76,7 +81,7 @@ for key, value in pairs(loadAnimations) do
 	loader:loadText(value, function(text)
 		debug.log("client() - Loaded '".. key .."'")
 
-		_ENV[key] = text
+		animations[key] = text
 
 		if loaded_animations == nil then loaded_animations = 0 end
 		loaded_animations = loaded_animations + 1
