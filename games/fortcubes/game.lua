@@ -32,6 +32,8 @@ game.connection.onEvent = function(connection, e)
 		connected = function(event)
 			debug.log("game() - connected")
 			
+			Player.Velocity = Number3(0, 0, 0)
+			Player.Motion = Number3(0, 0, 0)
 			Player.Position = Number3(event.data.posX*game.world.map.Width, 10, event.data.posY*game.world.map.Depth)*game.world.map.Scale
 			debug.log("game() - position set")
 
