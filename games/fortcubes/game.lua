@@ -46,10 +46,8 @@ game.connection.onEvent = function(connection, e)
 		                    v.pistol.Physics = PhysicsMode.Disabled
 		                    v.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
 		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
-
+							v.pistol.parent = v
 							v.Tick = function(self, dt)
-								self.parent = v
-
 								self.parent.Animations.Idle:Stop()
 								self.parent.Animations.Walk:Stop()
 
@@ -89,10 +87,9 @@ game.connection.onEvent = function(connection, e)
                     p.pistol.Physics = PhysicsMode.Disabled
                     p.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
                     p.pistol.LocalPosition = Number3(7, 0.2, 2)
+					p.pistol.parent = p
 
 					p.Tick = function(self, dt)
-						self.parent = p
-
 						self.parent.Animations.Idle:Stop()
 						self.parent.Animations.Walk:Stop()
 						
