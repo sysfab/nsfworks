@@ -39,14 +39,15 @@ game.connection.onEvent = function(connection, e)
 			b.lifeTime = 0.5
 			b.owner = event.Sender
 			b.Tick = function(self, dt)
+				local dt_factor = dt*63
+				b.Position = b.Position + b.Forward * 4 * dt_factor
+
 				b.lifeTime = b.lifeTime - dt
 				if b.lifeTime <= 0 then
 					b:SetParent(nil)
 					b.Tick = nil
 				end
 			end
-
-			debug.log("game() - created bullet")
 		end,
 
 		connected = function(event)
@@ -475,7 +476,7 @@ game.tick = function(self, dt)
 			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X, y = Player.Head.Position.Y, z = Player.Head.Position.Z})
 			e:SendTo(Players)
 
-			self.shootTimer = 0.5
+			self.shootTimer = 0.25
 		end
 	end
 end
