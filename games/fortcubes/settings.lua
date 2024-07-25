@@ -21,7 +21,7 @@ end
 
 function settings.save(self)
     local store = KeyValueStore("data: " .. Player.Username)
-    store:Set("settings", JSON:Encode(settings.currentSettings), function(success)
+    store:Set("settings", JSON:Encode(self.currentSettings), function(success)
         if success then
             debug.log("settings() - saved.")
         else
@@ -34,13 +34,13 @@ function settings.load(self)
     local store = KeyValueStore("data: " .. Player.Username)
     store:Get("settings", function(success, result)
         if success then
-            if result == nil then
+            if result.settings == nil then
                 self.currentSettings = default_settings
                 debug.log("settings() - saved default settings.")
                 self:save()
                 return
             end
-            self.currentSettings = JSON:Decode(result)
+            self.currentSettings = JSON:Decode(result.settings)
             debug.log("settings() - loaded.")
         else
             debug.log("settings() - load failed.")
