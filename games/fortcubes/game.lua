@@ -1,5 +1,13 @@
 local game = {}
 
+function getPlayerByUsername(username)
+	for k, v in pairs(Players) do
+		if v.Username == username then
+			return v
+		end
+	end
+end
+
 game.connection = {}
 game.connection.connected = false
 
@@ -27,7 +35,49 @@ game.connection.onEvent = function(connection, e)
 			Player.Position = Number3(event.data.posX*game.world.map.Width, 10, event.data.posY*game.world.map.Depth)*game.world.map.Scale
 			debug.log("game() - position set")
 
+			for k, v in pairs(Players) do
+				if event.data.players[v.Username] ~= nil then
+		            v.IsHidden = false
+		            if v.pistol == nil then
+		                Object:Load("voxels.silver_pistol", function(s)
+		                    v.pistol = Shape(s)
+		                    v.pistol:SetParent(v.Body.RightArm.RightHand)
+		                    v.pistol.Scale = 0.65
+		                    v.pistol.Physics = PhysicsMode.Disabled
+		                    v.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
+		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
+		                end)
+		            end
+		        end
+	        end
+
 			game.connection.connected = true
+		end,
+
+		new_connection = function(event)
+			debug.log("game() - new connection of '".. event.data.player .. "'")
+			local p = getPlayerByUsername(event.data.player)
+			p.IsHidden = false
+            if p.pistol == nil then
+                Object:Load("voxels.silver_pistol", function(s)
+                    p.pistol = Shape(s)
+                    p.pistol:SetParent(p.Body.RightArm.RightHand)
+                    p.pistol.Scale = 0.65
+                    p.pistol.Physics = PhysicsMode.Disabled
+                    p.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
+                    p.pistol.LocalPosition = Number3(7, 0.2, 2)
+                end)
+            end
+		end,
+
+		new_disconnection = function(event)
+			debug.log("game() - disconnect of '".. event.data.player .. "'")
+			local p = getPlayerByUsername(event.data.player)
+			p.IsHidden = false
+            if p.pistol ~= nil then
+                p.pistol:SetParent(nil)
+                p.pistol = nil
+            end
 		end,
 
 		["_"] = function(event)

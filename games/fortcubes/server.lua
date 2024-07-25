@@ -9,6 +9,14 @@ function resetGame()
 	game.ticks = 0
 end
 
+function getPlayerByUsername(username)
+	for k, v in pairs(Players) do
+		if v.Username == username then
+			return v
+		end
+	end
+end
+
 Server.OnStart = function()
 	resetGame()
 end
@@ -31,6 +39,10 @@ Server.DidReceiveEvent = function(e)
 	connect = function(event)
 		debug.log("server() - connecting '".. event.Sender.Username .."'")
 		if players[event.Sender.Username] == nil then
+			for player, stats in pairs(players) do
+				local r = crystal.Event("new_connect", {player = player, stat = stats})
+				r:SendTo(getPlayerByUsername(player))
+			end
 			players[event.Sender.Username] = {kills = 0, deaths = 0}
 			debug.log("server() - created player entry for '".. event.Sender.Username .."'")
 
@@ -42,6 +54,10 @@ Server.DidReceiveEvent = function(e)
 	disconnect = function(event)
 		debug.log("server() - disconnecting '".. event.Sender.Username .."'")
 		if players[event.Sender.Username] ~= nil then
+			for player, stats in pairs(players) do
+				local r = crystal.Event("new_disconnect", {player = player, stat = stats})
+				r:SendTo(getPlayerByUsername(player))
+			end
 			players[event.Sender.Username] = nil
 			debug.log("server() - removed player entry for '".. event.Sender.Username .."'")
 		end
