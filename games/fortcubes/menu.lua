@@ -123,6 +123,9 @@ function menu.create(self)
                 menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05*delta)
                 menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05*delta)
             end
+            for k, v in pairs(Players) do
+                v.IsHidden = true
+            end
         end
         if menu.closing then
             if menu.blackPanel.alpha ~= nil then
@@ -278,10 +281,6 @@ function menu.create(self)
             error("menu.update() should be called with ':'!", 2)
         end
 
-        for k, v in pairs(Players) do
-            v.IsHidden = true
-        end
-
         menu.wh = math.max(Screen.Width, Screen.Height)
         menu.screenWidth = math.min(640, menu.wh)/1920
         menu.screenHeight = math.min(360, menu.wh)/1080
@@ -297,6 +296,9 @@ function menu.create(self)
         -- MAIN MENU
 
         menu.titleBG.Width, menu.titleBG.Height = menu.screenWidth * 1010, menu.screenHeight * 220
+        if Screen.Height < 480 then
+            menu.titleBG.Width, menu.titleBG.Height = menu.titleBG.Width/1.85, menu.titleBG.Height/1.85
+        end
         --menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
         menu.titleBG.pos.X = 5
         
