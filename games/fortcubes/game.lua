@@ -363,6 +363,9 @@ game.screenResize = function(self)
 		self.mobileControls:screenResize()
 	end
 end
+game.tick = function(self)
+
+end
 game.create = function(self)
 	self.created = true
 	self.world:create(128)
@@ -382,6 +385,9 @@ game.create = function(self)
     self.eventListener = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(...)
         self.connection:onEvent(...)
     end)
+    self.tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(...)
+        self:tick(...)
+    end)
 
     self.connection:connect()
     debug.log("game() - created")
@@ -393,6 +399,7 @@ game.remove = function(self, callback)
 	if self.mobileControls.created then
 		self.mobileControls:remove()
 	end
+	self.tickListener:Remove()
 	self.connection:disconnect()
 	self.camera:remove()
 	self.world:remove()
