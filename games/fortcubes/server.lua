@@ -41,7 +41,7 @@ Server.DidReceiveEvent = function(e)
 	connect = function(event)
 		debug.log("server() - connecting '".. event.Sender.Username .."'")
 		if players[event.Sender.Username] == nil then
-			for player, stats in pairs(Players) do
+			for player, stats in pairs(players) do
 				if getPlayerByUsername(player) ~= nil then
 					local r = crystal.Event("new_connection", {player = player, stat = stats})
 					r:SendTo(getPlayerByUsername(player))
@@ -61,7 +61,7 @@ Server.DidReceiveEvent = function(e)
 	disconnect = function(event)
 		debug.log("server() - disconnecting '".. event.Sender.Username .."'")
 		if players[event.Sender.Username] ~= nil then
-			for player, stats in pairs(Players) do
+			for player, stats in pairs(players) do
 				if getPlayerByUsername(player) ~= nil then
 					local r = crystal.Event("new_disconnection", {player = player, stat = stats})
 					r:SendTo(getPlayerByUsername(player))
