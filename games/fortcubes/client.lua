@@ -83,8 +83,8 @@ for key, value in pairs(loadModules) do
 			loaded = loaded + 1
 			if loaded == need_to_load then
                 doneLoading()
-				debug.log("client() - Loaded all modules.")
             end
+			debug.log("client() - Loaded all modules.")
 		end
 	end)
 end
@@ -106,8 +106,8 @@ for key, value in pairs(loadAnimations) do
 			loaded = loaded + 1
 			if loaded == need_to_load then
                 doneLoading()
-				debug.log("client() - Loaded all animations.")
             end
+			debug.log("client() - Loaded all animations.")
 		end
 	end)
 end
@@ -129,8 +129,8 @@ for key, value in pairs(loadShapes) do
 			loaded = loaded + 1
 			if loaded == need_to_load then
                 doneLoading()
-				debug.log("client() - Loaded all shapes.")
             end
+			debug.log("client() - Loaded all shapes.")
 		end
 	end)
 end
@@ -152,8 +152,8 @@ for key, value in pairs(loadAudios) do
 			loaded = loaded + 1
 			if loaded == need_to_load then
                 doneLoading()
-				debug.log("client() - Loaded all audios.")
             end
+			debug.log("client() - Loaded all audios.")
 		end
 	end)
 end
