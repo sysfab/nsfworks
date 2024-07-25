@@ -85,6 +85,7 @@ for key, value in pairs(loadModules) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all modules.")
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 		end
 	end)
 end
@@ -108,6 +109,7 @@ for key, value in pairs(loadAnimations) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all animations.")
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 		end
 	end)
 end
@@ -131,6 +133,7 @@ for key, value in pairs(loadShapes) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all shapes.")
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 		end
 	end)
 end
@@ -154,6 +157,7 @@ for key, value in pairs(loadAudios) do
                 doneLoading()
             end
 			debug.log("client() - Loaded all audios.")
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 		end
 	end)
 end
