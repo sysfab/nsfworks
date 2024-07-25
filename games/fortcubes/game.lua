@@ -37,7 +37,7 @@ game.connection.onEvent = function(connection, e)
 			b.Rotation = Rotation(0, event.data.rot, 0)
 
 			if b.owner == Player then
-				b.Position = Number3(event.data.x, event.data.y, event.data.z)*0.5 + Player.Head.Position
+				b.Position = lerp(Number3(event.data.x, event.data.y, event.data.z), Player.Head.Position, 0.5)
 			else
 				b.Position = Number3(event.data.x, event.data.y, event.data.z)
 			end
