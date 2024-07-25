@@ -52,7 +52,7 @@ game.connection.onEvent = function(connection, e)
 								if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
 									self.Body.isMoving = true
 								end
-								if self.parent .isMoving then
+								if self.Body.isMoving then
 									self.Body:setLoop(true)
 									self.Body:setPlaySpeed(8)
 									self.Body:nanPlay("player_walk")
@@ -90,7 +90,7 @@ game.connection.onEvent = function(connection, e)
 						if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
 							self.Body.isMoving = true
 						end
-						if self.parent .isMoving then
+						if self.Body.isMoving then
 							self.Body:setLoop(true)
 							self.Body:setPlaySpeed(8)
 							self.Body:nanPlay("player_walk")
