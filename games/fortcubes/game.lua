@@ -210,6 +210,7 @@ game.world = {}
 game.world.create = function(world, scale)
 	debug.log("game() - Generating world...")
 	world.map = MutableShape()
+	world.map.Scale = 5
 	world.map.Physics = PhysicsMode.StaticPerBlock
 	for x = 1, scale do
 		for y = 1, scale do
@@ -239,7 +240,7 @@ game.camera.create = function(camera)
 
 	camera.object = Object()
 	camera.object.Tick = function()
-		Camera.Position = Player.Position + Number3(0, 70, 0)
+		Camera.Position = Player.Position + Number3(0, 160, 0)
 		Camera.Forward = Player.Down
 	end
 
