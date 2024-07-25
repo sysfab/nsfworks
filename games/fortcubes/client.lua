@@ -48,8 +48,18 @@ loadAnimations = {
 	player_walk = "games/fortcubes/assets/animations/game/walk.json",
 }
 
+shapes = {}
+loadShapes = {
+	bush = "nanskip.bush_1_alternate",
+	yard = "nsfworks.fortcubes_yard",
+	book = "nsfworks.fortcubes_settings",
+	tree = "nanskip.tree_2",
+	toolgun = "nanskip.toolgun",
+	lua_block = "fab3kleuuu.lua_block",
+}
+
 loaded = 0
-need_to_load = 2
+need_to_load = 3
 
 for key, value in pairs(loadModules) do
 	if need_to_load_modules == nil then need_to_load_modules = 0 end
@@ -96,6 +106,29 @@ for key, value in pairs(loadAnimations) do
 	end)
 end
 debug.log("client() - Loading " .. need_to_load_animations .. " animations..")
+
+for key, value in pairs(loadShapes) do
+	if need_to_load_shapes == nil then need_to_load_shapes = 0 end
+	need_to_load_shapes = need_to_load_shapes + 1
+
+	loader:loadText(value, function(text)
+		debug.log("client() - Loaded '".. key .."'")
+
+		shapes[key] = text
+
+		if loaded_shapes == nil then loaded_shapes = 0 end
+		loaded_shapes = loaded_shapes + 1
+
+		if loaded_shapes >= need_to_load_shapes then
+			loaded = loaded + 1
+			if loaded == need_to_load then
+                doneLoading()
+				debug.log("client() - Loaded all shapes.")
+            end
+		end
+	end)
+end
+debug.log("client() - Loading " .. need_to_load_shapes .. " shapes..")
 
 function doneLoading()
 	debug.log("client() - Loaded all assets.")

@@ -596,13 +596,11 @@ menu.loadModels = function(self)
     menu.sysfab.Shadow = true
     menu.sysfab.Scale = 0.3
 
-    Object:Load("fab3kleuuu.lua_block",function(s)
-        menu.sysfab.luablock = s
-        menu.sysfab.luablock:SetParent(World)
-        menu.sysfab.luablock.Scale = Number3(0.3, 0.3, 0.3)
-        menu.sysfab.luablock.Position = Number3(5, 0.3, -40)
-        menu.sysfab.luablock.Rotation = Rotation(0, 0.3, 0)
-    end)
+    menu.sysfab.luablock = Shape(shapes.lua_block, {includeChildren = true})
+    menu.sysfab.luablock:SetParent(World)
+    menu.sysfab.luablock.Scale = Number3(0.3, 0.3, 0.3)
+    menu.sysfab.luablock.Position = Number3(5, 0.3, -40)
+    menu.sysfab.luablock.Rotation = Rotation(0, 0.3, 0)
 
     self.ha:applyToDescendants(menu.sysfab, {includeRoot = true}, function(s)
         if type(s) == "Shape" or type(s) == "MutableShape" then
@@ -625,13 +623,11 @@ menu.loadModels = function(self)
     menu.nanskip.Shadow = true
     menu.nanskip.Scale = 0.3
 
-    Object:Load("nanskip.toolgun",function(s)
-        menu.nanskip.toolgun = s
-        menu.nanskip.toolgun:SetParent(menu.nanskip:GetChild(4):GetChild(1))
-        menu.nanskip.toolgun.Scale = 1
-        menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
-        menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
-    end)
+    menu.nanskip.toolgun = Shape(shapes.toolgun, {includeChildren = true})
+    menu.nanskip.toolgun:SetParent(menu.nanskip:GetChild(4):GetChild(1))
+    menu.nanskip.toolgun.Scale = 1
+    menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
+    menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
     
     self.ha:applyToDescendants(menu.nanskip, {includeRoot = true}, function(s)
         if type(s) == "Shape" or type(s) == "MutableShape" then
@@ -645,304 +641,295 @@ menu.loadModels = function(self)
 
     ---- END OF ANIMATIONS ----
 
-    Object:Load("nsfworks.fortcubes_yard", function(s)
-        menu.yard = Shape(s)
-        menu.yard:SetParent(World)
-        menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
-        menu.yard.Shadow = true
-    end)
-    Object:Load("nsfworks.fortcubes_settings", function(s)
-        menu.book = Shape(s, {includeChildren = true})
-        menu.book:SetParent(World)
-        menu.book.Scale = 0.75
-        menu.book.Position = Number3(-30, 7, -35)
-        menu.book.Rotation = Rotation(0, 0.8, 0)
-        menu.book.Shadow = true
-        menu.book.left = menu.book:GetChild(1)
-        menu.book.left.Shadow = true
-        menu.book.right = menu.book:GetChild(2)
-        menu.book.right.Shadow = true
-        
+    menu.yard = Shape(shapes.yard, {includeChildren = true})
+    menu.yard:SetParent(World)
+    menu.yard.Pivot = Number3(menu.yard.Width*menu.yard.Scale.X/2, menu.yard.Height*menu.yard.Scale.Y/2, menu.yard.Depth*menu.yard.Scale.Z/2)
+    menu.yard.Shadow = true
 
-    end)
+    menu.book = Shape(shapes.book, {includeChildren = true})
+    menu.book:SetParent(World)
+    menu.book.Scale = 0.75
+    menu.book.Position = Number3(-30, 7, -35)
+    menu.book.Rotation = Rotation(0, 0.8, 0)
+    menu.book.Shadow = true
+    menu.book.left = menu.book:GetChild(1)
+    menu.book.left.Shadow = true
+    menu.book.right = menu.book:GetChild(2)
+    menu.book.right.Shadow = true
 --[[
     for k, v in pairs(menu.bushes) do
         v:SetParent(nil)
         v = nil
     end
 ]]
-    Object:Load("nanskip.bush_1_alternate", function(s)
-        local bushes = {
-            {pos = Number3(-9, 1, 60), rot = Rotation(0, -math.pi-0.6, 0), scale = 0.45},
-            {pos = Number3(-1, 0.9, 64), rot = Rotation(0, 0.2, 0), scale = 0.58},
-            {pos = Number3(5, 1, 65), rot = Rotation(0, -0.9, 0), scale = 0.46},
-            {pos = Number3(9, 0.85, 69), rot = Rotation(0, 0.1, 0), scale = 0.52},
-            {pos = Number3(16, 1, 72), rot = Rotation(0, -0.7, 0), scale = 0.53},
-            {pos = Number3(-15, 0.8, 58), rot = Rotation(0, -0.2+math.pi, 0), scale = 0.45},
-            {pos = Number3(-20, 0.9, 63), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 0.5},
-            {pos = Number3(-25, 0.85, 67), rot = Rotation(0, 0.4, 0), scale = 0.45},
-            {pos = Number3(-30, 0.78, 59), rot = Rotation(0, -0.5, 0), scale = 0.55},
-            {pos = Number3(-36, 0.75, 61), rot = Rotation(0, 0.3, 0), scale = 0.45},
-            {pos = Number3(-40, 0.95, 58), rot = Rotation(0, -1.5, 0), scale = 0.47},
-            {pos = Number3(-45, 0.75, 57), rot = Rotation(0, -2.5, 0), scale = 0.5},
-            {pos = Number3(-52, 0.85, 60), rot = Rotation(0, 1.2, 0), scale = 0.57},
+    local bushes = {
+        {pos = Number3(-9, 1, 60), rot = Rotation(0, -math.pi-0.6, 0), scale = 0.45},
+        {pos = Number3(-1, 0.9, 64), rot = Rotation(0, 0.2, 0), scale = 0.58},
+        {pos = Number3(5, 1, 65), rot = Rotation(0, -0.9, 0), scale = 0.46},
+        {pos = Number3(9, 0.85, 69), rot = Rotation(0, 0.1, 0), scale = 0.52},
+        {pos = Number3(16, 1, 72), rot = Rotation(0, -0.7, 0), scale = 0.53},
+        {pos = Number3(-15, 0.8, 58), rot = Rotation(0, -0.2+math.pi, 0), scale = 0.45},
+        {pos = Number3(-20, 0.9, 63), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 0.5},
+        {pos = Number3(-25, 0.85, 67), rot = Rotation(0, 0.4, 0), scale = 0.45},
+        {pos = Number3(-30, 0.78, 59), rot = Rotation(0, -0.5, 0), scale = 0.55},
+        {pos = Number3(-36, 0.75, 61), rot = Rotation(0, 0.3, 0), scale = 0.45},
+        {pos = Number3(-40, 0.95, 58), rot = Rotation(0, -1.5, 0), scale = 0.47},
+        {pos = Number3(-45, 0.75, 57), rot = Rotation(0, -2.5, 0), scale = 0.5},
+        {pos = Number3(-52, 0.85, 60), rot = Rotation(0, 1.2, 0), scale = 0.57},
 
-            {pos = Number3(30, 0.8, 120), rot = Rotation(0, -0.2+math.pi, 0), scale = 1},
-            {pos = Number3(20, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
-            {pos = Number3(10, 0.8, 120), rot = Rotation(0, -0.2, 0), scale = 1},
-            {pos = Number3(0, 0.8, 120), rot = Rotation(0, -0.8+math.pi, 0), scale = 1},
-            {pos = Number3(-10, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
-            {pos = Number3(-20, 0.8, 120), rot = Rotation(0, -0.6, 0), scale = 1},
-            {pos = Number3(-30, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
-            {pos = Number3(-40, 0.85, 120), rot = Rotation(0, 0.4, 0), scale = 1},
-            {pos = Number3(-50, 0.8, 120), rot = Rotation(0, -0.4+math.pi, 0), scale = 1},
-            {pos = Number3(-60, 0.9, 120), rot = Rotation(0, -0.1+2, 0), scale = 1},
-            {pos = Number3(-70, 0.85, 120), rot = Rotation(0, 0.4, 0), scale = 1},
-            {pos = Number3(-80, 0.8, 120), rot = Rotation(0, -0.2, 0), scale = 1},
-            {pos = Number3(-90, 0.8, 120), rot = Rotation(0, -0.4+math.pi, 0), scale = 1},
+        {pos = Number3(30, 0.8, 120), rot = Rotation(0, -0.2+math.pi, 0), scale = 1},
+        {pos = Number3(20, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
+        {pos = Number3(10, 0.8, 120), rot = Rotation(0, -0.2, 0), scale = 1},
+        {pos = Number3(0, 0.8, 120), rot = Rotation(0, -0.8+math.pi, 0), scale = 1},
+        {pos = Number3(-10, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
+        {pos = Number3(-20, 0.8, 120), rot = Rotation(0, -0.6, 0), scale = 1},
+        {pos = Number3(-30, 0.9, 120), rot = Rotation(0, -0.1+math.pi/2, 0), scale = 1},
+        {pos = Number3(-40, 0.85, 120), rot = Rotation(0, 0.4, 0), scale = 1},
+        {pos = Number3(-50, 0.8, 120), rot = Rotation(0, -0.4+math.pi, 0), scale = 1},
+        {pos = Number3(-60, 0.9, 120), rot = Rotation(0, -0.1+2, 0), scale = 1},
+        {pos = Number3(-70, 0.85, 120), rot = Rotation(0, 0.4, 0), scale = 1},
+        {pos = Number3(-80, 0.8, 120), rot = Rotation(0, -0.2, 0), scale = 1},
+        {pos = Number3(-90, 0.8, 120), rot = Rotation(0, -0.4+math.pi, 0), scale = 1},
 
-            {pos = Number3(-32, 0, 51), rot = Rotation(0, -0.24, 0), scale = 0.58},
-            {pos = Number3(-35, 0, 47), rot = Rotation(0, 0.5, 0), scale = 0.5},
-            {pos = Number3(-38, 0, 43), rot = Rotation(0, -0.24, 0), scale = 0.6},
-            {pos = Number3(-41, 0, 39), rot = Rotation(0, 0.24, 0), scale = 0.5},
-            {pos = Number3(-44, 0, 32), rot = Rotation(0, -0.3, 0), scale = 0.6},
-            {pos = Number3(-47, 0, 28), rot = Rotation(0, -1.24, 0), scale = 0.55},
-            {pos = Number3(-50, 0, 20), rot = Rotation(0, -3.7, 0), scale = 0.6},
-            {pos = Number3(-48, 0, 13), rot = Rotation(0, -0.24, 0), scale = 0.56},
-            {pos = Number3(-50, 0, 7), rot = Rotation(0, -0.24, 0), scale = 0.5},
-            {pos = Number3(-50, 0, -1), rot = Rotation(0, -1.4, 0), scale = 0.5},
-            {pos = Number3(-48, 0, -9), rot = Rotation(0, 0.2, 0), scale = 0.5},
-            {pos = Number3(-50, 0, -17), rot = Rotation(0, 1.4, 0), scale = 0.55},
-            {pos = Number3(-50, 0, -24), rot = Rotation(0, -0.2, 0), scale = 0.45},
-            {pos = Number3(-52, 0, -30), rot = Rotation(0, 0.4, 0), scale = 0.55},
-            {pos = Number3(-46, 0, -37), rot = Rotation(0, 1.4, 0), scale = 0.5},
-            {pos = Number3(-41, 0, -40), rot = Rotation(0, -0.7, 0), scale = 0.45},    
-            {pos = Number3(-35, 0, -44), rot = Rotation(0, 0.4, 0), scale = 0.5},
-            {pos = Number3(-28, 0, -46), rot = Rotation(0, -0.7, 0), scale = 0.45},
-            {pos = Number3(-35, 0, -44), rot = Rotation(0, 0.4, 0), scale = 0.5},
-            {pos = Number3(-28, 0, -46), rot = Rotation(0, -0.7, 0), scale = 0.45},
-            {pos = Number3(-21, 0, -48), rot = Rotation(0, 0, 0), scale = 0.52},
-            {pos = Number3(-14, 0, -50), rot = Rotation(0, -0.3, 0), scale = 0.48},
-            {pos = Number3(-7, 0, -50), rot = Rotation(0, 0.3, 0), scale = 0.45},
-            {pos = Number3(0, 0, -50), rot = Rotation(0, -0.7, 0), scale = 0.5},
-            {pos = Number3(7, 0, -50), rot = Rotation(0, -0.3, 0), scale = 0.52},
-            {pos = Number3(14, 0, -50), rot = Rotation(0, 0.4, 0), scale = 0.45},
-            {pos = Number3(21, 0, -50), rot = Rotation(0, -0.7, 0), scale = 0.52},
-            {pos = Number3(28, 0, -48), rot = Rotation(0, -0.3, 0), scale = 0.5},
-            {pos = Number3(32, 0, -45), rot = Rotation(0, 0, 0), scale = 0.45},
-            {pos = Number3(36, 0, -40), rot = Rotation(0, 0.4, 0), scale = 0.48},
-            {pos = Number3(40, 0, -35), rot = Rotation(0, -0.7, 0), scale = 0.5},
-            {pos = Number3(44, 0, -29), rot = Rotation(0, 0.3, 0), scale = 0.45},
+        {pos = Number3(-32, 0, 51), rot = Rotation(0, -0.24, 0), scale = 0.58},
+        {pos = Number3(-35, 0, 47), rot = Rotation(0, 0.5, 0), scale = 0.5},
+        {pos = Number3(-38, 0, 43), rot = Rotation(0, -0.24, 0), scale = 0.6},
+        {pos = Number3(-41, 0, 39), rot = Rotation(0, 0.24, 0), scale = 0.5},
+        {pos = Number3(-44, 0, 32), rot = Rotation(0, -0.3, 0), scale = 0.6},
+        {pos = Number3(-47, 0, 28), rot = Rotation(0, -1.24, 0), scale = 0.55},
+        {pos = Number3(-50, 0, 20), rot = Rotation(0, -3.7, 0), scale = 0.6},
+        {pos = Number3(-48, 0, 13), rot = Rotation(0, -0.24, 0), scale = 0.56},
+        {pos = Number3(-50, 0, 7), rot = Rotation(0, -0.24, 0), scale = 0.5},
+        {pos = Number3(-50, 0, -1), rot = Rotation(0, -1.4, 0), scale = 0.5},
+        {pos = Number3(-48, 0, -9), rot = Rotation(0, 0.2, 0), scale = 0.5},
+        {pos = Number3(-50, 0, -17), rot = Rotation(0, 1.4, 0), scale = 0.55},
+        {pos = Number3(-50, 0, -24), rot = Rotation(0, -0.2, 0), scale = 0.45},
+        {pos = Number3(-52, 0, -30), rot = Rotation(0, 0.4, 0), scale = 0.55},
+        {pos = Number3(-46, 0, -37), rot = Rotation(0, 1.4, 0), scale = 0.5},
+        {pos = Number3(-41, 0, -40), rot = Rotation(0, -0.7, 0), scale = 0.45},    
+        {pos = Number3(-35, 0, -44), rot = Rotation(0, 0.4, 0), scale = 0.5},
+        {pos = Number3(-28, 0, -46), rot = Rotation(0, -0.7, 0), scale = 0.45},
+        {pos = Number3(-35, 0, -44), rot = Rotation(0, 0.4, 0), scale = 0.5},
+        {pos = Number3(-28, 0, -46), rot = Rotation(0, -0.7, 0), scale = 0.45},
+        {pos = Number3(-21, 0, -48), rot = Rotation(0, 0, 0), scale = 0.52},
+        {pos = Number3(-14, 0, -50), rot = Rotation(0, -0.3, 0), scale = 0.48},
+        {pos = Number3(-7, 0, -50), rot = Rotation(0, 0.3, 0), scale = 0.45},
+        {pos = Number3(0, 0, -50), rot = Rotation(0, -0.7, 0), scale = 0.5},
+        {pos = Number3(7, 0, -50), rot = Rotation(0, -0.3, 0), scale = 0.52},
+        {pos = Number3(14, 0, -50), rot = Rotation(0, 0.4, 0), scale = 0.45},
+        {pos = Number3(21, 0, -50), rot = Rotation(0, -0.7, 0), scale = 0.52},
+        {pos = Number3(28, 0, -48), rot = Rotation(0, -0.3, 0), scale = 0.5},
+        {pos = Number3(32, 0, -45), rot = Rotation(0, 0, 0), scale = 0.45},
+        {pos = Number3(36, 0, -40), rot = Rotation(0, 0.4, 0), scale = 0.48},
+        {pos = Number3(40, 0, -35), rot = Rotation(0, -0.7, 0), scale = 0.5},
+        {pos = Number3(44, 0, -29), rot = Rotation(0, 0.3, 0), scale = 0.45},
 
-            {pos = Number3(-35, 0, -100), rot = Rotation(0, 0.4, 0), scale = 1},
-            {pos = Number3(-28, 0, -100), rot = Rotation(0, -0.7, 0), scale = 1},
-            {pos = Number3(-21, 0, -90), rot = Rotation(0, 0, 0), scale = 1},
-            {pos = Number3(-14, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
-            {pos = Number3(-7, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
-            {pos = Number3(0, 0, -100), rot = Rotation(0, -0.7, 0), scale = 1},
-            {pos = Number3(7, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
-            {pos = Number3(14, 0, -100), rot = Rotation(0, 0.4, 0), scale = 1},
-            {pos = Number3(21, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
-            {pos = Number3(28, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
-            {pos = Number3(32, 0, -100), rot = Rotation(0, 0, 0), scale = 1},
-            {pos = Number3(36, 0, -90), rot = Rotation(0, 0.4, 0), scale = 1},
-            {pos = Number3(40, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
-            {pos = Number3(44, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
-            {pos = Number3(50, 0, -100), rot = Rotation(0, 0, 0), scale = 1},
-            {pos = Number3(57, 0, -90), rot = Rotation(0, 0.4, 0), scale = 1},
-            {pos = Number3(64, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
-            {pos = Number3(72, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
-            {pos = Number3(79, 0, -90), rot = Rotation(0, 0.3, 0), scale = 1},
-            {pos = Number3(-80, 0, 90), rot = Rotation(0, 0.24, 0), scale = 1},
-            {pos = Number3(-83, 0, 80), rot = Rotation(0, 0.7, 0), scale = 1.1},
-            {pos = Number3(-78, 0, 70), rot = Rotation(0, -1.44, 0), scale = 0.9},
-            {pos = Number3(-83, 0, 60), rot = Rotation(0, 0.24, 0), scale = 1},
-            {pos = Number3(-78, 0, 50), rot = Rotation(0, -1.4, 0), scale = 1.1},
-            {pos = Number3(-83, 0, 40), rot = Rotation(0, -0.24, 0), scale = 0.9},
-            {pos = Number3(-78, 0, 30), rot = Rotation(0, 1.4, 0), scale = 1},
-            {pos = Number3(-83, 0, 20), rot = Rotation(0, 0.24, 0), scale = 0.9},
-            {pos = Number3(-86, 0, 10), rot = Rotation(0, -0.7, 0), scale = 1.1},
-            {pos = Number3(-83, 0, 0), rot = Rotation(0, -0.24, 0), scale = 1},
-            {pos = Number3(-85, 0, -10), rot = Rotation(0, 1.4, 0), scale = 1.1},
-            {pos = Number3(-83, 0, -20), rot = Rotation(0, 0.24, 0), scale = 1},
-            {pos = Number3(-80, 0, -30), rot = Rotation(0, -0.24, 0), scale = 0.9},
-            {pos = Number3(-73, 0, -40), rot = Rotation(0, 0.7, 0), scale = 1.1},
-            {pos = Number3(-64, 0, -50), rot = Rotation(0, -0.24, 0), scale = 1},
-            {pos = Number3(-59, 0, -60), rot = Rotation(0, 1.4, 0), scale = 1.1},
-            {pos = Number3(-53, 0, -70), rot = Rotation(0, -0.24, 0), scale = 0.9},
-            {pos = Number3(-48, 0, -80), rot = Rotation(0, 0.24, 0), scale = 1},
-            {pos = Number3(-41, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
-            {pos = Number3(-36, 0, -100), rot = Rotation(0, 1.4, 0), scale = 1.1},
+        {pos = Number3(-35, 0, -100), rot = Rotation(0, 0.4, 0), scale = 1},
+        {pos = Number3(-28, 0, -100), rot = Rotation(0, -0.7, 0), scale = 1},
+        {pos = Number3(-21, 0, -90), rot = Rotation(0, 0, 0), scale = 1},
+        {pos = Number3(-14, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
+        {pos = Number3(-7, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
+        {pos = Number3(0, 0, -100), rot = Rotation(0, -0.7, 0), scale = 1},
+        {pos = Number3(7, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
+        {pos = Number3(14, 0, -100), rot = Rotation(0, 0.4, 0), scale = 1},
+        {pos = Number3(21, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
+        {pos = Number3(28, 0, -90), rot = Rotation(0, -0.3, 0), scale = 1},
+        {pos = Number3(32, 0, -100), rot = Rotation(0, 0, 0), scale = 1},
+        {pos = Number3(36, 0, -90), rot = Rotation(0, 0.4, 0), scale = 1},
+        {pos = Number3(40, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
+        {pos = Number3(44, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
+        {pos = Number3(50, 0, -100), rot = Rotation(0, 0, 0), scale = 1},
+        {pos = Number3(57, 0, -90), rot = Rotation(0, 0.4, 0), scale = 1},
+        {pos = Number3(64, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
+        {pos = Number3(72, 0, -100), rot = Rotation(0, 0.3, 0), scale = 1},
+        {pos = Number3(79, 0, -90), rot = Rotation(0, 0.3, 0), scale = 1},
+        {pos = Number3(-80, 0, 90), rot = Rotation(0, 0.24, 0), scale = 1},
+        {pos = Number3(-83, 0, 80), rot = Rotation(0, 0.7, 0), scale = 1.1},
+        {pos = Number3(-78, 0, 70), rot = Rotation(0, -1.44, 0), scale = 0.9},
+        {pos = Number3(-83, 0, 60), rot = Rotation(0, 0.24, 0), scale = 1},
+        {pos = Number3(-78, 0, 50), rot = Rotation(0, -1.4, 0), scale = 1.1},
+        {pos = Number3(-83, 0, 40), rot = Rotation(0, -0.24, 0), scale = 0.9},
+        {pos = Number3(-78, 0, 30), rot = Rotation(0, 1.4, 0), scale = 1},
+        {pos = Number3(-83, 0, 20), rot = Rotation(0, 0.24, 0), scale = 0.9},
+        {pos = Number3(-86, 0, 10), rot = Rotation(0, -0.7, 0), scale = 1.1},
+        {pos = Number3(-83, 0, 0), rot = Rotation(0, -0.24, 0), scale = 1},
+        {pos = Number3(-85, 0, -10), rot = Rotation(0, 1.4, 0), scale = 1.1},
+        {pos = Number3(-83, 0, -20), rot = Rotation(0, 0.24, 0), scale = 1},
+        {pos = Number3(-80, 0, -30), rot = Rotation(0, -0.24, 0), scale = 0.9},
+        {pos = Number3(-73, 0, -40), rot = Rotation(0, 0.7, 0), scale = 1.1},
+        {pos = Number3(-64, 0, -50), rot = Rotation(0, -0.24, 0), scale = 1},
+        {pos = Number3(-59, 0, -60), rot = Rotation(0, 1.4, 0), scale = 1.1},
+        {pos = Number3(-53, 0, -70), rot = Rotation(0, -0.24, 0), scale = 0.9},
+        {pos = Number3(-48, 0, -80), rot = Rotation(0, 0.24, 0), scale = 1},
+        {pos = Number3(-41, 0, -90), rot = Rotation(0, -0.7, 0), scale = 1},
+        {pos = Number3(-36, 0, -100), rot = Rotation(0, 1.4, 0), scale = 1.1},
 
-            {pos = Number3(50, 1, -60), rot = Rotation(0, -0.2, 0), scale = 0.55},
-            {pos = Number3(54, 1, -54), rot = Rotation(0, -0.6, 0), scale = 0.62},
-            {pos = Number3(58, 1, -46), rot = Rotation(0, 1.7, 0), scale = 0.58},
-            {pos = Number3(62, 1, -38), rot = Rotation(0, -0.6, 0), scale = 0.62},
-            {pos = Number3(66, 1, -30), rot = Rotation(0, 2.4, 0), scale = 0.55},
-            {pos = Number3(70, 1, -22), rot = Rotation(0, -0, 0), scale = 0.6},
-            {pos = Number3(70, 0, -16), rot = Rotation(0, 0.2, 0), scale = 0.6},
-            {pos = Number3(70, 0, -8), rot = Rotation(0, 2.4, 0), scale = 0.58},
-            {pos = Number3(70, 0, 0), rot = Rotation(0, -1.7, 0), scale = 0.62},
-            {pos = Number3(68, 0, 8), rot = Rotation(0, 0, 0), scale = 0.62},
-            {pos = Number3(64, 0, 16), rot = Rotation(0, 0.2, 0), scale = 0.58},
-            {pos = Number3(60, 0, 22), rot = Rotation(0, -0.6, 0), scale = 0.55},
-            {pos = Number3(56, 0, 30), rot = Rotation(0, -2.4, 0), scale = 0.55},
-            {pos = Number3(52, 0, 38), rot = Rotation(0, -0.6, 0), scale = 0.6},
-            {pos = Number3(48, 0, 46), rot = Rotation(0, 0.2, 0), scale = 0.58},
-            {pos = Number3(40, 0, 54), rot = Rotation(0, -1.7, 0), scale = 0.62},
-            {pos = Number3(32, 0, 62), rot = Rotation(0, 2.4, 0), scale = 0.58},
-            {pos = Number3(24, 0, 70), rot = Rotation(0, -0.6, 0), scale = 0.55},
+        {pos = Number3(50, 1, -60), rot = Rotation(0, -0.2, 0), scale = 0.55},
+        {pos = Number3(54, 1, -54), rot = Rotation(0, -0.6, 0), scale = 0.62},
+        {pos = Number3(58, 1, -46), rot = Rotation(0, 1.7, 0), scale = 0.58},
+        {pos = Number3(62, 1, -38), rot = Rotation(0, -0.6, 0), scale = 0.62},
+        {pos = Number3(66, 1, -30), rot = Rotation(0, 2.4, 0), scale = 0.55},
+        {pos = Number3(70, 1, -22), rot = Rotation(0, -0, 0), scale = 0.6},
+        {pos = Number3(70, 0, -16), rot = Rotation(0, 0.2, 0), scale = 0.6},
+        {pos = Number3(70, 0, -8), rot = Rotation(0, 2.4, 0), scale = 0.58},
+        {pos = Number3(70, 0, 0), rot = Rotation(0, -1.7, 0), scale = 0.62},
+        {pos = Number3(68, 0, 8), rot = Rotation(0, 0, 0), scale = 0.62},
+        {pos = Number3(64, 0, 16), rot = Rotation(0, 0.2, 0), scale = 0.58},
+        {pos = Number3(60, 0, 22), rot = Rotation(0, -0.6, 0), scale = 0.55},
+        {pos = Number3(56, 0, 30), rot = Rotation(0, -2.4, 0), scale = 0.55},
+        {pos = Number3(52, 0, 38), rot = Rotation(0, -0.6, 0), scale = 0.6},
+        {pos = Number3(48, 0, 46), rot = Rotation(0, 0.2, 0), scale = 0.58},
+        {pos = Number3(40, 0, 54), rot = Rotation(0, -1.7, 0), scale = 0.62},
+        {pos = Number3(32, 0, 62), rot = Rotation(0, 2.4, 0), scale = 0.58},
+        {pos = Number3(24, 0, 70), rot = Rotation(0, -0.6, 0), scale = 0.55},
 
-            {pos = Number3(50, 1, -12*6.5), rot = Rotation(0, 0.2, 0), scale = 1},
-            {pos = Number3(55, 1, -12*6), rot = Rotation(0, -1, 0), scale = 1},
-            {pos = Number3(60, 1, -12*5.5), rot = Rotation(0, 2.1, 0), scale = 1},
-            {pos = Number3(70, 1, -12*5), rot = Rotation(0, -2.1, 0), scale = 1},
-            {pos = Number3(80, 1, -12*4), rot = Rotation(0, 0.2, 0), scale = 1},
-            {pos = Number3(90, 1, -12*3), rot = Rotation(0, 0, 0), scale = 1},
-            {pos = Number3(100, 1, -12*2), rot = Rotation(0, -1, 0), scale = 1},
-            {pos = Number3(100, 1, -12*1), rot = Rotation(0, 0.2, 0), scale = 1},
-            {pos = Number3(100, 1, 0), rot = Rotation(0, 0, 0), scale = 1},
-            {pos = Number3(100, 1, 12), rot = Rotation(0, -1, 0), scale = 1},
-            {pos = Number3(100, 1, 12*2), rot = Rotation(0, 2.1, 0), scale = 1},
-            {pos = Number3(90, 1, 12*3), rot = Rotation(0, 0, 0), scale = 1},
-            {pos = Number3(80, 1, 12*4), rot = Rotation(0, -1, 0), scale = 1},
-            {pos = Number3(70, 1, 12*5), rot = Rotation(0, 2.1, 0), scale = 1},
-            {pos = Number3(60, 1, 12*6), rot = Rotation(0, 0, 0), scale = 1},
-            {pos = Number3(50, 1, 12*7), rot = Rotation(0, -2.1, 0), scale = 1},
-            {pos = Number3(40, 1, 12*8), rot = Rotation(0, -1, 0), scale = 1},
-            {pos = Number3(40, 1, 12*9), rot = Rotation(0, 0, 0), scale = 1},
-        }
+        {pos = Number3(50, 1, -12*6.5), rot = Rotation(0, 0.2, 0), scale = 1},
+        {pos = Number3(55, 1, -12*6), rot = Rotation(0, -1, 0), scale = 1},
+        {pos = Number3(60, 1, -12*5.5), rot = Rotation(0, 2.1, 0), scale = 1},
+        {pos = Number3(70, 1, -12*5), rot = Rotation(0, -2.1, 0), scale = 1},
+        {pos = Number3(80, 1, -12*4), rot = Rotation(0, 0.2, 0), scale = 1},
+        {pos = Number3(90, 1, -12*3), rot = Rotation(0, 0, 0), scale = 1},
+        {pos = Number3(100, 1, -12*2), rot = Rotation(0, -1, 0), scale = 1},
+        {pos = Number3(100, 1, -12*1), rot = Rotation(0, 0.2, 0), scale = 1},
+        {pos = Number3(100, 1, 0), rot = Rotation(0, 0, 0), scale = 1},
+        {pos = Number3(100, 1, 12), rot = Rotation(0, -1, 0), scale = 1},
+        {pos = Number3(100, 1, 12*2), rot = Rotation(0, 2.1, 0), scale = 1},
+        {pos = Number3(90, 1, 12*3), rot = Rotation(0, 0, 0), scale = 1},
+        {pos = Number3(80, 1, 12*4), rot = Rotation(0, -1, 0), scale = 1},
+        {pos = Number3(70, 1, 12*5), rot = Rotation(0, 2.1, 0), scale = 1},
+        {pos = Number3(60, 1, 12*6), rot = Rotation(0, 0, 0), scale = 1},
+        {pos = Number3(50, 1, 12*7), rot = Rotation(0, -2.1, 0), scale = 1},
+        {pos = Number3(40, 1, 12*8), rot = Rotation(0, -1, 0), scale = 1},
+        {pos = Number3(40, 1, 12*9), rot = Rotation(0, 0, 0), scale = 1},
+    }
 
-        menu.bushes = {}
-        for k, v in pairs(bushes) do
-            local bush = Shape(s)
-            bush.Position = v.pos
-            bush.Rotation = v.rot
-            bush.Scale = v.scale
-            bush:SetParent(World)
-            bush.Shadow = true
-            bush.Pivot.Y = 0
+    menu.bushes = {}
+    for k, v in pairs(bushes) do
+        local bush = Shape(shapes.bush, {includeChildren = true})
+        bush.Position = v.pos
+        bush.Rotation = v.rot
+        bush.Scale = v.scale
+        bush:SetParent(World)
+        bush.Shadow = true
+        bush.Pivot.Y = 0
 
-            table.insert(menu.bushes, bush)
-        end
-    end)
+        table.insert(menu.bushes, bush)
+    end
 --[[
     for k, v in pairs(menu.trees) do
         v:SetParent(nil)
         v = nil
     end
 ]]
-    Object:Load("nanskip.tree_2", function(s)
-        local trees = {
-            {pos = Number3(-49, 0, 60), rot = Rotation(0, 0.2, 0), scale = 0.75},
-            {pos = Number3(-42, -0.5, 65), rot = Rotation(0, -2.9, 0), scale = 0.65},
-            {pos = Number3(-31, -1, 65), rot = Rotation(0, -0.3, 0), scale = 0.7},
-            {pos = Number3(-22, -0.5, 70), rot = Rotation(0, -1.2, 0), scale = 0.85},
-            {pos = Number3(-10, -1, 70), rot = Rotation(0, -2.9, 0), scale = 0.65},
-            {pos = Number3(0, -1.5, 65), rot = Rotation(0, 0.2, 0), scale = 0.75},
-            {pos = Number3(8, -0.5, 70), rot = Rotation(0, 0, 0), scale = 0.8},
+    local trees = {
+        {pos = Number3(-49, 0, 60), rot = Rotation(0, 0.2, 0), scale = 0.75},
+        {pos = Number3(-42, -0.5, 65), rot = Rotation(0, -2.9, 0), scale = 0.65},
+        {pos = Number3(-31, -1, 65), rot = Rotation(0, -0.3, 0), scale = 0.7},
+        {pos = Number3(-22, -0.5, 70), rot = Rotation(0, -1.2, 0), scale = 0.85},
+        {pos = Number3(-10, -1, 70), rot = Rotation(0, -2.9, 0), scale = 0.65},
+        {pos = Number3(0, -1.5, 65), rot = Rotation(0, 0.2, 0), scale = 0.75},
+        {pos = Number3(8, -0.5, 70), rot = Rotation(0, 0, 0), scale = 0.8},
 
-            {pos = Number3(-63, -2-2, 80), rot = Rotation(0, 0.3, 0), scale = 0.75},
-            {pos = Number3(-56, -2-2, 80), rot = Rotation(0, -0.3, 0), scale = 0.8},
-            {pos = Number3(-45, 0-2, 80), rot = Rotation(0, -1.2, 0), scale = 0.75},
-            {pos = Number3(-40, -2, 85), rot = Rotation(0, 0.2, 0), scale = 0.75},
-            {pos = Number3(-29, -1-2, 85), rot = Rotation(0, 0, 0), scale = 0.7},
-            {pos = Number3(-25, -0.5-2, 90), rot = Rotation(0, 0, 0), scale = 0.85},
-            {pos = Number3(-16, 0-2, 90), rot = Rotation(0, -2.9, 0), scale = 0.85},
-            {pos = Number3(-5, -1.5-2, 85), rot = Rotation(0, 0.2, 0), scale = 0.75},
-            {pos = Number3(2, -0.5-2, 80), rot = Rotation(0, -0.3, 0), scale = 0.8},
+        {pos = Number3(-63, -2-2, 80), rot = Rotation(0, 0.3, 0), scale = 0.75},
+        {pos = Number3(-56, -2-2, 80), rot = Rotation(0, -0.3, 0), scale = 0.8},
+        {pos = Number3(-45, 0-2, 80), rot = Rotation(0, -1.2, 0), scale = 0.75},
+        {pos = Number3(-40, -2, 85), rot = Rotation(0, 0.2, 0), scale = 0.75},
+        {pos = Number3(-29, -1-2, 85), rot = Rotation(0, 0, 0), scale = 0.7},
+        {pos = Number3(-25, -0.5-2, 90), rot = Rotation(0, 0, 0), scale = 0.85},
+        {pos = Number3(-16, 0-2, 90), rot = Rotation(0, -2.9, 0), scale = 0.85},
+        {pos = Number3(-5, -1.5-2, 85), rot = Rotation(0, 0.2, 0), scale = 0.75},
+        {pos = Number3(2, -0.5-2, 80), rot = Rotation(0, -0.3, 0), scale = 0.8},
 
-            {pos = Number3(-17, -3, -70), rot = Rotation(0, -0.2, 0), scale = 0.75},
-            {pos = Number3(-8, -4, -70), rot = Rotation(0, 1.2, 0), scale = 0.85},
-            {pos = Number3(0, -2, -70), rot = Rotation(0, 0.4, 0), scale = 0.95},
-            {pos = Number3(9, -3, -70), rot = Rotation(0, 2.5, 0), scale = 0.75},
-            {pos = Number3(18, -3, -70), rot = Rotation(0, 0, 0), scale = 0.85},
-            {pos = Number3(25, -4, -70), rot = Rotation(0, -0.2, 0), scale = 0.75},
-            {pos = Number3(34, -3, -67), rot = Rotation(0, 1.2, 0), scale = 0.7},
-            {pos = Number3(42, -3, -67), rot = Rotation(0, 0.4, 0), scale = 0.85},
-            {pos = Number3(50, -2, -63), rot = Rotation(0, 2.5, 0), scale = 0.75},
-            {pos = Number3(57, -3, -63), rot = Rotation(0, -0.2, 0), scale = 0.7},
+        {pos = Number3(-17, -3, -70), rot = Rotation(0, -0.2, 0), scale = 0.75},
+        {pos = Number3(-8, -4, -70), rot = Rotation(0, 1.2, 0), scale = 0.85},
+        {pos = Number3(0, -2, -70), rot = Rotation(0, 0.4, 0), scale = 0.95},
+        {pos = Number3(9, -3, -70), rot = Rotation(0, 2.5, 0), scale = 0.75},
+        {pos = Number3(18, -3, -70), rot = Rotation(0, 0, 0), scale = 0.85},
+        {pos = Number3(25, -4, -70), rot = Rotation(0, -0.2, 0), scale = 0.75},
+        {pos = Number3(34, -3, -67), rot = Rotation(0, 1.2, 0), scale = 0.7},
+        {pos = Number3(42, -3, -67), rot = Rotation(0, 0.4, 0), scale = 0.85},
+        {pos = Number3(50, -2, -63), rot = Rotation(0, 2.5, 0), scale = 0.75},
+        {pos = Number3(57, -3, -63), rot = Rotation(0, -0.2, 0), scale = 0.7},
 
-            {pos = Number3(-17+3, -3, -80), rot = Rotation(0, -1.2, 0), scale = 0.75},
-            {pos = Number3(-8+7, -3, -80), rot = Rotation(0, 2.52, 0), scale = 0.85},
-            {pos = Number3(0+2, -4, -80), rot = Rotation(0, 0.1, 0), scale = 0.95},
-            {pos = Number3(9+7, -3, -80), rot = Rotation(0, 2.5, 0), scale = 0.75},
-            {pos = Number3(18+7, -2, -80), rot = Rotation(0, 0, 0), scale = 0.85},
-            {pos = Number3(25+5, -4, -80), rot = Rotation(0, -0.2, 0), scale = 0.75},
-            {pos = Number3(34+3, -3, -78), rot = Rotation(0, 1.2, 0), scale = 0.7},
-            {pos = Number3(42+1, -3, -78), rot = Rotation(0, 0.4, 0), scale = 0.85},
-            {pos = Number3(50+2, -4, -74), rot = Rotation(0, 0.1, 0), scale = 0.75},
-            {pos = Number3(57+7, -2, -74), rot = Rotation(0, -0.2, 0), scale = 0.7},
+        {pos = Number3(-17+3, -3, -80), rot = Rotation(0, -1.2, 0), scale = 0.75},
+        {pos = Number3(-8+7, -3, -80), rot = Rotation(0, 2.52, 0), scale = 0.85},
+        {pos = Number3(0+2, -4, -80), rot = Rotation(0, 0.1, 0), scale = 0.95},
+        {pos = Number3(9+7, -3, -80), rot = Rotation(0, 2.5, 0), scale = 0.75},
+        {pos = Number3(18+7, -2, -80), rot = Rotation(0, 0, 0), scale = 0.85},
+        {pos = Number3(25+5, -4, -80), rot = Rotation(0, -0.2, 0), scale = 0.75},
+        {pos = Number3(34+3, -3, -78), rot = Rotation(0, 1.2, 0), scale = 0.7},
+        {pos = Number3(42+1, -3, -78), rot = Rotation(0, 0.4, 0), scale = 0.85},
+        {pos = Number3(50+2, -4, -74), rot = Rotation(0, 0.1, 0), scale = 0.75},
+        {pos = Number3(57+7, -2, -74), rot = Rotation(0, -0.2, 0), scale = 0.7},
 
-            {pos = Number3(-35, -3, -115), rot = Rotation(0, 1.1, 0), scale = 0.75},
-            {pos = Number3(-45, -5, -110), rot = Rotation(0, -0.2, 0), scale = 0.85},
-            {pos = Number3(-50, 0, -100), rot = Rotation(0, 0.4, 0), scale = 0.8},
-            {pos = Number3(-55, -3, -96), rot = Rotation(0, -0.4, 0), scale = 0.85},
-            {pos = Number3(-60, -5, -80), rot = Rotation(0, 0, 0), scale = 0.89},
-            {pos = Number3(-65, 0, -70), rot = Rotation(0, 1.1, 0), scale = 0.83},
-            {pos = Number3(-70, 0, -60), rot = Rotation(0, -0, 0), scale = 0.8},
-            {pos = Number3(-80, -3, -45), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(-85, 0, -30), rot = Rotation(0, 1.1, 0), scale = 0.85},
-            {pos = Number3(-90, -5, -15), rot = Rotation(0, -0.2, 0), scale = 0.83},
-            {pos = Number3(-100, -2, 0), rot = Rotation(0, 0, 0), scale = 0.8},
-            {pos = Number3(-100, -2, 15), rot = Rotation(0, -1.1, 0), scale = 0.86},
-            {pos = Number3(-100, 0, 30), rot = Rotation(0, 0.2, 0), scale = 0.85},
-            {pos = Number3(-95, -2, 45), rot = Rotation(0, -0.2, 0), scale = 0.75},
-            {pos = Number3(-95, -3, 60), rot = Rotation(0, 1.1, 0), scale = 0.8},
-            {pos = Number3(-90, -5, 75), rot = Rotation(0, 0, 0), scale = 0.85},
-            {pos = Number3(-85, -2, 90), rot = Rotation(0, 0.4, 0), scale = 0.8},
-            {pos = Number3(-80, 0, 105), rot = Rotation(0, -0.2, 0), scale = 0.7},
-            {pos = Number3(-80, -3, 105), rot = Rotation(0, 0, 0), scale = 0.75},
+        {pos = Number3(-35, -3, -115), rot = Rotation(0, 1.1, 0), scale = 0.75},
+        {pos = Number3(-45, -5, -110), rot = Rotation(0, -0.2, 0), scale = 0.85},
+        {pos = Number3(-50, 0, -100), rot = Rotation(0, 0.4, 0), scale = 0.8},
+        {pos = Number3(-55, -3, -96), rot = Rotation(0, -0.4, 0), scale = 0.85},
+        {pos = Number3(-60, -5, -80), rot = Rotation(0, 0, 0), scale = 0.89},
+        {pos = Number3(-65, 0, -70), rot = Rotation(0, 1.1, 0), scale = 0.83},
+        {pos = Number3(-70, 0, -60), rot = Rotation(0, -0, 0), scale = 0.8},
+        {pos = Number3(-80, -3, -45), rot = Rotation(0, 0, 0), scale = 0.75},
+        {pos = Number3(-85, 0, -30), rot = Rotation(0, 1.1, 0), scale = 0.85},
+        {pos = Number3(-90, -5, -15), rot = Rotation(0, -0.2, 0), scale = 0.83},
+        {pos = Number3(-100, -2, 0), rot = Rotation(0, 0, 0), scale = 0.8},
+        {pos = Number3(-100, -2, 15), rot = Rotation(0, -1.1, 0), scale = 0.86},
+        {pos = Number3(-100, 0, 30), rot = Rotation(0, 0.2, 0), scale = 0.85},
+        {pos = Number3(-95, -2, 45), rot = Rotation(0, -0.2, 0), scale = 0.75},
+        {pos = Number3(-95, -3, 60), rot = Rotation(0, 1.1, 0), scale = 0.8},
+        {pos = Number3(-90, -5, 75), rot = Rotation(0, 0, 0), scale = 0.85},
+        {pos = Number3(-85, -2, 90), rot = Rotation(0, 0.4, 0), scale = 0.8},
+        {pos = Number3(-80, 0, 105), rot = Rotation(0, -0.2, 0), scale = 0.7},
+        {pos = Number3(-80, -3, 105), rot = Rotation(0, 0, 0), scale = 0.75},
 
-            {pos = Number3(-67, -5, -57), rot = Rotation(0, 1.1, 0), scale = 0.85},
-            {pos = Number3(-76, 0, -64), rot = Rotation(0, 0.2, 0), scale = 0.85},
-            {pos = Number3(-86, -3, -72), rot = Rotation(0,-0.4, 0), scale = 0.9},
-            {pos = Number3(-93, 0, -66), rot = Rotation(0, 1.1, 0), scale = 0.8},
-            {pos = Number3(-100, 0, -59), rot = Rotation(0, 1.1, 0), scale = 0.9},
-            {pos = Number3(-115, 0, -53), rot = Rotation(0, -0, 0), scale = 0.9},
-            {pos = Number3(-120, -3, -45), rot = Rotation(0, 0, 0), scale = 0.85},
-            {pos = Number3(-120, -2, -33), rot = Rotation(0, 1.1, 0), scale = 0.95},
-            {pos = Number3(-125, -5, -13), rot = Rotation(0, -0.2, 0), scale = 0.8},
-            {pos = Number3(-130, 0, 0), rot = Rotation(0, 0, 0), scale = 0.9},
-            {pos = Number3(-130, -2, 13), rot = Rotation(0, -1.1, 0), scale = 0.8},
-            {pos = Number3(-130, -3, 35), rot = Rotation(0, 0.2, 0), scale = 0.95},
-            {pos = Number3(-125, 0, 43), rot = Rotation(0, -0.2, 0), scale = 0.85},
-            
-            {pos = Number3(20, 0, 74), rot = Rotation(0, 0.2, 0), scale = 0.8},
-            {pos = Number3(26, 0, 70), rot = Rotation(0, 0, 0), scale = 0.65},
-            {pos = Number3(33, 0, 68), rot = Rotation(0, 0, 0), scale = 0.7},
-            {pos = Number3(38, 0, 62), rot = Rotation(0, -1.1, 0), scale = 0.8},
-            {pos = Number3(44, 0, 56), rot = Rotation(0, 0.73, 0), scale = 0.65},
-            {pos = Number3(50, 0, 50), rot = Rotation(0, 0.73, 0), scale = 0.7},
-            {pos = Number3(58, 0, 42), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(66, 0, 34), rot = Rotation(0, -1.1, 0), scale = 0.8},
-            {pos = Number3(74, 0, 26), rot = Rotation(0, 0, 0), scale = 0.65},
-            {pos = Number3(76, 0, 18), rot = Rotation(0, -0.2, 0), scale = 0.75},
-            {pos = Number3(78, 0, 10), rot = Rotation(0, 1.1, 0), scale = 0.7},
-            {pos = Number3(80, 0, 2), rot = Rotation(0, -1.1, 0), scale = 0.75},
-            {pos = Number3(78, 0, -6), rot = Rotation(0, 0.73, 0), scale = 0.65},
-            {pos = Number3(78, 0, -14), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(76, 0, -22), rot = Rotation(0, 0.2, 0), scale = 0.8},
-            {pos = Number3(74, 0, -30), rot = Rotation(0, 0.73, 0), scale = 0.8},
-            {pos = Number3(70, 0, -38), rot = Rotation(0, -1.1, 0), scale = 0.7},
-            {pos = Number3(66, 0, -46), rot = Rotation(0, 0.73, 0), scale = 0.65},
-            {pos = Number3(60, 0, -52), rot = Rotation(0, 0, 0), scale = 0.75},
-            {pos = Number3(62, 0, -58), rot = Rotation(0, -1.1, 0), scale = 0.7},
-        }
+        {pos = Number3(-67, -5, -57), rot = Rotation(0, 1.1, 0), scale = 0.85},
+        {pos = Number3(-76, 0, -64), rot = Rotation(0, 0.2, 0), scale = 0.85},
+        {pos = Number3(-86, -3, -72), rot = Rotation(0,-0.4, 0), scale = 0.9},
+        {pos = Number3(-93, 0, -66), rot = Rotation(0, 1.1, 0), scale = 0.8},
+        {pos = Number3(-100, 0, -59), rot = Rotation(0, 1.1, 0), scale = 0.9},
+        {pos = Number3(-115, 0, -53), rot = Rotation(0, -0, 0), scale = 0.9},
+        {pos = Number3(-120, -3, -45), rot = Rotation(0, 0, 0), scale = 0.85},
+        {pos = Number3(-120, -2, -33), rot = Rotation(0, 1.1, 0), scale = 0.95},
+        {pos = Number3(-125, -5, -13), rot = Rotation(0, -0.2, 0), scale = 0.8},
+        {pos = Number3(-130, 0, 0), rot = Rotation(0, 0, 0), scale = 0.9},
+        {pos = Number3(-130, -2, 13), rot = Rotation(0, -1.1, 0), scale = 0.8},
+        {pos = Number3(-130, -3, 35), rot = Rotation(0, 0.2, 0), scale = 0.95},
+        {pos = Number3(-125, 0, 43), rot = Rotation(0, -0.2, 0), scale = 0.85},
+        
+        {pos = Number3(20, 0, 74), rot = Rotation(0, 0.2, 0), scale = 0.8},
+        {pos = Number3(26, 0, 70), rot = Rotation(0, 0, 0), scale = 0.65},
+        {pos = Number3(33, 0, 68), rot = Rotation(0, 0, 0), scale = 0.7},
+        {pos = Number3(38, 0, 62), rot = Rotation(0, -1.1, 0), scale = 0.8},
+        {pos = Number3(44, 0, 56), rot = Rotation(0, 0.73, 0), scale = 0.65},
+        {pos = Number3(50, 0, 50), rot = Rotation(0, 0.73, 0), scale = 0.7},
+        {pos = Number3(58, 0, 42), rot = Rotation(0, 0, 0), scale = 0.75},
+        {pos = Number3(66, 0, 34), rot = Rotation(0, -1.1, 0), scale = 0.8},
+        {pos = Number3(74, 0, 26), rot = Rotation(0, 0, 0), scale = 0.65},
+        {pos = Number3(76, 0, 18), rot = Rotation(0, -0.2, 0), scale = 0.75},
+        {pos = Number3(78, 0, 10), rot = Rotation(0, 1.1, 0), scale = 0.7},
+        {pos = Number3(80, 0, 2), rot = Rotation(0, -1.1, 0), scale = 0.75},
+        {pos = Number3(78, 0, -6), rot = Rotation(0, 0.73, 0), scale = 0.65},
+        {pos = Number3(78, 0, -14), rot = Rotation(0, 0, 0), scale = 0.75},
+        {pos = Number3(76, 0, -22), rot = Rotation(0, 0.2, 0), scale = 0.8},
+        {pos = Number3(74, 0, -30), rot = Rotation(0, 0.73, 0), scale = 0.8},
+        {pos = Number3(70, 0, -38), rot = Rotation(0, -1.1, 0), scale = 0.7},
+        {pos = Number3(66, 0, -46), rot = Rotation(0, 0.73, 0), scale = 0.65},
+        {pos = Number3(60, 0, -52), rot = Rotation(0, 0, 0), scale = 0.75},
+        {pos = Number3(62, 0, -58), rot = Rotation(0, -1.1, 0), scale = 0.7},
+    }
 
-        menu.trees = {}
-        for k, v in pairs(trees) do
-            local tree = Shape(s, {includeChildren = true})
-            tree.Position = v.pos
-            tree.Rotation = v.rot
-            tree.Scale = v.scale
-            tree:SetParent(World)
-            tree.Shadow = true
-            tree.Pivot.Y = 0
+    menu.trees = {}
+    for k, v in pairs(trees) do
+        local tree = Shape(shapes.tree, {includeChildren = true})
+        tree.Position = v.pos
+        tree.Rotation = v.rot
+        tree.Scale = v.scale
+        tree:SetParent(World)
+        tree.Shadow = true
+        tree.Pivot.Y = 0
 
-            table.insert(menu.trees, tree)
-        end
-    end)
+        table.insert(menu.trees, tree)
+    end
 
     HTTP:Get("https://cdn.pixabay.com/photo/2012/04/01/18/55/work-in-progress-24027_1280.png", function(res)
         if res.StatusCode ~= 200 then
