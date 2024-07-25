@@ -216,19 +216,12 @@ function menu.create(self)
     menu:loadModels()
 
     if menu.music == nil then
-        debug.log("menu() - Downloading music...")
-        loader:loadData("games/fortcubes/assets/menuTheme.mp3", function(data)
-            if menu.music == nil then
-                local sound = data
-                menu.music = AudioSource("gun_shot_1")
-                menu.music:SetParent(Camera)
-                menu.music.Sound = sound
-                menu.music:Play()
-                menu.music.Loop = true
-                menu.music.Volume = 0.0001
-                debug.log("menu() - Downloaded music.")
-            end
-        end)
+        menu.music = AudioSource("gun_shot_1")
+        menu.music:SetParent(Camera)
+        menu.music.Sound = audio.menu_theme
+        menu.music:Play()
+        menu.music.Loop = true
+        menu.music.Volume = 0.0001
     end
 
     -- MAIN MENU - BUTTONS

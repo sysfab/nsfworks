@@ -58,8 +58,14 @@ loadShapes = {
 	lua_block = "fab3kleuuu.lua_block",
 }
 
+audio = {}
+loadAudios = {
+	game_theme = "games/fortcubes/assets/gameTheme.mp3",
+	menu_theme = "games/fortcubes/assets/menuTheme.mp3",
+}
+
 loaded = 0
-need_to_load = 3
+need_to_load = 4
 
 for key, value in pairs(loadModules) do
 	if need_to_load_modules == nil then need_to_load_modules = 0 end
@@ -129,6 +135,29 @@ for key, value in pairs(loadShapes) do
 	end)
 end
 debug.log("client() - Loading " .. need_to_load_shapes .. " shapes..")
+
+for key, value in pairs(loadAudios) do
+	if need_to_load_audios == nil then need_to_load_audios = 0 end
+	need_to_load_audios = need_to_load_audios + 1
+
+	loader:loadData(value, function(audio)
+		debug.log("client() - Loaded '".. key .."'")
+
+		audios[key] = audio
+
+		if loaded_audios == nil then loaded_audios = 0 end
+		loaded_audios = loaded_audios + 1
+
+		if loaded_audios >= need_to_load_audios then
+			loaded = loaded + 1
+			if loaded == need_to_load then
+                doneLoading()
+				debug.log("client() - Loaded all audios.")
+            end
+		end
+	end)
+end
+debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
 
 function doneLoading()
 	debug.log("client() - Loaded all assets.")

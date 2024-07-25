@@ -210,19 +210,12 @@ game.ui.create = function(u)
     end
 
 	if u.music == nil then
-        debug.log("game() - Downloading music...")
-        loader:loadData("games/fortcubes/assets/gameTheme.mp3", function(data)
-            if u.music == nil then
-                local sound = data
-                u.music = AudioSource("gun_shot_1")
-                u.music:SetParent(Camera)
-                u.music.Sound = sound
-                u.music:Play()
-                u.music.Loop = true
-                u.music.Volume = 0.0001
-                debug.log("game() - Downloaded music.")
-            end
-        end)
+		u.music = AudioSource("gun_shot_1")
+		u.music:SetParent(Camera)
+		u.music.Sound = audio.game_theme
+		u.music:Play()
+		u.music.Loop = true
+		u.music.Volume = 0.0001
     end
 
     u.toMenu = ui:createButton("To Menu", u.theme.button)
