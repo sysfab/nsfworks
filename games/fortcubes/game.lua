@@ -48,21 +48,22 @@ game.connection.onEvent = function(connection, e)
 		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
 
 							v.Tick = function(self, dt)
-								v.Animations.Idle:Stop()
-								v.Animations.Walk:Stop()
-								
-								local parent = self:GetParent():GetParent():GetParent()
-								parent:setLoop(true)
-								parent:setPlaySpeed(8)
+								self.parent = v
+
+								self.parent.Animations.Idle:Stop()
+								self.parent.Animations.Walk:Stop()
+
+								self.parent:setLoop(true)
+								self.parent:setPlaySpeed(8)
 	
-								parent.isMoving = false
-								if parent.Motion.X ~= 0 or parent.Motion.Z ~= 0 then
-									parent.isMoving = true
+								self.parent.isMoving = false
+								if self.parent.Motion.X ~= 0 or self.parent.Motion.Z ~= 0 then
+									self.parent.isMoving = true
 								end
-								if parent .isMoving then
-									parent:nanPlay("player_walk")
+								if self.parent .isMoving then
+									self.parent:nanPlay("player_walk")
 								else
-									parent:nanStop()
+									self.parent:nanStop()
 								end
 							end
 		                end)
@@ -90,20 +91,22 @@ game.connection.onEvent = function(connection, e)
                     p.pistol.LocalPosition = Number3(7, 0.2, 2)
 
 					p.Tick = function(self, dt)
-						p.Animations.Idle:Stop()
-						p.Animations.Walk:Stop()
-						local parent = self:GetParent():GetParent():GetParent()
-						parent:setLoop(true)
-						parent:setPlaySpeed(8)
+						self.parent = p
 
-						parent.isMoving = false
-						if parent.Motion.X ~= 0 or parent.Motion.Z ~= 0 then
-							parent.isMoving = true
+						self.parent.Animations.Idle:Stop()
+						self.parent.Animations.Walk:Stop()
+						
+						self.parent:setLoop(true)
+						self.parent:setPlaySpeed(8)
+
+						self.parent.isMoving = false
+						if self.parent.Motion.X ~= 0 or self.parent.Motion.Z ~= 0 then
+							self.parent.isMoving = true
 						end
-						if parent .isMoving then
-							parent:nanPlay("player_walk")
+						if self.parent .isMoving then
+							self.parent:nanPlay("player_walk")
 						else
-							parent:nanStop()
+							self.parent:nanStop()
 						end
 					end
                 end)
