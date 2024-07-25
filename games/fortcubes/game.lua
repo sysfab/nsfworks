@@ -43,11 +43,35 @@ game.connection.onEvent = function(connection, e)
 		                    v.pistol = Shape(s)
 		                    v.pistol:SetParent(v.Body.RightArm.RightHand)
 		                    v.pistol.Scale = 0.65
+							v.pistol.Shadow = true
 		                    v.pistol.Physics = PhysicsMode.Disabled
-		                    v.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
+		                    v.pistol.LocalRotation = Rotation(math.pi-0.2, math.pi/2, math.pi/2)
 		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
+							rawset(v.Animations, "Walk", {})
+							v.Tick = function(self, dt)
+								self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
+								self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
+								self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
+								self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
+								self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
+
+								self.Body.isMoving = false
+								if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
+									self.Body.isMoving = true
+								end
+								if self.Body.isMoving then
+									self.Body:setLoop(true)
+									self.Body:setPlaySpeed(8)
+									self.Body:nanPlay("player_walk")
+								else
+									self.Body:nanStop()
+								end
+							end
 		                end)
 		            end
+					if v.Body.nanplayer == nil then
+						nanimator.add(v.Body, "player_walk")
+					end
 		        end
 	        end
 
@@ -66,8 +90,32 @@ game.connection.onEvent = function(connection, e)
                     p.pistol.Physics = PhysicsMode.Disabled
                     p.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
                     p.pistol.LocalPosition = Number3(7, 0.2, 2)
+					p.pistol.parent = p
+					rawset(v.Animations, "Walk", {})
+					p.Tick = function(self, dt)
+						self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
+						self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
+						self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
+						self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
+						self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
+
+						self.Body.isMoving = false
+						if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
+							self.Body.isMoving = true
+						end
+						if self.Body.isMoving then
+							self.Body:setLoop(true)
+							self.Body:setPlaySpeed(8)
+							self.Body:nanPlay("player_walk")
+						else
+							self.Body:nanStop()
+						end
+					end
                 end)
             end
+			if p.Body.nanplayer == nil then
+				nanimator.add(p.Body, "player_walk")
+			end
 		end,
 
 		new_disconnection = function(event)
@@ -76,6 +124,7 @@ game.connection.onEvent = function(connection, e)
 			p.IsHidden = true
             if p.pistol ~= nil then
                 p.pistol:SetParent(nil)
+				p.pistol.Tick  = nil
                 p.pistol = nil
             end
 		end,
@@ -131,7 +180,8 @@ game.ui.create = function(u)
         u.object = Object()
     end
 
-    u.object.Tick = function()
+    u.object.Tick = function(self, dt)
+		local delta = dt*63
         if u.toMenu ~= nil then
             u.setBorders(u.toMenu)
         end
@@ -147,6 +197,32 @@ game.ui.create = function(u)
                 u.blackPanel.alpha = math.floor(lerp(u.blackPanel.alpha, 0, 0.3))
             end
         end
+		if u.music ~= nil then
+            if u.created == true then
+                u.music.Volume = lerp(u.music.Volume, 0.7, 0.005*delta)
+                if not u.music.IsPlaying then
+                    u.music:Play()
+                end
+            else
+                u.music.Volume = lerp(u.music.Volume, 0, 0.05*delta)
+            end
+        end
+    end
+
+	if u.music == nil then
+        debug.log("game() - Downloading music...")
+        loader:loadData("games/fortcubes/assets/gameTheme.mp3", function(data)
+            if u.music == nil then
+                local sound = data
+                u.music = AudioSource("gun_shot_1")
+                u.music:SetParent(Camera)
+                u.music.Sound = sound
+                u.music:Play()
+                u.music.Loop = true
+                u.music.Volume = 0.0001
+                debug.log("game() - Downloaded music.")
+            end
+        end)
     end
 
     u.toMenu = ui:createButton("To Menu", u.theme.button)
@@ -354,6 +430,7 @@ game.controls.directionalPad = function(dx, dy, isJoy)
 		dy = d.Y
 	end
 	Player.Motion = Number3(dx, 0, dy)*80
+	game.controls.move = {dx, dy}
 end
 
 game.created = false
@@ -367,7 +444,10 @@ game.screenResize = function(self)
 end
 
 game.tick = function(self)
-	Player.Motion.Y = 0.01
+	Player.Velocity.Y = Player.Velocity.Y + 0.01
+	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting then
+		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
+	end
 end
 
 game.create = function(self)
@@ -376,6 +456,7 @@ game.create = function(self)
 	self.camera:create()
 	self.ui:create()
 	self.controls:create()
+	nanimator.import(animations.player_walk, "player_walk")
 
 	if Client.IsMobile then
 		self.mobileControls:create()
