@@ -257,6 +257,9 @@ function menu.create(self)
     self.back = ui:createButton("BACK", menu.theme.button)
     self.back.pos = Number2(-1000, -1000)
     self.back.onRelease = function(s)
+        if menu.currentMenu == "settings" then
+            settings:save()
+        end
         menu.currentMenu = "menu"
         menu:update()
     end
@@ -662,26 +665,22 @@ menu.loadModels = function(self)
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume + 5
                     menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
                     menu.music.Volume = settings.currentSettings.musicVolume*0.01
-                    settings:save()
                 end
             elseif impact.Object.name == "musicLeft" then
                 if settings.currentSettings.musicVolume > 0 then
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume - 5
                     menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
                     menu.music.Volume = settings.currentSettings.musicVolume*0.01
-                    settings:save()
                 end
             elseif impact.Object.name == "soundRight" then
                 if settings.currentSettings.soundVolume < 100 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume + 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
-                    settings:save()
                 end
             elseif impact.Object.name == "soundLeft" then
                 if settings.currentSettings.soundVolume > 0 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
-                    settings:save()
                 end
             end
         end
