@@ -496,13 +496,6 @@ function menu.remove(self)
             menu.man2 = nil
         end
         if menu.sysfab ~= nil then
-            menu.sysfab:nanStop()
-            menu.sysfab.nanplayer:remove()
-            menu.sysfab.luablock:SetParent(nil)
-            menu.sysfab.luablock = nil
-            menu.sysfab:SetParent(nil)
-            menu.sysfab.Tick = nil
-            menu.sysfab = nil
             
             menu.sysfab.nameText:SetParent(nil)
             menu.sysfab.nameText.Tick = nil
@@ -510,8 +503,22 @@ function menu.remove(self)
             menu.sysfab.nameText.shadow:SetParent(nil)
             menu.sysfab.nameText.shadow = nil
 
+            menu.sysfab:nanStop()
+            menu.sysfab.nanplayer:remove()
+            menu.sysfab.luablock:SetParent(nil)
+            menu.sysfab.luablock = nil
+            menu.sysfab:SetParent(nil)
+            menu.sysfab.Tick = nil
+            menu.sysfab = nil
         end
         if menu.nanskip ~= nil then
+            
+            menu.nanskip.nameText:SetParent(nil)
+            menu.nanskip.nameText.Tick = nil
+            menu.nanskip.nameText = nil
+            menu.nanskip.nameText.shadow:SetParent(nil)
+            menu.nanskip.nameText.shadow = nil
+
             menu.nanskip:nanStop()
             menu.nanskip.nanplayer:remove()
             menu.nanskip.toolgun:SetParent(nil)
@@ -519,13 +526,6 @@ function menu.remove(self)
             menu.nanskip:SetParent(nil)
             menu.nanskip.Tick = nil
             menu.nanskip = nil
-
-            menu.nanskip.nameText:SetParent(nil)
-            menu.nanskip.nameText.Tick = nil
-            menu.nanskip.nameText = nil
-            menu.nanskip.nameText.shadow:SetParent(nil)
-            menu.nanskip.nameText.shadow = nil
-
         end
         self.yard:SetParent(nil)
         self.yard.Tick = nil
