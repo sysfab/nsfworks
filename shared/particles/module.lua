@@ -48,6 +48,7 @@ particles.createEmitter = function(config)
         particle.Pivot = Number3(0.5, 0.5, 0.5)
         particle.Physics = PhysicsMode.Dynamic
         particle.CollidesWithGroups = CollisionGroups()
+        particle.CollisionGroups = CollisionGroups()
         
         particle.Position = self.config.position
         particle.Rotation = self.config.rotation

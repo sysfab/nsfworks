@@ -56,7 +56,7 @@ game.connection.onEvent = function(connection, e)
 				position = b.Position + b.Forward*2.5 + b.Down*0.5,
 				scale = Number3(1, 1, 1),
 				color = Color(255, 239, 94),
-				life = 0.3,
+				life = 0.5,
 				scale_end = Number3(0, 0, 0),
 			})
 			for i=1, 10 do
@@ -66,7 +66,7 @@ game.connection.onEvent = function(connection, e)
 					})
 				end
 				b.particle:updateConfig({
-					velocity = (b.Forward*0.5 + b.Right*math.random(-10, 10)/7 + b.Up*math.random(5, 15)/4)*10 + b.owner.Motion*0.5,
+					velocity = (b.Forward*math.random(-10, 10)/15 + b.Right*math.random(-10, 10)/7 + b.Up*math.random(5, 15)/4)*10 + b.owner.Motion*0.75,
 				})
 				b.particle:emit()
 			end
@@ -120,6 +120,8 @@ game.connection.onEvent = function(connection, e)
 								v.Animations.Walk:Stop()
 							end
 							rawset(v.Animations, "Walk", {})
+							v.particles = particles.createEmitter()
+							v.particlesTick = 0
 							v.Tick = function(self, dt)
 								self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
 								self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
@@ -132,6 +134,19 @@ game.connection.onEvent = function(connection, e)
 									self.Body.isMoving = true
 								end
 								if self.Body.isMoving then
+									self.particlesTick = self.particlesTick + 1
+									if self.particlesTick > 10 then
+                                        self.particlesTick = 0
+										self.particles:updateConfig({
+											position = self.Position,
+											velocity = Number3(math.random(-10, 10), math.random(5, 20), math.random(-10, 10)),
+											scale = Number3(1, 1, 1),
+											color = Color(77, 144, 77),
+											life = 0.5,
+											scale_end = Number3(0, 0, 0),
+										})
+										self.particles:emit()
+									end
 									self.Body:setLoop(true)
 									self.Body:setPlaySpeed(8)
 									self.Body:nanPlay("player_walk")
@@ -180,6 +195,19 @@ game.connection.onEvent = function(connection, e)
 							self.Body.isMoving = true
 						end
 						if self.Body.isMoving then
+							self.particlesTick = self.particlesTick + 1
+							if self.particlesTick > 10 then
+								self.particlesTick = 0
+								self.particles:updateConfig({
+									position = self.Position,
+									velocity = Number3(math.random(-10, 10), math.random(5, 20), math.random(-10, 10)),
+									scale = Number3(1, 1, 1),
+									color = Color(77, 144, 77),
+									life = 0.5,
+									scale_end = Number3(0, 0, 0),
+								})
+								self.particles:emit()
+							end
 							self.Body:setLoop(true)
 							self.Body:setPlaySpeed(8)
 							self.Body:nanPlay("player_walk")
@@ -213,7 +241,6 @@ game.connection.onEvent = function(connection, e)
 
 	})
 end
-
 game.ui = {}
 game.ui.created = false
 game.ui.create = function(u)
