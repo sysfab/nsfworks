@@ -303,7 +303,22 @@ function menu.create(self)
         menu.screenHeight = menu.screenHeight * coff
 
         if menu.screenWidth < 0.334 or menu.screenHeight < 0.445 then
-            -- TODO: Add message that game cannot be played with this screen scale.
+            debug.log("menu() - game resolution is too small!")
+            if menu.resolution_error == nil then
+                menu.resolution_error = ui:createFrame(Color(100, 0, 0))
+                menu.resolution_error_text = ui:createText("Your resolution is too small! Make window bigger or change resolution", Color(255, 255, 255)) 
+            end
+            menu.resolution_error.Width = Screen.Width
+            menu.resolution_error.Height = Screen.Height
+
+            menu.resolution_error_text.pos = Number2(Screen.Width/2-menu.resolution_error_text.Width/2, Screen.Height/2-menu.resolution_error_text.Height/2)
+        else
+            if menu.resolution_error ~= nil then
+                menu.resolution_error:remove()
+                menu.resolution_error = nil
+                menu.resolution_error_text:remove()
+                menu.resolution_error_text = nil
+            end
         end
 
         -- MAIN MENU
