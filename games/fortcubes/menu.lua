@@ -642,23 +642,23 @@ menu.loadModels = function(self)
     menu.sysfab.luablock.Position = Number3(5, 0.3, -40)
     menu.sysfab.luablock.Rotation = Rotation(0, 0.3, 0)
 
-    menu.sysfab.name = Text()
-    menu.sysfab.name.Text = "sysfab"
-    menu.sysfab.name:SetParent(menu.sysfab)
-    menu.sysfab.name.Color = Color(255, 255, 255, 255)
-    menu.sysfab.name.Scale = 2
-    menu.sysfab.name.BackgroundColor = Color(255, 255, 255, 0)
-    menu.sysfab.name.Tick = function(self, dt)
-        menu.sysfab.name.Position = menu.sysfab.Position + Number3(0, 6.5, 0)
+    menu.sysfab.nameText = Text()
+    menu.sysfab.nameText.Text = "sysfab"
+    menu.sysfab.nameText:SetParent(menu.sysfab)
+    menu.sysfab.nameText.Color = Color(255, 255, 255, 255)
+    menu.sysfab.nameText.Scale = 2
+    menu.sysfab.nameText.BackgroundColor = Color(255, 255, 255, 0)
+    menu.sysfab.nameText.Tick = function(self, dt)
+        menu.sysfab.nameText.Position = menu.sysfab.Position + Number3(0, 6.5, 0)
         self.Backward = Camera.Backward
     end
-    menu.sysfab.name.shadow = Text()
-    menu.sysfab.name.shadow.Text = "sysfab"
-    menu.sysfab.name.shadow:SetParent(menu.sysfab.name)
-    menu.sysfab.name.shadow.Color = Color(0, 0, 0, 255)
-    menu.sysfab.name.shadow.Scale = 1
-    menu.sysfab.name.shadow.BackgroundColor = Color(255, 255, 255, 0)
-    menu.sysfab.name.shadow.LocalPosition = Number3(0.05, -0.1, 0.01)
+    menu.sysfab.nameText.shadow = Text()
+    menu.sysfab.nameText.shadow.Text = "sysfab"
+    menu.sysfab.nameText.shadow:SetParent(menu.sysfab.nameText)
+    menu.sysfab.nameText.shadow.Color = Color(0, 0, 0, 255)
+    menu.sysfab.nameText.shadow.Scale = 1
+    menu.sysfab.nameText.shadow.BackgroundColor = Color(255, 255, 255, 0)
+    menu.sysfab.nameText.shadow.LocalPosition = Number3(0.05, -0.1, 0.01)
 
     self.ha:applyToDescendants(menu.sysfab, {includeRoot = true}, function(s)
         if type(s) == "Shape" or type(s) == "MutableShape" then
@@ -687,23 +687,23 @@ menu.loadModels = function(self)
     menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
     menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
     
-    menu.nanskip.name = Text()
-    menu.nanskip.name.Text = "nanskip"
-    menu.nanskip.name:SetParent(menu.nanskip)
-    menu.nanskip.name.Color = Color(255, 255, 255, 255)
-    menu.nanskip.name.Scale = 2
-    menu.nanskip.name.BackgroundColor = Color(255, 255, 255, 0)
-    menu.nanskip.name.Tick = function(self, dt)
-        menu.nanskip.name.Position = menu.nanskip.Position + Number3(0, 6.5, 0)
+    menu.nanskip.nameText = Text()
+    menu.nanskip.nameText.Text = "nanskip"
+    menu.nanskip.nameText:SetParent(menu.nanskip)
+    menu.nanskip.nameText.Color = Color(255, 255, 255, 255)
+    menu.nanskip.nameText.Scale = 2
+    menu.nanskip.nameText.BackgroundColor = Color(255, 255, 255, 0)
+    menu.nanskip.nameText.Tick = function(self, dt)
+        menu.nanskip.nameText.Position = menu.nanskip.Position + Number3(0, 6.5, 0)
         self.Backward = Camera.Backward
     end
-    menu.nanskip.name.shadow = Text()
-    menu.nanskip.name.shadow.Text = "nanskip"
-    menu.nanskip.name.shadow:SetParent(menu.nanskip.name)
-    menu.nanskip.name.shadow.Color = Color(0, 0, 0, 255)
-    menu.nanskip.name.shadow.Scale = 1
-    menu.nanskip.name.shadow.BackgroundColor = Color(255, 255, 255, 0)
-    menu.nanskip.name.shadow.LocalPosition = Number3(0.05, -0.1, 0.01)
+    menu.nanskip.nameText.shadow = Text()
+    menu.nanskip.nameText.shadow.Text = "nanskip"
+    menu.nanskip.nameText.shadow:SetParent(menu.nanskip.nameText)
+    menu.nanskip.nameText.shadow.Color = Color(0, 0, 0, 255)
+    menu.nanskip.nameText.shadow.Scale = 1
+    menu.nanskip.nameText.shadow.BackgroundColor = Color(255, 255, 255, 0)
+    menu.nanskip.nameText.shadow.LocalPosition = Number3(0.05, -0.1, 0.01)
 
     self.ha:applyToDescendants(menu.nanskip, {includeRoot = true}, function(s)
         if type(s) == "Shape" or type(s) == "MutableShape" then
