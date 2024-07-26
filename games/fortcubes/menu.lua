@@ -658,11 +658,13 @@ menu.loadModels = function(self)
             if impact.Object.name == "musicRight" then
                 if settings.currentSettings.musicVolume < 100 then
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume + 5
+                    menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
                     settings:save()
                 end
             elseif impact.Object.name == "musicLeft" then
                 if settings.currentSettings.musicVolume > 0 then
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume - 5
+                    menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
                     settings:save()
                 end
             end
@@ -678,7 +680,7 @@ menu.loadModels = function(self)
     menu.book.musicVolume.LocalRotation.Y = math.pi/2
 
     menu.book.musicVolume.text = Text()
-    menu.book.musicVolume.text.Text = "100"
+    menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
     menu.book.musicVolume.text:SetParent(menu.book.left)
     menu.book.musicVolume.text.Scale = 0.75
     menu.book.musicVolume.text.LocalPosition = Number3(1.01, 4, 5.5)
