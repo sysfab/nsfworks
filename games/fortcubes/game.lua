@@ -52,17 +52,44 @@ game.connection.onEvent = function(connection, e)
 				b.as:Play()
 			end
 
+			b.particle = particles.createEmitter({
+				position = b.Position + b.Forward*2.5 + b.Down*0.5,
+				scale = Number3(1, 1, 1),
+				color = Color(255, 239, 94),
+				life = 0.3,
+				scale_end = Number3(0, 0, 0),
+			})
+			for i=1, 10 do
+				if b.owner ~= Player then
+					b.particle:updateConfig({
+						position = b.Position + b.Backward*2.5 + b.Down*0.5,
+					})
+				end
+				b.particle:updateConfig({
+					velocity = (b.Forward*0.5 + b.Right*math.random(-10, 10)/7 + b.Up*math.random(5, 15)/4)*10 + b.owner.Motion*0.5,
+				})
+				b.particle:emit()
+			end
+
 			b.lifeTime = 0.5
 			b.Tick = function(self, dt)
 				local dt_factor = dt*63
-				b.Position = b.Position + b.Forward * 4 * dt_factor
+				self.Position = self.Position + self.Forward * 4 * dt_factor
 
-				b.lifeTime = b.lifeTime - dt
-				if b.lifeTime <= 0 then
-					b.as:SetParent(nil)
-					b.as = nil
-					b:SetParent(nil)
-					b.Tick = nil
+				self.lifeTime = self.lifeTime - dt
+				if self.lifeTime <= 0 then
+					for i=1, 10 do
+						self.particle:updateConfig({
+							position = self.Position,
+							velocity = Number3(math.random(-10, 10), math.random(-10, 20), math.random(-10, 10)) + self.Forward * dt_factor*50,
+						})
+						self.particle:emit()
+					end
+					self.particle:remove()
+					self.as:SetParent(nil)
+					self.as = nil
+					self:SetParent(nil)
+					self.Tick = nil
 				end
 			end
 		end,
