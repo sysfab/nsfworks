@@ -48,7 +48,7 @@ game.connection.onEvent = function(connection, e)
 
 			b.Physics = PhysicsMode.Trigger
 			b:GetChild(1).Physics = PhysicsMode.Trigger
-			if distance(b.Position, Player.Position) < 100 then
+			if distance(b.Position, Player.Position) < 120 then
 				b.as:Play()
 			end
 
