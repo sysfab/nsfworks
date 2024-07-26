@@ -57,9 +57,8 @@ particles.createEmitter = function(config)
         particle.life = 0
 
         particle.Tick = function(p, dt)
-            p.Scale = lerp(p.Scale, self.config.scale_end, dt/self.config.life)
+            p.Scale = particles.lerp(p.Scale, self.config.scale_end, dt/self.config.life)
             p.life = p.life + dt
-            print(p.Scale)
             if p.life > self.config.life then
                 p.Tick = nil
                 p:SetParent(nil)
@@ -78,6 +77,10 @@ particles.createEmitter = function(config)
     end
 
     return emitter
+end
+
+particles.lerp = function(a, b, w)
+    return a + (b-a)*w
 end
 
 return particles
