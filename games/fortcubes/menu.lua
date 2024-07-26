@@ -306,7 +306,7 @@ function menu.create(self)
             debug.log("menu() - game resolution is too small!")
             if menu.resolution_error == nil then
                 menu.resolution_error = ui:createFrame(Color(100, 0, 0))
-                menu.resolution_error_text = ui:createText("Your resolution is too small! Make window bigger or change resolution", Color(255, 255, 255)) 
+                menu.resolution_error_text = ui:createText("Your resolution is too small!", Color(255, 255, 255)) 
             end
             menu.resolution_error.Width = Screen.Width
             menu.resolution_error.Height = Screen.Height
@@ -494,6 +494,13 @@ function menu.remove(self)
         self.descriptionBG = nil
         self.blackPanel:remove()
         self.blackPanel = nil
+
+        if self.resolution_error ~= nil then
+            self.resolution_error:remove()
+            self.resolution_error = nil
+            self.resolution_error_text:remove()
+            self.resolution_error_text = nil
+        end
 
         if menu.man1 ~= nil then
             menu.man1.pistol:SetParent(nil)
