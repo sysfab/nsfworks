@@ -34,7 +34,12 @@ game.connection.onEvent = function(connection, e)
 			b.owner = event.Sender
 
 			b:SetParent(World)
+			b.as = AudioSource("gun_shot_1")
+			b.as:SetParent(b)
+			b.as.Volume = settings.currentSettings.soundVolume*0.01
+			b.as:Play()
 			b.Rotation = Rotation(0, event.data.rot, 0)
+			b.Scale = Number3(0.5, 0.5, 1)
 
 			if b.owner == Player then
 				b.Position = lerp(Number3(event.data.x, event.data.y, event.data.z), Player.Head.Position, 0.5)
@@ -52,6 +57,8 @@ game.connection.onEvent = function(connection, e)
 
 				b.lifeTime = b.lifeTime - dt
 				if b.lifeTime <= 0 then
+					b.as:SetParent(nil)
+					b.as = nil
 					b:SetParent(nil)
 					b.Tick = nil
 				end
@@ -64,6 +71,7 @@ game.connection.onEvent = function(connection, e)
 			Player.Velocity = Number3(0, 0, 0)
 			Player.Motion = Number3(0, 0, 0)
 			Player.Position = Number3(event.data.posX*game.world.map.Width, 10, event.data.posY*game.world.map.Depth)*game.world.map.Scale
+			AudioListener:SetParent(Player)
 			debug.log("game() - position set")
 
 			for k, v in pairs(Players) do
@@ -250,7 +258,7 @@ game.ui.create = function(u)
 
 	if u.music == nil then
 		u.music = AudioSource("gun_shot_1")
-		u.music:SetParent(Camera)
+		u.music:SetParent(Player)
 		u.music.Sound = audio.game_theme
 		u.music:Play()
 		u.music.Loop = true
@@ -494,7 +502,7 @@ game.tick = function(self, dt)
 	self.shootTimer = math.max(0, self.shootTimer - dt)
 	if self.controls.shooting then
 		if self.shootTimer == 0 then
-			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X, y = Player.Head.Position.Y, z = Player.Head.Position.Z})
+			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X+Player.Forward.X*10, y = Player.Head.Position.Y-1+Player.Forward.Y*10, z = Player.Head.Position.Z+Player.Forward.Z*10})
 			e:SendTo(Players)
 
 			self.shootTimer = 0.25

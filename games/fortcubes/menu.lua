@@ -9,6 +9,7 @@ function menu.create(self)
         error("menu:create() - menu currently created.", 2)
     end
 
+    AudioListener:SetParent(Camera)
     debug.log("menu() - Creating menu...")
     self.created = true
     self.closing = false
