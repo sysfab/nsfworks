@@ -292,6 +292,7 @@ function menu.create(self)
         if menu.created == nil then
             error("menu.update() should be called with ':'!", 2)
         end
+        debug.log("menu() - updating...")
 
         menu.wh = math.max(Screen.Width, Screen.Height)
         menu.screenWidth = math.min(640, menu.wh)/1920

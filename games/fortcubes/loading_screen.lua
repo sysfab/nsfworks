@@ -27,6 +27,7 @@ function loading.create(self)
         if self.created == nil then
             error("loading.update() should be called with ':'!", 2)
         end
+        debug.log("loading() - updating...")
 
         self.BG.Width = Screen.Width
         self.BG.Height = Screen.Height
