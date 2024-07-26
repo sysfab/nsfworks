@@ -17,6 +17,10 @@ utils.init = function(env)
 	env.minmax = function(min, max, value)
 		return math.max(math.min(value, max), min)
 	end
+
+	env.distance = function(pos1, pos2)
+		return math.sqrt((pos1.X-pos2.X)*(pos1.X-pos2.X) + (pos1.Y-pos2.Y)*(pos1.Y-pos2.Y) + (pos1.Z-pos2.Z)*(pos1.Z-pos2.Z))
+	end
 end
 
 return utils

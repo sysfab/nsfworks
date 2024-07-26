@@ -37,7 +37,9 @@ game.connection.onEvent = function(connection, e)
 			b.as = AudioSource("gun_shot_1")
 			b.as:SetParent(b)
 			b.as.Volume = settings.currentSettings.soundVolume*0.01
-			b.as:Play()
+			if distance(b.Position, Player.Position) < 50 then
+				b.as:Play()
+			end
 			b.Rotation = Rotation(0, event.data.rot, 0)
 			b.Scale = Number3(0.5, 0.5, 1)
 
@@ -498,6 +500,7 @@ game.tick = function(self, dt)
 	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting then
 		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
 	end
+	AudioListener.Rotation = Camera.Rotation
 
 	self.shootTimer = math.max(0, self.shootTimer - dt)
 	if self.controls.shooting then
