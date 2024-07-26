@@ -10,6 +10,7 @@ end
 
 game.connection = {}
 game.connection.connected = false
+game.bullets = {}
 
 game.connection.connect = function(connection)
 	if connection.connected == false then
@@ -53,6 +54,7 @@ game.connection.onEvent = function(connection, e)
 			end
 			b.damage = 20
 			b.id = game.getId("bullet")
+			game.bullets[b.id] = b
 
 			b.particle = particles.createEmitter({
 				position = b.Position + b.Forward*2.5 + b.Down*0.5,
@@ -91,6 +93,7 @@ game.connection.onEvent = function(connection, e)
 				end
 			end
 			b.remove = function(self)
+				game.bullets[self.id] = nil
 				self.particle:remove()
 				self.as:SetParent(nil)
 				self.as = nil
@@ -262,6 +265,8 @@ game.connection.onEvent = function(connection, e)
 		set_health = function(event)
 			local p = getPlayerByUsername(event.data.player)
 			debug.log("game() - set_health event of " .. event.data.player .. " with bullet id [" .. event.data.bullet .. "].")
+			local bullet = game.getBulletById(event.data.bullet)
+			bullet:remove()
 		end,
 
 		["_"] = function(event)
@@ -656,6 +661,10 @@ game.getId = function(type)
 	local id = #game.ids[type] + 1
 	game.ids[type][id] = true
     return id
+end
+
+game.getBulletById = function(id)
+	return game.bullets[id]
 end
 
 return game
