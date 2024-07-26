@@ -238,6 +238,7 @@ function menu.create(self)
     self.settings.pos = Number2(-1000, -1000)
     self.settings.onRelease = function(s)
         menu.currentMenu = "settings"
+        menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
         menu:update()
     end
     self.armory = ui:createButton("ARMORY", menu.theme.button)
@@ -659,12 +660,14 @@ menu.loadModels = function(self)
                 if settings.currentSettings.musicVolume < 100 then
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume + 5
                     menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
+                    menu.music.Volume = settings.currentSettings.musicVolume*0.01
                     settings:save()
                 end
             elseif impact.Object.name == "musicLeft" then
                 if settings.currentSettings.musicVolume > 0 then
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume - 5
                     menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
+                    menu.music.Volume = settings.currentSettings.musicVolume*0.01
                     settings:save()
                 end
             end
@@ -680,7 +683,7 @@ menu.loadModels = function(self)
     menu.book.musicVolume.LocalRotation.Y = math.pi/2
 
     menu.book.musicVolume.text = Text()
-    menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
+    menu.book.musicVolume.text.Text = "0"
     menu.book.musicVolume.text:SetParent(menu.book.left)
     menu.book.musicVolume.text.Scale = 0.75
     menu.book.musicVolume.text.LocalPosition = Number3(1.01, 4, 5.5)
