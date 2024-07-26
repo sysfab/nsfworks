@@ -5,6 +5,7 @@ local default_settings = {
 }
 
 settings.currentSettings = default_settings
+debug.log("settings() - loaded with default settings.")
 
 function settings.set(self, setting, value)
     if value == nil then
@@ -17,9 +18,12 @@ function settings.set(self, setting, value)
         error("settings:set(setting, value) - setting parameter can't be set.", 2)
     end
     self.currentSettings[setting] = value
+
+    debug.log("settings() - set '"..setting.."' to '"..value.."'")
 end
 
 function settings.save(self)
+    debug.log("settings() - trying to save settings.")
     local store = KeyValueStore("data: " .. Player.Username)
     store:Set("settings", JSON:Encode(self.currentSettings), function(success)
         if success then
@@ -31,6 +35,7 @@ function settings.save(self)
 end
 
 function settings.load(self)
+    debug.log("settings() - trying to load settings.")
     local store = KeyValueStore("data: " .. Player.Username)
     store:Get("settings", function(success, result)
         if success then
