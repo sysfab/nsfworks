@@ -4,6 +4,7 @@ debug.log("server() - online")
 game = {}
 players = {}
 event_players = {}
+
 function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
