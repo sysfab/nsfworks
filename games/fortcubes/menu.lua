@@ -474,6 +474,12 @@ function menu.remove(self)
         self.version2 = nil
         self.version:remove()
         self.version = nil
+        self.description:remove()
+        self.description = nil
+        self.descriptionName:remove()
+        self.descriptionName = nil
+        self.descriptionBG:remove()
+        self.descriptionBG = nil
         self.blackPanel:remove()
         self.blackPanel = nil
 
