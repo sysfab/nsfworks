@@ -51,6 +51,7 @@ game.connection.onEvent = function(connection, e)
 			if distance(b.Position, Player.Position) < 120 then
 				b.as:Play()
 			end
+			b.damage = 20
 
 			b.particle = particles.createEmitter({
 				position = b.Position + b.Forward*2.5 + b.Down*0.5,
@@ -85,12 +86,15 @@ game.connection.onEvent = function(connection, e)
 						})
 						self.particle:emit()
 					end
-					self.particle:remove()
-					self.as:SetParent(nil)
-					self.as = nil
-					self:SetParent(nil)
-					self.Tick = nil
+					self:remove()
 				end
+			end
+			b.remove = function(self)
+				self.particle:remove()
+				self.as:SetParent(nil)
+				self.as = nil
+				self:SetParent(nil)
+				self.Tick = nil
 			end
 		end,
 
@@ -122,6 +126,14 @@ game.connection.onEvent = function(connection, e)
 							rawset(v.Animations, "Walk", {})
 							v.particles = particles.createEmitter()
 							v.particlesTick = 0
+
+							v.OnCollisionBegin = function(self, other)
+								if other.damage ~= nil then
+									other:remove()
+									debug.log("game() - got hit by bullet.")
+								end
+							end
+
 							v.Tick = function(self, dt)
 								self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
 								self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
@@ -186,6 +198,16 @@ game.connection.onEvent = function(connection, e)
 						p.Animations.Walk:Stop()
 					end
 					rawset(p.Animations, "Walk", {})
+					p.particles = particles.createEmitter()
+					p.particlesTick = 0
+
+					p.OnCollisionBegin = function(self, other)
+						if other.damage ~= nil then
+							other:remove()
+							debug.log("game() - got hit by bullet.")
+						end
+					end
+
 					p.Tick = function(self, dt)
 						self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
 						self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
@@ -234,6 +256,11 @@ game.connection.onEvent = function(connection, e)
 				p.pistol.Tick  = nil
                 p.pistol = nil
             end
+		end,
+
+		set_health = function(event)
+			local p = getPlayerByUsername(event.data.player)
+			debug.log("game() - set_health event of " .. event.data.player .. ".")
 		end,
 
 		["_"] = function(event)
