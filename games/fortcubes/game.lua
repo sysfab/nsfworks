@@ -128,7 +128,7 @@ game.connection.onEvent = function(connection, e)
 							v.particlesTick = 0
 
 							v.OnCollisionBegin = function(self, other)
-								if other.damage ~= nil then
+								if self ~= Player and other.damage ~= nil and other.owner == Player then
 									other:remove()
 									debug.log("game() - got hit by bullet.")
 								end
@@ -202,7 +202,7 @@ game.connection.onEvent = function(connection, e)
 					p.particlesTick = 0
 
 					p.OnCollisionBegin = function(self, other)
-						if other.damage ~= nil then
+						if self ~= Player and other.damage ~= nil and other.owner == Player then
 							other:remove()
 							debug.log("game() - got hit by bullet.")
 						end
