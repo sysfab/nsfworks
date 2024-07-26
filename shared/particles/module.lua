@@ -46,6 +46,8 @@ particles.createEmitter = function(config)
         local b = Block(self.config.color, Number3(0, 0, 0))
         particle:AddBlock(b)
         particle.Pivot = Number3(0.5, 0.5, 0.5)
+        particle.Physics = PhysicsMode.Dynamic
+        particle.CollidesWithGroups = {}
         
         particle.Position = self.config.position
         particle.Rotation = self.config.rotation
