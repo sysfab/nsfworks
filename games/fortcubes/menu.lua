@@ -673,7 +673,7 @@ menu.loadModels = function(self)
                 end
             elseif impact.Object.name == "soundRight" then
                 if settings.currentSettings.soundVolume > 0 then
-                    settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
+                    settings.currentSettings.soundVolume = settings.currentSettings.soundVolume + 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
                     settings:save()
                 end
