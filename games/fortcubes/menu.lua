@@ -365,30 +365,27 @@ function menu.show(self, name)
         error("menu:show(name) - 1st argument should be a string.", 2)
     end
     menu.play.Width, menu.play.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+    menu.play.content.Scale.X = menu.screenWidth * 3 menu.play.content.Scale.Y = menu.screenHeight * 3
     menu.aboutUs.Width, menu.aboutUs.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+    menu.aboutUs.content.Scale.X = menu.screenWidth * 3 menu.aboutUs.content.Scale.Y = menu.screenHeight * 3
     menu.settings.Width, menu.settings.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+    menu.settings.content.Scale.X = menu.screenWidth * 3 menu.settings.content.Scale.Y = menu.screenHeight * 3
     menu.armory.Width, menu.armory.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+    menu.armory.content.Scale.X = menu.screenWidth * 3 menu.armory.content.Scale.Y = menu.screenHeight * 3
     menu.back.Width, menu.back.Height = 380 * menu.screenWidth, 80 * menu.screenHeight
+    menu.back.content.Scale.X = menu.screenWidth * 3 menu.back.content.Scale.Y = menu.screenHeight * 3
 
     if name == "menu" then
         menu.aboutUs.pos.Y = 5 + 85 * menu.screenHeight*0
-        menu.aboutUs.content.Scale.X = menu.screenWidth * 3
-        menu.aboutUs.content.Scale.Y = menu.screenHeight * 3
         menu.aboutUs.content.pos = Number2(menu.aboutUs.Width/2 - menu.aboutUs.content.Width/2, menu.aboutUs.Height/2 - menu.aboutUs.content.Height/2)
 
         menu.settings.pos.Y = 5 + 85 * menu.screenHeight*1
-        menu.settings.content.Scale.X = menu.screenWidth * 3
-        menu.settings.content.Scale.Y = menu.screenHeight * 3
         menu.settings.content.pos = Number2(menu.settings.Width/2 - menu.settings.content.Width/2, menu.settings.Height/2 - menu.settings.content.Height/2)
 
         menu.armory.pos.Y = 5 + 85 * menu.screenHeight*2
-        menu.armory.content.Scale.X = menu.screenWidth * 3
-        menu.armory.content.Scale.Y = menu.screenHeight * 3
         menu.armory.content.pos = Number2(menu.armory.Width/2 - menu.armory.content.Width/2, menu.armory.Height/2 - menu.armory.content.Height/2)
 
         menu.play.pos.Y = 5 + 85 * menu.screenHeight*3
-        menu.play.content.Scale.X = menu.screenWidth * 3
-        menu.play.content.Scale.Y = menu.screenHeight * 3
         menu.play.content.pos = Number2(menu.play.Width/2 - menu.play.content.Width/2, menu.play.Height/2 - menu.play.content.Height/2)
 
         menu.aboutUs:enable()
@@ -397,8 +394,6 @@ function menu.show(self, name)
         menu.armory:enable()
     elseif name == "armory" then
         menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
-        menu.back.content.Scale.X = menu.screenWidth * 3
-        menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
 
         menu.aboutUs:disable()
@@ -407,8 +402,6 @@ function menu.show(self, name)
         menu.armory:disable()
     elseif name == "settings" then
         menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
-        menu.back.content.Scale.X = menu.screenWidth * 3
-        menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
 
         menu.aboutUs:disable()
@@ -417,8 +410,6 @@ function menu.show(self, name)
         menu.armory:disable()
     elseif name == "about us" then
         menu.back.pos.Y = 5 + 85 * menu.screenHeight*0
-        menu.back.content.Scale.X = menu.screenWidth * 3
-        menu.back.content.Scale.Y = menu.screenHeight * 3
         menu.back.content.pos = Number2(menu.back.Width/2 - menu.back.content.Width/2, menu.back.Height/2 - menu.back.content.Height/2)
 
         menu.aboutUs:disable()
