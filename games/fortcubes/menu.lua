@@ -675,14 +675,12 @@ menu.loadModels = function(self)
                 if settings.currentSettings.soundVolume > 0 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
-                    game.music.Volume = settings.currentSettings.soundVolume*0.01
                     settings:save()
                 end
             elseif impact.Object.name == "soundLeft" then
                 if settings.currentSettings.soundVolume > 0 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
-                    game.music.Volume = settings.currentSettings.soundVolume*0.01
                     settings:save()
                 end
             end
