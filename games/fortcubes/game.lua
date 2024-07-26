@@ -52,6 +52,7 @@ game.connection.onEvent = function(connection, e)
 				b.as:Play()
 			end
 			b.damage = 20
+			b.id = game.getId("bullet")
 
 			b.particle = particles.createEmitter({
 				position = b.Position + b.Forward*2.5 + b.Down*0.5,
@@ -129,8 +130,8 @@ game.connection.onEvent = function(connection, e)
 
 							v.OnCollisionBegin = function(self, other)
 								if self ~= Player and other.damage ~= nil and other.owner == Player then
-									other:remove()
-									debug.log("game() - got hit by bullet.")
+									local e = crystal.Event("set_health", {player = v.Username, bullet = other.id})
+									e:SendTo(OtherPlayers)
 								end
 							end
 
@@ -203,8 +204,8 @@ game.connection.onEvent = function(connection, e)
 
 					p.OnCollisionBegin = function(self, other)
 						if self ~= Player and other.damage ~= nil and other.owner == Player then
-							other:remove()
-							debug.log("game() - got hit by bullet.")
+							local e = crystal.Event("set_health", {player = v.Username, bullet = other.id})
+							e:SendTo(OtherPlayers)
 						end
 					end
 
@@ -260,7 +261,7 @@ game.connection.onEvent = function(connection, e)
 
 		set_health = function(event)
 			local p = getPlayerByUsername(event.data.player)
-			debug.log("game() - set_health event of " .. event.data.player .. ".")
+			debug.log("game() - set_health event of " .. event.data.player .. " with bullet id [" .. event.data.bullet .. "].")
 		end,
 
 		["_"] = function(event)
@@ -644,5 +645,17 @@ game.remove = function(self, callback)
 	debug.log("game() - removed")
 end
 
+game.getId = function(type)
+	if game.ids == nil then
+		game.ids = {}
+	end
+	if game.ids[type] == nil then
+		game.ids[type] = {}
+	end
+	
+	local id = #game.ids[type] + 1
+	game.ids[type][id] = true
+    return id
+end
 
 return game
