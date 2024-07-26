@@ -239,6 +239,7 @@ function menu.create(self)
     self.settings.onRelease = function(s)
         menu.currentMenu = "settings"
         menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
+        menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
         menu:update()
     end
     self.armory = ui:createButton("ARMORY", menu.theme.button)
@@ -670,6 +671,20 @@ menu.loadModels = function(self)
                     menu.music.Volume = settings.currentSettings.musicVolume*0.01
                     settings:save()
                 end
+            elseif impact.Object.name == "soundRight" then
+                if settings.currentSettings.soundVolume > 0 then
+                    settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
+                    menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
+                    game.music.Volume = settings.currentSettings.soundVolume*0.01
+                    settings:save()
+                end
+            elseif impact.Object.name == "soundLeft" then
+                if settings.currentSettings.soundVolume > 0 then
+                    settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
+                    menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
+                    game.music.Volume = settings.currentSettings.soundVolume*0.01
+                    settings:save()
+                end
             end
         end
     end)
@@ -719,6 +734,52 @@ menu.loadModels = function(self)
     menu.book.musicVolume.left.quad.Scale = 2
     menu.book.musicVolume.left.quad.LocalPosition = Number3(-1, -1, 0)
     menu.book.musicVolume.left.quad.Physics = PhysicsMode.Static
+
+    menu.book.soundVolume = Text()
+    menu.book.soundVolume.Text = "Sound volume: "
+    menu.book.soundVolume:SetParent(menu.book.right)
+    menu.book.soundVolume.Scale = 0.75
+    menu.book.soundVolume.LocalPosition = Number3(-1.01, 2, 5.5)
+    menu.book.soundVolume.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.soundVolume.LocalRotation.Y = math.pi/2
+
+    menu.book.soundVolume.text = Text()
+    menu.book.soundVolume.text.Text = "0"
+    menu.book.soundVolume.text:SetParent(menu.book.left)
+    menu.book.soundVolume.text.Scale = 0.75
+    menu.book.soundVolume.text.LocalPosition = Number3(1.01, 2, 5.5)
+    menu.book.soundVolume.text.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.soundVolume.text.LocalRotation.Y = -math.pi/2
+
+    menu.book.soundVolume.right = Text()
+    menu.book.soundVolume.right.Text = ">"
+    menu.book.soundVolume.right:SetParent(menu.book.left)
+    menu.book.soundVolume.right.Scale = 0.75
+    menu.book.soundVolume.right.LocalPosition = Number3(1.01, 2, 8)
+    menu.book.soundVolume.right.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.soundVolume.right.LocalRotation.Y = -math.pi/2
+    menu.book.soundVolume.right.quad = Quad()
+    menu.book.soundVolume.right.quad.name = "soundRight"
+    menu.book.soundVolume.right.quad.Color.A = 0
+    menu.book.soundVolume.right.quad:SetParent(menu.book.soundVolume.right)
+    menu.book.soundVolume.right.quad.Scale = 2
+    menu.book.soundVolume.right.quad.LocalPosition = Number3(-1, -1, 0)
+    menu.book.soundVolume.right.quad.Physics = PhysicsMode.Static
+
+    menu.book.soundVolume.left = Text()
+    menu.book.soundVolume.left.Text = "<"
+    menu.book.soundVolume.left:SetParent(menu.book.left)
+    menu.book.soundVolume.left.Scale = 0.75
+    menu.book.soundVolume.left.LocalPosition = Number3(1.01, 2, 3)
+    menu.book.soundVolume.left.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.soundVolume.left.LocalRotation.Y = -math.pi/2
+    menu.book.soundVolume.left.quad = Quad()
+    menu.book.soundVolume.left.quad.name = "soundLeft"
+    menu.book.soundVolume.left.quad.Color.A = 0
+    menu.book.soundVolume.left.quad:SetParent(menu.book.soundVolume.left)
+    menu.book.soundVolume.left.quad.Scale = 2
+    menu.book.soundVolume.left.quad.LocalPosition = Number3(-1, -1, 0)
+    menu.book.soundVolume.left.quad.Physics = PhysicsMode.Static
 
 --[[
     for k, v in pairs(menu.bushes) do
