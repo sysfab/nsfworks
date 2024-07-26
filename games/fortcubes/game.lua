@@ -456,8 +456,13 @@ game.controls.analogPad = function(dx, dy, isJoy)
 		dx = d.X
 		dy = d.Y
 	end
-
-	Player.Forward = Number3(dx, 0, dy)*25
+	local dxmul = 1
+	if dy < 0 then
+		dxmul = 1.2
+	else
+		dxmul = 1.3
+	end
+	Player.Forward = Number3(dx*dxmul, 0, dy)*25
 end
 game.controls.directionalPad = function(dx, dy, isJoy)
 	if isJoy == true then
