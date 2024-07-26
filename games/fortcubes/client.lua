@@ -17,7 +17,7 @@ end
 -- CONFIG
 set("VERSION", "v0.0")
 
-debug.log("client() - config loaded")
+debug.log("client() - version: "..VERSION)
 
 
 Client.DirectionalPad = nil
@@ -67,11 +67,12 @@ loadAudios = {
 }
 
 loaded = 0
-need_to_load = 4
+need_to_load = 0
 
 for key, value in pairs(loadModules) do
 	if need_to_load_modules == nil then need_to_load_modules = 0 end
 	need_to_load_modules = need_to_load_modules + 1
+	need_to_load = need_to_load + 1
 
 	loader:loadFunction(value, function(module)
 		debug.log("client() - Loaded '".. key .."'")
@@ -80,9 +81,9 @@ for key, value in pairs(loadModules) do
 
 		if loaded_modules == nil then loaded_modules = 0 end
 		loaded_modules = loaded_modules + 1
+		loaded = loaded + 1
 
 		if loaded_modules >= need_to_load_modules then
-			loaded = loaded + 1
 			if loaded == need_to_load then
                 doneLoading()
             end
@@ -96,6 +97,9 @@ for key, value in pairs(loadModules) do
 				loadingBG = nil
 			end
 		end
+		if loaded >= need_to_load then
+			doneLoading()
+		end
 	end)
 end
 debug.log("client() - Loading " .. need_to_load_modules.. " modules..")
@@ -103,6 +107,7 @@ debug.log("client() - Loading " .. need_to_load_modules.. " modules..")
 for key, value in pairs(loadAnimations) do
 	if need_to_load_animations == nil then need_to_load_animations = 0 end
 	need_to_load_animations = need_to_load_animations + 1
+	need_to_load = need_to_load + 1
 
 	loader:loadText(value, function(text)
 		debug.log("client() - Loaded '".. key .."'")
@@ -111,12 +116,9 @@ for key, value in pairs(loadAnimations) do
 
 		if loaded_animations == nil then loaded_animations = 0 end
 		loaded_animations = loaded_animations + 1
+		loaded = loaded + 1
 
 		if loaded_animations >= need_to_load_animations then
-			loaded = loaded + 1
-			if loaded == need_to_load then
-                doneLoading()
-            end
 			debug.log("client() - Loaded all animations.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
@@ -127,6 +129,9 @@ for key, value in pairs(loadAnimations) do
 				loadingBG = nil
 			end
 		end
+		if loaded >= need_to_load then
+			doneLoading()
+		end
 	end)
 end
 debug.log("client() - Loading " .. need_to_load_animations .. " animations..")
@@ -134,6 +139,7 @@ debug.log("client() - Loading " .. need_to_load_animations .. " animations..")
 for key, value in pairs(loadShapes) do
 	if need_to_load_shapes == nil then need_to_load_shapes = 0 end
 	need_to_load_shapes = need_to_load_shapes + 1
+	need_to_load = need_to_load + 1
 
 	Object:Load(value, function(shape)
 		debug.log("client() - Loaded '".. key .."'")
@@ -142,12 +148,9 @@ for key, value in pairs(loadShapes) do
 
 		if loaded_shapes == nil then loaded_shapes = 0 end
 		loaded_shapes = loaded_shapes + 1
+		loaded = loaded + 1
 
 		if loaded_shapes >= need_to_load_shapes then
-			loaded = loaded + 1
-			if loaded == need_to_load then
-                doneLoading()
-            end
 			debug.log("client() - Loaded all shapes.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
@@ -158,6 +161,9 @@ for key, value in pairs(loadShapes) do
 				loadingBG = nil
 			end
 		end
+		if loaded >= need_to_load then
+			doneLoading()
+		end
 	end)
 end
 debug.log("client() - Loading " .. need_to_load_shapes .. " shapes..")
@@ -165,6 +171,7 @@ debug.log("client() - Loading " .. need_to_load_shapes .. " shapes..")
 for key, value in pairs(loadAudios) do
 	if need_to_load_audios == nil then need_to_load_audios = 0 end
 	need_to_load_audios = need_to_load_audios + 1
+	need_to_load = need_to_load + 1
 
 	loader:loadData(value, function(audioData)
 		debug.log("client() - Loaded '".. key .."'")
@@ -173,12 +180,9 @@ for key, value in pairs(loadAudios) do
 
 		if loaded_audios == nil then loaded_audios = 0 end
 		loaded_audios = loaded_audios + 1
+		loaded = loaded + 1
 
 		if loaded_audios >= need_to_load_audios then
-			loaded = loaded + 1
-			if loaded == need_to_load then
-                doneLoading()
-            end
 			debug.log("client() - Loaded all audios.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
@@ -188,6 +192,9 @@ for key, value in pairs(loadAudios) do
 				loadingBG:remove()
 				loadingBG = nil
 			end
+		end
+		if loaded >= need_to_load then
+			doneLoading()
 		end
 	end)
 end
