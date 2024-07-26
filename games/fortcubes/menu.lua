@@ -497,11 +497,11 @@ function menu.remove(self)
         end
         if menu.sysfab ~= nil then
             
+            menu.sysfab.nameText.shadow:SetParent(nil)
+            menu.sysfab.nameText.shadow = nil
             menu.sysfab.nameText:SetParent(nil)
             menu.sysfab.nameText.Tick = nil
             menu.sysfab.nameText = nil
-            menu.sysfab.nameText.shadow:SetParent(nil)
-            menu.sysfab.nameText.shadow = nil
 
             menu.sysfab:nanStop()
             menu.sysfab.nanplayer:remove()
@@ -513,11 +513,11 @@ function menu.remove(self)
         end
         if menu.nanskip ~= nil then
             
+            menu.nanskip.nameText.shadow:SetParent(nil)
+            menu.nanskip.nameText.shadow = nil
             menu.nanskip.nameText:SetParent(nil)
             menu.nanskip.nameText.Tick = nil
             menu.nanskip.nameText = nil
-            menu.nanskip.nameText.shadow:SetParent(nil)
-            menu.nanskip.nameText.shadow = nil
 
             menu.nanskip:nanStop()
             menu.nanskip.nanplayer:remove()
