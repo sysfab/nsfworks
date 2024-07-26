@@ -79,7 +79,7 @@ game.connection.onEvent = function(connection, e)
 		                    v.pistol.LocalRotation = Rotation(math.pi-0.2, math.pi/2, math.pi/2)
 		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
 							v.Animations.Idle:Stop()
-							if v.Animations.Walk ~= nil then
+							if v.Animations.Walk.Stop ~= nil then
 								v.Animations.Walk:Stop()
 							end
 							rawset(v.Animations, "Walk", {})
@@ -127,7 +127,7 @@ game.connection.onEvent = function(connection, e)
                     p.pistol.LocalPosition = Number3(7, 0.2, 2)
 					p.pistol.parent = p
 					p.Animations.Idle:Stop()
-					if p.Animations.Walk ~= nil then
+					if p.Animations.Walk.Stop ~= nil then
 						p.Animations.Walk:Stop()
 					end
 					rawset(p.Animations, "Walk", {})
