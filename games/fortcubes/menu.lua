@@ -308,7 +308,6 @@ function menu.create(self)
 
         -- MAIN MENU
 
-        return
         menu.titleBG.Width, menu.titleBG.Height = menu.screenWidth * 1010, menu.screenHeight * 220
         if Screen.Height < 480 then
             menu.titleBG.Width, menu.titleBG.Height = menu.titleBG.Width/1.85, menu.titleBG.Height/1.85
