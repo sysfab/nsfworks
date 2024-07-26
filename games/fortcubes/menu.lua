@@ -504,11 +504,11 @@ function menu.remove(self)
             menu.sysfab.Tick = nil
             menu.sysfab = nil
             
-            menu.sysfab.name:SetParent(nil)
-            menu.sysfab.name.Tick = nil
-            menu.sysfab.name = nil
-            menu.sysfab.name.shadow:SetParent(nil)
-            menu.sysfab.name.shadow = nil
+            menu.sysfab.nameText:SetParent(nil)
+            menu.sysfab.nameText.Tick = nil
+            menu.sysfab.nameText = nil
+            menu.sysfab.nameText.shadow:SetParent(nil)
+            menu.sysfab.nameText.shadow = nil
 
         end
         if menu.nanskip ~= nil then
@@ -520,11 +520,11 @@ function menu.remove(self)
             menu.nanskip.Tick = nil
             menu.nanskip = nil
 
-            menu.nanskip.name:SetParent(nil)
-            menu.nanskip.name.Tick = nil
-            menu.nanskip.name = nil
-            menu.nanskip.name.shadow:SetParent(nil)
-            menu.nanskip.name.shadow = nil
+            menu.nanskip.nameText:SetParent(nil)
+            menu.nanskip.nameText.Tick = nil
+            menu.nanskip.nameText = nil
+            menu.nanskip.nameText.shadow:SetParent(nil)
+            menu.nanskip.nameText.shadow = nil
 
         end
         self.yard:SetParent(nil)
