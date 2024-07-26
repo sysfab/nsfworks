@@ -79,7 +79,9 @@ game.connection.onEvent = function(connection, e)
 		                    v.pistol.LocalRotation = Rotation(math.pi-0.2, math.pi/2, math.pi/2)
 		                    v.pistol.LocalPosition = Number3(7, 0.2, 2)
 							v.Animations.Idle:Stop()
-							v.Animations.Walk:Stop()
+							if v.Animations.Walk ~= nil then
+								v.Animations.Walk:Stop()
+							end
 							rawset(v.Animations, "Walk", {})
 							v.Tick = function(self, dt)
 								self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
@@ -125,7 +127,9 @@ game.connection.onEvent = function(connection, e)
                     p.pistol.LocalPosition = Number3(7, 0.2, 2)
 					p.pistol.parent = p
 					p.Animations.Idle:Stop()
-					p.Animations.Walk:Stop()
+					if p.Animations.Walk ~= nil then
+						p.Animations.Walk:Stop()
+					end
 					rawset(p.Animations, "Walk", {})
 					p.Tick = function(self, dt)
 						self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)

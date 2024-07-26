@@ -503,6 +503,8 @@ function menu.remove(self)
         self.workinprogress:SetParent(nil)
         self.workinprogress = nil
 
+        menu.pointer:Remove()
+
         for k, v in pairs(menu.bushes) do
             v:SetParent(nil)
             v = nil
@@ -649,6 +651,70 @@ menu.loadModels = function(self)
     menu.book.left.Shadow = true
     menu.book.right = menu.book:GetChild(2)
     menu.book.right.Shadow = true
+
+    menu.pointer = LocalEvent:Listen(LocalEvent.Name.PointerClick, function(pe)
+        local impact = pe:CastRay(Map.CollisionGroup)
+        if impact then
+            if impact.Object.name == "musicRight" then
+                if settings.currentSettings.musicVolume < 100 then
+                    settings.currentSettings.musicVolume = settings.currentSettings.musicVolume + 5
+                    settings:save()
+                end
+            elseif impact.Object.name == "musicLeft" then
+                if settings.currentSettings.musicVolume > 0 then
+                    settings.currentSettings.musicVolume = settings.currentSettings.musicVolume - 5
+                    settings:save()
+                end
+            end
+        end
+    end)
+
+    menu.book.musicVolume = Text()
+    menu.book.musicVolume.Text = "Music volume: "
+    menu.book.musicVolume:SetParent(menu.book.right)
+    menu.book.musicVolume.Scale = 0.75
+    menu.book.musicVolume.LocalPosition = Number3(-1.01, 4, 5.5)
+    menu.book.musicVolume.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.musicVolume.LocalRotation.Y = math.pi/2
+
+    menu.book.musicVolume.text = Text()
+    menu.book.musicVolume.text.Text = "100"
+    menu.book.musicVolume.text:SetParent(menu.book.left)
+    menu.book.musicVolume.text.Scale = 0.75
+    menu.book.musicVolume.text.LocalPosition = Number3(1.01, 4, 5.5)
+    menu.book.musicVolume.text.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.musicVolume.text.LocalRotation.Y = -math.pi/2
+
+    menu.book.musicVolume.right = Text()
+    menu.book.musicVolume.right.Text = ">"
+    menu.book.musicVolume.right:SetParent(menu.book.left)
+    menu.book.musicVolume.right.Scale = 0.75
+    menu.book.musicVolume.right.LocalPosition = Number3(1.01, 4, 8)
+    menu.book.musicVolume.right.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.musicVolume.right.LocalRotation.Y = -math.pi/2
+    menu.book.musicVolume.right.quad = Quad()
+    menu.book.musicVolume.right.quad.name = "musicRight"
+    menu.book.musicVolume.right.quad.Color.A = 0
+    menu.book.musicVolume.right.quad:SetParent(menu.book.musicVolume.right)
+    menu.book.musicVolume.right.quad.Scale = 2
+    menu.book.musicVolume.right.quad.LocalPosition = Number3(-1, -1, 0)
+    menu.book.musicVolume.right.quad.Physics = PhysicsMode.Static
+
+    menu.book.musicVolume.left = Text()
+    menu.book.musicVolume.left.Text = "<"
+    menu.book.musicVolume.left:SetParent(menu.book.left)
+    menu.book.musicVolume.left.Scale = 0.75
+    menu.book.musicVolume.left.LocalPosition = Number3(1.01, 4, 3)
+    menu.book.musicVolume.left.BackgroundColor = Color(0, 0, 0, 0)
+    menu.book.musicVolume.left.LocalRotation.Y = -math.pi/2
+    menu.book.musicVolume.left.quad = Quad()
+    menu.book.musicVolume.left.quad.name = "musicLeft"
+    menu.book.musicVolume.left.quad.Color.A = 0
+    menu.book.musicVolume.left.quad:SetParent(menu.book.musicVolume.left)
+    menu.book.musicVolume.left.quad.Scale = 2
+    menu.book.musicVolume.left.quad.LocalPosition = Number3(-1, -1, 0)
+    menu.book.musicVolume.left.quad.Physics = PhysicsMode.Static
+
 --[[
     for k, v in pairs(menu.bushes) do
         v:SetParent(nil)
