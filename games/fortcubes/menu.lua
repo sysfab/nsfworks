@@ -72,13 +72,15 @@ function menu.create(self)
                 menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3*delta)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3*delta)
                 menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3*delta)
+                menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
             elseif menu.currentMenu == "about us" then
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.15*delta)
                 Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.1*delta)
                 Camera.FOV = lerp(Camera.FOV, 27, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3*delta)
-                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3*delta)
+                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
+                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
+                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
+                menu.description.posy = lerp(menu.description.pos.Y, 10, 0.3*delta)
             elseif menu.currentMenu == "settings" then
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.31, 0), 0.15*delta)
                 Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.1*delta)
@@ -86,6 +88,7 @@ function menu.create(self)
                 menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
                 menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
+                menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
                 if menu.book.left ~= nil then
                     menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05*delta)
                     menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.05*delta)
@@ -97,10 +100,15 @@ function menu.create(self)
                 menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
                 menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
+                menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
+                menu.descriptionName.posy = lerp(menu.descriptionName.pos.Y, menu.description.Height + 15, 0.3*delta)
             end
             menu.titleBG.pos.Y = menu.titleBG.posy
             menu.title.pos.Y = menu.title.posy
             menu.title2.pos.Y = menu.title2.posy
+            menu.description.pos.Y = menu.description.posy
+            menu.descriptionName.pos.Y = menu.description.posy + menu.description.Height + 5
+            menu.descriptionBG.pos.Y = menu.description.posy - 10
             if menu.currentMenu == "menu" and not menu.closing then
                 menu.mainbuttonsx = lerp(menu.mainbuttonsx, 5, 0.3*delta)
                 menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3*delta)
@@ -211,6 +219,18 @@ function menu.create(self)
     self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
     self.version.pos = Number2(-1000, -1000)
 
+
+    menu.descriptionBG = ui:createFrame(Color(0, 0, 0, 80))
+    menu.descriptionBG.pos = Number2(-1000, -1000)
+    menu.descriptionName = ui:createText("NSFWorks Team")
+    menu.descriptionName.pos = Number2(-1000, -1000)
+    menu.descriptionName.Color = Color(255, 255, 255, 255)
+    menu.descriptionName.object.Scale = 2
+    menu.description = ui:createText("We're creating games that" .. string.char(10) .. "is not suitable for work." .. string.char(10) .. "    Only for playing.")
+    menu.description.pos = Number2(-1000, -1000)
+    menu.description.Color = Color(200, 200, 200, 255)
+    menu.description.object.Scale = 2
+
     debug.log("menu() - Loading models...")
 
     menu:loadModels()
@@ -263,7 +283,7 @@ function menu.create(self)
         menu.currentMenu = "menu"
         menu:update()
     end
-    
+
     self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
     self.blackPanel.alpha = 255
 
@@ -313,6 +333,12 @@ function menu.create(self)
 
         menu.blackPanel.Width = Screen.Width
         menu.blackPanel.Height = Screen.Height
+
+        menu.description.pos.X = Screen.Width/2 - menu.description.Width/2
+        menu.descriptionName.pos.X = Screen.Width/2 - menu.descriptionName.Width/2
+        menu.descriptionBG.Width = menu.description.Width + 20
+        menu.descriptionBG.Height = menu.description.Height + 20 + menu.descriptionName.Height
+        menu.descriptionBG.pos.X = Screen.Width/2 - menu.descriptionBG.Width/2
 
         -- MAIN MENU -- BUTTONS
         for k, v in pairs(self.menus) do
@@ -477,6 +503,13 @@ function menu.remove(self)
             menu.sysfab:SetParent(nil)
             menu.sysfab.Tick = nil
             menu.sysfab = nil
+            
+            menu.sysfab.name:SetParent(nil)
+            menu.sysfab.name.Tick = nil
+            menu.sysfab.name = nil
+            menu.sysfab.name.shadow:SetParent(nil)
+            menu.sysfab.name.shadow = nil
+
         end
         if menu.nanskip ~= nil then
             menu.nanskip:nanStop()
@@ -486,6 +519,13 @@ function menu.remove(self)
             menu.nanskip:SetParent(nil)
             menu.nanskip.Tick = nil
             menu.nanskip = nil
+
+            menu.nanskip.name:SetParent(nil)
+            menu.nanskip.name.Tick = nil
+            menu.nanskip.name = nil
+            menu.nanskip.name.shadow:SetParent(nil)
+            menu.nanskip.name.shadow = nil
+
         end
         self.yard:SetParent(nil)
         self.yard.Tick = nil
@@ -602,6 +642,24 @@ menu.loadModels = function(self)
     menu.sysfab.luablock.Position = Number3(5, 0.3, -40)
     menu.sysfab.luablock.Rotation = Rotation(0, 0.3, 0)
 
+    menu.sysfab.name = Text()
+    menu.sysfab.name.Text = "sysfab"
+    menu.sysfab.name:SetParent(menu.sysfab)
+    menu.sysfab.name.Color = Color(255, 255, 255, 255)
+    menu.sysfab.name.Scale = 2
+    menu.sysfab.name.BackgroundColor = Color(255, 255, 255, 0)
+    menu.sysfab.name.Tick = function(self, dt)
+        menu.sysfab.name.Position = menu.sysfab.Position + Number3(0, 6.5, 0)
+        self.Backward = Camera.Backward
+    end
+    menu.sysfab.name.shadow = Text()
+    menu.sysfab.name.shadow.Text = "sysfab"
+    menu.sysfab.name.shadow:SetParent(menu.sysfab.name)
+    menu.sysfab.name.shadow.Color = Color(0, 0, 0, 255)
+    menu.sysfab.name.shadow.Scale = 1
+    menu.sysfab.name.shadow.BackgroundColor = Color(255, 255, 255, 0)
+    menu.sysfab.name.shadow.LocalPosition = Number3(0.05, -0.1, 0.01)
+
     self.ha:applyToDescendants(menu.sysfab, {includeRoot = true}, function(s)
         if type(s) == "Shape" or type(s) == "MutableShape" then
             s.Shadow = true
@@ -629,6 +687,24 @@ menu.loadModels = function(self)
     menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
     menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
     
+    menu.nanskip.name = Text()
+    menu.nanskip.name.Text = "nanskip"
+    menu.nanskip.name:SetParent(menu.nanskip)
+    menu.nanskip.name.Color = Color(255, 255, 255, 255)
+    menu.nanskip.name.Scale = 2
+    menu.nanskip.name.BackgroundColor = Color(255, 255, 255, 0)
+    menu.nanskip.name.Tick = function(self, dt)
+        menu.nanskip.name.Position = menu.nanskip.Position + Number3(0, 6.5, 0)
+        self.Backward = Camera.Backward
+    end
+    menu.nanskip.name.shadow = Text()
+    menu.nanskip.name.shadow.Text = "nanskip"
+    menu.nanskip.name.shadow:SetParent(menu.nanskip.name)
+    menu.nanskip.name.shadow.Color = Color(0, 0, 0, 255)
+    menu.nanskip.name.shadow.Scale = 1
+    menu.nanskip.name.shadow.BackgroundColor = Color(255, 255, 255, 0)
+    menu.nanskip.name.shadow.LocalPosition = Number3(0.05, -0.1, 0.01)
+
     self.ha:applyToDescendants(menu.nanskip, {includeRoot = true}, function(s)
         if type(s) == "Shape" or type(s) == "MutableShape" then
             s.Shadow = true
