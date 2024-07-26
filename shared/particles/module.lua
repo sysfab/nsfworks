@@ -1,4 +1,4 @@
-particles = {}
+local particles = {}
 
 particles.createEmitter = function(config)
     local defaultConfig = {
