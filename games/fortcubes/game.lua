@@ -429,7 +429,7 @@ game.controls.create = function(controls)
 			game.controls.shooting = true
 		end
 		Pointer.Down = function(pe)
-			--controls.analogPad(pe.X, pe.Y)
+			controls.analogPad(pe.X, pe.Y)
 			game.controls.shooting = true
 		end
 		Pointer.Up = function(pe)
