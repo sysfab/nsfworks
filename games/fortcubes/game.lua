@@ -37,9 +37,6 @@ game.connection.onEvent = function(connection, e)
 			b.as = AudioSource("gun_shot_1")
 			b.as:SetParent(b)
 			b.as.Volume = settings.currentSettings.soundVolume*0.01
-			if distance(b.Position, Player.Position) < 50 then
-				b.as:Play()
-			end
 			b.Rotation = Rotation(0, event.data.rot, 0)
 			b.Scale = Number3(0.5, 0.5, 1)
 
@@ -51,6 +48,9 @@ game.connection.onEvent = function(connection, e)
 
 			b.Physics = PhysicsMode.Trigger
 			b:GetChild(1).Physics = PhysicsMode.Trigger
+			if distance(b.Position, Player.Position) < 100 then
+				b.as:Play()
+			end
 
 			b.lifeTime = 0.5
 			b.Tick = function(self, dt)
