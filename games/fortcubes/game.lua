@@ -611,10 +611,10 @@ game.world.create = function(world, scale)
 				if chance == 0 then
 					local a = perlin.get(x*0.1, y*0.1)*30
 					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
-					local plus = (a + b) / 2
-					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
-					local coff = math.min(1, 1/(1/(math.abs(x+minusY)))/8)
-					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
+					local plus = math.abs(((a + b) / 2)*3//3*3)
+					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x+1, 0, y))
+					local coff = math.min(1, (1/(1/(math.abs(x+minusY)))/8)*2)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230-plus, coff)), math.floor(lerp(block.Color.G, 230-plus, coff)), math.floor(lerp(block.Color.B, 131-plus, coff)))
 
 					world.map:AddBlock(block)
 				end
@@ -636,11 +636,11 @@ game.world.create = function(world, scale)
 				if chance == 0 then
 					local a = perlin.get(x*0.1, y*0.1)*30
 					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
-					local plus = (a + b) / 2
+					local plus = math.abs(((a + b) / 2)*3//3*3)
 					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
-					local coff = math.min(1, 1/(1/(math.abs(x-scale-minusY)))/8)
-					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
-		
+					local coff = math.min(1, (1/(1/(math.abs(x-scale-minusY)))/8)*2)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230-plus, coff)), math.floor(lerp(block.Color.G, 230-plus, coff)), math.floor(lerp(block.Color.B, 131-plus, coff)))
+					
 					world.map:AddBlock(block)
 				end
 			end
@@ -654,11 +654,11 @@ game.world.create = function(world, scale)
 				if chance == 0 then
 					local a = perlin.get(x*0.1, y*0.1)*30
 					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
-					local plus = (a + b) / 2
-					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
-					local coff = math.min(1, 1/(1/(math.abs(y)))/8)
-					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
-		
+					local plus = math.abs(((a + b) / 2)*3//3*3)
+					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y+1))
+					local coff = math.min(1, (1/(1/(math.abs(y)))/8)*2)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230-plus, coff)), math.floor(lerp(block.Color.G, 230-plus, coff)), math.floor(lerp(block.Color.B, 131-plus, coff)))
+					
 					world.map:AddBlock(block)
 				end
 			end
@@ -671,11 +671,11 @@ game.world.create = function(world, scale)
 				if chance == 0 then
 					local a = perlin.get(x*0.1, y*0.1)*30
 					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
-					local plus = (a + b) / 2
+					local plus = math.abs(((a + b) / 2)*3//3*3)
 					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
-					local coff = math.min(1, 1/(1/(math.abs(y-scale)))/8)
-					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
-		
+					local coff = math.min(1, (1/(1/(math.abs(y-scale)))/8)*2)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230-plus, coff)), math.floor(lerp(block.Color.G, 230-plus, coff)), math.floor(lerp(block.Color.B, 131-plus, coff)))
+					
 					world.map:AddBlock(block)
 				end
 			end
@@ -683,25 +683,40 @@ game.world.create = function(world, scale)
 	end
 	world.map:SetParent(World)
 	world.map.water = Quad()
-	world.map.water.Color = Color(122, 194, 245)
+	world.map.water.Color = Color(99, 143, 219)
 	world.map.water.Rotation.X = math.pi/2
-	world.map.water.Scale = scale^2
+	world.map.water.Scale = 32*20
 	world.map.water:SetParent(World)
-	world.map.water.Position = Number3(-scale*5, 4, -scale*5)
+	world.map.water.Position = Number3(-32*5, 4, -32*5)
 	world.map.water.t = 0
 	world.map.water.Tick = function(self, dt)
 		local delta = 63*dt
 		self.t = self.t + delta
-		self.LocalPosition.Y = 0.5 + (math.sin(self.t*0.01)*0.5)
+		self.LocalPosition.Y = 4 + (math.sin(self.t*0.03)*0.5)*0.5
 	end
 
+	world.map.water.shadow = Shape(world.map)
+	world.map.water.shadow:SetParent(World)
+	world.map.water.shadow.Scale = 5
+	world.map.water.shadow.Scale.Y = 0.01
+	world.map.water.shadow.Rotation = Rotation(0, 0, 0)
+	world.map.water.shadow.Tick = function(self, dt)
+		self.Position = world.map.water.Position + Number3(world.map.Width, 0, world.map.Depth)*3.25 + Number3(4.5, 0.001, 1.5)
+	end
+	for i=1, #world.map.water.shadow.Palette do
+		world.map.water.shadow.Palette[i].Color = Color(0, 0, 0, 0.2)
+	end
+	world.map.water.shadow:RefreshModel()
+	Player.Position.Y = 10000
 	Player:SetParent(World)
 end
 game.world.remove = function(world)
-	world.map:SetParent(nil)
+	world.map.water.shadow:SetParent(nil)
+	world.map.water.shadow.Tick = nil
 	world.map.water:SetParent(nil)
 	world.map.water.Tick = nil
 	world.map.water = nil
+	world.map:SetParent(nil)
 	world.map = nil
 
 	Player:SetParent(nil)
@@ -807,6 +822,24 @@ game.tick = function(self, dt)
 		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
 	end
 	AudioListener.Rotation = Camera.Rotation
+
+	if Player.Position.X < 7.5 then
+		Player.Position.X = 7.5
+	end
+	if Player.Position.Z < 7.5 then
+		Player.Position.Z = 7.5
+	end
+	if Player.Position.X > (game.world.map.Width-16) * game.world.map.Scale.X +2.5 then
+		Player.Position.X = (game.world.map.Width-16) * game.world.map.Scale.X +2.5 
+	end
+	if Player.Position.Z > (game.world.map.Depth-16) * game.world.map.Scale.Z -2.5 then 
+		Player.Position.Z = (game.world.map.Depth-16) * game.world.map.Scale.Z -2.5 
+	end
+	if Player.Position.Y < 3 and not Player.isDead then
+		Player.health = 0
+		local e = crystal.Event("set_health", {player = Player.Username, damage = 100})
+		e:SendTo(OtherPlayers) 
+	end
 
 	self.shootTimer = math.max(0, self.shootTimer - dt)
 	if self.controls.shooting and not Player.isDead then
