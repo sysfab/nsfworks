@@ -42,6 +42,8 @@ function loading.create(self)
         self.Title.Text = text
         self:update()
     end
+
+    debug.log("loading() - loading screen created")
 end
 
 function loading.remove(self)
@@ -61,7 +63,7 @@ function loading.remove(self)
     self.Title:remove()
     self.Title = nil
 
-    debug.log("loading() - loading screen removed...")
+    debug.log("loading() - loading screen removed")
 end
 
 return loading
