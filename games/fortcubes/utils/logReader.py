@@ -11,7 +11,7 @@ with open("logs.json", "r", encoding="UTF-8") as f:
 		for log in content['client']:
 			print(("[DEBUG] " if log['type'] == "message" else "[DEBUG ERROR] ") + str(log['content']))
 		print("\nSERVER LOGS:")
-		for log in content['client']:
+		for log in content['server']:
 			print(("[DEBUG] " if log['type'] == "message" else "[DEBUG ERROR] ") + str(log['content']))
 	else:
 		raise ValueError("Wrong logs format")
