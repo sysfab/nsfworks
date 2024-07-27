@@ -92,8 +92,8 @@ game.connection.onEvent = function(connection, e)
 			end
 			b.remove = function(self)
 				self.particle:remove()
-				self.as:SetParent(nil)
-				self.as = nil
+				--self.as:SetParent(nil)
+				--self.as = nil
 				self:SetParent(nil)
 				self.Tick = nil
 			end
