@@ -168,9 +168,7 @@ game.connection.onEvent = function(connection, e)
 								exp:shapes(self)
 								self.isDead = true
 								Timer(2, false, function()
-									self.isDead = false
 									self.Position = Number3(-100000, -100000, -100000)
-									self.IsHidden = false
 									self.health = 100
 									if self == Player then
 										self.Velocity = Number3(0, 0, 0)
@@ -178,6 +176,10 @@ game.connection.onEvent = function(connection, e)
 										self.Position = Number3(math.random(20, 80)/100*game.world.map.Width, 10, math.random(20, 80)/100*game.world.map.Depth)*game.world.map.Scale
 										AudioListener:SetParent(Player)
 									end
+								end)
+								Timer(2.2, false, function()
+									self.isDead = false
+									self.IsHidden = false
 								end)
 							end
 
@@ -297,9 +299,7 @@ game.connection.onEvent = function(connection, e)
 						exp:shapes(self)
 						self.isDead = true
 						Timer(2, false, function()
-							self.isDead = false
 							self.Position = Number3(-100000, -100000, -100000)
-							self.IsHidden = false
 							self.health = 100
 							if self == Player then
 								self.Velocity = Number3(0, 0, 0)
@@ -307,6 +307,10 @@ game.connection.onEvent = function(connection, e)
 								self.Position = Number3(math.random(20, 80)/100*game.world.map.Width, 10, math.random(20, 80)/100*game.world.map.Depth)*game.world.map.Scale
 								AudioListener:SetParent(Player)
 							end
+						end)
+						Timer(2.2, false, function()
+							self.isDead = false
+							self.IsHidden = false
 						end)
 					end
 
