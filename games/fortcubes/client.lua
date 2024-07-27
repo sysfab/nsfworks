@@ -287,7 +287,7 @@ function doneLoading()
 	debug.log("GAME LOADED")
 	debug.log("")
 
-	debug.log("client() - "..randomEasterLogs[math.random(1, #randomEasterLogs)])
+	debug.log("#"..randomEasterLogs[math.random(1, #randomEasterLogs)])
 
 	if debug.enabled == true then
 		toast:create({message = "Game launched with debug enabled."})
