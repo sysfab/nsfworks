@@ -687,13 +687,20 @@ game.world.create = function(world, scale)
 	world.map.water.Rotation.X = math.pi/2
 	world.map.water.Scale = scale^2
 	world.map.water:SetParent(World)
-	world.map.water.Position = Number3(-scale, 4, -scale)
+	world.map.water.Position = Number3(-scale*5, 4, -scale*5)
+	world.map.water.t = 0
+	world.map.water.Tick = function(self, dt)
+		local delta = 63*dt
+		self.t = self.t + delta
+		self.LocalPosition.Y = 0.5 + (math.sin(self.t*0.01)*0.5)
+	end
 
 	Player:SetParent(World)
 end
 game.world.remove = function(world)
 	world.map:SetParent(nil)
 	world.map.water:SetParent(nil)
+	world.map.water.Tick = nil
 	world.map.water = nil
 	world.map = nil
 
