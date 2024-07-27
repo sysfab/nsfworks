@@ -290,6 +290,19 @@ game.connection.onEvent = function(connection, e)
 							end
 						end
 						if other.owner.Username ~= self.Username and other.damage ~= nil and not self.isDead then
+							self.damageParticles = particles:createEmitter()
+							for i=1, 30 do
+								self.damageParticles:updateConfig({
+									position = p.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
+									rotation = Rotation(0, 0, 0),
+									scale = Number3(1, 1, 1),
+									color = Color(255, 0, 0, 230),
+									life = 3.0,
+									velocity = Number3(math.random(-40, 40)/2, math.random(0, 80)/2, math.random(-40, 40)/2),
+								})
+								self.damageParticles:emit()
+							end
+							self.damageParticles:remove()
 							other:remove()
 						end
 					end
@@ -373,6 +386,19 @@ game.connection.onEvent = function(connection, e)
 			debug.log("game() - disconnect of '".. event.data.player .. "'")
 			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = true
+			p.leaveParticles = particles:createEmitter()
+			for i=1, 30 do
+				p.leaveParticles:updateConfig({
+					position = p.Position + Number3(math.random(-10, 10)/2, math.random(0, 40)/2, math.random(-10, 10)/2),
+					rotation = Rotation(0, 0, 0),
+					scale = Number3(3, 3, 3),
+					color = Color(255, 255, 255, 200),
+					life = 3.0,
+					velocity = Number3(math.random(-20, 20)/2, math.random(0, 80)/2, math.random(-20, 20)/2),
+				})
+				p.leaveParticles:emit()
+			end
+			p.leaveParticles:remove()
             if p.pistol ~= nil then
                 p.pistol:SetParent(nil)
 				p.pistol.Tick  = nil
