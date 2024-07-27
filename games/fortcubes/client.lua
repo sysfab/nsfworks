@@ -12,10 +12,16 @@ toast = require("ui_toast")
 
 
 function copyClientLogs()
+	debug.log("client() - copying client logs")
+
 	Dev:CopyToClipboard(debug:export())
 	toast:create({message = "Logs are copied to clipboard."})
+
+	debug.log("client() - client logs are copied")
 end
 function copyServerLogs()
+	debug.log("client() - copying server logs")
+	
 	local e = crystal.Event("get_logs", {})
 	e:SendTo(Server)
 
@@ -28,6 +34,32 @@ function copyServerLogs()
 		toast:create({message = "Server logs are copied to clipboard."})
 		serverLogListener:Remove()
 		serverLogListener = nil
+
+		debug.log("client() - server logs are copied")
+	end)
+end
+function copyLogs()
+	debug.log("client() - copying client and server logs")
+	
+	copyLogsLogs = {}
+	copyLogsLogs.client = JSON:Decode(debug:export())
+
+	local e = crystal.Event("get_logs", {})
+	e:SendTo(Server)
+
+	if serverLogListener ~= nil then
+		serverLogListener:Remove()
+		serverLogListener = nil
+	end
+	serverLogListener = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
+		copyLogsLogs.server = JSON:Decode(e.data)
+		serverLogListener:Remove()
+		serverLogListener = nil
+
+		toast:create({message = "Logs are copied."})
+
+		Dev:CopyToClipboard(JSON:Encode(copyLogsLogs))
+		debug.log("client() - clint and server logs are copied")
 	end)
 end
 
