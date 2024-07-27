@@ -207,7 +207,7 @@ game.connection.onEvent = function(connection, e)
 
 					p.OnCollisionBegin = function(self, other)
 						if self ~= Player and other.damage ~= nil and other.owner == Player then
-							local e = crystal.Event("set_health", {player = v.Username, bullet = other.id})
+							local e = crystal.Event("set_health", {player = p.Username, bullet = other.id})
 							e:SendTo(OtherPlayers)
 						end
 					end
