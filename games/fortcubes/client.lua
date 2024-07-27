@@ -2,13 +2,16 @@ debug.enabled = true
 debug.log("client() - started")
 
 Player.Position = Number3(-1000, -1000, -1000)
-multi = require("multi")
 
 Camera:SetParent(nil)
 Fog.On = false
 Clouds.On = false
+
+debug.log("client() - loading cubzh modules...")
+multi = require("multi")
 ui = uikit_loader()
 toast = require("ui_toast")
+debug.log("client() - loaded cubzh modules")
 
 
 function copyClientLogs()
@@ -63,10 +66,6 @@ function copyLogs()
 	end)
 end
 
-if debug.enabled == true then
-	toast:create({message = "Game launched with debug enabled."})
-end
-
 function set(key, value)
 	rawset(_ENV, key, value)
 end
@@ -74,6 +73,7 @@ end
 
 -- CONFIG
 set("VERSION", "v0.0")
+set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 debug.log("client() - version: "..VERSION)
 
@@ -133,7 +133,7 @@ for key, value in pairs(loadModules) do
 	need_to_load = need_to_load + 1
 
 	loader:loadFunction(value, function(module)
-		debug.log("client() - Loaded '".. key .."'")
+		debug.log("client() - Loaded '".. value .."'")
 
 		_ENV[key] = module()
 
@@ -168,7 +168,7 @@ for key, value in pairs(loadAnimations) do
 	need_to_load = need_to_load + 1
 
 	loader:loadText(value, function(text)
-		debug.log("client() - Loaded '".. key .."'")
+		debug.log("client() - Loaded '".. value .."'")
 
 		animations[key] = text
 
@@ -200,7 +200,7 @@ for key, value in pairs(loadShapes) do
 	need_to_load = need_to_load + 1
 
 	Object:Load(value, function(shape)
-		debug.log("client() - Loaded '".. key .."'")
+		debug.log("client() - Loaded '".. value .."'")
 
 		shapes[key] = shape
 
@@ -232,7 +232,7 @@ for key, value in pairs(loadAudios) do
 	need_to_load = need_to_load + 1
 
 	loader:loadData(value, function(audioData)
-		debug.log("client() - Loaded '".. key .."'")
+		debug.log("client() - Loaded '".. value .."'")
 
 		audio[key] = audioData
 
@@ -258,10 +258,17 @@ for key, value in pairs(loadAudios) do
 end
 debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
 
-function doneLoading()
-	debug.log("client() - Loaded all assets.")
-	settings:load()
 
-	menu:create()
+debug.log("client() - Total: " .. need_to_load .. " assets")
+
+function doneLoading()
 	Camera:SetParent(World)
+	debug.log("client() - Loaded all assets.")
+
+	if debug.enabled == true then
+		toast:create({message = "Game launched with debug enabled."})
+	end
+
+	settings:load()
+	menu:create()
 end
