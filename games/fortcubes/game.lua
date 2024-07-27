@@ -128,6 +128,25 @@ game.connection.onEvent = function(connection, e)
 							v.particles = particles.createEmitter()
 							v.particlesTick = 0
 
+							v.health = 100
+							v.healthBarBG = Quad()
+							v.healthBarBG:SetParent(v)
+							v.healthBarBG.Color = Color(0, 0, 0, 200)
+							v.healthBarBG.Width, v.healthBarBG.Height = 20, 3.5
+							v.healthBarBG.Tick = function(self, dt)
+								self.Position = self:GetParent().Position + Number3(self.Width/4, 15 + self.Height/2, 0)
+								self.Forward = Camera.Backward
+							end
+							v.healthBar = Quad()
+							v.healthBar:SetParent(v)
+							v.healthBar.Color = Color(255, 0, 0, 255)
+							v.healthBar.Width, v.healthBar.Height = 19*v.health*0.01, 2
+							v.healthBar.Tick = function(self, dt)
+								self.Position = self:GetParent().healthBarBG.Position + Number3(-10+0.25, 0.5, 0.01)
+								self.Width, self.Height = 19*self:GetParent().health*0.01, 2
+								self.Backward = Camera.Backward
+							end
+
 							v.OnCollisionBegin = function(self, other)
 								if self ~= Player and other.damage ~= nil then
 									if other.owner == Player then
@@ -141,7 +160,7 @@ game.connection.onEvent = function(connection, e)
 							end
 
 							v.decreaseHealth = function(self, damage)
-								print("player:decreaseHealth(" .. damage .. ") - executed.")
+								self.health = self.health - 20
 							end
 
 							v.Tick = function(self, dt)
@@ -211,6 +230,25 @@ game.connection.onEvent = function(connection, e)
 					p.particles = particles.createEmitter()
 					p.particlesTick = 0
 
+					p.health = 100
+					p.healthBarBG = Quad()
+					p.healthBarBG:SetParent(p)
+					p.healthBarBG.Color = Color(0, 0, 0, 200)
+					p.healthBarBG.Width, p.healthBarBG.Height = 20, 3.5
+					p.healthBarBG.Tick = function(self, dt)
+						self.Position = self:GetParent().Position + Number3(self.Width/4, 15 + self.Height/2, 0)
+						self.Forward = Camera.Backward
+					end
+					p.healthBar = Quad()
+					p.healthBar:SetParent(p)
+					p.healthBar.Color = Color(255, 0, 0, 255)
+					p.healthBar.Width, p.healthBar.Height = 19*p.health*0.01, 2
+					p.healthBar.Tick = function(self, dt)
+						self.Position = self:GetParent().healthBarBG.Position + Number3(-10+0.25, 0.5, 0.01)
+						self.Width, self.Height = 19*self:GetParent().health*0.01, 2
+						self.Backward = Camera.Backward
+					end
+
 					p.OnCollisionBegin = function(self, other)
 						if self ~= Player and other.damage ~= nil then
 							if other.owner == Player then
@@ -224,7 +262,7 @@ game.connection.onEvent = function(connection, e)
 					end
 
 					p.decreaseHealth = function(self, damage)
-						print(self.Username .. ":decreaseHealth(" .. damage .. ") - executed.")
+						self.health = self.health - 20
 					end
 
 					p.Tick = function(self, dt)
