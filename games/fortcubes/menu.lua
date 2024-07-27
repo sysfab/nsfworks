@@ -133,7 +133,9 @@ function menu.create(self)
                 menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05*delta)
             end
             for k, v in pairs(Players) do
-                v.IsHidden = true
+                if not v.isDead then
+                    v.IsHidden = true
+                end
             end
         else
             for k, v in pairs(Players) do
