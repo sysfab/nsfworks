@@ -76,6 +76,13 @@ Server.DidReceiveEvent = function(e)
 		end
 	end,
 
+	get_logs = function(event)
+		debug.log("server() - sending server logs to "..event.Sender.Username)
+
+		local r = crystal.Event("server_logs", debug:export())
+		r:SendTo(event.Sender)
+	end,
+
 	["_"] = function(event)
 		debug.log("server() - got unknown event: "..tostring(event.action))
 	end
