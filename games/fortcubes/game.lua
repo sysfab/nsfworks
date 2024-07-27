@@ -219,6 +219,10 @@ game.connection.onEvent = function(connection, e)
 						end
 					end
 
+					p.decreaseHealth = function(self, damage)
+						print("player:decreaseHealth(" .. damage .. ") - executed.")
+					end
+
 					p.Tick = function(self, dt)
 						self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
 						self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
