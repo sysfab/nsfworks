@@ -235,7 +235,7 @@ game.connection.onEvent = function(connection, e)
 										end
 									end
 									self.Body:setLoop(true)
-									self.Body:setPlaySpeed(8)
+									self.Body:setPlaySpeed(10)
 									self.Body:nanPlay("player_walk")
 								else
 									self.Body:nanStop()
@@ -381,7 +381,7 @@ game.connection.onEvent = function(connection, e)
 								end
 							end
 							self.Body:setLoop(true)
-							self.Body:setPlaySpeed(8)
+							self.Body:setPlaySpeed(10)
 							self.Body:nanPlay("player_walk")
 						else
 							self.Body:nanStop()
@@ -847,7 +847,7 @@ game.controls.directionalPad = function(dx, dy, isJoy)
 		dx = 0
 		dy = 0
 	end
-	Player.Motion = Number3(dx, 0, dy)*80
+	Player.Motion = Number3(dx, 0, dy)*60
 	game.controls.move = {dx, dy}
 end
 
