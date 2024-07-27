@@ -210,6 +210,11 @@ game.connection.onEvent = function(connection, e)
 											self.particles:emit()
 										end
 									end
+
+									if self.health <= 0 and not self.isDead then
+										self:die()
+									end
+									
 									self.Body:setLoop(true)
 									self.Body:setPlaySpeed(8)
 									self.Body:nanPlay("player_walk")
@@ -312,7 +317,7 @@ game.connection.onEvent = function(connection, e)
 						self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
 						self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
 
-					    if self.health < 0 then
+					    if self.health <= 0 and not self.isDead then
 							self:die()
 						end
 
