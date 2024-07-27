@@ -194,6 +194,11 @@ game.connection.onEvent = function(connection, e)
 								if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
 									self.Body.isMoving = true
 								end
+								
+								if self.health <= 0 and not self.isDead then
+									self:die()
+								end
+								
 								if self.Body.isMoving then
 									self.particlesTick = self.particlesTick + 1
 									if self.particlesTick > 8 then
@@ -210,11 +215,6 @@ game.connection.onEvent = function(connection, e)
 											self.particles:emit()
 										end
 									end
-
-									if self.health <= 0 and not self.isDead then
-										self:die()
-									end
-									
 									self.Body:setLoop(true)
 									self.Body:setPlaySpeed(8)
 									self.Body:nanPlay("player_walk")
