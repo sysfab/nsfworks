@@ -157,6 +157,19 @@ game.connection.onEvent = function(connection, e)
 									end
 								end
 								if other.owner.Username ~= self.Username and other.damage ~= nil and not self.isDead then
+									self.damageParticles = particles:createEmitter()
+									for i=1, 30 do
+										self.damageParticles:updateConfig({
+											position = p.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
+											rotation = Rotation(0, 0, 0),
+											scale = Number3(1, 1, 1),
+											color = Color(255, 0, 0, 230),
+											life = 3.0,
+											velocity = Number3(math.random(-40, 40)/2, math.random(0, 80)/2, math.random(-40, 40)/2) + other.Forward*5,
+										})
+										self.damageParticles:emit()
+									end
+									self.damageParticles:remove()
 									other:remove()
 								end
 							end
@@ -290,6 +303,19 @@ game.connection.onEvent = function(connection, e)
 							end
 						end
 						if other.owner.Username ~= self.Username and other.damage ~= nil and not self.isDead then
+							self.damageParticles = particles:createEmitter()
+							for i=1, 30 do
+								self.damageParticles:updateConfig({
+									position = p.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
+									rotation = Rotation(0, 0, 0),
+									scale = Number3(1, 1, 1),
+									color = Color(255, 0, 0, 230),
+									life = 3.0,
+									velocity = Number3(math.random(-40, 40)/2, math.random(0, 80)/2, math.random(-40, 40)/2) + other.Forward*5,
+								})
+								self.damageParticles:emit()
+							end
+							self.damageParticles:remove()
 							other:remove()
 						end
 					end
@@ -399,19 +425,6 @@ game.connection.onEvent = function(connection, e)
 			
 			local p = getPlayerByUsername(event.data.player)
 			p:decreaseHealth(event.data.damage)
-			p.damageParticles = particles:createEmitter()
-			for i=1, 30 do
-				p.damageParticles:updateConfig({
-					position = p.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
-					rotation = Rotation(0, 0, 0),
-					scale = Number3(1, 1, 1),
-					color = Color(255, 0, 0, 230),
-					life = 3.0,
-					velocity = Number3(math.random(-40, 40)/2, math.random(0, 80)/2, math.random(-40, 40)/2),
-				})
-				p.damageParticles:emit()
-			end
-			p.damageParticles:remove()
 		end,
 
 		["_"] = function(event)
