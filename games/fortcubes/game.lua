@@ -104,7 +104,7 @@ game.connection.onEvent = function(connection, e)
 			
 			Player.Velocity = Number3(0, 0, 0)
 			Player.Motion = Number3(0, 0, 0)
-			Player.Position = Number3(event.data.posX*game.world.map.Width, 10, event.data.posY*game.world.map.Depth)*game.world.map.Scale
+			Player.Position = Number3(event.data.posX*(game.world.map.Width-16), 10, event.data.posY*(game.world.map.Depth-16))*game.world.map.Scale
 			AudioListener:SetParent(Player)
 			debug.log("game() - position set")
 
@@ -173,7 +173,7 @@ game.connection.onEvent = function(connection, e)
 									if self == Player then
 										self.Velocity = Number3(0, 0, 0)
 										self.Motion = Number3(0, 0, 0)
-										self.Position = Number3(math.random(20, 80)/100*game.world.map.Width, 10, math.random(20, 80)/100*game.world.map.Depth)*game.world.map.Scale
+										self.Position = Number3(math.random(20, 80)/100*(game.world.map.Width-16), 10, math.random(20, 80)/100*(game.world.map.Depth-16))*game.world.map.Scale
 										AudioListener:SetParent(Player)
 									end
 								end)
@@ -304,7 +304,7 @@ game.connection.onEvent = function(connection, e)
 							if self == Player then
 								self.Velocity = Number3(0, 0, 0)
 								self.Motion = Number3(0, 0, 0)
-								self.Position = Number3(math.random(20, 80)/100*game.world.map.Width, 10, math.random(20, 80)/100*game.world.map.Depth)*game.world.map.Scale
+								self.Position = Number3(math.random(20, 80)/100*(game.world.map.Width-16)+8, 10, math.random(20, 80)/100*(game.world.map.Depth-16)+8)*game.world.map.Scale
 								AudioListener:SetParent(Player)
 							end
 						end)
@@ -597,12 +597,104 @@ game.world.create = function(world, scale)
 			world.map:AddBlock(block)
 		end
 	end
+	for x = -8, 0 do
+		for y = -8, scale+8 do
+			local minusY = 0
+			if y < 0 then
+				minusY = y
+			elseif y > scale then
+				minusY = -(y-scale)
+			end
+			
+			for i=1, 2 do
+				local chance = math.random(math.min(x+minusY, 0), math.max(x+1+minusY, 0))
+				if chance == 0 then
+					local a = perlin.get(x*0.1, y*0.1)*30
+					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
+					local plus = (a + b) / 2
+					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
+					local coff = math.min(1, 1/(1/(math.abs(x+minusY)))/8)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
+
+					world.map:AddBlock(block)
+				end
+			end
+		end
+	end
+
+	for x = scale+1, scale+8 do
+		for y = -8, scale+8 do
+			local minusY = 0
+			if y < 0 then
+				minusY = y
+			elseif y > scale then
+				minusY = -(y-scale)
+			end
+			
+			for i=1, 2 do
+				local chance = math.random(math.min(x-scale-minusY, 0), math.max(x-scale-minusY, 0))
+				if chance == 0 then
+					local a = perlin.get(x*0.1, y*0.1)*30
+					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
+					local plus = (a + b) / 2
+					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
+					local coff = math.min(1, 1/(1/(math.abs(x-scale-minusY)))/8)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
+		
+					world.map:AddBlock(block)
+				end
+			end
+		end
+	end
+
+	for y = -8, 0 do
+		for x = 0, scale do
+			for i=1, 2 do
+				local chance = math.random(math.min(y, 0), math.max(y+1, 0))
+				if chance == 0 then
+					local a = perlin.get(x*0.1, y*0.1)*30
+					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
+					local plus = (a + b) / 2
+					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
+					local coff = math.min(1, 1/(1/(math.abs(y)))/8)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
+		
+					world.map:AddBlock(block)
+				end
+			end
+		end
+	end
+	for y = scale, scale+8 do
+		for x = 0, scale do
+			for i=1, 2 do
+				local chance = math.random(math.min(y-scale, 0), math.max(y-scale, 0))
+				if chance == 0 then
+					local a = perlin.get(x*0.1, y*0.1)*30
+					local b = perlin.get(x+18532*0.2, y+13532*0.2)*20
+					local plus = (a + b) / 2
+					local block = Block(Color(math.floor(77-plus), math.floor(140-plus), math.floor(77-plus), 255), Number3(x, 0, y))
+					local coff = math.min(1, 1/(1/(math.abs(y-scale)))/8)
+					block.Color = Color(math.floor(lerp(block.Color.R, 230, coff)), math.floor(lerp(block.Color.G, 230, coff)), math.floor(lerp(block.Color.B, 131, coff)))
+		
+					world.map:AddBlock(block)
+				end
+			end
+		end
+	end
 	world.map:SetParent(World)
+	world.map.water = Quad()
+	world.map.water.Color = Color(122, 194, 245)
+	world.map.water.Rotation.X = math.pi/2
+	world.map.water.Scale = scale^2
+	world.map.water:SetParent(World)
+	world.map.water.Position = Number3(-scale, 4, -scale)
 
 	Player:SetParent(World)
 end
 game.world.remove = function(world)
 	world.map:SetParent(nil)
+	world.map.water:SetParent(nil)
+	world.map.water = nil
 	world.map = nil
 
 	Player:SetParent(nil)
