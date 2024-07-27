@@ -154,26 +154,23 @@ game.connection.onEvent = function(connection, e)
 										e:SendTo(Players)
 									end
 								end
-								if other.owner.Username ~= self.Username and other.damage ~= nil then
+								if other.owner.Username ~= self.Username and other.damage ~= nil and not self.isDead then
 									other:remove()
 								end
 							end
-
+		
 							v.decreaseHealth = function(self, damage)
-								if not self.isDead then
-									self.health = self.health - damage
-								end
+								self.health = self.health - damage
 							end
 		
 							v.die = function(self)
 								local exp = require("explode")
 								exp:shapes(self)
 								self.isDead = true
-								self.IsHidden = true
 								Timer(2, false, function()
 									self.isDead = false
-									self.health = 100
 									self.IsHidden = false
+									self.health = 100
 									if self == Player then
 										self.Velocity = Number3(0, 0, 0)
 										self.Motion = Number3(0, 0, 0)
@@ -197,6 +194,10 @@ game.connection.onEvent = function(connection, e)
 								
 								if self.health <= 0 and not self.isDead then
 									self:die()
+								end
+
+								if self.isDead == true then
+									self.IsHidden = true
 								end
 
 								if self.Body.isMoving then
@@ -281,15 +282,13 @@ game.connection.onEvent = function(connection, e)
 								e:SendTo(Players)
 							end
 						end
-						if other.owner.Username ~= self.Username and other.damage ~= nil then
+						if other.owner.Username ~= self.Username and other.damage ~= nil and not self.isDead then
 							other:remove()
 						end
 					end
 
 					p.decreaseHealth = function(self, damage)
-						if not self.isDead then
-							self.health = self.health - damage
-						end
+						self.health = self.health - damage
 					end
 
 					p.die = function(self)
@@ -298,8 +297,8 @@ game.connection.onEvent = function(connection, e)
 						self.isDead = true
 						Timer(2, false, function()
 							self.isDead = false
-							self.health = 100
 							self.IsHidden = false
+							self.health = 100
 							if self == Player then
 								self.Velocity = Number3(0, 0, 0)
 								self.Motion = Number3(0, 0, 0)
@@ -316,33 +315,41 @@ game.connection.onEvent = function(connection, e)
 						self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
 						self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
 
-					    if self.health <= 0 and not self.isDead then
-							self:die()
-						end
-
 						self.Body.isMoving = false
 						if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
 							self.Body.isMoving = true
 						end
+						
+						if self.health <= 0 and not self.isDead then
+							self:die()
+						end
+
+						if self.isDead == true then
+							self.IsHidden = true
+						end
+
 						if self.Body.isMoving then
 							self.particlesTick = self.particlesTick + 1
-							if self.particlesTick > 10 then
+							if self.particlesTick > 8 then
 								self.particlesTick = 0
-								self.particles:updateConfig({
-									position = self.Position,
-									velocity = Number3(math.random(-10, 10), math.random(5, 20), math.random(-10, 10)),
-									scale = Number3(1, 1, 1),
-									color = Color(77, 144, 77),
-									life = 0.5,
-									scale_end = Number3(0, 0, 0),
-								})
-								self.particles:emit()
+								for i=1, 5 do
+									self.particles:updateConfig({
+										position = self.Position + self.Forward,
+										velocity = Number3(math.random(-10, 10), math.random(10, 20), math.random(-10, 10))*2,
+										scale = Number3(1.5, 1.5, 1.5),
+										color = Color(77, 144, 77),
+										life = 0.5,
+										scale_end = Number3(0, 0, 0),
+									})
+									self.particles:emit()
+								end
 							end
 							self.Body:setLoop(true)
 							self.Body:setPlaySpeed(8)
 							self.Body:nanPlay("player_walk")
 						else
 							self.Body:nanStop()
+							self.particlesTick = 0
 						end
 					end
                 end)
