@@ -198,7 +198,7 @@ game.connection.onEvent = function(connection, e)
 								if self.health <= 0 and not self.isDead then
 									self:die()
 								end
-								
+
 								if self.Body.isMoving then
 									self.particlesTick = self.particlesTick + 1
 									if self.particlesTick > 8 then
@@ -296,7 +296,6 @@ game.connection.onEvent = function(connection, e)
 						local exp = require("explode")
 						exp:shapes(self)
 						self.isDead = true
-						self.IsHidden = true
 						Timer(2, false, function()
 							self.isDead = false
 							self.health = 100
@@ -690,13 +689,13 @@ end
 
 game.tick = function(self, dt)
 	Player.Velocity.Y = Player.Velocity.Y + 0.01
-	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting then
+	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting and not Player.isDead then
 		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
 	end
 	AudioListener.Rotation = Camera.Rotation
 
 	self.shootTimer = math.max(0, self.shootTimer - dt)
-	if self.controls.shooting then
+	if self.controls.shooting and not Player.isDead then
 		if self.shootTimer == 0 then
 			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X+Player.Forward.X*10, y = Player.Head.Position.Y-1+Player.Forward.Y*10, z = Player.Head.Position.Z+Player.Forward.Z*10})
 			e:SendTo(Players)
