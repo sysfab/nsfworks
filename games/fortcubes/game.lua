@@ -723,7 +723,7 @@ game.create = function(self)
 	self.shootTimer = 0
 
 	self.created = true
-	self.world:create(128)
+	self.world:create(32)
 	self.camera:create()
 	self.ui:create()
 	self.controls:create()
