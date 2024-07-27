@@ -135,7 +135,7 @@ game.connection.onEvent = function(connection, e)
 										e:SendTo(Players)
 									end
 								end
-								if other.owner.Username ~= self.Username then
+								if other.owner.Username ~= self.Username and other.damage ~= nil then
 									other:remove()
 								end
 							end
