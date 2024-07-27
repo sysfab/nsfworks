@@ -132,8 +132,10 @@ game.connection.onEvent = function(connection, e)
 								if self ~= Player and other.damage ~= nil then
 									if other.owner == Player then
 										local e = crystal.Event("set_health", {player = self.Username, damage = other.damage})
-										e:SendTo(OtherPlayers)
+										e:SendTo(Players)
 									end
+								end
+								if other.owner.Username ~= self.Username then
 									other:remove()
 								end
 							end
@@ -213,14 +215,16 @@ game.connection.onEvent = function(connection, e)
 						if self ~= Player and other.damage ~= nil then
 							if other.owner == Player then
 								local e = crystal.Event("set_health", {player = self.Username, damage = other.damage})
-								e:SendTo(OtherPlayers)
+								e:SendTo(Players)
 							end
+						end
+						if other.owner.Username ~= self.Username then
 							other:remove()
 						end
 					end
 
 					p.decreaseHealth = function(self, damage)
-						print("player:decreaseHealth(" .. damage .. ") - executed.")
+						print(self.Username .. ":decreaseHealth(" .. damage .. ") - executed.")
 					end
 
 					p.Tick = function(self, dt)
