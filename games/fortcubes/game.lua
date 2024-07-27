@@ -160,7 +160,27 @@ game.connection.onEvent = function(connection, e)
 							end
 
 							v.decreaseHealth = function(self, damage)
-								self.health = self.health - 20
+								if not self.isDead then
+									self.health = self.health - damage
+								end
+							end
+		
+							v.die = function(self)
+								local exp = require("explode")
+								exp:shapes(self)
+								self.isDead = true
+								self.IsHidden = true
+								Timer(2, false, function()
+									self.isDead = false
+									self.health = 100
+									self.IsHidden = false
+									if self == Player then
+										self.Velocity = Number3(0, 0, 0)
+										self.Motion = Number3(0, 0, 0)
+										self.Position = Number3(math.random(20, 80)/100*game.world.map.Width, 10, math.random(20, 80)/100*game.world.map.Depth)*game.world.map.Scale
+										AudioListener:SetParent(Player)
+									end
+								end)
 							end
 
 							v.Tick = function(self, dt)
@@ -262,7 +282,27 @@ game.connection.onEvent = function(connection, e)
 					end
 
 					p.decreaseHealth = function(self, damage)
-						self.health = self.health - 20
+						if not self.isDead then
+							self.health = self.health - damage
+						end
+					end
+
+					p.die = function(self)
+						local exp = require("explode")
+						exp:shapes(self)
+						self.isDead = true
+						self.IsHidden = true
+						Timer(2, false, function()
+							self.isDead = false
+							self.health = 100
+							self.IsHidden = false
+							if self == Player then
+								self.Velocity = Number3(0, 0, 0)
+								self.Motion = Number3(0, 0, 0)
+								self.Position = Number3(math.random(20, 80)/100*game.world.map.Width, 10, math.random(20, 80)/100*game.world.map.Depth)*game.world.map.Scale
+								AudioListener:SetParent(Player)
+							end
+						end)
 					end
 
 					p.Tick = function(self, dt)
@@ -271,6 +311,10 @@ game.connection.onEvent = function(connection, e)
 						self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
 						self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
 						self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
+
+					    if self.health < 0 then
+							self:die()
+						end
 
 						self.Body.isMoving = false
 						if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
