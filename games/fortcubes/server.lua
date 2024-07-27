@@ -1,5 +1,5 @@
 debug.enabled = true
-debug.log("server() - online")
+debug.log("server() - started")
 
 game = {}
 players = {}

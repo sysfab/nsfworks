@@ -1,6 +1,26 @@
 debug.enabled = true
 debug.log("client() - started")
 
+randomEasterLogs = {
+	"Once upon a time...",
+	"NOT SAFE TO PLAY",
+	"It starts with...",
+	"Who coded this??",
+	"Hello world!",
+	"Good luck debugging this",
+	"Who also hates bugs?",
+	"SYSTEMS: ONLINE | STATUS: WORKING (or not)",
+	"im totally not just adding garbage logs into this",
+	":3",
+	"pew pew",
+	"Do not touch anything",
+	"please, forgive me",
+	"Hello    anyone??",
+	"Im watching you <0>",
+	"TOP SECRET",
+	"If it breaks, im not guilty"
+}
+
 Player.Position = Number3(-1000, -1000, -1000)
 
 Camera:SetParent(nil)
@@ -263,7 +283,11 @@ debug.log("client() - Total: " .. need_to_load .. " assets")
 
 function doneLoading()
 	Camera:SetParent(World)
-	debug.log("client() - Loaded all assets.")
+	debug.log("")
+	debug.log("GAME LOADED")
+	debug.log("")
+
+	debug.log("client() - "..randomEasterLogs[math.random(1, #randomEasterLogs)])
 
 	if debug.enabled == true then
 		toast:create({message = "Game launched with debug enabled."})
