@@ -825,6 +825,7 @@ game.tick = function(self, dt)
 	if game.controls.move[1] ~= nil and game.controls.move[2] ~= nil and not game.controls.shooting and not Player.isDead then
 		Player.Forward = lerp(Player.Forward, Number3(game.controls.move[1]+math.random(-100, 100)/ 100000, 0, game.controls.move[2]+math.random(-100, 100)/ 100000), 0.3)
 	end
+	Player.Head.Rotation.X = 0
 	AudioListener.Rotation = Camera.Rotation
 
 	if Player.Position.X < 7.5 then
