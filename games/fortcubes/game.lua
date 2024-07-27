@@ -686,7 +686,9 @@ game.controls.directionalPad = function(dx, dy, isJoy)
 		dx = d.X
 		dy = d.Y
 	end
-	Player.Motion = Number3(dx, 0, dy)*80
+	if not Player.isDead then
+		Player.Motion = Number3(dx, 0, dy)*80
+	end
 	game.controls.move = {dx, dy}
 end
 
