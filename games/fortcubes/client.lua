@@ -8,6 +8,32 @@ Camera:SetParent(nil)
 Fog.On = false
 Clouds.On = false
 ui = uikit_loader()
+toast = require("ui_toast")
+
+
+function copyClientLogs()
+	Dev:CopyToClipboard(debug:export())
+	toast:create({message = "Logs are copied to clipboard."})
+end
+function copyServerLogs()
+	local e = crystal.Event("get_logs", {})
+	e:SendTo(Server)
+
+	if serverLogListener ~= nil then
+		serverLogListener:Remove()
+		serverLogListener = nil
+	end
+	serverLogListener = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
+		Dev:CopyToClipboard(e.data)
+		toast:create({message = "Server logs are copied to clipboard."})
+		serverLogListener:Remove()
+		serverLogListener = nil
+	end)
+end
+
+if debug.enabled == true then
+	toast:create({message = "Game launched with debug enabled."})
+end
 
 function set(key, value)
 	rawset(_ENV, key, value)
