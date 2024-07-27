@@ -147,6 +147,8 @@ game.connection.onEvent = function(connection, e)
 								self.Backward = Camera.Backward
 							end
 
+							v.CollisionBox = Box({-8, 0, -8}, {8, 29, 8})
+
 							v.OnCollisionBegin = function(self, other)
 								if self ~= Player and other.damage ~= nil then
 									if other.owner == Player then
@@ -277,6 +279,8 @@ game.connection.onEvent = function(connection, e)
 						self.Width, self.Height = 19*self:GetParent().health*0.01, 2
 						self.Backward = Camera.Backward
 					end
+
+					p.CollisionBox = Box({-8, 0, -8}, {8, 29, 8})
 
 					p.OnCollisionBegin = function(self, other)
 						if self ~= Player and other.damage ~= nil then
@@ -701,7 +705,7 @@ game.world.create = function(world, scale)
 	world.map.water.shadow.Scale.Y = 0.01
 	world.map.water.shadow.Rotation = Rotation(0, 0, 0)
 	world.map.water.shadow.Tick = function(self, dt)
-		self.Position = world.map.water.Position + Number3(world.map.Width, 0, world.map.Depth)*3.25 + Number3(4.5, 0.001, 1.5)
+		self.Position = Number3(world.map.Position.X, world.map.water.Position.Y, world.map.Position.Z) + Number3(0.5, 0.01, 0.5)
 	end
 	for i=1, #world.map.water.shadow.Palette do
 		world.map.water.shadow.Palette[i].Color = Color(0, 0, 0, 0.2)
@@ -857,7 +861,7 @@ game.create = function(self)
 	self.shootTimer = 0
 
 	self.created = true
-	self.world:create(32)
+	self.world:create(64)
 	self.camera:create()
 	self.ui:create()
 	self.controls:create()
