@@ -111,6 +111,7 @@ game.connection.onEvent = function(connection, e)
 			for k, v in pairs(Players) do
 				if event.data.players[v.Username] ~= nil then
 		            v.IsHidden = false
+					v.health = 100
 		            if v.pistol == nil then
 		                Object:Load("voxels.silver_pistol", function(s)
 		                    v.pistol = Shape(s)
@@ -128,7 +129,6 @@ game.connection.onEvent = function(connection, e)
 							v.particles = particles.createEmitter()
 							v.particlesTick = 0
 
-							v.health = 100
 							v.healthBarBG = Quad()
 							v.healthBarBG:SetParent(v)
 							v.healthBarBG.Color = Color(0, 0, 0, 200)
@@ -257,6 +257,7 @@ game.connection.onEvent = function(connection, e)
 			debug.log("game() - new connection of '".. event.data.player .. "'")
 			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = false
+			p.health = 100
             if p.pistol == nil then
                 Object:Load("voxels.silver_pistol", function(s)
                     p.pistol = Shape(s)
@@ -274,7 +275,6 @@ game.connection.onEvent = function(connection, e)
 					p.particles = particles.createEmitter()
 					p.particlesTick = 0
 
-					p.health = 100
 					p.healthBarBG = Quad()
 					p.healthBarBG:SetParent(p)
 					p.healthBarBG.Color = Color(0, 0, 0, 200)
