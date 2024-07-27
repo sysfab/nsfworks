@@ -160,7 +160,7 @@ game.connection.onEvent = function(connection, e)
 									self.damageParticles = particles:createEmitter()
 									for i=1, 30 do
 										self.damageParticles:updateConfig({
-											position = p.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
+											position = self.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
 											rotation = Rotation(0, 0, 0),
 											scale = Number3(1, 1, 1),
 											color = Color(255, 0, 0, 230),
@@ -306,7 +306,7 @@ game.connection.onEvent = function(connection, e)
 							self.damageParticles = particles:createEmitter()
 							for i=1, 30 do
 								self.damageParticles:updateConfig({
-									position = p.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
+									position = self.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
 									rotation = Rotation(0, 0, 0),
 									scale = Number3(1, 1, 1),
 									color = Color(255, 0, 0, 230),
