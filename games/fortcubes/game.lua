@@ -53,8 +53,6 @@ game.connection.onEvent = function(connection, e)
 				b.as:Play()
 			end
 			b.damage = 20
-			b.id = game.getId("bullet")
-			game.bullets[b.id] = b
 
 			b.particle = particles.createEmitter({
 				position = b.Position + b.Forward*2.5 + b.Down*0.5,
@@ -93,7 +91,6 @@ game.connection.onEvent = function(connection, e)
 				end
 			end
 			b.remove = function(self)
-				game.bullets[self.id] = nil
 				self.particle:remove()
 				self.as:SetParent(nil)
 				self.as = nil
@@ -132,10 +129,17 @@ game.connection.onEvent = function(connection, e)
 							v.particlesTick = 0
 
 							v.OnCollisionBegin = function(self, other)
-								if self ~= Player and other.damage ~= nil and other.owner == Player then
-									local e = crystal.Event("set_health", {player = v.Username, bullet = other.id})
-									e:SendTo(OtherPlayers)
+								if self ~= Player and other.damage ~= nil then
+									if other.owner == Player then
+										local e = crystal.Event("set_health", {player = self.Username, damage = other.damage})
+										e:SendTo(OtherPlayers)
+									end
+									other:remove()
 								end
+							end
+
+							v.decreaseHealth = function(self, damage)
+								print("player:decreaseHealth(" .. damage .. ") - executed.")
 							end
 
 							v.Tick = function(self, dt)
@@ -206,9 +210,12 @@ game.connection.onEvent = function(connection, e)
 					p.particlesTick = 0
 
 					p.OnCollisionBegin = function(self, other)
-						if self ~= Player and other.damage ~= nil and other.owner == Player then
-							local e = crystal.Event("set_health", {player = p.Username, bullet = other.id})
-							e:SendTo(OtherPlayers)
+						if self ~= Player and other.damage ~= nil then
+							if other.owner == Player then
+								local e = crystal.Event("set_health", {player = self.Username, damage = other.damage})
+								e:SendTo(OtherPlayers)
+							end
+							other:remove()
 						end
 					end
 
@@ -264,9 +271,10 @@ game.connection.onEvent = function(connection, e)
 
 		set_health = function(event)
 			local p = getPlayerByUsername(event.data.player)
-			debug.log("game() - set_health event of " .. event.data.player .. " with bullet id [" .. event.data.bullet .. "].")
-			local bullet = game.getBulletById(event.data.bullet)
-			bullet:remove()
+			debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
+			
+			local p = getPlayerByUsername(event.data.player)
+			p:decreaseHealth(event.data.damage)
 		end,
 
 		["_"] = function(event)
@@ -648,23 +656,6 @@ game.remove = function(self, callback)
 	self.created = false
 	Player.Position = Number3(-1000, -1000, -1000)
 	debug.log("game() - removed")
-end
-
-game.getId = function(type)
-	if game.ids == nil then
-		game.ids = {}
-	end
-	if game.ids[type] == nil then
-		game.ids[type] = {}
-	end
-	
-	local id = #game.ids[type] + 1
-	game.ids[type][id] = true
-    return id
-end
-
-game.getBulletById = function(id)
-	return game.bullets[id]
 end
 
 return game
