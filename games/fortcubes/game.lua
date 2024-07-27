@@ -169,6 +169,7 @@ game.connection.onEvent = function(connection, e)
 								self.isDead = true
 								Timer(2, false, function()
 									self.isDead = false
+									self.Position = Number3(-100000, -100000, -100000)
 									self.IsHidden = false
 									self.health = 100
 									if self == Player then
@@ -297,6 +298,7 @@ game.connection.onEvent = function(connection, e)
 						self.isDead = true
 						Timer(2, false, function()
 							self.isDead = false
+							self.Position = Number3(-100000, -100000, -100000)
 							self.IsHidden = false
 							self.health = 100
 							if self == Player then
