@@ -433,7 +433,7 @@ game.connection.onEvent = function(connection, e)
 			for k, v in pairs(rocks) do
 				local rock = Shape(shapes.rock)
 				rock:SetParent(World)
-				rock.Position = rocks[k].pos
+				rock.Position = rocks[k].pos + Number3(2.5, 0, 2.5)
 				rock.Rotation.Y = rocks[k].rot
 				rock.Palette[1].Color = rocks[k].col1
 				rock.Palette[2].Color = rocks[k].col2

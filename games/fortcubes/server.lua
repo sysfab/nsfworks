@@ -87,7 +87,7 @@ Server.DidReceiveEvent = function(e)
 
 	send_rocks = function(event)
 		local p = getPlayerByUsername(event.data.player)
-		local e = crystal.Event("load_rocks", {rocks = JSON:Encode(rocks)})
+		local e = crystal.Event("load_rocks", {rocks = JSON:Encode(server_rocks)})
 		e:SendTo(p)
 	end,
 
@@ -99,15 +99,15 @@ Server.DidReceiveEvent = function(e)
 end
 
 function createRocks()
-	rocks = {}
+	server_rocks = {}
 	
 	for i=1, 50 do
-		rocks[i].pos = Number3((math.random(1, scale))*5, 5, (math.random(1, scale))*5) + Number3(2.5, 0, 2.5)
-		rocks[i].rot = math.random(-314, 314)*0.01
+		server_rocks[i].pos = {(math.random(1, scale))*5, 5, (math.random(1, scale))*5}
+		server_rocks[i].rot = math.random(-314, 314)*0.01
 
 		local c = math.random(-20, 20)
-		rocks[i].col1 = Color(130+c, 140+c, 140+c)
-		rocks[i].col2 = Color(140+c, 150+c, 160+c)
-		rocks[i].id = i
+		server_rocks[i].col1 = {130+c, 140+c, 140+c}
+		server_rocks[i].col2 = {140+c, 150+c, 160+c}
+		server_rocks[i].id = i
 	end
 end
