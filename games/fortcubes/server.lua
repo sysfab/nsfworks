@@ -1,6 +1,17 @@
 debug.enabled = true
 debug.log("server() - started")
 
+function set(key, value)
+	rawset(_ENV, key, value)
+end
+
+
+-- CONFIG
+set("VERSION", "v1.0")
+set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
+
+debug.log("server() - version: "..VERSION)
+
 game = {}
 players = {}
 event_players = {}

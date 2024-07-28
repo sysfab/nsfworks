@@ -92,7 +92,7 @@ end
 
 
 -- CONFIG
-set("VERSION", "v0.0")
+set("VERSION", "v1.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 debug.log("client() - version: "..VERSION)
