@@ -9,6 +9,8 @@ function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
 	game.ticks = 0
+
+	createRocks()
 end
 
 function getPlayerByUsername(username)
@@ -25,9 +27,6 @@ end
 
 Server.OnPlayerJoin = function(player)
 	debug.log("server() - player joined [" .. player.Username .. "]")
-	if server_logs == nil then
-		createRocks()
-	end
 end
 
 Server.OnPlayerLeave = function(player)
