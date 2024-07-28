@@ -150,7 +150,7 @@ game.connection.onEvent = function(connection, e)
 
 							v.bushcollider = Object()
 							v.bushcollider:SetParent(v)
-							v.bushcollider.CollisionBox = Box(Number3(-0.5, 0, -0.5), Number3(0.5, 20, 0.5))
+							v.bushcollider.CollisionBox = Box(Number3(-2.5, 0, -2.5), Number3(2.5, 20, 2.5))
 							v.bushcollider.Physics = PhysicsMode.Trigger
 							v.bushcollider.LocalPosition.Y = 9
 							v.bushcollider.t = 0
@@ -169,7 +169,7 @@ game.connection.onEvent = function(connection, e)
 								if self.collides and not self:GetParent().Body.isMoving then
 									self.t = self.t + 63*dt
 
-									if self.t > 180 then
+									if self.t > 60 then
 										if not self.inbush then
 											self.inbush = true
 											self:GetParent().inbush = true
