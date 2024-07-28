@@ -960,6 +960,11 @@ game.world.remove = function(world)
 		world.map.rocks[i] = nil
 	end
 
+	for i=1, #world.map.bushes do
+		world.map.bushes[i]:SetParent(nil)
+		world.map.bushes[i] = nil
+	end
+
 	world.map.water.shadow:SetParent(nil)
 	world.map.water.shadow.Tick = nil
 	world.map.water:SetParent(nil)
