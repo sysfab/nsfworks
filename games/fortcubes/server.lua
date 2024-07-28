@@ -105,7 +105,7 @@ function createRocks()
 	
 	for i=1, 50 do
 		server_rocks[i] = {}
-		server_rocks[i].pos = {(math.random(1, scale))*5, 5, (math.random(1, scale))*5}
+		server_rocks[i].pos = {(math.random(1, 64))*5, 5, (math.random(1, 64))*5}
 		server_rocks[i].rot = math.random(-314, 314)*0.01
 
 		local c = math.random(-20, 20)
