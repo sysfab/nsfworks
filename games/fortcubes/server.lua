@@ -9,6 +9,8 @@ function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
 	game.ticks = 0
+	
+	createRocks()
 end
 
 function getPlayerByUsername(username)
@@ -101,6 +103,7 @@ function createRocks()
 	debug.log("server() - creating rocks...")
 	
 	for i=1, 50 do
+		server_rocks[i] = {}
 		server_rocks[i].pos = {(math.random(1, scale))*5, 5, (math.random(1, scale))*5}
 		server_rocks[i].rot = math.random(-314, 314)*0.01
 
@@ -112,5 +115,3 @@ function createRocks()
 
 	debug.log("server() - rocks created: " .. tostring(server_rocks))
 end
-
-createRocks()
