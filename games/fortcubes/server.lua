@@ -9,8 +9,6 @@ function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
 	game.ticks = 0
-
-	createRocks()
 end
 
 function getPlayerByUsername(username)
@@ -114,3 +112,5 @@ function createRocks()
 
 	debug.log("server() - rocks created: " .. tostring(server_rocks))
 end
+
+createRocks()
