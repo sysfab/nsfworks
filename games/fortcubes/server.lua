@@ -87,7 +87,7 @@ Server.DidReceiveEvent = function(e)
 
 	send_rocks = function(event)
 		local p = getPlayerByUsername(event.data.player)
-		local e = crystal.Event("load_rocks", {rocks = rocks})
+		local e = crystal.Event("load_rocks", {rocks = JSON:Encode(rocks)})
 		e:SendTo(p)
 	end,
 
