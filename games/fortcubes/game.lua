@@ -587,11 +587,12 @@ game.connection.onEvent = function(connection, e)
 				bush.move = function(self)
 					if not self.ismoving then
 						local defaultRot = Rotation(self.Rotation.X, self.Rotation.Y, self.Rotation.Z)
-						self.Rotation.X = math.random(-10, 10)*0.1
+						local r = {"X", "Y", "Z"}
+						self.Rotation[r[math.random(1, 3)]] = math.random(-10, 10)*0.1
 						self.ismoving = true
-						for i=1, 60 do
+						for i=1, 20 do
 							Timer(i*0.016, false, function()
-								self.Rotation:Slerp(self.Rotation, defaultRot, 0.1)
+								self.Rotation:Slerp(self.Rotation, defaultRot, 0.3)
 							end)
 							Timer(1, false, function()
 								self.ismoving = false
