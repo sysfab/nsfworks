@@ -435,8 +435,8 @@ game.connection.onEvent = function(connection, e)
 				rock:SetParent(World)
 				rock.Position = rocks[k].pos + Number3(2.5, 0, 2.5)
 				rock.Rotation.Y = rocks[k].rot
-				rock.Palette[1].Color = rocks[k].col1
-				rock.Palette[2].Color = rocks[k].col2
+				rock.Palette[1].Color = Color(rocks[k].col1[1], rocks[k].col1[2], rocks[k].col1[3])
+				rock.Palette[2].Color = Color(rocks[k].col2[1], rocks[k].col2[2], rocks[k].col2[3])
 				rock.id = rocks[k].id
 
 				rock.Physics = PhysicsMode.Trigger
