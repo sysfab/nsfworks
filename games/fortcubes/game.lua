@@ -168,6 +168,7 @@ game.connection.onEvent = function(connection, e)
 								end
 								if distance(v.Position, Player.Position) < 120 and other.type == "bush"then
 									v.bushcollider.sound:Play()
+									other:move()
 								end
 							end
 							v.bushcollider.OnCollisionEnd = function(self, other)
@@ -375,6 +376,7 @@ game.connection.onEvent = function(connection, e)
 						end
 						if distance(p.Position, Player.Position) < 120 and other.type == "bush"then
 							p.bushcollider.sound:Play()
+							other:move()
 						end
 					end
 					p.bushcollider.OnCollisionEnd = function(self, other)
@@ -581,6 +583,15 @@ game.connection.onEvent = function(connection, e)
 				bush.Rotation.Y = bushes[k].rot
 				bush.id = bushes[k].id
 				bush.type = "bush"
+
+				bush.move = function(self)
+					self.Rotation.X = math.random(-10, 10)*0.1
+					for i=1, 60 do
+						Timer(i*0.016, false, function()
+							self.Rotation.X = lerp(self.Rotation.X, 0, 0.05)
+						end)
+					end
+				end
 
 				bush.Physics = PhysicsMode.Trigger
 				bush.Scale = Number3(0.75, 1.5, 0.75)
