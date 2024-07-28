@@ -641,7 +641,7 @@ game.world.create = function(world, scale)
 		end
 	end
 	for x = -8, 0 do
-		for y = -8, scale+8 do
+		for y = -7, scale+8 do
 			local minusY = 0
 			if y < 0 then
 				minusY = y
@@ -666,7 +666,7 @@ game.world.create = function(world, scale)
 	end
 
 	for x = scale+1, scale+8 do
-		for y = -8, scale+8 do
+		for y = -7, scale+8 do
 			local minusY = 0
 			if y < 0 then
 				minusY = y
@@ -750,10 +750,27 @@ game.world.create = function(world, scale)
 		world.map.water.shadow.Palette[i].Color = Color(0, 0, 0, 0.2)
 	end
 	world.map.water.shadow:RefreshModel()
+
+	world.map.rocks = {}
+	for i=1, 50 do
+		local rock = Shape(shapes.rock)
+		rock:SetParent(World)
+		rock.Position = Number3((math.random(1, scale)+8)*5, 5, (math.random(1, scale)+8)*5)
+		rock.Rotation.Y = math.random(-314, 314)*0.01
+
+		world.map.rocks[i] = rock
+	end
+
 	Player.Position.Y = 10000
 	Player:SetParent(World)
 end
 game.world.remove = function(world)
+
+	for i=1, #world.map.rocks do
+		world.map.rocks[i]:SetParent(nil)
+		world.map.rocks[i] = nil
+	end
+
 	world.map.water.shadow:SetParent(nil)
 	world.map.water.shadow.Tick = nil
 	world.map.water:SetParent(nil)
@@ -878,8 +895,8 @@ game.tick = function(self, dt)
 	if Player.Position.X > (game.world.map.Width-16) * game.world.map.Scale.X +2.5 then
 		Player.Position.X = (game.world.map.Width-16) * game.world.map.Scale.X +2.5 
 	end
-	if Player.Position.Z > (game.world.map.Depth-16) * game.world.map.Scale.Z -2.5 then 
-		Player.Position.Z = (game.world.map.Depth-16) * game.world.map.Scale.Z -2.5 
+	if Player.Position.Z > (game.world.map.Depth-16) * game.world.map.Scale.Z +2.5 then 
+		Player.Position.Z = (game.world.map.Depth-16) * game.world.map.Scale.Z +2.5 
 	end
 	if Player.Position.Y < 3 and not Player.isDead then
 		Player.health = 0

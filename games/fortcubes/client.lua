@@ -136,6 +136,7 @@ loadShapes = {
 	toolgun = "nanskip.toolgun",
 	lua_block = "fab3kleuuu.lua_block",
 	bullet = "nanskip.ca_bullet",
+	rock = "nsfworks.fortcubes_rock"
 }
 
 audio = {}
