@@ -32,7 +32,7 @@ game.connection.onEvent = function(connection, e)
 
 		bullet = function(event)
 			local b = Shape(shapes.bullet, {includeChildren = true})
-			b.owner = getPlayerByUsername(event.player)
+			b.owner = getPlayerByUsername(event.data.player)
 
 			b:SetParent(World)
 			b.Rotation = Rotation(0, event.data.rot, 0)
@@ -304,8 +304,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		new_connection = function(event)
-			debug.log("game() - new connection of '".. event.player .. "'")
-			local p = getPlayerByUsername(event.player)
+			debug.log("game() - new connection of '".. event.data.player .. "'")
+			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = false
 			p.health = 100
             if p.pistol == nil then
@@ -495,8 +495,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		new_disconnection = function(event)
-			debug.log("game() - disconnect of '".. event.player .. "'")
-			local p = getPlayerByUsername(event.player)
+			debug.log("game() - disconnect of '".. event.data.player .. "'")
+			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = true
 			p.leaveParticles = particles:createEmitter()
 			for i=1, 30 do
@@ -519,8 +519,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		set_health = function(event)
-			local p = getPlayerByUsername(event.player)
-			debug.log("game() - set_health event of " .. event.player .. " with damage [" .. event.data.damage .. "].")
+			local p = getPlayerByUsername(event.data.player)
+			debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
 
 			p:decreaseHealth(event.data.damage)
 			p.lastDamager = event.Sender.Username
@@ -568,14 +568,14 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		enable_invisibility = function(event)
-			debug.log("game() - invisibility enabled for " .. event.player)
-			local p = getPlayerByUsername(event.player)
+			debug.log("game() - invisibility enabled for " .. evevent.dataent.player)
+			local p = getPlayerByUsername(event.data.player)
 			p.inbush = true
 		end,
 
 		disable_visibility = function(event)
-			debug.log("game() - invisibility disabled for " .. event.player)
-			local p = getPlayerByUsername(event.player)
+			debug.log("game() - invisibility disabled for " .. event.data.player)
+			local p = getPlayerByUsername(event.data.player)
 			p.inbush = false
 		end,
 
