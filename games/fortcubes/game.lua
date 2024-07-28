@@ -32,7 +32,7 @@ game.connection.onEvent = function(connection, e)
 
 		bullet = function(event)
 			local b = Shape(shapes.bullet, {includeChildren = true})
-			b.owner = event.Sender
+			b.owner = getPlayerByUsername(event.player)
 
 			b:SetParent(World)
 			b.Rotation = Rotation(0, event.data.rot, 0)
@@ -166,32 +166,34 @@ game.connection.onEvent = function(connection, e)
 								end
 							end
 							v.bushcollider.Tick = function(self, dt)
-								if self.collides and not self:GetParent().Body.isMoving then
-									self.t = self.t + 63*dt
+								if self:GetParent() == Player then
+									if self.collides and not self:GetParent().Body.isMoving then
+										self.t = self.t + 63*dt
 
-									if self.t > 60 then
-										if not self.inbush then
-											self.inbush = true
-											self:GetParent().inbush = true
-											local e = crystal.Event("enable_invisibility", {})
-											e:SendTo(OtherPlayers)
+										if self.t > 60 then
+											if not self.inbush then
+												self.inbush = true
+												self:GetParent().inbush = true
+												local e = crystal.Event("enable_invisibility", {player = Player.Username})
+												e:SendTo(OtherPlayers)
+											end
+										else
+											if self.inbush then
+												self.inbush = false
+												self:GetParent().inbush = false
+												local e = crystal.Event("disable_invisibility", {player = Player.Username})
+												e:SendTo(OtherPlayers)
+											end
 										end
 									else
 										if self.inbush then
 											self.inbush = false
 											self:GetParent().inbush = false
-											local e = crystal.Event("disable_invisibility", {})
+											local e = crystal.Event("disable_invisibility", {player = Player.Username})
 											e:SendTo(OtherPlayers)
 										end
+										self.t = 0
 									end
-								else
-									if self.inbush then
-										self.inbush = false
-										self:GetParent().inbush = false
-										local e = crystal.Event("disable_invisibility", {})
-										e:SendTo(OtherPlayers)
-									end
-									self.t = 0
 								end
 							end
 
@@ -302,8 +304,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		new_connection = function(event)
-			debug.log("game() - new connection of '".. event.Sender.Username .. "'")
-			local p = event.Sender
+			debug.log("game() - new connection of '".. event.player .. "'")
+			local p = getPlayerByUsername(event.player)
 			p.IsHidden = false
 			p.health = 100
             if p.pistol == nil then
@@ -339,6 +341,55 @@ game.connection.onEvent = function(connection, e)
 						self.Position = self:GetParent().healthBarBG.Position + Number3(-10+0.25, 0.5, 0.01)
 						self.Width, self.Height = 19*self:GetParent().health*0.01, 2
 						self.Backward = Camera.Backward
+					end
+
+					p.bushcollider = Object()
+					p.bushcollider:SetParent(p)
+					p.bushcollider.CollisionBox = Box(Number3(-2.5, 0, -2.5), Number3(2.5, 20, 2.5))
+					p.bushcollider.Physics = PhysicsMode.Trigger
+					p.bushcollider.LocalPosition.Y = 9
+					p.bushcollider.t = 0
+					p.bushcollider.collides = false
+					p.bushcollider.OnCollisionBegin = function(self, other)
+						if self:GetParent() == Player and other.type == "bush" then
+							p.bushcollider.collides = true
+						end
+					end
+					p.bushcollider.OnCollisionEnd = function(self, other)
+						if self:GetParent() == Player and other.type == "bush" then
+							p.bushcollider.collides = false
+						end
+					end
+					p.bushcollider.Tick = function(self, dt)
+						if self:GetParent() == Player then
+							if self.collides and not self:GetParent().Body.isMoving then
+								self.t = self.t + 63*dt
+
+								if self.t > 60 then
+									if not self.inbush then
+										self.inbush = true
+										self:GetParent().inbush = true
+										local e = crystal.Event("enable_invisibility", {player = Player.Username})
+										e:SendTo(OtherPlayers)
+									end
+								else
+									if self.inbush then
+										self.inbush = false
+										self:GetParent().inbush = false
+										local e = crystal.Event("disable_invisibility", {player = Player.Username})
+										e:SendTo(OtherPlayers)
+									end
+								end
+							else
+								if self.inbush then
+									self.inbush = false
+									self:GetParent().inbush = false
+									local e = crystal.Event("disable_invisibility", {player = Player.Username})
+									e:SendTo(OtherPlayers)
+								end
+								self.t = 0
+							end
+						end
 					end
 
 					p.CollisionBox = Box({-8, 0, -8}, {8, 29, 8})
@@ -444,8 +495,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		new_disconnection = function(event)
-			debug.log("game() - disconnect of '".. event.Sender .. "'")
-			local p = event.Sender
+			debug.log("game() - disconnect of '".. event.player .. "'")
+			local p = getPlayerByUsername(event.player)
 			p.IsHidden = true
 			p.leaveParticles = particles:createEmitter()
 			for i=1, 30 do
@@ -468,8 +519,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		set_health = function(event)
-			local p = event.Sender
-			debug.log("game() - set_health event of " .. event.Sender .. " with damage [" .. event.data.damage .. "].")
+			local p = getPlayerByUsername(event.player)
+			debug.log("game() - set_health event of " .. event.player .. " with damage [" .. event.data.damage .. "].")
 
 			p:decreaseHealth(event.data.damage)
 			p.lastDamager = event.Sender.Username
@@ -517,13 +568,15 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		enable_invisibility = function(event)
-			debug.log("game() - invisibility enabled for " .. event.Sender.Username)
-			event.Sender.inbush = true
+			debug.log("game() - invisibility enabled for " .. event.player)
+			local p = getPlayerByUsername(event.player)
+			p.inbush = true
 		end,
 
 		disable_visibility = function(event)
-			debug.log("game() - invisibility disabled for " .. event.Sender.Username)
-			event.Sender.inbush = false
+			debug.log("game() - invisibility disabled for " .. event.player)
+			local p = getPlayerByUsername(event.player)
+			p.inbush = false
 		end,
 
 		["_"] = function(event)
@@ -1002,7 +1055,7 @@ game.tick = function(self, dt)
 			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X+Player.Forward.X*10, y = Player.Head.Position.Y-1+Player.Forward.Y*10, z = Player.Head.Position.Z+Player.Forward.Z*10})
 			e:SendTo(Players)
 			Player.bushcollider.t = 0
-			local e = crystal.Event("disable_invisibility", {})
+			local e = crystal.Event("disable_invisibility", {player = Player.Username})
 			e:SendTo(OtherPlayers)
 
 			self.shootTimer = 0.25
