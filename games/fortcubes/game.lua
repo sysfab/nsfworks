@@ -594,7 +594,7 @@ game.connection.onEvent = function(connection, e)
 							Timer(i*0.016, false, function()
 								self.Rotation:Slerp(self.Rotation, defaultRot, 0.3)
 							end)
-							Timer(1, false, function()
+							Timer(20*0.016, false, function()
 								self.ismoving = false
 							end)
 						end
