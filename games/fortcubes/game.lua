@@ -111,7 +111,6 @@ game.connection.onEvent = function(connection, e)
 			for k, v in pairs(Players) do
 				if event.data.players[v.Username] ~= nil then
 		            v.IsHidden = false
-					v.health = 100
 					v.lastDamager = nil
 		            if v.pistol == nil then
 		                Object:Load("voxels.silver_pistol", function(s)
@@ -129,6 +128,8 @@ game.connection.onEvent = function(connection, e)
 							rawset(v.Animations, "Walk", {})
 							v.particles = particles.createEmitter()
 							v.particlesTick = 0
+
+							v.health = 100
 
 							v.healthBarBG = Quad()
 							v.healthBarBG:SetParent(v)
@@ -309,7 +310,6 @@ game.connection.onEvent = function(connection, e)
 			debug.log("game() - new connection of '".. event.data.player .. "'")
 			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = false
-			p.health = 100
             if p.pistol == nil then
                 Object:Load("voxels.silver_pistol", function(s)
                     p.pistol = Shape(s)
@@ -326,6 +326,8 @@ game.connection.onEvent = function(connection, e)
 					rawset(p.Animations, "Walk", {})
 					p.particles = particles.createEmitter()
 					p.particlesTick = 0
+
+					p.health = 100
 
 					p.healthBarBG = Quad()
 					p.healthBarBG:SetParent(p)
