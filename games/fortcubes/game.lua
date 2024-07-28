@@ -456,15 +456,13 @@ game.connection.onEvent = function(connection, e)
 			for k, v in pairs(bushes) do
 				local bush = Shape(shapes.bush)
 				bush:SetParent(World)
-				bush.Position = bushes[k].pos + Number3(2.5, 0, 2.5)
+				bush.Position = bushes[k].pos + Number3(2.5, 5, 2.5)
 				bush.Rotation.Y = bushes[k].rot
-				bush.Palette[1].Color = Color(bushes[k].col1[1], bushes[k].col1[2], bushes[k].col1[3])
-				bush.Palette[2].Color = Color(bushes[k].col2[1], bushes[k].col2[2], bushes[k].col2[3])
 				bush.id = bushes[k].id
 				bush.type = "bush"
 
 				bush.Physics = PhysicsMode.Trigger
-				bush.Scale = 0.5
+				bush.Scale = 0.75
 				bush.Shadow = true
 
 				game.world.map.bushes[k] = bush

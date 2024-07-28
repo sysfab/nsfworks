@@ -137,8 +137,6 @@ function createBushes()
 		server_bushes[i].rot = math.random(-314, 314)*0.01
 
 		local c = math.random(-20, 20)
-		server_bushes[i].col1 = {130+c, 140+c, 140+c}
-		server_bushes[i].col2 = {140+c, 150+c, 160+c}
 		server_bushes[i].id = i
 	end
 
