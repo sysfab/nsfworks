@@ -160,13 +160,13 @@ game.connection.onEvent = function(connection, e)
 							v.bushcollider.sound = AudioSource("gun_shot_1")
 							v.bushcollider.sound.Sound = audio.bush
 							v.bushcollider.sound:SetParent(v)
-							v.bushcollider.sound.Volume = settings.currentSettings.soundVolume*0.005
+							v.bushcollider.sound.Volume = settings.currentSettings.soundVolume*0.01
 
 							v.bushcollider.OnCollisionBegin = function(self, other)
 								if self:GetParent() == Player and other.type == "bush" then
 									v.bushcollider.collides = true
 								end
-								if distance(v.Position, Player.Position) < 120 then
+								if distance(v.Position, Player.Position) < 120 and other.type == "bush"then
 									v.bushcollider.sound:Play()
 								end
 							end
@@ -367,13 +367,13 @@ game.connection.onEvent = function(connection, e)
 					p.bushcollider.sound = AudioSource("gun_shot_1")
 					p.bushcollider.sound.Sound = audio.bush
 					p.bushcollider.sound:SetParent(p)
-					p.bushcollider.sound.Volume = settings.currentSettings.soundVolume*0.005
+					p.bushcollider.sound.Volume = settings.currentSettings.soundVolume*0.01
 
 					p.bushcollider.OnCollisionBegin = function(self, other)
 						if self:GetParent() == Player and other.type == "bush" then
 							p.bushcollider.collides = true
 						end
-						if distance(p.Position, Player.Position) < 120 then
+						if distance(p.Position, Player.Position) < 120 and other.type == "bush"then
 							p.bushcollider.sound:Play()
 						end
 					end
