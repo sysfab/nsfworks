@@ -156,8 +156,13 @@ game.connection.onEvent = function(connection, e)
 							v.bushcollider.t = 0
 							v.bushcollider.collides = false
 							v.bushcollider.OnCollisionBegin = function(self, other)
-								if self:GetParent() == Player then
+								if self:GetParent() == Player and other.type == "bush" then
 									v.bushcollider.collides = true
+								end
+							end
+							v.bushcollider.OnCollisionEnd = function(self, other)
+								if self:GetParent() == Player and other.type == "bush" then
+									v.bushcollider.collides = false
 								end
 							end
 							v.bushcollider.Tick = function(self, dt)
@@ -996,6 +1001,9 @@ game.tick = function(self, dt)
 		if self.shootTimer == 0 then
 			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X+Player.Forward.X*10, y = Player.Head.Position.Y-1+Player.Forward.Y*10, z = Player.Head.Position.Z+Player.Forward.Z*10})
 			e:SendTo(Players)
+			self.bushcollider.t = 0
+			local e = crystal.Event("disable_invisibility", {})
+			e:SendTo(OtherPlayers)
 
 			self.shootTimer = 0.25
 		end
