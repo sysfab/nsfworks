@@ -167,12 +167,14 @@ game.connection.onEvent = function(connection, e)
 									if self.t > 180 then
 										if not self.inbush then
 											self.inbush = true
+											self:GetParent().inbush = true
 											local e = crystal.Event("enable_invisibility", {})
 											e:SendTo(OtherPlayers)
 										end
 									else
 										if self.inbush then
 											self.inbush = false
+											self:GetParent().inbush = false
 											local e = crystal.Event("disable_invisibility", {})
 											e:SendTo(OtherPlayers)
 										end
@@ -180,6 +182,7 @@ game.connection.onEvent = function(connection, e)
 								else
 									if self.inbush then
 										self.inbush = false
+										self:GetParent().inbush = false
 										local e = crystal.Event("disable_invisibility", {})
 										e:SendTo(OtherPlayers)
 									end
