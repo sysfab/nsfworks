@@ -585,10 +585,11 @@ game.connection.onEvent = function(connection, e)
 				bush.type = "bush"
 
 				bush.move = function(self)
+					local defaultRot = self.Rotation
 					self.Rotation.X = math.random(-10, 10)*0.1
 					for i=1, 60 do
 						Timer(i*0.016, false, function()
-							self.Rotation.X = lerp(self.Rotation.X, 0, 0.05)
+							self.Rotation:Slerp(self.Rotation, defaultRot, 0.1)
 						end)
 					end
 				end
