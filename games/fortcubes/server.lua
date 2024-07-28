@@ -9,6 +9,8 @@ function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
 	game.ticks = 0
+
+	createRocks()
 end
 
 function getPlayerByUsername(username)
@@ -83,9 +85,29 @@ Server.DidReceiveEvent = function(e)
 		r:SendTo(event.Sender)
 	end,
 
+	send_rocks = function(event)
+		local p = getPlayerByUsername(event.data.player)
+		local e = crystal.Event("load_rocks", {rocks = rocks})
+		e:SendTo(p)
+	end,
+
 	["_"] = function(event)
 		debug.log("server() - got unknown event: "..tostring(event.action))
 	end
 
 	})
+end
+
+function createRocks()
+	rocks = {}
+	
+	for i=1, 50 do
+		rocks[i].pos = Number3((math.random(1, scale))*5, 5, (math.random(1, scale))*5) + Number3(2.5, 0, 2.5)
+		rocks[i].rot = math.random(-314, 314)*0.01
+
+		local c = math.random(-20, 20)
+		rocks[i].col1 = Color(130+c, 140+c, 140+c)
+		rocks[i].col2 = Color(140+c, 150+c, 160+c)
+		rocks[i].id = i
+	end
 end

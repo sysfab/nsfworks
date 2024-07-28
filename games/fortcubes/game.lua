@@ -427,6 +427,26 @@ game.connection.onEvent = function(connection, e)
 			p:decreaseHealth(event.data.damage)
 		end,
 
+		load_rocks = function(event)
+			local rocks = JSON:Decode(event.data.rocks)
+
+			for k, v in pairs(rocks) do
+				local rock = Shape(shapes.rock)
+				rock:SetParent(World)
+				rock.Position = rocks[k].pos
+				rock.Rotation.Y = rocks[k].rot
+				rock.Palette[1].Color = rocks[k].col1
+				rock.Palette[2].Color = rocks[k].col2
+				rock.id = rocks[k].id
+
+				rock.Physics = PhysicsMode.Trigger
+				rock.Scale = 0.5
+				rock.Shadow = true
+
+				game.world.map.rocks[k] = rock
+			end
+		end,
+
 		["_"] = function(event)
 			if event.action ~= nil then
 				debug.log("game() - got unknown event: '".. event.action .."'")
@@ -630,6 +650,7 @@ game.world.create = function(world, scale)
 	world.map = MutableShape()
 	world.map.Scale = 5
 	world.map.Physics = PhysicsMode.StaticPerBlock
+	world.map.Shadow = true
 	for x = 1, scale do
 		for y = 1, scale do
 			local a = perlin.get(x*0.1, y*0.1)*30
@@ -750,16 +771,7 @@ game.world.create = function(world, scale)
 		world.map.water.shadow.Palette[i].Color = Color(0, 0, 0, 0.2)
 	end
 	world.map.water.shadow:RefreshModel()
-
 	world.map.rocks = {}
-	for i=1, 50 do
-		local rock = Shape(shapes.rock)
-		rock:SetParent(World)
-		rock.Position = Number3((math.random(1, scale)+8)*5, 5, (math.random(1, scale)+8)*5)
-		rock.Rotation.Y = math.random(-314, 314)*0.01
-
-		world.map.rocks[i] = rock
-	end
 
 	Player.Position.Y = 10000
 	Player:SetParent(World)
@@ -943,6 +955,9 @@ game.create = function(self)
     end)
 
     self.connection:connect()
+
+	local e = crystal.Event("send_rocks", {player = Player.Username})
+	e:SendTo(Server)
     debug.log("game() - created")
 end
 game.remove = function(self, callback)
