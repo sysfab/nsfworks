@@ -588,7 +588,8 @@ game.connection.onEvent = function(connection, e)
 					if not self.ismoving then
 						local defaultRot = Rotation(self.Rotation.X, self.Rotation.Y, self.Rotation.Z)
 						local r = {"X", "Y", "Z"}
-						self.Rotation[r[math.random(1, 3)]] = math.random(-10, 10)*0.1
+						local c = r[math.random(1, 3)]
+						self.Rotation[c] = self.Rotation[c] + math.random(-10, 10)*0.05
 						self.ismoving = true
 						for i=1, 20 do
 							Timer(i*0.016, false, function()
