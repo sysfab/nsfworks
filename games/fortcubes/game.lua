@@ -148,6 +148,45 @@ game.connection.onEvent = function(connection, e)
 								self.Backward = Camera.Backward
 							end
 
+							v.bushcollider = Object()
+							v.bushcollider:SetParent(v)
+							v.bushcollider.CollisionBox = Box(Number3(-0.5, 0, -0.5), Number3(0.5, 20, 0.5))
+							v.bushcollider.Physics = PhysicsMode.Trigger
+							v.bushcollider.LocalPosition.Y = 9
+							v.bushcollider.t = 0
+							v.bushcollider.collides = false
+							v.bushcollider.OnCollisionBegin = function(self, other)
+								if self:GetParent() == Player then
+									v.bushcollider.collides = true
+								end
+							end
+							v.bushcollider.Tick = function(self, dt)
+								if self.collides and not self:GetParent().Body.isMoving then
+									self.t = self.t + 63*dt
+
+									if self.t > 180 then
+										if not self.inbush then
+											self.inbush = true
+											local e = crystal.Event("enable_invisibility", {})
+											e:SendTo(OtherPlayers)
+										end
+									else
+										if self.inbush then
+											self.inbush = false
+											local e = crystal.Event("disable_invisibility", {})
+											e:SendTo(OtherPlayers)
+										end
+									end
+								else
+									if self.inbush then
+										self.inbush = false
+										local e = crystal.Event("disable_invisibility", {})
+										e:SendTo(OtherPlayers)
+									end
+									self.t = 0
+								end
+							end
+
 							v.CollisionBox = Box({-8, 0, -8}, {8, 29, 8})
 
 							v.OnCollisionBegin = function(self, other)
@@ -255,8 +294,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		new_connection = function(event)
-			debug.log("game() - new connection of '".. event.data.player .. "'")
-			local p = getPlayerByUsername(event.data.player)
+			debug.log("game() - new connection of '".. event.Sender .. "'")
+			local p = event.Sender
 			p.IsHidden = false
 			p.health = 100
             if p.pistol == nil then
@@ -397,8 +436,8 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		new_disconnection = function(event)
-			debug.log("game() - disconnect of '".. event.data.player .. "'")
-			local p = getPlayerByUsername(event.data.player)
+			debug.log("game() - disconnect of '".. event.Sender .. "'")
+			local p = event.Sender
 			p.IsHidden = true
 			p.leaveParticles = particles:createEmitter()
 			for i=1, 30 do
@@ -421,12 +460,11 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		set_health = function(event)
-			local p = getPlayerByUsername(event.data.player)
-			debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
+			local p = event.Sender
+			debug.log("game() - set_health event of " .. event.Sender .. " with damage [" .. event.data.damage .. "].")
 
 			p:decreaseHealth(event.data.damage)
 			p.lastDamager = event.Sender.Username
-
 		end,
 
 		load_rocks = function(event)
@@ -462,11 +500,20 @@ game.connection.onEvent = function(connection, e)
 				bush.type = "bush"
 
 				bush.Physics = PhysicsMode.Trigger
-				bush.Scale = 0.75
+				bush.Scale = Number3(0.75, 1.5, 0.75)
 				bush.Shadow = true
+				bush.CollisionBox = Box(Number3(6, 0, 5), Number3(9, 16, 8))
 
 				game.world.map.bushes[k] = bush
 			end
+		end,
+
+		enable_invisibility = function(event)
+			debug.log("game() - invisibility enabled for " .. event.Sender.Username)
+		end,
+
+		disable_visibility = function(event)
+			debug.log("game() - invisibility disabled for " .. event.Sender.Username)
 		end,
 
 		["_"] = function(event)
