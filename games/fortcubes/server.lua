@@ -85,6 +85,12 @@ Server.DidReceiveEvent = function(e)
 		e:SendTo(p)
 	end,
 
+	send_bushes = function(event)
+		local p = getPlayerByUsername(event.data.player)
+		local e = crystal.Event("load_bushes", {rocks = JSON:Encode(server_bushes)})
+		e:SendTo(p)
+	end,
+
 	["_"] = function(event)
 		debug.log("server() - got unknown event: "..tostring(event.action))
 	end
@@ -107,8 +113,27 @@ function createRocks()
 		server_rocks[i].id = i
 	end
 
-	debug.log("server() - rocks created: " .. tostring(server_rocks))
+	debug.log("server() - rocks created: " .. tostring(server_bushes))
+end
+
+function createBushes()
+	server_bushes = {}
+	debug.log("server() - creating rocks...")
+	
+	for i=1, 50 do
+		server_bushes[i] = {}
+		server_bushes[i].pos = {(math.random(1, 64))*5, 5, (math.random(1, 64))*5}
+		server_bushes[i].rot = math.random(-314, 314)*0.01
+
+		local c = math.random(-20, 20)
+		server_bushes[i].col1 = {130+c, 140+c, 140+c}
+		server_bushes[i].col2 = {140+c, 150+c, 160+c}
+		server_bushes[i].id = i
+	end
+
+	debug.log("server() - rocks created: " .. tostring(server_bushes))
 end
 
 resetGame()
 createRocks()
+createBushes()
