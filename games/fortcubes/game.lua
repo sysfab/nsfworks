@@ -1001,7 +1001,7 @@ game.tick = function(self, dt)
 		if self.shootTimer == 0 then
 			local e = crystal.Event("bullet", {rot = Player.Rotation.Y, x = Player.Head.Position.X+Player.Forward.X*10, y = Player.Head.Position.Y-1+Player.Forward.Y*10, z = Player.Head.Position.Z+Player.Forward.Z*10})
 			e:SendTo(Players)
-			self.bushcollider.t = 0
+			Player.bushcollider.t = 0
 			local e = crystal.Event("disable_invisibility", {})
 			e:SendTo(OtherPlayers)
 
