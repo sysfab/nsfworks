@@ -226,6 +226,8 @@ game.connection.onEvent = function(connection, e)
 		
 							v.decreaseHealth = function(self, damage)
 								self.health = self.health - damage
+								self.bushcollider.t = 0
+								self.inbush = false
 							end
 		
 							v.die = function(self)
@@ -421,6 +423,8 @@ game.connection.onEvent = function(connection, e)
 
 					p.decreaseHealth = function(self, damage)
 						self.health = self.health - damage
+						self.bushcollider.t = 0
+						self.inbush = false
 					end
 
 					p.die = function(self)
