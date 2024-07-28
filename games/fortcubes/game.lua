@@ -450,6 +450,27 @@ game.connection.onEvent = function(connection, e)
 			end
 		end,
 
+		load_bushes = function(event)
+			local bushes = JSON:Decode(event.data.bushes)
+
+			for k, v in pairs(bushes) do
+				local bush = Shape(shapes.bush)
+				bush:SetParent(World)
+				bush.Position = bushes[k].pos + Number3(2.5, 0, 2.5)
+				bush.Rotation.Y = bushes[k].rot
+				bush.Palette[1].Color = Color(bushes[k].col1[1], bushes[k].col1[2], bushes[k].col1[3])
+				bush.Palette[2].Color = Color(bushes[k].col2[1], bushes[k].col2[2], bushes[k].col2[3])
+				bush.id = bushes[k].id
+				bush.type = "bush"
+
+				bush.Physics = PhysicsMode.Trigger
+				bush.Scale = 0.5
+				bush.Shadow = true
+
+				game.world.map.bushes[k] = bush
+			end
+		end,
+
 		["_"] = function(event)
 			if event.action ~= nil then
 				debug.log("game() - got unknown event: '".. event.action .."'")
@@ -960,6 +981,9 @@ game.create = function(self)
     self.connection:connect()
 
 	local e = crystal.Event("send_rocks", {player = Player.Username})
+	e:SendTo(Server)
+	
+	local e = crystal.Event("send_bushes", {player = Player.Username})
 	e:SendTo(Server)
     debug.log("game() - created")
 end
