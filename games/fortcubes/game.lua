@@ -568,7 +568,7 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		enable_invisibility = function(event)
-			debug.log("game() - invisibility enabled for " .. evevent.dataent.player)
+			debug.log("game() - invisibility enabled for " .. event.data.player)
 			local p = getPlayerByUsername(event.data.player)
 			p.inbush = true
 		end,
