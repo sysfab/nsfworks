@@ -19,16 +19,8 @@ function getPlayerByUsername(username)
 	end
 end
 
-Server.OnStart = function()
-	resetGame()
-end
-
 Server.OnPlayerJoin = function(player)
 	debug.log("server() - player joined [" .. player.Username .. "]")
-
-	if server_rocks == nil then
-		createRocks()
-	end
 end
 
 Server.OnPlayerLeave = function(player)
@@ -117,3 +109,6 @@ function createRocks()
 
 	debug.log("server() - rocks created: " .. tostring(server_rocks))
 end
+
+resetGame()
+createRocks()

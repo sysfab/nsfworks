@@ -438,6 +438,7 @@ game.connection.onEvent = function(connection, e)
 				rock.Palette[1].Color = Color(rocks[k].col1[1], rocks[k].col1[2], rocks[k].col1[3])
 				rock.Palette[2].Color = Color(rocks[k].col2[1], rocks[k].col2[2], rocks[k].col2[3])
 				rock.id = rocks[k].id
+				rock.type = "rock"
 
 				rock.Physics = PhysicsMode.Trigger
 				rock.Scale = 0.5
