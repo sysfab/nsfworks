@@ -302,7 +302,7 @@ game.connection.onEvent = function(connection, e)
 		end,
 
 		new_connection = function(event)
-			debug.log("game() - new connection of '".. event.Sender .. "'")
+			debug.log("game() - new connection of '".. event.Sender.Username .. "'")
 			local p = event.Sender
 			p.IsHidden = false
 			p.health = 100
