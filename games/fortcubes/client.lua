@@ -143,6 +143,7 @@ audio = {}
 loadAudios = {
 	game_theme = "games/fortcubes/assets/gameTheme.mp3",
 	menu_theme = "games/fortcubes/assets/menuTheme.mp3",
+	bush = "games/fortcubes/assets/bush.mp3"
 }
 
 loaded = 0
