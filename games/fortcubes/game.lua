@@ -112,6 +112,7 @@ game.connection.onEvent = function(connection, e)
 				if event.data.players[v.Username] ~= nil then
 		            v.IsHidden = false
 					v.health = 100
+					v.lastDamager = nil
 		            if v.pistol == nil then
 		                Object:Load("voxels.silver_pistol", function(s)
 		                    v.pistol = Shape(s)
@@ -422,9 +423,10 @@ game.connection.onEvent = function(connection, e)
 		set_health = function(event)
 			local p = getPlayerByUsername(event.data.player)
 			debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
-			
-			local p = getPlayerByUsername(event.data.player)
+
 			p:decreaseHealth(event.data.damage)
+			p.lastDamager = event.Sender.Username
+
 		end,
 
 		load_rocks = function(event)
