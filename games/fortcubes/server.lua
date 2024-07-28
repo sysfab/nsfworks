@@ -100,6 +100,7 @@ end
 
 function createRocks()
 	server_rocks = {}
+	debug.log("server() - creating rocks...")
 	
 	for i=1, 50 do
 		server_rocks[i].pos = {(math.random(1, scale))*5, 5, (math.random(1, scale))*5}
@@ -110,4 +111,6 @@ function createRocks()
 		server_rocks[i].col2 = {140+c, 150+c, 160+c}
 		server_rocks[i].id = i
 	end
+
+	debug.log("server() - rocks created: " .. tostring(server_rocks))
 end
