@@ -254,7 +254,7 @@ game.connection.onEvent = function(connection, e)
 									self:die()
 								end
 
-								if self.isDead == true then
+								if self.isDead == true or self.inbush then
 									self.IsHidden = true
 								end
 
@@ -400,7 +400,7 @@ game.connection.onEvent = function(connection, e)
 							self:die()
 						end
 
-						if self.isDead == true then
+						if self.isDead == true or self.inbush then
 							self.IsHidden = true
 						end
 
@@ -510,10 +510,12 @@ game.connection.onEvent = function(connection, e)
 
 		enable_invisibility = function(event)
 			debug.log("game() - invisibility enabled for " .. event.Sender.Username)
+			event.Sender.inbush = true
 		end,
 
 		disable_visibility = function(event)
 			debug.log("game() - invisibility disabled for " .. event.Sender.Username)
+			event.Sender.inbush = false
 		end,
 
 		["_"] = function(event)
