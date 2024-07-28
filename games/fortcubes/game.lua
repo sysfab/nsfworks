@@ -796,6 +796,7 @@ game.world.create = function(world, scale)
 	end
 	world.map.water.shadow:RefreshModel()
 	world.map.rocks = {}
+	world.map.bushes = {}
 
 	Player.Position.Y = 10000
 	Player:SetParent(World)
