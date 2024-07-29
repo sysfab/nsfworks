@@ -570,12 +570,13 @@ game.connection.onEvent = function(connection, e)
 
 		set_health = function(event)
 			local p = getPlayerByUsername(event.data.player)
-			debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
 
 			if event.data.damage ~= nil then
+				debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
 				p:decreaseHealth(event.data.damage)
 				p.lastDamager = event.Sender.Username
 			elseif event.data.health ~= nil then
+				debug.log("game() - set_health event of " .. event.data.player .. " with health [" .. event.data.health .. "].")
 				p.health = event.data.health
 			end
 		end,
