@@ -168,6 +168,7 @@ game.connection.onEvent = function(connection, e)
 									v.bushcollider.collides = true
 								end
 								if distance(v.Position, Player.Position) < 120 and other.type == "bush"then
+									v.bushcollider.sound.Volume = settings.currentSettings.soundVolume*0.01
 									v.bushcollider.sound:Play()
 									other:move()
 								end
