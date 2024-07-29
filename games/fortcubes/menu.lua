@@ -217,9 +217,9 @@ function menu.create(self)
     menu.title.posy = 0
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
     self.versionBG.pos = Number2(-1000, -1000)
-    self.version2 = ui:createText(VERSION, Color(0, 0, 0, 127))
+    self.version2 = ui:createText(VERSION.." ["..githash.."]", Color(0, 0, 0, 127))
     self.version2.pos = Number2(-1000, -1000)
-    self.version = ui:createText(VERSION, Color(255, 255, 200, 255))
+    self.version = ui:createText(VERSION.." ["..githash.."]", Color(255, 255, 200, 255))
     self.version.pos = Number2(-1000, -1000)
 
 
