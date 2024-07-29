@@ -341,7 +341,7 @@ function menu.create(self)
         --menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
         menu.title2.pos.X = 11+30 * menu.screenWidth
 
-        menu.versionBG.Width = menu.version.Width * 2
+        menu.versionBG.Width = menu.version.Width + 10
         menu.versionBG.Height = menu.version.Height + 6
         menu.versionBG.pos = Number2(Screen.Width-Screen.SafeArea.Right-menu.versionBG.Width, 0)
 
