@@ -557,6 +557,8 @@ function menu.remove(self)
         self.yard:SetParent(nil)
         self.yard.Tick = nil
         self.yard = nil
+        self.book.sound:SetParent(nil)
+        self.book.sound = nil
         self.book:SetParent(nil)
         self.book.Tick = nil
         self.book = nil
@@ -760,6 +762,10 @@ menu.loadModels = function(self)
     menu.book.right = menu.book:GetChild(2)
     menu.book.right.Shadow = true
 
+    menu.book.sound = AudioSource("button_1")
+    menu.book.sound.Volume = settings.currentSettings.soundVolume
+    menu.book.sound:SetParent(Camera)
+
     menu.pointer = LocalEvent:Listen(LocalEvent.Name.PointerClick, function(pe)
         local impact = pe:CastRay(Map.CollisionGroup)
         if impact then
@@ -768,22 +774,26 @@ menu.loadModels = function(self)
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume + 5
                     menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
                     menu.music.Volume = settings.currentSettings.musicVolume*0.01
+                    menu.book.sound:Play()
                 end
             elseif impact.Object.name == "musicLeft" then
                 if settings.currentSettings.musicVolume > 0 then
                     settings.currentSettings.musicVolume = settings.currentSettings.musicVolume - 5
                     menu.book.musicVolume.text.Text = settings.currentSettings.musicVolume
                     menu.music.Volume = settings.currentSettings.musicVolume*0.01
+                    menu.book.sound:Play()
                 end
             elseif impact.Object.name == "soundRight" then
                 if settings.currentSettings.soundVolume < 100 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume + 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
+                    menu.book.sound:Play()
                 end
             elseif impact.Object.name == "soundLeft" then
                 if settings.currentSettings.soundVolume > 0 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
+                    menu.book.sound:Play()
                 end
             end
         end
