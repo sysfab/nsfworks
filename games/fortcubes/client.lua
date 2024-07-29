@@ -291,7 +291,7 @@ debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
 debug.log("client() - Total: " .. need_to_load .. " assets")
 
 function checkLoading()
-	if playerJoined then
+	if playerJoined and loaded >= need_to_load then
 		doneLoading()
 	end
 end
