@@ -958,11 +958,13 @@ game.world.remove = function(world)
 
 	for i=1, #world.map.rocks do
 		world.map.rocks[i]:SetParent(nil)
+		world.map.rocks[i].Tick = nil
 		world.map.rocks[i] = nil
 	end
 
 	for i=1, #world.map.bushes do
 		world.map.bushes[i]:SetParent(nil)
+		world.map.bushes[i].Tick = nil
 		world.map.bushes[i] = nil
 	end
 
