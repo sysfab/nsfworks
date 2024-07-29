@@ -585,6 +585,7 @@ game.connection.onEvent = function(connection, e)
 				bush.Rotation.Y = bushes[k].rot
 				bush.id = bushes[k].id
 				bush.type = "bush"
+				bush.particles = particles.createEmitter()
 
 				bush.move = function(self)
 					if not self.ismoving then
@@ -600,6 +601,15 @@ game.connection.onEvent = function(connection, e)
 							Timer(20*0.016, false, function()
 								self.ismoving = false
 							end)
+							self.particles:updateConfig({
+								position = self.Position + Number3(math.random(-10, 10), math.random(10, 30), math.random(-10, 10)),
+								scale = math.random(5, 8)*0.1,
+								color = Color(63, 105, 64),
+								life = 1.0,
+								velocity = Number3(math.random(-10, 10), math.random(0, 20), math.random(-10, 10)),
+								scale_end = Number3(0, 0, 0),
+							})
+							self.particles:emit()
 						end
 					end
 				end
@@ -965,6 +975,7 @@ game.world.remove = function(world)
 
 	for i=1, #world.map.bushes do
 		world.map.bushes[i]:SetParent(nil)
+		world.map.bushes[i].particles:remove()
 		world.map.bushes[i].Tick = nil
 		world.map.bushes[i] = nil
 	end
