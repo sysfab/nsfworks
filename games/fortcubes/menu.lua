@@ -763,7 +763,7 @@ menu.loadModels = function(self)
     menu.book.right.Shadow = true
 
     menu.book.sound = AudioSource("button_1")
-    menu.book.sound.Volume = settings.currentSettings.soundVolume
+    menu.book.sound.Volume = settings.currentSettings.soundVolume*0.01
     menu.book.sound:SetParent(Camera)
 
     menu.pointer = LocalEvent:Listen(LocalEvent.Name.PointerClick, function(pe)
@@ -787,14 +787,14 @@ menu.loadModels = function(self)
                 if settings.currentSettings.soundVolume < 100 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume + 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
-                    menu.book.sound.Volume = settings.currentSettings.soundVolume
+                    menu.book.sound.Volume = settings.currentSettings.soundVolume*0.01
                     menu.book.sound:Play()
                 end
             elseif impact.Object.name == "soundLeft" then
                 if settings.currentSettings.soundVolume > 0 then
                     settings.currentSettings.soundVolume = settings.currentSettings.soundVolume - 5
                     menu.book.soundVolume.text.Text = settings.currentSettings.soundVolume
-                    menu.book.sound.Volume = settings.currentSettings.soundVolume
+                    menu.book.sound.Volume = settings.currentSettings.soundVolume*0.01
                     menu.book.sound:Play()
                 end
             end
