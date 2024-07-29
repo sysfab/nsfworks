@@ -1147,7 +1147,7 @@ game.tick = function(self, dt)
 	end
 	if Player.Position.Y < 3 and not Player.isDead then
 		Player.health = 0
-		local e = crystal.Event("set_health", {player = Player.Username, health = 100})
+		local e = crystal.Event("set_health", {player = Player.Username, health = 0})
 		e:SendTo(OtherPlayers) 
 	end
 
