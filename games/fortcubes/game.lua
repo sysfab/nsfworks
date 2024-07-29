@@ -105,6 +105,7 @@ game.connection.onEvent = function(connection, e)
 			Player.Velocity = Number3(0, 0, 0)
 			Player.Motion = Number3(0, 0, 0)
 			Player.Position = Number3(event.data.posX*(game.world.map.Width-16), 10, event.data.posY*(game.world.map.Depth-16))*game.world.map.Scale
+			Player.health = 100
 			AudioListener:SetParent(Player)
 			debug.log("game() - position set")
 

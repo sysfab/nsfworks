@@ -1,4 +1,4 @@
-debug.enabled = true
+debug.enabled = false
 debug.log("server() - started")
 
 function set(key, value)
