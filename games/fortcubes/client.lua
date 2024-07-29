@@ -101,6 +101,12 @@ debug.log("client() - version: "..VERSION)
 
 Client.DirectionalPad = nil
 Client.AnalogPad = nil
+Client.OnPlayerJoin = function(p)
+	if p == Player and not playerJoined then
+		playerJoined = true
+		checkLoading()
+	end
+end
 Pointer.Drag = nil
 
 
@@ -166,7 +172,7 @@ for key, value in pairs(loadModules) do
 
 		if loaded_modules >= need_to_load_modules then
 			if loaded == need_to_load then
-                doneLoading()
+                checkLoading()
             end
 			debug.log("client() - Loaded all modules.")
 			if loading_screen.created then
@@ -179,7 +185,7 @@ for key, value in pairs(loadModules) do
 			end
 		end
 		if loaded >= need_to_load then
-			doneLoading()
+			checkLoading()
 		end
 	end)
 end
@@ -211,7 +217,7 @@ for key, value in pairs(loadAnimations) do
 			end
 		end
 		if loaded >= need_to_load then
-			doneLoading()
+			checkLoading()
 		end
 	end)
 end
@@ -243,7 +249,7 @@ for key, value in pairs(loadShapes) do
 			end
 		end
 		if loaded >= need_to_load then
-			doneLoading()
+			checkLoading()
 		end
 	end)
 end
@@ -275,7 +281,7 @@ for key, value in pairs(loadAudios) do
 			end
 		end
 		if loaded >= need_to_load then
-			doneLoading()
+			checkLoading()
 		end
 	end)
 end
@@ -283,6 +289,12 @@ debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
 
 
 debug.log("client() - Total: " .. need_to_load .. " assets")
+
+function checkLoading()
+	if playerJoined then
+		doneLoading()
+	end
+end
 
 function doneLoading()
 	Camera:SetParent(World)

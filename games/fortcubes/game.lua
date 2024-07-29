@@ -280,6 +280,8 @@ game.connection.onEvent = function(connection, e)
 								Timer(2.2, false, function()
 									self.isDead = false
 									self.IsHidden = false
+									local e = crystal.Event("set_health", {player = self, health = 100})
+									e:SendTo(OtherPlayers)
 								end)
 							end
 
@@ -570,8 +572,12 @@ game.connection.onEvent = function(connection, e)
 			local p = getPlayerByUsername(event.data.player)
 			debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
 
-			p:decreaseHealth(event.data.damage)
-			p.lastDamager = event.Sender.Username
+			if event.data.damage ~= nil then
+				p:decreaseHealth(event.data.damage)
+				p.lastDamager = event.Sender.Username
+			elseif event.data.health ~= nil then
+				p.health = event.data.health
+			end
 		end,
 
 		load_rocks = function(event)
@@ -1140,7 +1146,7 @@ game.tick = function(self, dt)
 	end
 	if Player.Position.Y < 3 and not Player.isDead then
 		Player.health = 0
-		local e = crystal.Event("set_health", {player = Player.Username, damage = 100})
+		local e = crystal.Event("set_health", {player = Player.Username, health = 100})
 		e:SendTo(OtherPlayers) 
 	end
 
