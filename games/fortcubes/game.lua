@@ -280,7 +280,7 @@ game.connection.onEvent = function(connection, e)
 								Timer(2.2, false, function()
 									self.isDead = false
 									self.IsHidden = false
-									local e = crystal.Event("set_health", {player = self, health = 100})
+									local e = crystal.Event("set_health", {player = self.Username, health = 100})
 									e:SendTo(OtherPlayers)
 								end)
 							end
