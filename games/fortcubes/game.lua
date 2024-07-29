@@ -189,6 +189,17 @@ game.connection.onEvent = function(connection, e)
 												self:GetParent().inbush = true
 												local e = crystal.Event("enable_invisibility", {player = Player.Username})
 												e:SendTo(OtherPlayers)
+												for i=1, 20 do
+													self:GetParent().particles:updateConfig({
+														position = self:GetParent().Position + Number3(math.random(-5, 5), math.random(0, 10), math.random(-5, 5)/4),
+														scale = math.random(5, 8)*0.1,
+														color = Color(63, 105, 64),
+														life = 1.0,
+														velocity = Number3(math.random(-10, 10), math.random(0, 20), math.random(-10, 10)),
+														scale_end = Number3(0, 0, 0),
+													})
+													self:GetParent().particles:emit()
+												end
 											end
 										else
 											if self.inbush then
@@ -209,6 +220,8 @@ game.connection.onEvent = function(connection, e)
 									end
 								end
 							end
+
+							v.bushparticles = particles:createEmitter()
 
 							v.CollisionBox = Box({-8, 0, -8}, {8, 29, 8})
 
@@ -602,7 +615,7 @@ game.connection.onEvent = function(connection, e)
 								self.ismoving = false
 							end)
 							self.particles:updateConfig({
-								position = self.Position + Number3(math.random(-10, 10), math.random(10, 30), math.random(-10, 10)),
+								position = self.Position + Number3(math.random(-5, 5), math.random(0, 10), math.random(-5, 5)/4),
 								scale = math.random(5, 8)*0.1,
 								color = Color(63, 105, 64),
 								life = 1.0,
@@ -626,6 +639,17 @@ game.connection.onEvent = function(connection, e)
 		enable_invisibility = function(event)
 			debug.log("game() - invisibility enabled for " .. event.data.player)
 			local p = getPlayerByUsername(event.data.player)
+			for i=1, 20 do
+				p.particles:updateConfig({
+					position = p.Position + Number3(math.random(-5, 5), math.random(0, 10), math.random(-5, 5)/4),
+					scale = math.random(5, 8)*0.1,
+					color = Color(63, 105, 64),
+					life = 1.0,
+					velocity = Number3(math.random(-10, 10), math.random(0, 20), math.random(-10, 10)),
+					scale_end = Number3(0, 0, 0),
+				})
+				p.particles:emit()
+			end
 			p.inbush = true
 		end,
 
