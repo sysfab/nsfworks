@@ -54,6 +54,12 @@ game.connection.onEvent = function(connection, e)
 			end
 			b.damage = 20
 
+			b.OnCollisionBegin = function(self, other)
+				if other.type == "bush" then
+					other:move()
+				end
+			end
+
 			b.particle = particles.createEmitter({
 				position = b.Position + b.Forward*2.5 + b.Down*0.5,
 				scale = Number3(1, 1, 1),
@@ -92,6 +98,7 @@ game.connection.onEvent = function(connection, e)
 			end
 			b.remove = function(self)
 				self.particle:remove()
+				self.OnCollisionBegin = nil
 				--self.as:SetParent(nil)
 				--self.as = nil
 				self:SetParent(nil)
@@ -608,10 +615,10 @@ game.connection.onEvent = function(connection, e)
 						self.Rotation[c] = self.Rotation[c] + math.random(-10, 10)*0.05
 						self.ismoving = true
 						for i=1, 20 do
-							Timer(i*0.016, false, function()
+							Timer(i/2*0.016, false, function()
 								self.Rotation:Slerp(self.Rotation, defaultRot, 0.3)
 							end)
-							Timer(20*0.016, false, function()
+							Timer(10*0.016, false, function()
 								self.ismoving = false
 							end)
 							self.particles:updateConfig({
@@ -630,7 +637,7 @@ game.connection.onEvent = function(connection, e)
 				bush.Physics = PhysicsMode.Trigger
 				bush.Scale = Number3(0.75, 1.5, 0.75)
 				bush.Shadow = true
-				bush.CollisionBox = Box(Number3(6, 0, 5), Number3(9, 16, 8))
+				bush.CollisionBox = Box(Number3(5, 0, 4), Number3(10, 16, 9))
 
 				game.world.map.bushes[k] = bush
 			end
