@@ -1,5 +1,6 @@
 debug.enabled = false
-debug.log("server() - started")
+debug.log("server() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'")
+debug.log("server() - Starting '"..game.."' server...")
 
 function set(key, value)
 	rawset(_ENV, key, value)

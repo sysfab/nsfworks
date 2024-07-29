@@ -1,5 +1,6 @@
 debug.enabled = false
-debug.log("client() - started")
+debug.log("client() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..hash.."'")
+debug.log("client() - Starting '"..game.."'...")
 
 randomEasterLogs = {
 	"Once upon a time...",
