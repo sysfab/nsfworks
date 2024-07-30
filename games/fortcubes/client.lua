@@ -223,7 +223,7 @@ for key, value in pairs(loadModules) do
 		debug.log("client() - Loaded '".. value .."'")
 
 		errorHandler(
-			function() error("Test") _ENV[key] = module() end, 
+			function() _ENV[key] = module() end, 
 			function(err) CRASH("Failed to load module '"..key.."' - "..err) end
 		)()
 
