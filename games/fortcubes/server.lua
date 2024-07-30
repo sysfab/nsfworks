@@ -120,6 +120,14 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		e:SendTo(event.Sender)
 	end,
 
+	crash = function(event)
+		for i, username in ipairs(ADMIN) do
+			if username == event.Sender.Username then
+				error("crashed by admin")
+			end
+		end
+	end
+
 	["_"] = function(event)
 		debug.log("server() - got unknown event: "..tostring(event.action))
 	end
