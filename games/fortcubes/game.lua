@@ -27,7 +27,7 @@ game.connection.disconnect = function(connection)
 	e:SendTo(Server)
 	connection.connected = false
 end
-game.connection.onEvent = function(connection, e)
+game.connection.onEvent = errorHandler(function(connection, e)
 	crystal.ParseEvent(e, {
 
 		bullet = function(event)
@@ -680,7 +680,7 @@ game.connection.onEvent = function(connection, e)
 		end
 
 	})
-end
+end, function(err) CRASH("game.connection.onEvent - "..err) end)
 game.ui = {}
 game.ui.created = false
 game.ui.create = function(u)
