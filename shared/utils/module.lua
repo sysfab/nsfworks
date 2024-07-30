@@ -26,8 +26,9 @@ utils.init = function(env)
 		local handled = false
 		local returned = nil
 		return function(...)
+			print(...)
 			if handled == true then return end
-			local ok, err = pcall(function() f(...) end)
+			local ok, err = pcall(function() print(...) f(...) end)
 			if not ok then
 				handled = true
 				handler(err)
