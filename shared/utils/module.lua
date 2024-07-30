@@ -32,8 +32,8 @@ utils.init = function(env)
 			end
 		end
 		return function(...)
-			local args = ...
 			if handled == true then return end
+			local args = ...
 			local ok, err = pcall(f_wrapper(args))
 			if not ok then
 				handled = true
