@@ -126,7 +126,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 				error("crashed by admin")
 			end
 		end
-	end
+	end,
 
 	["_"] = function(event)
 		debug.log("server() - got unknown event: "..tostring(event.action))
