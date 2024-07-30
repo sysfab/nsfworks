@@ -200,6 +200,7 @@ function menu.create(self)
     self.title.pos = Number2(-1000, -1000)
     self.title.posy = 0
     self.title:setImage(images.logo)
+    self.title.Color = (Color(255, 255, 255, 254))
     self.title.Width = 1354
     self.title.Height = 359
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
