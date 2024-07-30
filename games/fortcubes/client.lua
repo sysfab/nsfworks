@@ -222,7 +222,10 @@ for key, value in pairs(loadModules) do
 	loader:loadFunction(value, function(module)
 		debug.log("client() - Loaded '".. value .."'")
 
-		errorHandler(function() _ENV[key] = module() end, function(err) CRASH("Failed to load module '"..key.."' - "..err end)
+		errorHandler(
+			function() _ENV[key] = module() end, 
+			function(err) CRASH("Failed to load module '"..key.."' - "..err) end
+		)
 
 		if loaded_modules == nil then loaded_modules = 0 end
 		loaded_modules = loaded_modules + 1
