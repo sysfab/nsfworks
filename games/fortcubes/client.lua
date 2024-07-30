@@ -89,8 +89,8 @@ end
 
 
 LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
-	debug.log("GOT SERVER CRASH")
 	if e.action == "server_crash" and e.Sender == Server then
+		debug.log("GOT SERVER CRASH")
 		CRASH(e.data.error)
 	end
 end)
