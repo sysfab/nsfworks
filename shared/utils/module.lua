@@ -21,6 +21,24 @@ utils.init = function(env)
 	env.distance = function(pos1, pos2)
 		return math.sqrt((pos1.X-pos2.X)*(pos1.X-pos2.X) + (pos1.Y-pos2.Y)*(pos1.Y-pos2.Y) + (pos1.Z-pos2.Z)*(pos1.Z-pos2.Z))
 	end
+
+	env.errorHandler = function(f, handler)
+		local handled = false
+		local returned = nil
+		local f_wrapped = function(...)
+			local returned = f(...)
+		end
+		return function()
+			if handled = true then return end
+			local ok, err = pcall(f_wrapped)
+			if not ok then
+				handled = true
+				handler(err)
+			else
+				return returned
+			end
+		end
+	end
 end
 
 return utils
