@@ -135,7 +135,6 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 debug.log("client() - version: "..VERSION)
 
-
 Client.DirectionalPad = nil
 Client.AnalogPad = nil
 Client.OnPlayerJoin = function(p)
@@ -192,6 +191,12 @@ loadAudios = {
 
 loaded = 0
 need_to_load = 0
+
+function checkLoading()
+	if playerJoined and loaded >= need_to_load then
+		doneLoading()
+	end
+end
 
 errorHandler(function()
 	for key, value in pairs(loadModules) do
@@ -327,12 +332,6 @@ errorHandler(function()
 	
 	
 	debug.log("client() - Total: " .. need_to_load .. " assets")
-	
-	function checkLoading()
-		if playerJoined and loaded >= need_to_load then
-			doneLoading()
-		end
-	end
 end, 
 function(err) CRASH("Failed to load resources: "..err) end)
 
