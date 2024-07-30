@@ -192,6 +192,22 @@ loadAudios = {
 loaded = 0
 need_to_load = 0
 
+function doneLoading()
+	Camera:SetParent(World)
+	debug.log("")
+	debug.log("GAME LOADED")
+	debug.log("")
+
+	debug.log("#"..randomEasterLogs[math.random(1, #randomEasterLogs)])
+
+	if debug.enabled == true then
+		toast:create({message = "Game launched with debug enabled."})
+	end
+
+	settings:load()
+	menu:create()
+end
+
 function checkLoading()
 	if playerJoined and loaded >= need_to_load then
 		doneLoading()
@@ -334,19 +350,3 @@ errorHandler(function()
 	debug.log("client() - Total: " .. need_to_load .. " assets")
 end, 
 function(err) CRASH("Failed to load resources: "..err) end)
-
-function doneLoading()
-	Camera:SetParent(World)
-	debug.log("")
-	debug.log("GAME LOADED")
-	debug.log("")
-
-	debug.log("#"..randomEasterLogs[math.random(1, #randomEasterLogs)])
-
-	if debug.enabled == true then
-		toast:create({message = "Game launched with debug enabled."})
-	end
-
-	settings:load()
-	menu:create()
-end
