@@ -185,8 +185,7 @@ function menu.create(self)
                     menu.armory:disable()
                 end
             end, 
-            function(err) CRASH("menu.object.Tick() - "..err) end)(self, dt)
-        end
+        function(err) CRASH("menu.object.Tick() - "..err) end)(self, dt)
     end
 
     Camera:SetModeFree()
