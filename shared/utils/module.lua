@@ -25,10 +25,15 @@ utils.init = function(env)
 	env.errorHandler = function(f, handler)
 		local handled = false
 		local returned = nil
+		local f_wrapper = function(...)
+			local args = ...
+			return function()
+				f(args)
+			end
+		end
 		return function(...)
-			print(...)
 			if handled == true then return end
-			local ok, err = pcall(function() print(...) f(...) end)
+			local ok, err = pcall(f_wrapper(...))
 			if not ok then
 				handled = true
 				handler(err)
