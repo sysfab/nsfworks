@@ -121,7 +121,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	end,
 
 	crash = function(event)
-		for i, username in ipairs(ADMIN) do
+		for i, username in ipairs(ADMINS) do
 			if username == event.Sender.Username then
 				error("crashed by admin")
 			end
