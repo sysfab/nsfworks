@@ -158,8 +158,7 @@ loadModules = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua",
 	game = "games/fortcubes/game.lua",
-	settings = "games/fortcubes/settings.lua",
-	test = "test.lua"
+	settings = "games/fortcubes/settings.lua"
 }
 
 animations = {}
@@ -224,7 +223,7 @@ for key, value in pairs(loadModules) do
 		debug.log("client() - Loaded '".. value .."'")
 
 		errorHandler(
-			function() _ENV[key] = module() end, 
+			function() error("Test") _ENV[key] = module() end, 
 			function(err) CRASH("Failed to load module '"..key.."' - "..err) end
 		)()
 
