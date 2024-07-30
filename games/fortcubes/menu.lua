@@ -70,7 +70,7 @@ function menu.create(self)
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.15*delta)
                 Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.1*delta)
                 Camera.FOV = lerp(Camera.FOV, 30, 0.1*delta)
-                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3*delta)
+                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height, 0.3*delta)
                 menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
             elseif menu.currentMenu == "about us" then
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.15*delta)
@@ -196,9 +196,12 @@ function menu.create(self)
 
     debug.log("menu() - Creating elements...")
 
-    self.title = ui:createFrame(Color(255, 255, 255, 255))
+    self.title = ui:createFrame(Color(255, 255, 255, 254))
     self.title.pos = Number2(-1000, -1000)
     self.title.posy = 0
+    self.title:setImage(images.logo)
+    self.title.Width = 1354
+    self.title.Height = 359
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
     self.versionBG.pos = Number2(-1000, -1000)
     self.version2 = ui:createText(VERSION.." ["..githash.."]", Color(0, 0, 0, 127))
@@ -309,9 +312,9 @@ function menu.create(self)
 
         -- MAIN MENU
         
-        menu.title.object.Scale.X = menu.screenWidth * 8.85
-        menu.title.object.Scale.Y = menu.screenHeight * 8.85
-        menu.title.pos.X = 11+30 * menu.screenWidth
+        menu.title.object.Scale.X = menu.screenWidth * 1
+        menu.title.object.Scale.Y = menu.screenHeight * 1
+        menu.title.pos.X = 0
 
         menu.versionBG.Width = menu.version.Width + 10
         menu.versionBG.Height = menu.version.Height + 6
