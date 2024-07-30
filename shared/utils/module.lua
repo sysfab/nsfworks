@@ -26,7 +26,7 @@ utils.init = function(env)
 		local handled = false
 		local returned = nil
 		local f_wrapped = function(...)
-			local returned = f(...)
+			returned = f(...)
 		end
 		return function()
 			if handled == true then return end
