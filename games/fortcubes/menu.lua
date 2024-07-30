@@ -56,7 +56,7 @@ function menu.create(self)
         menu.object = Object()
     end
     debug.log("menu() - Setting tick...")
-    menu.object.Tick = function(self, dt) 
+    menu.object.Tick = function(...) 
         local handler = errorHandler(function(self, dt)
             local delta = dt * 63
             if menu.aboutUs ~= nil then
@@ -186,7 +186,7 @@ function menu.create(self)
                 end
             end
         end, function(err) CRASH("menu.object.Tick() - "..err) end)
-        handler(self, dt)
+        handler(...)
     end
 
     Camera:SetModeFree()
