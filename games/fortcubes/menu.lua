@@ -272,7 +272,7 @@ function menu.create(self)
     self.play = ui:createButton("PLAY", menu.theme.button)
     self.play.pos = Number2(-1000, -1000)
     self.play.onRelease = function(s)
-        menu:remove()
+        menu:remove(function() game:create() end)
     end
 
     self.back = ui:createButton("BACK", menu.theme.button)
@@ -460,7 +460,7 @@ function menu.hide(self, name)
     end
 end
 
-function menu.remove(self)
+function menu.remove(self, callback)
     if self.created == nil then
         error("menu.remove() should be called with ':'!", 2)
     end
@@ -589,8 +589,10 @@ function menu.remove(self)
         end
 
         debug.log("menu() - Menu removed.")
-        game:create()
-
+        debug.log("menu() - Executing remove callback...")
+        if callback ~= nil then
+            callback()
+        end
     end)
 end
 

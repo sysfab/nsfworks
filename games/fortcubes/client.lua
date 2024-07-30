@@ -102,8 +102,8 @@ end
 set("CRASH", function(message)
 	message = tostring(message)
 	pcall(function()
-		menu:remove()
-		game:remove()
+		if menu.created then menu:remove() end
+		if game.created then game:remove() end
 	end)
 
 	local ui = require("uikit")
