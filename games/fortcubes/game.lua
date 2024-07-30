@@ -535,9 +535,9 @@ game.connection.onEvent = errorHandler(function(connection, e)
 						else
 							self.Body:nanStop()
 							self.particlesTick = 0
-						end, function(err) CRASH("p.Tick - "..err) end)
-					end, function(err) CRASH("Object:Load(\"voxels.silver_pistol\") - "..err) end))
-                end
+						end
+					end, function(err) CRASH("p.Tick - "..err) end)
+                end, function(err) CRASH("Object:Load(\"voxels.silver_pistol\") - "..err) end))
             end
 			if p.Body.nanplayer == nil then
 				nanimator.add(p.Body, "player_walk")
