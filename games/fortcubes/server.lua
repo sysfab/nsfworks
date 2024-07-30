@@ -121,6 +121,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	end,
 
 	crash = function(event)
+		if debug.enabled ~= true then return end
 		for i, username in ipairs(ADMINS) do
 			if username == event.Sender.Username then
 				error("crashed by admin")
