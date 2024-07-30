@@ -114,7 +114,7 @@ set("CRASH", function(message)
 	end
 	crash_bg:parentDidResize()
 
-	local crash_text = ui:createText("CRASH\nFortcubes cannot continue runnning because of unexpected error:\n  "..message.."\n\nTo copy logs type '?logs' in the chat\nSend us logs:\n  On Discord  Server\n  @sysfab (discord)\n  @nanskip (discord)", Color(255, 255, 255, 255))
+	local crash_text = ui:createText("CRASH\nFortcubes cannot continue runnning because of unexpected error:\n  "..message.."\n\nTo copy logs type '?logs' in the chat\nWays to send us logs:\n  * On Cubzh Discord Server (#worlds -> Fortcubes)\n  * @sysfab (discord)\n  * @nanskip (discord)", Color(255, 255, 255, 255))
 	crash_text.parentDidResize = function()
 		crash_text.pos = Number2(4, Screen.Height/2-crash_text.Height/2)
 	end
