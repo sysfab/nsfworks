@@ -159,6 +159,7 @@ loadModules = {
 	menu = "games/fortcubes/menu.lua",
 	game = "games/fortcubes/game.lua",
 	settings = "games/fortcubes/settings.lua",
+	test = "test.lua"
 }
 
 animations = {}
