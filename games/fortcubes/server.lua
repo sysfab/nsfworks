@@ -6,6 +6,25 @@ function set(key, value)
 	rawset(_ENV, key, value)
 end
 
+set("CRASH", function(message)
+	message = tostring(message)
+	pcall(function()
+		Server.DidReceiveEvent = nil
+		Server.OnPlayerJoin = nil
+		Server.OnPlayerLeave = nil
+		Server.Tick = nil
+	end)
+
+	local e = crystal.Event("server_crash", {error=message})
+	e:SendTo(Players)
+
+	debug.log("")
+	debug.log("CRASH WAS CALLED:")
+	debug.log(message)
+	debug.log("")
+	debug.error("CRASH() - crash was called", 2)
+	error("CRASH() - crash was called", 2)
+end)
 
 -- CONFIG
 set("VERSION", "v1.0")
@@ -44,7 +63,7 @@ Server.OnPlayerLeave = function(player)
 	end
 end
 
-Server.DidReceiveEvent = function(e) 
+Server.DidReceiveEvent = errorHandler(function(e) 
 	crystal.ParseEvent(e, {
 
 	connect = function(event)
@@ -106,7 +125,7 @@ Server.DidReceiveEvent = function(e)
 	end
 
 	})
-end
+end, function(err) CRASH("Server.DidReceiveEvent - "..err) end)
 
 function createRocks()
 	server_rocks = {}

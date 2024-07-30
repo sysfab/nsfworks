@@ -87,10 +87,17 @@ function copyLogs()
 	end)
 end
 
+
+LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
+	debug.log("GOT SERVER CRASH")
+	if e.action == "server_crash" and e.Sender == Server then
+		CRASH(e.data.error)
+	end
+end)
 LocalEvent:Listen(LocalEvent.Name.OnChat, function(payload)
     message = payload.message
     if message == "?logs" then
-        copyClientLogs()
+        copyLogs()
     end
 end)
 
