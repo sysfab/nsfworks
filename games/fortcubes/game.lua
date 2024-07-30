@@ -80,7 +80,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 			end
 
 			b.lifeTime = 0.5
-			b.Tick = function(self, dt)
+			b.Tick = errorHandler(function(self, dt)
 				local dt_factor = dt*63
 				self.Position = self.Position + self.Forward * 4 * dt_factor
 
@@ -95,7 +95,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 					end
 					self:remove()
 				end
-			end
+			end, function(err) CRASH("b.Tick - "..err) end)
 			b.remove = function(self)
 				self.particle:remove()
 				self.OnCollisionBegin = nil
@@ -121,7 +121,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 		            v.IsHidden = false
 					v.lastDamager = nil
 		            if v.pistol == nil then
-		                Object:Load("voxels.silver_pistol", function(s)
+		                Object:Load("voxels.silver_pistol", errorHandler(function(s)
 		                    v.pistol = Shape(s)
 		                    v.pistol:SetParent(v.Body.RightArm.RightHand)
 		                    v.pistol.Scale = 0.65
@@ -285,7 +285,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 								end)
 							end
 
-							v.Tick = function(self, dt)
+							v.Tick = errorHandler(function(self, dt)
 								self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
 								self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
 								self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
@@ -328,8 +328,8 @@ game.connection.onEvent = errorHandler(function(connection, e)
 									self.Body:nanStop()
 									self.particlesTick = 0
 								end
-							end
-		                end)
+							end, function(err) CRASH("v.Tick - "..err) end)
+		                end, function(err) CRASH("Object:Load(\"voxels.silver_pistol\") - "..err) end))
 		            end
 					if v.Body.nanplayer == nil then
 						nanimator.add(v.Body, "player_walk")
@@ -345,7 +345,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = false
             if p.pistol == nil then
-                Object:Load("voxels.silver_pistol", function(s)
+                Object:Load("voxels.silver_pistol", errorHandler(function(s)
                     p.pistol = Shape(s)
                     p.pistol:SetParent(p.Body.RightArm.RightHand)
                     p.pistol.Scale = 0.65
@@ -493,7 +493,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 						end)
 					end
 
-					p.Tick = function(self, dt)
+					p.Tick = errorHandler(function(self, dt)
 						self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
 						self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
 						self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
@@ -535,8 +535,8 @@ game.connection.onEvent = errorHandler(function(connection, e)
 						else
 							self.Body:nanStop()
 							self.particlesTick = 0
-						end
-					end
+						end, function(err) CRASH("p.Tick - "..err) end)
+					end, function(err) CRASH("Object:Load(\"voxels.silver_pistol\") - "..err) end)
                 end)
             end
 			if p.Body.nanplayer == nil then
