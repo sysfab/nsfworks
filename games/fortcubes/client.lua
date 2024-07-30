@@ -189,9 +189,6 @@ loadAudios = {
 	bush = "games/fortcubes/assets/bush.mp3"
 }
 
-loaded = 0
-need_to_load = 0
-
 function doneLoading()
 	Camera:SetParent(World)
 	debug.log("")
@@ -215,6 +212,8 @@ function checkLoading()
 end
 
 errorHandler(function()
+	loaded = 0
+	need_to_load = 0
 	for key, value in pairs(loadModules) do
 		if need_to_load_modules == nil then need_to_load_modules = 0 end
 		need_to_load_modules = need_to_load_modules + 1
