@@ -114,7 +114,7 @@ set("CRASH", function(message)
 	end)
 
 	local ui = require("uikit")
-	local crash_bg = ui:createFrame(Color(100, 0, 0, 255))
+	local crash_bg = ui:createFrame(Color(89, 157, 220, 255))
 	crash_bg.parentDidResize = function()
 		crash_bg.Width = Screen.Width
 		crash_bg.Height = Screen.Height
