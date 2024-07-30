@@ -57,7 +57,7 @@ function menu.create(self)
     end
     debug.log("menu() - Setting tick...")
     menu.object.Tick = function(self, dt) 
-        errorHandler(function(self, dt)
+        local handler = errorHandler(function(self, dt)
             local delta = dt * 63
             if menu.aboutUs ~= nil then
                 menu.setBorders(menu.aboutUs)
@@ -184,8 +184,9 @@ function menu.create(self)
                     menu.settings:disable()
                     menu.armory:disable()
                 end
-            end, 
-        function(err) CRASH("menu.object.Tick() - "..err) end)(self, dt)
+            end
+        end, function(err) CRASH("menu.object.Tick() - "..err) end)
+        handler(self, dt)
     end
 
     Camera:SetModeFree()
