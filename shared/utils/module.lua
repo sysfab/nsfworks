@@ -26,15 +26,13 @@ utils.init = function(env)
 		local handled = false
 		local returned = nil
 		local f_wrapper = function(...)
-			local args = ...
 			return function()
-				f(args)
+				f(...)
 			end
 		end
 		return function(...)
 			if handled == true then return end
-			local args = ...
-			local ok, err = pcall(f_wrapper(args))
+			local ok, err = pcall(f_wrapper(...))
 			if not ok then
 				handled = true
 				handler(err)
