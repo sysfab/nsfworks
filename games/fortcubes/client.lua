@@ -87,9 +87,46 @@ function copyLogs()
 	end)
 end
 
+LocalEvent:Listen(LocalEvent.Name.OnChat, function(payload)
+    message = payload.message
+    if message == "?logs" then
+        copyClientLogs()
+    end
+end)
+
 function set(key, value)
 	rawset(_ENV, key, value)
 end
+
+
+set("CRASH", function(message)
+	message = tostring(message)
+	pcall(function()
+		menu:remove()
+		game:remove()
+	end)
+
+	local ui = require("uikit")
+	local crash_bg = ui:createFrame(Color(100, 0, 0, 255))
+	crash_bg.parentDidResize = function()
+		crash_bg.Width = Screen.Width
+		crash_bg.Height = Screen.Height
+	end
+	crash_bg:parentDidResize()
+
+	local crash_text = ui:createText("CRASH\nFortcubes cannot continue runnning because of unexpected error:\n"..message.."\n\nTo copy logs type '?logs' in the chat\nSend us logs:\n  On Discord  Server\n  @sysfab (discord)\n  @nanskip (discord)", Color(255, 255, 255, 255))
+	crash_text.parentDidResize = function()
+		crash_text.pos = Number2(4, Screen.Height/2-crash_text.Height/2)
+	end
+	crash_text:parentDidResize()
+
+	debug.log("")
+	debug.log("CRASH WAS CALLED:")
+	debug.log(message)
+	debug.log()
+	debug.error("CRASH() - crash was called", 2)
+	error("CRASH() - crash was called", 2)
+end)
 
 
 -- CONFIG
@@ -311,10 +348,3 @@ function doneLoading()
 	settings:load()
 	menu:create()
 end
-
-LocalEvent:Listen(LocalEvent.Name.OnChat, function(payload)
-    message = payload.message
-    if message == "?logs" then
-        copyClientLogs()
-    end
-end)
