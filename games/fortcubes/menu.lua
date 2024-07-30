@@ -711,7 +711,7 @@ menu.loadModels = function(self)
     menu.nanskip.Scale = 0.3
 
     menu.nanskip.toolgun = Shape(shapes.toolgun, {includeChildren = true})
-    menu.nanskip.toolgun:SetParent(menu.nanskip:GetChild(4):GetChild(1))
+    menu.nanskip.toolgun:SetParent(menu.nanskip.RightHand)
     menu.nanskip.toolgun.Scale = 1
     menu.nanskip.toolgun.LocalRotation = Rotation(0, math.pi/2, math.pi/2)
     menu.nanskip.toolgun.LocalPosition = Number3(9.3, 0.1, 0.1)
