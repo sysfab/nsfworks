@@ -56,135 +56,138 @@ function menu.create(self)
         menu.object = Object()
     end
     debug.log("menu() - Setting tick...")
-    menu.object.Tick = errorHandler(function(self, dt)
-        local delta = dt * 63
-        if menu.aboutUs ~= nil then
-            menu.setBorders(menu.aboutUs)
-            menu.setBorders(menu.settings)
-            menu.setBorders(menu.armory)
-            menu.setBorders(menu.play)
-            menu.setBorders(menu.back)
-        end
-        if menu.created then
-            if menu.currentMenu == "menu" then
-                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.15*delta)
-                Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.1*delta)
-                Camera.FOV = lerp(Camera.FOV, 30, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3*delta)
-                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3*delta)
-                menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
-            elseif menu.currentMenu == "about us" then
-                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.15*delta)
-                Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.1*delta)
-                Camera.FOV = lerp(Camera.FOV, 27, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
-                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
-                menu.description.posy = lerp(menu.description.pos.Y, 10, 0.3*delta)
-            elseif menu.currentMenu == "settings" then
-                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.31, 0), 0.15*delta)
-                Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.1*delta)
-                Camera.FOV = lerp(Camera.FOV, 23, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
-                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
-                menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
-                if menu.book.left ~= nil then
-                    menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05*delta)
-                    menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.05*delta)
+    menu.object.Tick = function(self, dt) 
+        errorHandler(function(self, dt)
+            local delta = dt * 63
+            if menu.aboutUs ~= nil then
+                menu.setBorders(menu.aboutUs)
+                menu.setBorders(menu.settings)
+                menu.setBorders(menu.armory)
+                menu.setBorders(menu.play)
+                menu.setBorders(menu.back)
+            end
+            if menu.created then
+                if menu.currentMenu == "menu" then
+                    Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.15*delta)
+                    Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.1*delta)
+                    Camera.FOV = lerp(Camera.FOV, 30, 0.1*delta)
+                    menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3*delta)
+                    menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3*delta)
+                    menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3*delta)
+                    menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
+                elseif menu.currentMenu == "about us" then
+                    Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.15*delta)
+                    Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.1*delta)
+                    Camera.FOV = lerp(Camera.FOV, 27, 0.1*delta)
+                    menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
+                    menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
+                    menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
+                    menu.description.posy = lerp(menu.description.pos.Y, 10, 0.3*delta)
+                elseif menu.currentMenu == "settings" then
+                    Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.31, 0), 0.15*delta)
+                    Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.1*delta)
+                    Camera.FOV = lerp(Camera.FOV, 23, 0.1*delta)
+                    menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
+                    menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
+                    menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
+                    menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
+                    if menu.book.left ~= nil then
+                        menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05*delta)
+                        menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 1.34, 0), 0.05*delta)
+                    end
+                elseif menu.currentMenu == "armory" then
+                    Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, math.pi/2-0.5, 0), 0.15*delta)
+                    Camera.Position:Lerp(Camera.Position, Number3(-12.46, 6.89, -14.66), 0.1*delta)
+                    Camera.FOV = lerp(Camera.FOV, 15, 0.1*delta)
+                    menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
+                    menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
+                    menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
+                    menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
+                    menu.descriptionName.posy = lerp(menu.descriptionName.pos.Y, menu.description.Height + 15, 0.3*delta)
                 end
-            elseif menu.currentMenu == "armory" then
-                Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, math.pi/2-0.5, 0), 0.15*delta)
-                Camera.Position:Lerp(Camera.Position, Number3(-12.46, 6.89, -14.66), 0.1*delta)
-                Camera.FOV = lerp(Camera.FOV, 15, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
-                menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
-                menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
-                menu.descriptionName.posy = lerp(menu.descriptionName.pos.Y, menu.description.Height + 15, 0.3*delta)
-            end
-            menu.titleBG.pos.Y = menu.titleBG.posy
-            menu.title.pos.Y = menu.title.posy
-            menu.title2.pos.Y = menu.title2.posy
-            menu.description.pos.Y = menu.description.posy
-            menu.descriptionName.pos.Y = menu.description.posy + menu.description.Height + 5
-            menu.descriptionBG.pos.Y = menu.description.posy - 10
-            if menu.currentMenu == "menu" and not menu.closing then
-                menu.mainbuttonsx = lerp(menu.mainbuttonsx, 5, 0.3*delta)
-                menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3*delta)
-            elseif menu.currentMenu ~= "menu" and not menu.closing then
-                menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.back.Width-5, 0.3*delta)
-                menu.backsx = lerp(menu.backsx, 5, 0.3*delta)
-            end
-            if menu.currentMenu ~= "menu" and not menu.closing then
-                menu.back.pos.X = menu.backsx
-            end
-            if menu.closing then
-                menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.play.Width-5, 0.3*delta)
-                menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3*delta)
-            end
-            menu.aboutUs.pos.X = menu.mainbuttonsx
-            menu.settings.pos.X = menu.mainbuttonsx
-            menu.play.pos.X = menu.mainbuttonsx
-            menu.armory.pos.X = menu.mainbuttonsx
-            if menu.currentMenu ~= "settings" and menu.book.left ~= nil then
-                menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05*delta)
-                menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05*delta)
-            end
-            for k, v in pairs(Players) do
-                v.IsHidden = true
-            end
-        else
-            for k, v in pairs(Players) do
-                if not v.isDead then
-                    v.IsHidden = false
+                menu.titleBG.pos.Y = menu.titleBG.posy
+                menu.title.pos.Y = menu.title.posy
+                menu.title2.pos.Y = menu.title2.posy
+                menu.description.pos.Y = menu.description.posy
+                menu.descriptionName.pos.Y = menu.description.posy + menu.description.Height + 5
+                menu.descriptionBG.pos.Y = menu.description.posy - 10
+                if menu.currentMenu == "menu" and not menu.closing then
+                    menu.mainbuttonsx = lerp(menu.mainbuttonsx, 5, 0.3*delta)
+                    menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3*delta)
+                elseif menu.currentMenu ~= "menu" and not menu.closing then
+                    menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.back.Width-5, 0.3*delta)
+                    menu.backsx = lerp(menu.backsx, 5, 0.3*delta)
                 end
-            end
-        end
-        if menu.closing then
-            if menu.blackPanel.alpha ~= nil then
-                menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3*delta))
-            end
-        else
-            if menu.blackPanel.alpha ~= nil then
-                menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3*delta))
-            end
-        end
-        if menu.blackPanel ~= nil and menu.blackPanel.alpha ~= nil then
-            menu.blackPanel.Color.A = menu.blackPanel.alpha
-        end
-        if menu.music ~= nil then
-            if menu.created == true then
-                menu.music.Volume = lerp(menu.music.Volume, settings.currentSettings.musicVolume*0.01, 0.005*delta)
-                if not menu.music.IsPlaying then
-                    menu.music:Play()
+                if menu.currentMenu ~= "menu" and not menu.closing then
+                    menu.back.pos.X = menu.backsx
+                end
+                if menu.closing then
+                    menu.mainbuttonsx = lerp(menu.mainbuttonsx, -menu.play.Width-5, 0.3*delta)
+                    menu.backsx = lerp(menu.backsx, -menu.back.Width-5, 0.3*delta)
+                end
+                menu.aboutUs.pos.X = menu.mainbuttonsx
+                menu.settings.pos.X = menu.mainbuttonsx
+                menu.play.pos.X = menu.mainbuttonsx
+                menu.armory.pos.X = menu.mainbuttonsx
+                if menu.currentMenu ~= "settings" and menu.book.left ~= nil then
+                    menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, 0, 0), 0.05*delta)
+                    menu.book.right.LocalRotation:Slerp(menu.book.right.LocalRotation, Rotation(0, 0, 0), 0.05*delta)
+                end
+                for k, v in pairs(Players) do
+                    v.IsHidden = true
                 end
             else
-                menu.music.Volume = lerp(menu.music.Volume, 0, 0.05*delta)
+                for k, v in pairs(Players) do
+                    if not v.isDead then
+                        v.IsHidden = false
+                    end
+                end
             end
+            if menu.closing then
+                if menu.blackPanel.alpha ~= nil then
+                    menu.blackPanel.alpha = math.ceil(lerp(menu.blackPanel.alpha, 255, 0.3*delta))
+                end
+            else
+                if menu.blackPanel.alpha ~= nil then
+                    menu.blackPanel.alpha = math.floor(lerp(menu.blackPanel.alpha, 0, 0.3*delta))
+                end
+            end
+            if menu.blackPanel ~= nil and menu.blackPanel.alpha ~= nil then
+                menu.blackPanel.Color.A = menu.blackPanel.alpha
+            end
+            if menu.music ~= nil then
+                if menu.created == true then
+                    menu.music.Volume = lerp(menu.music.Volume, settings.currentSettings.musicVolume*0.01, 0.005*delta)
+                    if not menu.music.IsPlaying then
+                        menu.music:Play()
+                    end
+                else
+                    menu.music.Volume = lerp(menu.music.Volume, 0, 0.05*delta)
+                end
+            end
+            if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and menu.workinprogress ~= nil then
+                if loading_screen.created then
+                    loading_screen:remove()
+                end
+                if not menu.firstTick then
+                    menu:update()
+                end
+                menu.firstTick = true
+                menu.play:enable()
+                menu.aboutUs:enable()
+                menu.settings:enable()
+                menu.armory:enable()
+            else
+                if menu.created then
+                    menu.play:disable()
+                    menu.aboutUs:disable()
+                    menu.settings:disable()
+                    menu.armory:disable()
+                end
+            end, 
+            function(err) CRASH("menu.object.Tick() - "..err) end)(self, dt)
         end
-        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and menu.workinprogress ~= nil then
-            if loading_screen.created then
-                loading_screen:remove()
-            end
-            if not menu.firstTick then
-                menu:update()
-            end
-            menu.firstTick = true
-            menu.play:enable()
-            menu.aboutUs:enable()
-            menu.settings:enable()
-            menu.armory:enable()
-        else
-            if menu.created then
-                menu.play:disable()
-                menu.aboutUs:disable()
-                menu.settings:disable()
-                menu.armory:disable()
-            end
-        end
-    end, function(err) CRASH("menu.object.Tick() - "..err) end)
+    end
 
     Camera:SetModeFree()
     Camera.Rotation = Rotation(0, -0.2, 0)

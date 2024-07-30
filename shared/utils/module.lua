@@ -27,9 +27,7 @@ utils.init = function(env)
 		local returned = nil
 		local f_wrapper = function(...)
 			local args = ...
-			print(args)
 			return function()
-				print(args)
 				f(args)
 			end
 		end
