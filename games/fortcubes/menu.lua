@@ -55,7 +55,7 @@ function menu.create(self)
     if menu.object == nil then
         menu.object = Object()
     end
-    debug.log("menu() - Setting tick...")
+    debug.log("menu() - Setting tick...")--[[
     menu.object.Tick = function(self, dt)
         local delta = dt * 63
         if menu.aboutUs ~= nil then
@@ -185,7 +185,7 @@ function menu.create(self)
             end
         end
     end
-
+]]
     Camera:SetModeFree()
     Camera.Rotation = Rotation(0, -0.2, 0)
     Camera.Position = Number3(-10, 5, 5)
