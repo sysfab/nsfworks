@@ -196,6 +196,12 @@ loadAudios = {
 	bush = "games/fortcubes/assets/bush.mp3"
 }
 
+images = {}
+loadImages = {
+	logo = "games/fortcubes/assets/logo.png",
+}
+
+
 loaded = 0
 need_to_load = 0
 
@@ -354,6 +360,38 @@ for key, value in pairs(loadAudios) do
 	end)
 end
 debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
+
+for key, value in pairs(loadImages) do
+	if need_to_load_images == nil then need_to_load_images = 0 end
+	need_to_load_images = need_to_load_images + 1
+	need_to_load = need_to_load + 1
+
+	loader:loadData(value, function(data)
+		debug.log("client() - Loaded '".. value .."'")
+
+		images[key] = data
+
+		if loaded_images == nil then loaded_images = 0 end
+		loaded_images = loaded_images + 1
+		loaded = loaded + 1
+
+		if loaded_images >= need_to_load_images then
+			debug.log("client() - Loaded all images.")
+			if loading_screen.created then
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			elseif loading_screen ~= nil then
+				loading_screen:create()
+				
+				loadingBG:remove()
+				loadingBG = nil
+			end
+		end
+		if loaded >= need_to_load then
+			checkLoading()
+		end
+	end)
+end
+debug.log("client() - Loading " .. need_to_load_images .. " images..")
 
 
 debug.log("client() - Total: " .. need_to_load .. " assets")

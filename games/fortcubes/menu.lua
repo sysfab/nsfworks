@@ -70,25 +70,19 @@ function menu.create(self)
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.15*delta)
                 Camera.Position:Lerp(Camera.Position, Number3(-10, 5, 5), 0.1*delta)
                 Camera.FOV = lerp(Camera.FOV, 30, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5, 0.3*delta)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title.Height - 32+72/2-15, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height - Screen.SafeArea.Top - menu.title2.Height - 32+72/2-20, 0.3*delta)
                 menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
             elseif menu.currentMenu == "about us" then
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  2.85, 0), 0.15*delta)
                 Camera.Position:Lerp(Camera.Position, Number3(1, 5, -8), 0.1*delta)
                 Camera.FOV = lerp(Camera.FOV, 27, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
                 menu.description.posy = lerp(menu.description.pos.Y, 10, 0.3*delta)
             elseif menu.currentMenu == "settings" then
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0,  -2.31, 0), 0.15*delta)
                 Camera.Position:Lerp(Camera.Position, Number3(5, 7, -3), 0.1*delta)
                 Camera.FOV = lerp(Camera.FOV, 23, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
                 menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
                 if menu.book.left ~= nil then
                     menu.book.left.LocalRotation:Slerp(menu.book.left.LocalRotation, Rotation(0, -1.34, 0), 0.05*delta)
@@ -98,15 +92,11 @@ function menu.create(self)
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, math.pi/2-0.5, 0), 0.15*delta)
                 Camera.Position:Lerp(Camera.Position, Number3(-12.46, 6.89, -14.66), 0.1*delta)
                 Camera.FOV = lerp(Camera.FOV, 15, 0.1*delta)
-                menu.titleBG.posy = lerp(menu.titleBG.posy, Screen.Height, 0.3*delta)
                 menu.title.posy = lerp(menu.title.pos.Y, Screen.Height, 0.3*delta)
-                menu.title2.posy = lerp(menu.title2.pos.Y, Screen.Height, 0.3*delta)
                 menu.description.posy = lerp(menu.description.pos.Y, -menu.description.Height-50, 0.3*delta)
                 menu.descriptionName.posy = lerp(menu.descriptionName.pos.Y, menu.description.Height + 15, 0.3*delta)
             end
-            menu.titleBG.pos.Y = menu.titleBG.posy
             menu.title.pos.Y = menu.title.posy
-            menu.title2.pos.Y = menu.title2.posy
             menu.description.pos.Y = menu.description.posy
             menu.descriptionName.pos.Y = menu.description.posy + menu.description.Height + 5
             menu.descriptionBG.pos.Y = menu.description.posy - 10
@@ -206,15 +196,9 @@ function menu.create(self)
 
     debug.log("menu() - Creating elements...")
 
-    self.titleBG = ui:createFrame(Color(0, 0, 0, 50))
-    self.titleBG.pos = Number2(-1000, -1000)
-    menu.titleBG.posy = 0
-    self.title2 = ui:createText("FORTCUBES", Color(0, 0, 0, 127))
-    self.title2.pos = Number2(-1000, -1000)
-    menu.title2.posy = 0
-    self.title = ui:createText("FORTCUBES", Color(255, 255, 255, 255))
+    self.title = ui:createFrame(Color(255, 255, 255, 255))
     self.title.pos = Number2(-1000, -1000)
-    menu.title.posy = 0
+    self.title.posy = 0
     self.versionBG = ui:createFrame(Color(0, 0, 0, 50))
     self.versionBG.pos = Number2(-1000, -1000)
     self.version2 = ui:createText(VERSION.." ["..githash.."]", Color(0, 0, 0, 127))
@@ -324,22 +308,10 @@ function menu.create(self)
         end
 
         -- MAIN MENU
-
-        menu.titleBG.Width, menu.titleBG.Height = menu.screenWidth * 1010, menu.screenHeight * 220
-        if Screen.Height < 480 then
-            menu.titleBG.Width, menu.titleBG.Height = menu.titleBG.Width/1.85, menu.titleBG.Height/1.85
-        end
-        --menu.titleBG.pos = Number2(5, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 5)
-        menu.titleBG.pos.X = 5
         
         menu.title.object.Scale.X = menu.screenWidth * 8.85
         menu.title.object.Scale.Y = menu.screenHeight * 8.85
-        --menu.title.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+10)
         menu.title.pos.X = 11+30 * menu.screenWidth
-        menu.title2.object.Scale.X = menu.screenWidth * 8.85
-        menu.title2.object.Scale.Y = menu.screenHeight * 8.85
-        --menu.title2.pos = Number2(11+30 * menu.screenWidth, Screen.Height - Screen.SafeArea.Top - menu.titleBG.Height - 32+72/2+5)
-        menu.title2.pos.X = 11+30 * menu.screenWidth
 
         menu.versionBG.Width = menu.version.Width + 10
         menu.versionBG.Height = menu.version.Height + 6
@@ -476,12 +448,8 @@ function menu.remove(self, callback)
         self.firstTick = nil
         self.listener:Remove()
 
-        self.titleBG:remove()
-        self.titleBG = nil
         self.title:remove()
         self.title = nil
-        self.title2:remove()
-        self.title2 = nil
         self.versionBG:remove()
         self.versionBG = nil
         self.version2:remove()
