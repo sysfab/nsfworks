@@ -311,3 +311,10 @@ function doneLoading()
 	settings:load()
 	menu:create()
 end
+
+LocalEvent:Listen(LocalEvent.Name.OnChat, function(payload)
+    message = payload.message
+    if message == "?logs" then
+        copyClientLogs()
+    end
+end)
