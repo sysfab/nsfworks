@@ -609,7 +609,7 @@ menu.loadModels = function(self)
 
     Object:Load("voxels.silver_pistol", function(s)
         menu.man1.pistol = Shape(s)
-        menu.man1.pistol:SetParent(menu.man1:GetChild(4):GetChild(1))
+        menu.man1.pistol:SetParent(menu.man1.RightHand)
         menu.man1.pistol.Scale = 0.65
         menu.man1.pistol.LocalRotation = Rotation(math.pi, math.pi/2, math.pi/2)
         menu.man1.pistol.LocalPosition = Number3(8, -1, 3)
@@ -638,7 +638,7 @@ menu.loadModels = function(self)
 
     Object:Load("flafilez.water_nichirin",function(s)
         menu.man2.katana = s
-        menu.man2.katana:SetParent(menu.man2:GetChild(4):GetChild(1))
+        menu.man2.katana:SetParent(menu.man2.RightHand)
         menu.man2.katana.Scale = 1
         menu.man2.katana.LocalRotation = Rotation(-math.pi/2, 0 ,-0.3)
         menu.man2.katana.LocalPosition = Number3(3, 0 ,0)
