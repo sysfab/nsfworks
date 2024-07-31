@@ -732,9 +732,9 @@ game.ui.create = function(u)
     u.screenHeight = u.screenHeight * coff
 
 	u.timerBG = ui:createFrame(Color(0, 0, 0, 0.5))
-	u.timerBG.pos = Number3(-1000, -1000)
+	u.timerBG.pos = Number2(-1000, -1000)
 	u.timer = ui:createText("0:00", Color(255, 255, 255))
-	u.timer.pos = Number3(-1000, -1000)
+	u.timer.pos = Number2(-1000, -1000)
 
     if u.object == nil then
         u.object = Object()
