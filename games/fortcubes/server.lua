@@ -136,10 +136,12 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	})
 end, function(err) CRASH("Server.DidReceiveEvent - "..err) end)
 
-Server.Tick = errorHandler(function(self, dt)
-	game.ticks = game.ticks + dt*62.5
-	print(game.ticks)
-end, function(err) CRASH("Server.Tick - "..err) end)
+Server.Tick = function(self, dt)
+	if game.ticks ~= nil then
+		game.ticks = game.ticks + dt*62.5
+		print(game.ticks)
+	end
+end
 
 function createRocks()
 	server_rocks = {}
