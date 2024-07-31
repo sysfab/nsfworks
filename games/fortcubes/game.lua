@@ -673,6 +673,18 @@ game.connection.onEvent = errorHandler(function(connection, e)
 			p.inbush = false
 		end,
 
+		round_end = function(event)
+			debug.log("game() - round end. Winner: " .. event.data.winner)
+		end,
+		
+		get_round = function(event)
+			debug.log("game() - loaded round. Time: " .. event.data.time .. ". End time: " .. event.data.time_end .. ". Mode: " .. event.data.mode)
+			game.ui.loadedTimer = true
+			game.time = event.data.time
+			game.time_end = event.data.time_end
+			game.mode = event.data.mode
+		end,
+
 		["_"] = function(event)
 			if event.action ~= nil then
 				debug.log("game() - got unknown event: '".. event.action .."'")
@@ -719,6 +731,11 @@ game.ui.create = function(u)
     u.screenWidth = u.screenWidth * coff
     u.screenHeight = u.screenHeight * coff
 
+	u.timerBG = ui:createFrame(Color(0, 0, 0, 0.5))
+	u.timerBG.pos = Number3(-1000, -1000)
+	u.timer = ui:createText("0:00", Color(255, 255, 255))
+	u.timer.pos = Number3(-1000, -1000)
+
     if u.object == nil then
         u.object = Object()
     end
@@ -750,6 +767,18 @@ game.ui.create = function(u)
                 u.music.Volume = lerp(u.music.Volume, 0, 0.05*delta)
             end
         end
+		
+		if u.timer ~= nil and u.loadedTimer then
+			u.timer.pos = Number2(Screen.Width/2-Screen.SafeArea.Right-u.timer.Width/2, Screen.Height-Screen.SafeArea.Top-u.timer.Height-15)
+			u.timerBG.pos = Number2(u.timerBG.pos.X-15, u.timerBG.pos.Y-15)
+			u.timerBG.Width = u.timerBG.Width + 30
+			u.timerBG.Height = u.timerBG.Height + 30
+
+			local minutes = (game.time_end - math.floor(game.time))//60
+			local seconds = (game.time_end - math.floor(game.time))%60
+			u.timer.Text = minutes .. ":" .. seconds
+			game.time = game.time + dt
+		end
     end
 
 	if u.music == nil then
@@ -1198,6 +1227,9 @@ game.create = function(self)
 	e:SendTo(Server)
 	
 	local e = crystal.Event("send_bushes", {player = Player.Username})
+	e:SendTo(Server)
+
+	local e = crystal.Event("get_round", {player = Player.Username})
 	e:SendTo(Server)
     debug.log("game() - created")
 end

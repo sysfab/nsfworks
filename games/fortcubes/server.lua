@@ -39,17 +39,11 @@ event_players = {}
 function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
+	game.time_end = 300 -- 5 minutes per round
 	game.ticks = 0
 
-	tick = Object()
-	tick.Tick = function(self, dt)
-		game.ticks = game.ticks + dt
-		if game.ticks > 1 then
-			game.ticks = 0
-			game.time = game.time + 1
-			print(game.time)
-		end
-	end
+	local e = crystal.Event("round_end", {winner = "winner placeholder"})
+	e:SendTo(Players)
 end
 
 function getPlayerByUsername(username)
@@ -130,6 +124,11 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		e:SendTo(event.Sender)
 	end,
 
+	send_round = function(event)
+		local e = crystal.Event("get_round", {time = game.time, time_end = game.time_end, mode = "default"})
+		e:SendTo(event.Sender)
+	end,
+
 	crash = function(event)
 		if debug.enabled ~= true then return end
 		for i, username in ipairs(ADMINS) do
@@ -183,3 +182,17 @@ end
 resetGame()
 createRocks()
 createBushes()
+
+tick = Object()
+tick.Tick = function(self, dt)
+	game.ticks = game.ticks + dt
+	if game.ticks > 1 then
+		game.ticks = 0
+		game.time = game.time + 1
+	end
+	if game.time > game.time_end then
+		resetGame()
+	end
+end
+
+debug.log("server() - created tick object with Tick function.")
