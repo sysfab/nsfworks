@@ -776,6 +776,9 @@ game.ui.create = function(u)
 
 			local minutes = (game.time_end - math.floor(game.time))//60
 			local seconds = (game.time_end - math.floor(game.time))%60
+			if seconds < 10 then
+                seconds = "0".. seconds
+			end
 			u.timer.Text = minutes .. ":" .. seconds
 			game.time = game.time + dt
 		end
