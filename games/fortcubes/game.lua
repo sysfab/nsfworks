@@ -770,7 +770,7 @@ game.ui.create = function(u)
 		
 		if u.timer ~= nil and u.loadedTimer then
 			u.timer.pos = Number2(Screen.Width/2-Screen.SafeArea.Right-u.timer.Width/2, Screen.Height-Screen.SafeArea.Top-u.timer.Height-15)
-			u.timerBG.pos = Number2(u.timerBG.pos.X-15, u.timerBG.pos.Y-15)
+			u.timerBG.pos = Number2(u.timer.pos.X-15, u.timer.pos.Y-15)
 			u.timerBG.Width = u.timer.Width + 30
 			u.timerBG.Height = u.timer.Height + 30
 
