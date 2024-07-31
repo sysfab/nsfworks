@@ -675,6 +675,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 
 		round_end = function(event)
 			debug.log("game() - round end. Winner: " .. event.data.winner)
+			game:remove(function() menu:create() menu:update() end)
 		end,
 		
 		get_round = function(event)
@@ -818,6 +819,12 @@ game.ui.remove = function(u, callback)
 
     Timer(0.5, false, function()
         u.created = false
+
+		u.timerBG:remove()
+		u.timerBG = nil
+		u.timer:remove()
+        u.timer = nil
+		u.loadedTimer = false
 
         u.toMenu:remove()
         u.toMenu = nil
