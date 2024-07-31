@@ -64,7 +64,7 @@ function menu.create(self)
             menu.setBorders(menu.armory)
             menu.setBorders(menu.play)
             menu.setBorders(menu.back)
-        end
+        end  
         if menu.created then
             if menu.currentMenu == "menu" then
                 Camera.Rotation:Slerp(Camera.Rotation, Rotation(0, -0.2, 0), 0.15*delta)
@@ -197,7 +197,7 @@ function menu.create(self)
     debug.log("menu() - Creating elements...")
 
     self.title = ui:createFrame(Color(255, 255, 255, 254))
-    self.title.pos = Number2(-1000, -1000)
+    self.title.pos = Number2(-10000, -1000)
     self.title.posy = 0
     self.title:setImage(images.logo)
     self.title.Color = (Color(255, 255, 255, 254))
@@ -313,8 +313,8 @@ function menu.create(self)
 
         -- MAIN MENU
         
-        menu.title.object.Scale.X = menu.screenWidth * 1
-        menu.title.object.Scale.Y = menu.screenHeight * 1
+        menu.title.Width = 1354 * menu.screenWidth*0.85
+        menu.title.Height = 359 * menu.screenHeight*0.85
         menu.title.pos.X = 0
 
         menu.versionBG.Width = menu.version.Width + 10
