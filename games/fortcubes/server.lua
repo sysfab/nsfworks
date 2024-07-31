@@ -40,6 +40,16 @@ function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
 	game.ticks = 0
+
+	tick = Object()
+	tick.Tick = function(self, dt)
+		game.ticks = game.ticks + dt
+		if game.ticks > 1 then
+			game.ticks = 0
+			game.time = game.time + 1
+			print(game.time)
+		end
+	end
 end
 
 function getPlayerByUsername(username)
@@ -135,13 +145,6 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	})
 end, function(err) CRASH("Server.DidReceiveEvent - "..err) end)
-
-Server.Tick = function(self, dt)
-	if game.ticks ~= nil then
-		game.ticks = game.ticks + dt*62.5
-		print(game.ticks)
-	end
-end
 
 function createRocks()
 	server_rocks = {}
