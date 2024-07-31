@@ -1229,7 +1229,7 @@ game.create = function(self)
 	local e = crystal.Event("send_bushes", {player = Player.Username})
 	e:SendTo(Server)
 
-	local e = crystal.Event("get_round", {player = Player.Username})
+	local e = crystal.Event("send_round", {player = Player.Username})
 	e:SendTo(Server)
     debug.log("game() - created")
 end
