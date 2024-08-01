@@ -283,6 +283,10 @@ game.connection.onEvent = errorHandler(function(connection, e)
 									local e = crystal.Event("set_health", {player = self.Username, health = 100})
 									e:SendTo(OtherPlayers)
 								end)
+								if self == Player then
+									local e = crystal.Event("kill", {player = self.Username, killer = self.lastDamager})
+									e:SendTo(Server)
+								end
 							end
 
 							v.Tick = errorHandler(function(self, dt)
@@ -491,6 +495,10 @@ game.connection.onEvent = errorHandler(function(connection, e)
 							self.isDead = false
 							self.IsHidden = false
 						end)
+						if self == Player then
+							local e = crystal.Event("kill", {player = self.Username, killer = self.lastDamager})
+							e:SendTo(Server)
+						end
 					end
 
 					p.Tick = errorHandler(function(self, dt)
