@@ -11,7 +11,7 @@ l.init = function(self, env)
 end
 
 
--- DO NOT USE THIS FUNCTION, USE loadData
+-- DO NOT USE THIS FUNCTION, USE LoadData
 l.load = function(self, file, callback, error_callback)
     if self.env == nil then
         error("loader:loadData() should be called with ':'!", 2)
@@ -34,7 +34,87 @@ l.load = function(self, file, callback, error_callback)
 end
 
 --
--- STANDARD FUNCTIONS
+-- ADVANCED FUNCTIONS 
+--
+l.Loader = function(self, file, type, callback, error_callback)
+    local lr = {}
+    lr.file = file
+    lr.type = type
+    lr.callback = callback
+    lr.error_callback = error_callback
+
+    lr.Start = function(s)
+        if s.type == "Data" then
+            s.request = l.LoadData(s.file, s.callback, s.error_callback)
+            return s.request
+        elseif s.type == "Text" then
+            s.request = l.LoadText(s.file, s.callback, s.error_callback)
+            return s.request
+        elseif s.type == "JSON" then
+            s.request = l.LoadJSON(s.file, s.callback, s.error_callback)
+            return s.request
+        elseif s.type == "Function" then
+            s.request = l.LoadFunction(s.file, s.callback, s.error_callback)
+            return s.request
+        end
+    end
+
+    lr.Cancel = function(s)
+        if s.request ~= nil then
+            s.request:Cancel()
+        end
+    end
+    return lr
+end
+
+l.BatchLoader = function(self, files)
+    local bl = {}
+    bl.files = files
+
+    bl.result = {}
+    bl.loaders = {}
+
+    bl.Start = function(s, callback, error_callback)
+        s.result = {}
+        s.error_callback = function(...)
+            for i, request in pairs(s.loaders) do
+                request:Cancel()
+            end
+            s.loaders = {}
+            error_callback(...)
+        end
+
+        s.loaded = 0
+        s.need_to_load = 0
+        for key, setting in pairs(s.files) do
+            s.need_to_load = s.need_to_load + 1
+            local loader = l.Loader(setting[2], setting[1], 
+            function(result)
+                s.results[setting[2]] = result
+                s.loaded = s.loaded + 1
+                if s.loaded >= s.need_to_load then
+                    s.loaders = {}
+                    callback(s.results)
+                end
+            end, s.error_callback)
+            table.insert(s.loaders, loader)
+        end
+        for i, loader in ipairs(s.loaders) do
+            loader:Start()
+        end
+    end
+    bl.Cancel = function(s)
+        for i, request in pairs(s.loaders) do
+            request:Cancel()
+        end
+        s.result = {}
+        s.loaders = {}
+    end
+    return bl
+end
+
+--
+-- BASIC FUNCTIONS
 --
 l.LoadData = function(self, file, callback, error_callback)
     if self.env == nil then
