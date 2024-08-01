@@ -276,6 +276,15 @@ function menu.create(self)
     self.blackPanel = ui:createFrame(Color(0, 0, 0, 0))
     self.blackPanel.alpha = 255
 
+    if self.lastWinner ~= nil then
+        self.lastWinnerBG = ui:createFrame(Color(0, 0, 0, 100))
+        self.lastWinnerBG.pos = Number2(-1000, -1000)
+
+        self.lastWinnerText = ui:createText("", Color(255, 255, 255))
+        self.lastWinnerText.Text = "LAST WINNER: \n" .. self.lastWinner
+        self.lastWinnerText.pos = Number2(-1000, -1000)
+    end
+
     -- -- ------  --  --------------------  --  ------ -- --
     debug.log("menu() - Creating menu:update()...")
     function menu.update(self)
@@ -340,6 +349,14 @@ function menu.create(self)
         menu.descriptionBG.Width = menu.description.Width + 20
         menu.descriptionBG.Height = menu.description.Height + 20 + menu.descriptionName.Height
         menu.descriptionBG.pos.X = Screen.Width/2 - menu.descriptionBG.Width/2
+
+        if self.lastWinner ~= nil then
+            self.lastWinnerText.Text = "LAST WINNER: \n" .. self.lastWinner
+            self.lastWinnerText.pos = Number2(Screen.Width-Screen.SafeArea.Right-self.lastWinnerText.Width - 20, Screen.Height-Screen.SafeArea.Top-self.lastWinnerText.Height-10)
+            self.lastWinnerBG.Width = self.lastWinnerText.Width + 40
+            self.lastWinnerBG.Height = self.lastWinnerText.Height + 20
+            self.lastWinnerBG.pos = Number2(self.lastWinnerText.pos.X - 20, self.lastWinnerText.pos.Y - 10)
+        end
 
         -- MAIN MENU -- BUTTONS
         for k, v in pairs(self.menus) do
@@ -474,6 +491,13 @@ function menu.remove(self, callback)
             self.resolution_error = nil
             self.resolution_error_text:remove()
             self.resolution_error_text = nil
+        end
+
+        if self.lastWinner ~= nil then
+            self.lastWinnerText:remove()
+            self.lastWinnerText = nil
+            self.lastWinnerBG:remove()
+            self.lastWinnerBG = nil
         end
 
         if menu.man1 ~= nil then
