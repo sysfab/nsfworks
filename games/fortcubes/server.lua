@@ -41,6 +41,7 @@ function resetGame()
 	game.time = 0
 	game.time_end = 60 -- 5 minutes per round
 	game.ticks = 0
+	game.winner = "unknown"
 	if game.players ~= nil then
 		local top_player = "unknown"
 		local kills = 0
@@ -60,10 +61,11 @@ function resetGame()
 
 		local e = crystal.Event("top", {winner = top_player, kills = kills, deaths = deaths})
         e:SendTo(Players)
+		game.winner = top_player
 	end
 	game.players = {}
 
-	local e = crystal.Event("round_end", {winner = "winner placeholder"})
+	local e = crystal.Event("round_end", {winner = game.winner})
 	e:SendTo(Players)
 end
 
