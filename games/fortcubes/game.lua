@@ -683,7 +683,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 
 		round_end = function(event)
 			debug.log("game() - round end. Winner: " .. event.data.winner)
-			game:remove(function() menu:create() menu:update() end)
+			game:remove(function() menu.lastWinner = event.data.winner menu:create() menu:update() end)
 		end,
 		
 		get_round = function(event)
