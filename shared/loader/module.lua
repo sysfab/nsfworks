@@ -57,12 +57,14 @@ l.Loader = function(self, file, type, callback, error_callback)
             s.request = l.LoadFunction(s.file, s.callback, s.error_callback)
             return s.request
         end
+        return s
     end
 
     lr.Cancel = function(s)
         if s.request ~= nil then
             s.request:Cancel()
         end
+        return s
     end
     return lr
 end
@@ -102,6 +104,7 @@ l.BatchLoader = function(self, files)
         for i, loader in ipairs(s.loaders) do
             loader:Start()
         end
+        return bl
     end
     bl.Cancel = function(s)
         for i, request in pairs(s.loaders) do
@@ -109,6 +112,7 @@ l.BatchLoader = function(self, files)
         end
         s.result = {}
         s.loaders = {}
+        return bl
     end
     return bl
 end
