@@ -39,7 +39,7 @@ event_players = {}
 function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
-	game.time_end = 60 -- 5 minutes per round
+	game.time_end = 60*3 -- 5 minutes per round
 	game.ticks = 0
 	game.winner = "unknown"
 	if game.players ~= nil then
