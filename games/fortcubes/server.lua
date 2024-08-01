@@ -48,6 +48,7 @@ function resetGame()
 		local coff = 0
 
 		for k, v in pairs(game.players) do
+			print(v)
 			local score = v.kills - (v.deaths/v.kills)
 			if score > coff then
                 coff = score
