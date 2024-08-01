@@ -33,6 +33,7 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 debug.log("server() - version: "..VERSION)
 
 game = {}
+players = {}
 event_players = {}
 
 function resetGame()
