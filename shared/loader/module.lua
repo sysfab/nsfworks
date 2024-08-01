@@ -12,7 +12,7 @@ end
 
 
 -- DO NOT USE THIS FUNCTION, USE loadData
-l.load = function(self, file, callback)
+l.load = function(self, file, callback, error_callback)
     if self.env == nil then
         error("loader:loadData() should be called with ':'!", 2)
     end
@@ -20,7 +20,11 @@ l.load = function(self, file, callback)
 
     local request = HTTP:Get(url, function(response)
         if response.StatusCode ~= 200 then
-            error("Error when loading '" .. url .. "'. Code: " .. response.StatusCode, 3)
+            if error_callback ~= nil then
+                error_callback(response.Body, response.StatusCode)
+            else
+                error("Error when loading '" .. url .. "'. Code: " .. response.StatusCode, 3)
+            end
         end
 
         callback(response.Body)
@@ -29,34 +33,54 @@ l.load = function(self, file, callback)
     return request
 end
 
-
-l.loadData = function(self, file, callback)
+--
+-- STANDARD FUNCTIONS
+--
+l.LoadData = function(self, file, callback, error_callback)
     if self.env == nil then
         error("loader:loadData() should be called with ':'!", 2)
     end
-    return self:load(file, function(data) callback(data) end)
+    return self:load(file, function(data) callback(data) end, error_callback)
 end
 
-l.loadText = function(self, file, callback)
+-- LEGACY
+l.LoadText = function(self, file, callback, error_callback)
     if self.env == nil then
         error("loader:loadText() should be called with ':'!", 2)
     end
-    return self:load(file, function(data) callback(data:ToString()) end)
+    return self:load(file, function(data) callback(data:ToString()) end, error_callback)
 end
 
-l.loadJSON = function(self, file, callback)
+-- LEGACY
+l.LoadJSON = function(self, file, callback, error_callback)
     if self.env == nil then
         error("loader:loadJSON() should be called with ':'!", 2)
     end
-    return self:load(file, function(data) callback(JSON:Decode(data:ToString())) end)
+    return self:load(file, function(data) callback(JSON:Decode(data:ToString())) end, error_callback)
 end
 
-l.loadFunction = function(self, file, callback)
+-- LEGACY
+l.LoadFunction = function(self, file, callback, error_callback)
     if self.env == nil then
         error("loader:loadFunction() should be called with ':'!", 2)
     end
-    return self:load(file, function(data) callback(load(data:ToString(), nil, "bt", self.env)) end)
+    return self:load(file, function(data) callback(load(data:ToString(), nil, "bt", self.env)) end, error_callback)
 end
+
+--
+-- LEGACY FUNCTIONS:
+--
+-- LEGACY
+l.loadData = l.LoadData
+
+-- LEGACY
+l.loadText = l.LoadText
+
+-- LEGACY
+l.loadJSON = l.LoadJSON
+
+-- LEGACY
+l.loadFunction = l.LoadFunction
 
 
 return l
