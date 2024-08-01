@@ -39,7 +39,7 @@ event_players = {}
 function resetGame()
 	debug.log("server() - resetting game..")
 	game.time = 0
-	game.time_end = 300 -- 5 minutes per round
+	game.time_end = 60 -- 5 minutes per round
 	game.ticks = 0
 	if game.players ~= nil then
 		local top_player = "unknown"
