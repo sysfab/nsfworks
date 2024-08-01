@@ -99,6 +99,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 					debug.error("server() - failed to find player "..player)
 				end
 			end
+			players[event.Sender.Username] = {kills = 0, deaths = 0}
 			event_players[event.Sender.Username] = event.Sender
 			debug.log("server() - created player entry for '".. event.Sender.Username .."'")
 
@@ -121,6 +122,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 					debug.error("server() - failed to find player "..player)
 				end
 			end
+			players[event.Sender.Username] = nil
 			event_players[event.Sender.Username] = nil
 			debug.log("server() - removed player entry for '".. event.Sender.Username .."'")
 		end
