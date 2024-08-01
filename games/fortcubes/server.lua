@@ -156,9 +156,6 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	kill = function(event)
 		game.players[event.data.player].deaths = game.players[event.data.player].deaths + 1
 		game.players[event.data.killer].kills = game.players[event.data.killer].kills + 1
-
-		print(game.players[event.data.player].name, game.players[event.data.player].deaths)
-		print(game.players[event.data.killer].name, game.players[event.data.killer].kills)
 	end,
 
 	crash = function(event)
