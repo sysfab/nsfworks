@@ -686,6 +686,11 @@ game.connection.onEvent = errorHandler(function(connection, e)
 			game.mode = event.data.mode
 		end,
 
+		top = function(event)
+			debug.log("game() - loaded top 1 player: " .. event.data.winner)
+			print("Winner: " .. event.data.winner .. " with " .. event.data.kills .. " kills and " .. event.data.deaths .. " deaths.")
+		end,
+
 		["_"] = function(event)
 			if event.action ~= nil then
 				debug.log("game() - got unknown event: '".. event.action .."'")

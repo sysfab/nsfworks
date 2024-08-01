@@ -33,7 +33,6 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 debug.log("server() - version: "..VERSION)
 
 game = {}
-players = {}
 event_players = {}
 
 function resetGame()
@@ -41,6 +40,24 @@ function resetGame()
 	game.time = 0
 	game.time_end = 300 -- 5 minutes per round
 	game.ticks = 0
+	if game.players ~= nil then
+		local top_player = "unknown"
+		local kills = 0
+		local deaths = 0
+		local coff = 0
+
+		for k, v in pairs(game.players) do
+			local score = game.players[k].kills - (game.players[k].deaths/game.players[k].kills)
+			if score > coff then
+                coff = score
+				top_player = k.name
+			end
+		end
+
+		local e = crystal.Event("top", {winner = top_player, kills = kills, deaths = deaths})
+        e:SendTo(Players)
+	end
+	game.players = {}
 
 	local e = crystal.Event("round_end", {winner = "winner placeholder"})
 	e:SendTo(Players)
@@ -81,12 +98,14 @@ Server.DidReceiveEvent = errorHandler(function(e)
 					debug.error("server() - failed to find player "..player)
 				end
 			end
-			players[event.Sender.Username] = {kills = 0, deaths = 0}
 			event_players[event.Sender.Username] = event.Sender
 			debug.log("server() - created player entry for '".. event.Sender.Username .."'")
 
 			local r = crystal.Event("connected", {players = players, game = game, posX = math.random(20, 80)/100, posY = math.random(20, 80)/100})
 			r:SendTo(event.Sender)
+			if game.players[event.Sender.Username] == nil then
+				game.players[event.Sender.Username] = {kills = 0, deaths = 0, name = event.Sender.Username}
+			end
 		end
 	end,
 
@@ -101,7 +120,6 @@ Server.DidReceiveEvent = errorHandler(function(e)
 					debug.error("server() - failed to find player "..player)
 				end
 			end
-			players[event.Sender.Username] = nil
 			event_players[event.Sender.Username] = nil
 			debug.log("server() - removed player entry for '".. event.Sender.Username .."'")
 		end
@@ -127,6 +145,14 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	send_round = function(event)
 		local e = crystal.Event("get_round", {time = game.time, time_end = game.time_end, mode = "default"})
 		e:SendTo(event.Sender)
+	end,
+
+	kill = function(event)
+		local player = game.players[event.data.player]
+		local victim = game.players[event.data.victim]
+
+		game.players[event.data.player].kills = game.players[event.data.player].kills + 1
+		game.players[event.data.victim].deaths = game.players[event.data.victim].deaths + 1
 	end,
 
 	crash = function(event)
