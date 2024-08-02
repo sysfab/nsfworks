@@ -232,7 +232,7 @@ for key, value in pairs(loadModules) do
 	need_to_load_modules = need_to_load_modules + 1
 	need_to_load = need_to_load + 1
 
-	loader:loadFunction(value, function(module)
+	loader:LoadFunction(value, function(module)
 		debug.log("client() - Loaded '".. value .."'")
 
 		errorHandler(
@@ -270,7 +270,7 @@ for key, value in pairs(loadAnimations) do
 	need_to_load_animations = need_to_load_animations + 1
 	need_to_load = need_to_load + 1
 
-	loader:loadText(value, function(text)
+	loader:LoadText(value, function(text)
 		debug.log("client() - Loaded '".. value .."'")
 
 		animations[key] = text
@@ -334,7 +334,7 @@ for key, value in pairs(loadAudios) do
 	need_to_load_audios = need_to_load_audios + 1
 	need_to_load = need_to_load + 1
 
-	loader:loadData(value, function(audioData)
+	loader:LoadData(value, function(audioData)
 		debug.log("client() - Loaded '".. value .."'")
 
 		audio[key] = audioData
@@ -366,7 +366,7 @@ for key, value in pairs(loadImages) do
 	need_to_load_images = need_to_load_images + 1
 	need_to_load = need_to_load + 1
 
-	loader:loadData(value, function(data)
+	loader:LoadData(value, function(data)
 		debug.log("client() - Loaded '".. value .."'")
 
 		images[key] = data
