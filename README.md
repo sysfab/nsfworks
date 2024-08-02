@@ -3,8 +3,7 @@ Not Suitable For Works
 
 We making games for Cubzh
 
-# Fortcubes
-## Checkout our latest game - Fortcubes
+# Checkout our latest game - Fortcubes
 
 Fast paced cross-platform top-down shooter
 
