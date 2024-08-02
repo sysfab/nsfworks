@@ -6,6 +6,11 @@ local debug = {}
 debug.enabled = false
 debug.history = {}
 
+debug.init = function(self, env)
+	self.env = env
+	rawset(env, "Debug", self)
+end
+
 debug.log = function(message)
 	table.insert(debug.history, {type = "message", content = tostring(message)})
 	if debug.enabled == true then

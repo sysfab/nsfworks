@@ -5,7 +5,7 @@ local default_settings = {
 }
 
 settings.currentSettings = default_settings
-debug.log("settings() - loaded with default settings.")
+Debug.log("settings() - loaded with default settings.")
 
 function settings.set(self, setting, value)
     if value == nil then
@@ -19,36 +19,36 @@ function settings.set(self, setting, value)
     end
     self.currentSettings[setting] = value
 
-    debug.log("settings() - set '"..setting.."' to '"..value.."'")
+    Debug.log("settings() - set '"..setting.."' to '"..value.."'")
 end
 
 function settings.save(self)
-    debug.log("settings() - trying to save settings.")
+    Debug.log("settings() - trying to save settings.")
     local store = KeyValueStore("data: " .. Player.Username)
     store:Set("settings", JSON:Encode(self.currentSettings), function(success)
         if success then
-            debug.log("settings() - saved.")
+            Debug.log("settings() - saved.")
         else
-            debug.log("settings() - save failed.")
+            Debug.log("settings() - save failed.")
         end
     end)
 end
 
 function settings.load(self)
-    debug.log("settings() - trying to load settings.")
+    Debug.log("settings() - trying to load settings.")
     local store = KeyValueStore("data: " .. Player.Username)
     store:Get("settings", function(success, result)
         if success then
             if result.settings == nil then
                 self.currentSettings = default_settings
-                debug.log("settings() - saved default settings.")
+                Debug.log("settings() - saved default settings.")
                 self:save()
                 return
             end
             self.currentSettings = JSON:Decode(result.settings)
-            debug.log("settings() - loaded.")
+            Debug.log("settings() - loaded.")
         else
-            debug.log("settings() - load failed.")
+            Debug.log("settings() - load failed.")
         end
     end)
 end

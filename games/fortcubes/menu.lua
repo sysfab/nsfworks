@@ -10,7 +10,7 @@ function menu.create(self)
     end
 
     AudioListener:SetParent(Camera)
-    debug.log("menu() - Creating menu...")
+    Debug.log("menu() - Creating menu...")
     self.created = true
     self.closing = false
 
@@ -55,7 +55,7 @@ function menu.create(self)
     if menu.object == nil then
         menu.object = Object()
     end
-    debug.log("menu() - Setting tick...")
+    Debug.log("menu() - Setting tick...")
     menu.object.Tick = errorHandler(function(self, dt)
         local delta = dt * 63
         if menu.aboutUs ~= nil then
@@ -194,7 +194,7 @@ function menu.create(self)
 
     -- MAIN MENU
 
-    debug.log("menu() - Creating elements...")
+    Debug.log("menu() - Creating elements...")
 
     self.title = ui:createFrame(Color(255, 255, 255, 254))
     self.title.pos = Number2(-10000, -1000)
@@ -220,7 +220,7 @@ function menu.create(self)
     menu.description.pos = Number2(-1000, -1000)
     menu.description.Color = Color(200, 200, 200, 255)
 
-    debug.log("menu() - Loading models...")
+    Debug.log("menu() - Loading models...")
 
     menu:loadModels()
 
@@ -235,7 +235,7 @@ function menu.create(self)
 
     -- MAIN MENU - BUTTONS
 
-    debug.log("menu() - Creating buttons...")
+    Debug.log("menu() - Creating buttons...")
 
     self.aboutUs = ui:createButton("ABOUT US", menu.theme.button)
     self.aboutUs.pos = Number2(-1000, -1000)
@@ -286,12 +286,12 @@ function menu.create(self)
     end
 
     -- -- ------  --  --------------------  --  ------ -- --
-    debug.log("menu() - Creating menu:update()...")
+    Debug.log("menu() - Creating menu:update()...")
     function menu.update(self)
         if menu.created == nil then
             error("menu.update() should be called with ':'!", 2)
         end
-        debug.log("menu() - updating...")
+        Debug.log("menu() - updating...")
 
         menu.wh = math.max(Screen.Width, Screen.Height)
         menu.screenWidth = math.min(640, menu.wh)/1920
@@ -302,7 +302,7 @@ function menu.create(self)
         menu.screenHeight = menu.screenHeight * coff
 
         if menu.screenWidth < 0.334 or menu.screenHeight < 0.445 then
-            debug.log("menu() - game resolution is too small!")
+            Debug.log("menu() - game resolution is too small!")
             if menu.resolution_error == nil then
                 menu.resolution_error = ui:createFrame(Color(100, 0, 0))
                 menu.resolution_error_text = ui:createText("Your resolution is too small!", Color(255, 255, 255)) 
@@ -366,7 +366,7 @@ function menu.create(self)
     end
 
 
-    debug.log("menu() - Menu created.")
+    Debug.log("menu() - Menu created.")
 end
 
 function menu.show(self, name)
@@ -461,7 +461,7 @@ function menu.remove(self, callback)
         error("menu:remove() - menu currently removed.", 2)
     end
 
-    debug.log("menu() - Removing menu...")
+    Debug.log("menu() - Removing menu...")
     self.closing = true
 
     Timer(0.5, false, function()
@@ -584,8 +584,8 @@ function menu.remove(self, callback)
             v = nil
         end
 
-        debug.log("menu() - Menu removed.")
-        debug.log("menu() - Executing remove callback...")
+        Debug.log("menu() - Menu removed.")
+        Debug.log("menu() - Executing remove callback...")
         if callback ~= nil then
             callback()
         end

@@ -8,6 +8,7 @@ l.repo = "sysfab/nsfworks/main"
 
 l.init = function(self, env)
     self.env = env
+    rawset(env, "Loader", self)
 end
 
 

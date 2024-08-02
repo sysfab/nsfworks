@@ -14,21 +14,21 @@ game.bullets = {}
 
 game.connection.connect = function(connection)
 	if connection.connected == false then
-		debug.log("game() - connecting...")
-		local e = crystal.Event("connect", {})
+		Debug.log("game() - connecting...")
+		local e = Network.Event("connect", {})
 		e:SendTo(Server)
 	else
-		debug.error("game() - trying to connect when already connected", 2)
+		Debug.error("game() - trying to connect when already connected", 2)
 	end
 end
 game.connection.disconnect = function(connection)
-	debug.log("game() - disconnecting...")
-	local e = crystal.Event("disconnect", {})
+	Debug.log("game() - disconnecting...")
+	local e = Network.Event("disconnect", {})
 	e:SendTo(Server)
 	connection.connected = false
 end
 game.connection.onEvent = errorHandler(function(connection, e)
-	crystal.ParseEvent(e, {
+	Network.ParseEvent(e, {
 
 		bullet = function(event)
 			local b = Shape(shapes.bullet, {includeChildren = true})
@@ -107,14 +107,14 @@ game.connection.onEvent = errorHandler(function(connection, e)
 		end,
 
 		connected = function(event)
-			debug.log("game() - connected")
+			Debug.log("game() - connected")
 			
 			Player.Velocity = Number3(0, 0, 0)
 			Player.Motion = Number3(0, 0, 0)
 			Player.Position = Number3(event.data.posX*(game.world.map.Width-16), 10, event.data.posY*(game.world.map.Depth-16))*game.world.map.Scale
 			Player.health = 100
 			AudioListener:SetParent(Player)
-			debug.log("game() - position set")
+			Debug.log("game() - position set")
 
 			for k, v in pairs(Players) do
 				if event.data.players[v.Username] ~= nil then
@@ -194,7 +194,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 											if not self.inbush then
 												self.inbush = true
 												self:GetParent().inbush = true
-												local e = crystal.Event("enable_invisibility", {player = Player.Username})
+												local e = Network.Event("enable_invisibility", {player = Player.Username})
 												e:SendTo(OtherPlayers)
 												for i=1, 20 do
 													self:GetParent().particles:updateConfig({
@@ -212,7 +212,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 											if self.inbush then
 												self.inbush = false
 												self:GetParent().inbush = false
-												local e = crystal.Event("disable_invisibility", {player = Player.Username})
+												local e = Network.Event("disable_invisibility", {player = Player.Username})
 												e:SendTo(OtherPlayers)
 											end
 										end
@@ -220,7 +220,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 										if self.inbush then
 											self.inbush = false
 											self:GetParent().inbush = false
-											local e = crystal.Event("disable_invisibility", {player = Player.Username})
+											local e = Network.Event("disable_invisibility", {player = Player.Username})
 											e:SendTo(OtherPlayers)
 										end
 										self.t = 0
@@ -235,7 +235,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 							v.OnCollisionBegin = function(self, other)
 								if self ~= Player and other.damage ~= nil then
 									if other.owner == Player then
-										local e = crystal.Event("set_health", {player = self.Username, damage = other.damage})
+										local e = Network.Event("set_health", {player = self.Username, damage = other.damage})
 										e:SendTo(Players)
 									end
 								end
@@ -280,11 +280,11 @@ game.connection.onEvent = errorHandler(function(connection, e)
 								Timer(2.2, false, function()
 									self.isDead = false
 									self.IsHidden = false
-									local e = crystal.Event("set_health", {player = self.Username, health = 100})
+									local e = Network.Event("set_health", {player = self.Username, health = 100})
 									e:SendTo(OtherPlayers)
 								end)
 								if self == Player then
-									local e = crystal.Event("kill", {player = self.Username, killer = self.lastDamager})
+									local e = Network.Event("kill", {player = self.Username, killer = self.lastDamager})
 									e:SendTo(Server)
 								end
 							end
@@ -345,7 +345,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 		end,
 
 		new_connection = function(event)
-			debug.log("game() - new connection of '".. event.data.player .. "'")
+			Debug.log("game() - new connection of '".. event.data.player .. "'")
 			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = false
             if p.pistol == nil then
@@ -421,14 +421,14 @@ game.connection.onEvent = errorHandler(function(connection, e)
 									if not self.inbush then
 										self.inbush = true
 										self:GetParent().inbush = true
-										local e = crystal.Event("enable_invisibility", {player = Player.Username})
+										local e = Network.Event("enable_invisibility", {player = Player.Username})
 										e:SendTo(OtherPlayers)
 									end
 								else
 									if self.inbush then
 										self.inbush = false
 										self:GetParent().inbush = false
-										local e = crystal.Event("disable_invisibility", {player = Player.Username})
+										local e = Network.Event("disable_invisibility", {player = Player.Username})
 										e:SendTo(OtherPlayers)
 									end
 								end
@@ -436,7 +436,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 								if self.inbush then
 									self.inbush = false
 									self:GetParent().inbush = false
-									local e = crystal.Event("disable_invisibility", {player = Player.Username})
+									local e = Network.Event("disable_invisibility", {player = Player.Username})
 									e:SendTo(OtherPlayers)
 								end
 								self.t = 0
@@ -449,7 +449,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 					p.OnCollisionBegin = function(self, other)
 						if self ~= Player and other.damage ~= nil then
 							if other.owner == Player then
-								local e = crystal.Event("set_health", {player = self.Username, damage = other.damage})
+								local e = Network.Event("set_health", {player = self.Username, damage = other.damage})
 								e:SendTo(Players)
 							end
 						end
@@ -496,7 +496,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 							self.IsHidden = false
 						end)
 						if self == Player then
-							local e = crystal.Event("kill", {player = self.Username, killer = self.lastDamager})
+							local e = Network.Event("kill", {player = self.Username, killer = self.lastDamager})
 							e:SendTo(Server)
 						end
 					end
@@ -553,7 +553,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 		end,
 
 		new_disconnection = function(event)
-			debug.log("game() - disconnect of '".. event.data.player .. "'")
+			Debug.log("game() - disconnect of '".. event.data.player .. "'")
 			local p = getPlayerByUsername(event.data.player)
 			p.IsHidden = true
 			p.leaveParticles = particles:createEmitter()
@@ -580,11 +580,11 @@ game.connection.onEvent = errorHandler(function(connection, e)
 			local p = getPlayerByUsername(event.data.player)
 
 			if event.data.damage ~= nil then
-				debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
+				Debug.log("game() - set_health event of " .. event.data.player .. " with damage [" .. event.data.damage .. "].")
 				p:decreaseHealth(event.data.damage)
 				p.lastDamager = event.Sender.Username
 			elseif event.data.health ~= nil then
-				debug.log("game() - set_health event of " .. event.data.player .. " with health [" .. event.data.health .. "].")
+				Debug.log("game() - set_health event of " .. event.data.player .. " with health [" .. event.data.health .. "].")
 				p.health = event.data.health
 			end
 		end,
@@ -659,7 +659,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 		end,
 
 		enable_invisibility = function(event)
-			debug.log("game() - invisibility enabled for " .. event.data.player)
+			Debug.log("game() - invisibility enabled for " .. event.data.player)
 			local p = getPlayerByUsername(event.data.player)
 			for i=1, 20 do
 				p.particles:updateConfig({
@@ -676,18 +676,18 @@ game.connection.onEvent = errorHandler(function(connection, e)
 		end,
 
 		disable_invisibility = function(event)
-			debug.log("game() - invisibility disabled for " .. event.data.player)
+			Debug.log("game() - invisibility disabled for " .. event.data.player)
 			local p = getPlayerByUsername(event.data.player)
 			p.inbush = false
 		end,
 
 		round_end = function(event)
-			debug.log("game() - round end. Winner: " .. event.data.winner)
+			Debug.log("game() - round end. Winner: " .. event.data.winner)
 			game:remove(function() menu.lastWinner = event.data.winner menu:create() menu:update() end)
 		end,
 		
 		get_round = function(event)
-			debug.log("game() - loaded round. Time: " .. event.data.time .. ". End time: " .. event.data.time_end .. ". Mode: " .. event.data.mode)
+			Debug.log("game() - loaded round. Time: " .. event.data.time .. ". End time: " .. event.data.time_end .. ". Mode: " .. event.data.mode)
 			game.ui.loadedTimer = true
 			game.time = event.data.time
 			game.time_end = event.data.time_end
@@ -695,13 +695,13 @@ game.connection.onEvent = errorHandler(function(connection, e)
 		end,
 
 		top = function(event)
-			debug.log("game() - loaded top 1 player: " .. event.data.winner)
+			Debug.log("game() - loaded top 1 player: " .. event.data.winner)
 			print("Winner: " .. event.data.winner .. " with " .. event.data.kills .. " kills and " .. event.data.deaths .. " deaths.")
 		end,
 
 		["_"] = function(event)
 			if event.action ~= nil then
-				debug.log("game() - got unknown event: '".. event.action .."'")
+				Debug.log("game() - got unknown event: '".. event.action .."'")
 			end
 		end
 
@@ -827,7 +827,7 @@ game.ui.remove = function(u, callback)
         error("game.ui:remove() - menu currently removed.", 2)
     end
 
-    debug.log("game() - Removing game.ui...")
+    Debug.log("game() - Removing game.ui...")
     u.closing = true
 
     Timer(0.5, false, function()
@@ -845,7 +845,7 @@ game.ui.remove = function(u, callback)
         u.blackPanel:remove()
         u.blackPanel = nil
 
-        debug.log("game() - game.ui removed.")
+        Debug.log("game() - game.ui removed.")
         if callback ~= nil then callback() end
     end)
 end
@@ -924,7 +924,7 @@ end
 
 game.world = {}
 game.world.create = function(world, scale)
-	debug.log("game() - Generating world...")
+	Debug.log("game() - Generating world...")
 	world.map = MutableShape()
 	world.map.Scale = 5
 	world.map.Physics = PhysicsMode.StaticPerBlock
@@ -1199,17 +1199,17 @@ game.tick = errorHandler(function(self, dt)
 	end
 	if Player.Position.Y < 3 and not Player.isDead then
 		Player.health = 0
-		local e = crystal.Event("set_health", {player = Player.Username, health = 0})
+		local e = Network.Event("set_health", {player = Player.Username, health = 0})
 		e:SendTo(OtherPlayers) 
 	end
 
 	self.shootTimer = math.max(0, self.shootTimer - dt)
 	if self.controls.shooting and not Player.isDead then
 		if self.shootTimer == 0 then
-			local e = crystal.Event("bullet", {player = Player.Username, rot = Player.Rotation.Y, x = Player.Head.Position.X+Player.Forward.X*10, y = Player.Head.Position.Y-1+Player.Forward.Y*10, z = Player.Head.Position.Z+Player.Forward.Z*10})
+			local e = Network.Event("bullet", {player = Player.Username, rot = Player.Rotation.Y, x = Player.Head.Position.X+Player.Forward.X*10, y = Player.Head.Position.Y-1+Player.Forward.Y*10, z = Player.Head.Position.Z+Player.Forward.Z*10})
 			e:SendTo(Players)
 			Player.bushcollider.t = 0
-			local e = crystal.Event("disable_invisibility", {player = Player.Username})
+			local e = Network.Event("disable_invisibility", {player = Player.Username})
 			e:SendTo(OtherPlayers)
 
 			self.shootTimer = 0.25
@@ -1246,15 +1246,15 @@ game.create = function(self)
 
     self.connection:connect()
 
-	local e = crystal.Event("send_rocks", {player = Player.Username})
+	local e = Network.Event("send_rocks", {player = Player.Username})
 	e:SendTo(Server)
 	
-	local e = crystal.Event("send_bushes", {player = Player.Username})
+	local e = Network.Event("send_bushes", {player = Player.Username})
 	e:SendTo(Server)
 
-	local e = crystal.Event("send_round", {player = Player.Username})
+	local e = Network.Event("send_round", {player = Player.Username})
 	e:SendTo(Server)
-    debug.log("game() - created")
+    Debug.log("game() - created")
 end
 game.remove = function(self, callback)
 	self.controls:remove()
@@ -1270,7 +1270,7 @@ game.remove = function(self, callback)
 	self.ui:remove(callback)
 	self.created = false
 	Player.Position = Number3(-1000, -1000, -1000)
-	debug.log("game() - removed")
+	Debug.log("game() - removed")
 end
 
 return game

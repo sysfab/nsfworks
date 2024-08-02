@@ -1,6 +1,6 @@
-debug.enabled = false
-debug.log("client() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..hash.."'")
-debug.log("client() - Starting '"..game.."'...")
+Debug.enabled = false
+Debug.log("client() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..hash.."'")
+Debug.log("client() - Starting '"..game.."'...")
 
 randomEasterLogs = {
 	"Once upon a time...",
@@ -28,23 +28,23 @@ Camera:SetParent(nil)
 Fog.On = false
 Clouds.On = false
 
-debug.log("client() - loading cubzh modules...")
+Debug.log("client() - loading cubzh modules...")
 multi = require("multi")
 ui = uikit_loader()
 toast = require("ui_toast")
-debug.log("client() - loaded cubzh modules")
+Debug.log("client() - loaded cubzh modules")
 
 
 function copyClientLogs()
-	debug.log("client() - copying client logs")
+	Debug.log("client() - copying client logs")
 
-	Dev:CopyToClipboard(debug:export())
+	Dev:CopyToClipboard(Debug:export())
 	toast:create({message = "Logs are copied to clipboard."})
 
-	debug.log("client() - client logs are copied")
+	Debug.log("client() - client logs are copied")
 end
 function copyServerLogs()
-	debug.log("client() - copying server logs")
+	Debug.log("client() - copying server logs")
 	
 	local e = crystal.Event("get_logs", {})
 	e:SendTo(Server)
@@ -59,14 +59,14 @@ function copyServerLogs()
 		serverLogListener:Remove()
 		serverLogListener = nil
 
-		debug.log("client() - server logs are copied")
+		Debug.log("client() - server logs are copied")
 	end)
 end
 function copyLogs()
-	debug.log("client() - copying client and server logs")
+	Debug.log("client() - copying client and server logs")
 	
 	copyLogsLogs = {}
-	copyLogsLogs.client = JSON:Decode(debug:export())
+	copyLogsLogs.client = JSON:Decode(Debug:export())
 
 	local e = crystal.Event("get_logs", {})
 	e:SendTo(Server)
@@ -83,14 +83,14 @@ function copyLogs()
 		toast:create({message = "Logs are copied."})
 
 		Dev:CopyToClipboard(JSON:Encode(copyLogsLogs))
-		debug.log("client() - clint and server logs are copied")
+		Debug.log("client() - clint and server logs are copied")
 	end)
 end
 
 
 LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
 	if e.action == "server_crash" and e.Sender == Server then
-		debug.log("GOT SERVER CRASH")
+		Debug.log("GOT SERVER CRASH")
 		CRASH(e.data.error)
 	end
 end)
@@ -127,11 +127,11 @@ set("CRASH", function(message)
 	end
 	crash_text:parentDidResize()
 
-	debug.log("")
-	debug.log("CRASH WAS CALLED:")
-	debug.log(message)
-	debug.log("")
-	debug.error("CRASH() - crash was called", 2)
+	Debug.log("")
+	Debug.log("CRASH WAS CALLED:")
+	Debug.log(message)
+	Debug.log("")
+	Debug.error("CRASH() - crash was called", 2)
 	error("CRASH() - crash was called", 2)
 end)
 
@@ -140,7 +140,7 @@ end)
 set("VERSION", "v1.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
-debug.log("client() - version: "..VERSION)
+Debug.log("client() - version: "..VERSION)
 
 Client.DirectionalPad = nil
 Client.AnalogPad = nil
@@ -207,14 +207,14 @@ need_to_load = 0
 
 function doneLoading()
 	Camera:SetParent(World)
-	debug.log("")
-	debug.log("GAME LOADED")
-	debug.log("")
+	Debug.log("")
+	Debug.log("GAME LOADED")
+	Debug.log("")
 
-	debug.log("#"..randomEasterLogs[math.random(1, #randomEasterLogs)])
+	Debug.log("#"..randomEasterLogs[math.random(1, #randomEasterLogs)])
 
-	if debug.enabled == true then
-		toast:create({message = "Game launched with debug enabled."})
+	if Debug.enabled == true then
+		toast:create({message = "Game launched with Debug enabled."})
 	end
 
 	settings:load()
@@ -232,8 +232,8 @@ for key, value in pairs(loadModules) do
 	need_to_load_modules = need_to_load_modules + 1
 	need_to_load = need_to_load + 1
 
-	loader:LoadFunction(value, function(module)
-		debug.log("client() - Loaded '".. value .."'")
+	Loader:LoadFunction(value, function(module)
+		Debug.log("client() - Loaded '".. value .."'")
 
 		errorHandler(
 			function() _ENV[key] = module() end, 
@@ -248,7 +248,7 @@ for key, value in pairs(loadModules) do
 			if loaded == need_to_load then
 				checkLoading()
 			end
-			debug.log("client() - Loaded all modules.")
+			Debug.log("client() - Loaded all modules.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
@@ -263,15 +263,15 @@ for key, value in pairs(loadModules) do
 		end
 	end)
 end
-debug.log("client() - Loading " .. need_to_load_modules.. " modules..")
+Debug.log("client() - Loading " .. need_to_load_modules.. " modules..")
 
 for key, value in pairs(loadAnimations) do
 	if need_to_load_animations == nil then need_to_load_animations = 0 end
 	need_to_load_animations = need_to_load_animations + 1
 	need_to_load = need_to_load + 1
 
-	loader:LoadText(value, function(text)
-		debug.log("client() - Loaded '".. value .."'")
+	Loader:LoadText(value, function(text)
+		Debug.log("client() - Loaded '".. value .."'")
 
 		animations[key] = text
 
@@ -280,7 +280,7 @@ for key, value in pairs(loadAnimations) do
 		loaded = loaded + 1
 
 		if loaded_animations >= need_to_load_animations then
-			debug.log("client() - Loaded all animations.")
+			Debug.log("client() - Loaded all animations.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
@@ -295,7 +295,7 @@ for key, value in pairs(loadAnimations) do
 		end
 	end)
 end
-debug.log("client() - Loading " .. need_to_load_animations .. " animations..")
+Debug.log("client() - Loading " .. need_to_load_animations .. " animations..")
 
 for key, value in pairs(loadShapes) do
 	if need_to_load_shapes == nil then need_to_load_shapes = 0 end
@@ -303,7 +303,7 @@ for key, value in pairs(loadShapes) do
 	need_to_load = need_to_load + 1
 
 	Object:Load(value, function(shape)
-		debug.log("client() - Loaded '".. value .."'")
+		Debug.log("client() - Loaded '".. value .."'")
 
 		shapes[key] = shape
 
@@ -312,7 +312,7 @@ for key, value in pairs(loadShapes) do
 		loaded = loaded + 1
 
 		if loaded_shapes >= need_to_load_shapes then
-			debug.log("client() - Loaded all shapes.")
+			Debug.log("client() - Loaded all shapes.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
@@ -327,15 +327,15 @@ for key, value in pairs(loadShapes) do
 		end
 	end)
 end
-debug.log("client() - Loading " .. need_to_load_shapes .. " shapes..")
+Debug.log("client() - Loading " .. need_to_load_shapes .. " shapes..")
 
 for key, value in pairs(loadAudios) do
 	if need_to_load_audios == nil then need_to_load_audios = 0 end
 	need_to_load_audios = need_to_load_audios + 1
 	need_to_load = need_to_load + 1
 
-	loader:LoadData(value, function(audioData)
-		debug.log("client() - Loaded '".. value .."'")
+	Loader:LoadData(value, function(audioData)
+		Debug.log("client() - Loaded '".. value .."'")
 
 		audio[key] = audioData
 
@@ -344,7 +344,7 @@ for key, value in pairs(loadAudios) do
 		loaded = loaded + 1
 
 		if loaded_audios >= need_to_load_audios then
-			debug.log("client() - Loaded all audios.")
+			Debug.log("client() - Loaded all audios.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
@@ -359,15 +359,15 @@ for key, value in pairs(loadAudios) do
 		end
 	end)
 end
-debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
+Debug.log("client() - Loading " .. need_to_load_audios .. " audios..")
 
 for key, value in pairs(loadImages) do
 	if need_to_load_images == nil then need_to_load_images = 0 end
 	need_to_load_images = need_to_load_images + 1
 	need_to_load = need_to_load + 1
 
-	loader:LoadData(value, function(data)
-		debug.log("client() - Loaded '".. value .."'")
+	Loader:LoadData(value, function(data)
+		Debug.log("client() - Loaded '".. value .."'")
 
 		images[key] = data
 
@@ -376,7 +376,7 @@ for key, value in pairs(loadImages) do
 		loaded = loaded + 1
 
 		if loaded_images >= need_to_load_images then
-			debug.log("client() - Loaded all images.")
+			Debug.log("client() - Loaded all images.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
 			elseif loading_screen ~= nil then
@@ -391,7 +391,7 @@ for key, value in pairs(loadImages) do
 		end
 	end)
 end
-debug.log("client() - Loading " .. need_to_load_images .. " images..")
+Debug.log("client() - Loading " .. need_to_load_images .. " images..")
 
 
-debug.log("client() - Total: " .. need_to_load .. " assets")
+Debug.log("client() - Total: " .. need_to_load .. " assets")

@@ -1,5 +1,9 @@
 local particles = {}
 
+particles.init = function(self, env)
+    self.env = env
+end
+
 particles.createEmitter = function(config)
     local defaultConfig = {
         position = Number3(0, 0, 0),

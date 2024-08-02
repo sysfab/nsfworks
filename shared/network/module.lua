@@ -1,9 +1,14 @@
--- Crystal
+-- Network (old - Crystal)
 -- Network module
 
-local crystal = {}
+local network = {}
 
-crystal.Event = function(action, data)
+network.init = function(self, env)
+	self.env = env
+	rawset(env, "Network", self)
+end
+
+network.Event = function(action, data)
 	local e = Event()
 	e.action = action
 	e.data = data
@@ -11,7 +16,7 @@ crystal.Event = function(action, data)
 	return e
 end
 
-crystal.ParseEvent = function(event, parseTable)
+network.ParseEvent = function(event, parseTable)
 	for action, func in pairs(parseTable) do
 		if event.action == action then
 			func(event)
@@ -23,4 +28,4 @@ crystal.ParseEvent = function(event, parseTable)
 	end
 end
 
-return crystal
+return network
