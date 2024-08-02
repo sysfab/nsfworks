@@ -74,7 +74,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 					})
 				end
 				b.particle:updateConfig({
-					velocity = (b.Forward*math.random(-10, 10)/5 + b.Right*math.random(-10, 10)/2 + b.Up*math.random(5, 15)/4)*20 + b.owner.Motion*0.75,
+					velocity = (b.Forward*math.random(-10, 10)/15 + b.Right*math.random(-10, 10)/7 + b.Up*math.random(5, 15)/4)*10 + b.owner.Motion*0.75,
 				})
 				b.particle:emit()
 			end
