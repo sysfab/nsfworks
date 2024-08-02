@@ -67,7 +67,7 @@ game.connection.onEvent = errorHandler(function(connection, e)
 				life = 0.5,
 				scale_end = Number3(0, 0, 0),
 			})
-			for i=1, 2500 do
+			for i=1, 4000 do
 				if b.owner ~= Player then
 					b.particle:updateConfig({
 						position = b.Position + b.Backward*2.5 + b.Down*0.5,
