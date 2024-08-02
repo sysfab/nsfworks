@@ -46,7 +46,7 @@ end
 function copyServerLogs()
 	Debug.log("client() - copying server logs")
 	
-	local e = crystal.Event("get_logs", {})
+	local e = Network.Event("get_logs", {})
 	e:SendTo(Server)
 
 	if serverLogListener ~= nil then
@@ -68,7 +68,7 @@ function copyLogs()
 	copyLogsLogs = {}
 	copyLogsLogs.client = JSON:Decode(Debug:export())
 
-	local e = crystal.Event("get_logs", {})
+	local e = Network.Event("get_logs", {})
 	e:SendTo(Server)
 
 	if serverLogListener ~= nil then
