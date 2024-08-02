@@ -7,7 +7,7 @@ We making games for Cubzh
 Checkout our latest game - Fortcubes
 
 Fast paced cross-platform top-down shooter
-More info at [Cubzh Discord](https://discord.gg/cubzh) at #worlds channel
+More info at [Cubzh Discord](https://discord.gg/cubzh) at `#worlds` channel
 
 # NSFWFramework
 
