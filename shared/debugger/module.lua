@@ -46,6 +46,13 @@ debug.assert = function(condition, message, level)
 	end
 end
 
+debug.getLine = function()
+	local ok, err = pcall(function() error("", 2) end)
+	if not ok then
+		return err
+	end
+end
+
 
 debug.export = function(self)
 	if self.error == nil then
