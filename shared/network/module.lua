@@ -25,7 +25,7 @@ local event_mt = {
 		elseif key == "Forward" then
 			return self.event.SendTo
 		end
-	end
+	end,
 	__newindex = function(self, key, value)
 		if key == "data" then 
 			self.event.data = value
