@@ -24,11 +24,11 @@ utils.init = function(self, env)
 		return math.sqrt((pos1.X-pos2.X)*(pos1.X-pos2.X) + (pos1.Y-pos2.Y)*(pos1.Y-pos2.Y) + (pos1.Z-pos2.Z)*(pos1.Z-pos2.Z))
 	end
 
-	self.env.errorHandler = function(f, handler)
+	self.env.errorHandler = function(f, handler, ignore_handled)
 		local handled = false
 		local returned = nil
 		return function(...)
-			if handled == true then return end
+			if ignore_handled ~= true then if handled == true then return end end
 			local ok, err = pcall(f, ...)
 			if not ok then
 				handled = true
