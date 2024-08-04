@@ -14,13 +14,13 @@ local event_mt = {
 		elseif key == "SendTo" then
 			return self.event.SendTo
 		elseif key == "Sender" then
-			return self.event.Sender
+			return self.event.sender
 		elseif key == "Author" then
 			return self.event.author
 		elseif key == "Reply" then
 			return function(...)
 				local r = network.Event(...)
-				r:SendTo(self.Sender)
+				r:SendTo(self.event.sender)
 			end
 		elseif key == "Forward" then
 			return self.event.SendTo
