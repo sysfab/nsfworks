@@ -28,7 +28,7 @@ game.connection.disconnect = function(connection)
 	connection.connected = false
 end
 game.connection.onEvent = errorHandler(function(connection, e)
-	Network.ParseEvent(e, {
+	Network:ParseEvent(e, {
 
 		bullet = function(event)
 			local b = Shape(shapes.bullet, {includeChildren = true})

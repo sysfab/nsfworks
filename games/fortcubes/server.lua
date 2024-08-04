@@ -113,7 +113,7 @@ Server.OnPlayerLeave = function(player)
 end
 
 Server.DidReceiveEvent = errorHandler(function(e) 
-	Network.ParseEvent(e, {
+	Network:ParseEvent(e, {
 
 	connect = function(event)
 		Debug.log("server() - connecting '".. event.Sender.Username .."'")
