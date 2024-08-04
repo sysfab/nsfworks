@@ -29,6 +29,7 @@ end)
 -- CONFIG
 set("VERSION", "v1.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
+set("BOT_COUNT", 1)
 
 Debug.log("server() - version: "..VERSION)
 
@@ -36,10 +37,22 @@ game = {}
 players = {}
 event_players = {}
 
+function createBot(username)
+	local bot = {}
+	bot.username = username
+
+	bot.x = math.random(1, 64*5)
+	bot.z = math.random(1, 64*5)
+
+	bot.rotation = 0
+
+	return bot
+end
+
 function resetGame()
 	Debug.log("server() - resetting game..")
 	game.time = 0
-	game.time_end = 60*3 -- 5 minutes per round
+	game.time_end = 60*3 -- In seconds
 	game.ticks = 0
 	game.winner = "unknown"
 	if game.players ~= nil then
@@ -64,6 +77,14 @@ function resetGame()
 		game.winner = top_player
 	end
 	game.players = {}
+	game.players_connected = 0
+	game.bots = {}
+
+	Debug.log("Creating bots...")
+	for i = 1, BOT_COUNT do
+		table.insert(game.bots, createBot("bot"..i.." "))
+		Debug.log("Created bot with username 'bot"..i.." '")
+	end
 
 	local e = Network.Event("round_end", {winner = game.winner})
 	e:SendTo(Players)
@@ -86,6 +107,7 @@ Server.OnPlayerLeave = function(player)
 	if players[player.Username] ~= nil then
 		players[player.Username] = nil
 		event_players[player.Username] = nil
+		game.players_connected = game.players_connected - 1
 		Debug.log("server() - removed player entry for '".. player.Username .."'")
 	end
 end
@@ -106,6 +128,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 			end
 			players[event.Sender.Username] = {kills = 0, deaths = 0}
 			event_players[event.Sender.Username] = event.Sender
+			game.players_connected = game.players_connected + 1
 			Debug.log("server() - created player entry for '".. event.Sender.Username .."'")
 
 			local r = Network.Event("connected", {players = players, game = game, posX = math.random(20, 80)/100, posY = math.random(20, 80)/100})
@@ -129,6 +152,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 			end
 			players[event.Sender.Username] = nil
 			event_players[event.Sender.Username] = nil
+			game.players_connected = game.players_connected - 1
 			Debug.log("server() - removed player entry for '".. event.Sender.Username .."'")
 		end
 	end,
@@ -214,8 +238,16 @@ resetGame()
 createRocks()
 createBushes()
 
+function botsTick()
+	
+end
+
 tick = Object()
-tick.Tick = function(self, dt)
+tick.Tick = errorHandler(function(self, dt)
+	if game.players_connected > 0 then
+		botsTick()
+	end
+
 	game.ticks = game.ticks + dt
 	if game.ticks > 1 then
 		game.ticks = 0
@@ -224,6 +256,6 @@ tick.Tick = function(self, dt)
 	if game.time > game.time_end then
 		resetGame()
 	end
-end
+end, function(err) CRASH("Server.tick.Tick - "..err) end)
 
 Debug.log("server() - created tick object with Tick function.")
