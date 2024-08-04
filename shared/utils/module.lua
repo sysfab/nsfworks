@@ -38,6 +38,10 @@ utils.init = function(self, env)
 			end
 		end
 	end
+
+	self.env.loadFunction = function(func_or_string, env)
+		return load(func_or_string, nil, "bt", self.env)
+	end
 end
 
 return utils
