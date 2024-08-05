@@ -14,7 +14,7 @@ stat.init = function(self, env)
                 if results.initialized ~= true then
                     self.kvs:Set("initialized", true, "players", JSON:Encode({}), "global", JSON:Encode({["times_launched"] = 1}), function(success)
                         if not success then
-                            error("Statistics - failed to init [1]", 3)
+                            Debug.Log("Statistics - failed to init [1]", 3)
                         end
                     end)
                 else
@@ -22,7 +22,7 @@ stat.init = function(self, env)
                     new_global.times_launched = new_global.times_launched + 1
                     self.kvs:Set("global", JSON:Encode(new_global), function(success)
                         if not success then
-                            error("Statistics - failed to init [2]", 3)
+                            Debug.Log("Statistics - failed to init [2]", 3)
                         end
                     end)
                 end
@@ -41,11 +41,11 @@ stat.init = function(self, env)
                     new_players[player.Username] = player_data
                     self.kvs:Set("players", JSON:Encode(new_players), function(success)
                         if not success then
-                            error("Statistics - failed to set players [4]", 3)
+                            Debug.Log("Statistics - failed to set players [4]", 3)
                         end
                     end)
                 else
-                    error("Statistics - failed to get players [3]", 3)
+                    Debug.Log("Statistics - failed to get players [3]", 3)
                 end
             end)
         end)
