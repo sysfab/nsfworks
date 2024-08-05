@@ -12,7 +12,7 @@ stat.init = function(self, env)
         self.kvs:Get("initialized", "players", "global", function(success, results)
             if success then
                 if results.initialized ~= true then
-                    self.kvs:Set("initialized", true, "players", JSON:Encode({}), "global", JSON:Encode({"times_launched" = 1}), function(success)
+                    self.kvs:Set("initialized", true, "players", JSON:Encode({}), "global", JSON:Encode({["times_launched"] = 1}), function(success)
                         if not success then
                             error("Statistics - failed to init [1]", 3)
                         end
