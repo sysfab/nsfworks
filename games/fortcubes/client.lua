@@ -206,6 +206,7 @@ loadAudios = {
 images = {}
 loadImages = {
 	logo = "games/fortcubes/assets/logo.png",
+	gradient = "games/fortcubes/assets/gradient.png",
 }
 
 
