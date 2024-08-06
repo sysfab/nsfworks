@@ -114,7 +114,7 @@ playerConstructor.create = function(player)
 			player.bushparticles = particles:createEmitter()
 
             player.shootIndicator = Quad()
-            player.shootIndicator:setImage(images.gradient)
+            player.shootIndicator.Image = images.gradient
             player.shootIndicator.Color = Color(255, 255, 255, 127)
             player.shootIndicator.Scale = Number3(10, 120, 0)
             player.shootIndicator.Rotation.X = math.pi/2
