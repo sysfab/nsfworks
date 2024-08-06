@@ -149,7 +149,9 @@ function game.controls.analogPad(dx, dy, isJoy)
 	else
 		dxmul = 1.3
 	end
-	Player.Forward = Number3(dx*dxmul, 0, dy)*25
+	if not Player.isDead then
+		Player.Forward = Number3(dx*dxmul, 0, dy)*25
+	end
 end
 function game.controls.directionalPad(dx, dy, isJoy)
 	if isJoy == true then
