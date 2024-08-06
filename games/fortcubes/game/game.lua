@@ -10,8 +10,22 @@ end
 
 game.bullets = {}
 
-game.connection = gameEvent
-game.ui = gameUI
+game.load = Object()
+function game.load.Tick(self, dt)
+	if game.connection == nil then
+		game.connection = gameEvent
+	end
+	if game.ui == nil then
+		game.ui = gameUI
+	end
+	if game.world == nil then
+		game.world = gameWorld
+	end
+	if game.world and game.connection and game.ui then
+		game.load.Tick = nil
+		game.load = nil
+	end
+end
 
 game.mobileControls = {}
 game.mobileControls.created = false
@@ -147,8 +161,6 @@ function game.controls.directionalPad(dx, dy, isJoy)
 	Player.Motion = Number3(dx, 0, dy)*60
 	game.controls.move = {dx, dy}
 end
-
-game.world = gameWorld
 
 game.created = false
 function game.screenResize(self)
