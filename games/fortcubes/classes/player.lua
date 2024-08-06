@@ -223,4 +223,26 @@ playerConstructor.create = function(player)
 	end
 end
 
+playerConstructor.remove = function(player)
+    player.IsHidden = true
+    player.leaveParticles = particles:createEmitter()
+    for i=1, 30 do
+        player.leaveParticles:updateConfig({
+            position = player.Position + Number3(math.random(-10, 10)/2, math.random(0, 40)/2, math.random(-10, 10)/2),
+            rotation = Rotation(0, 0, 0),
+            scale = Number3(3, 3, 3),
+            color = Color(255, 255, 255, 200),
+            life = 3.0,
+            velocity = Number3(math.random(-20, 20)/2, math.random(0, 80)/2, math.random(-20, 20)/2),
+        })
+        player.leaveParticles:emit()
+    end
+    player.leaveParticles:remove()
+    if player.pistol ~= nil then
+        player.pistol:SetParent(nil)
+        player.pistol.Tick  = nil
+        player.pistol = nil
+    end
+end
+
 return playerConstructor
