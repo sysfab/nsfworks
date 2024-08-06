@@ -178,7 +178,6 @@ playerConstructor.create = function(player)
 				end)
 				Timer(2.2, false, function()
 					self.isDead = false
-					self.IsHidden = false
 					local e = Network.Event("set_health", {player = self.Username, health = 100})
 					e:SendTo(OtherPlayers)
 				end)
@@ -204,7 +203,7 @@ playerConstructor.create = function(player)
 					self:die()
 				end
 
-				if self.isDead == true or self.inbush then
+				if self.inbush then
 					self.IsHidden = true
 				end
 
