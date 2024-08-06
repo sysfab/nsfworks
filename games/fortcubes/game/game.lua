@@ -233,6 +233,7 @@ function game.create(self)
 	self.ui:create()
 	self.controls:create()
 	nanimator.import(animations.player_walk, "player_walk")
+	nanimator.import(animations.player_die, "player_die")
 
 	if Client.IsMobile then
 		self.mobileControls:create()

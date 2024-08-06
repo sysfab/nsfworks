@@ -162,8 +162,9 @@ playerConstructor.create = function(player)
 			end
 
 			player.die = function(self)
-				local exp = require("explode")
-				exp:shapes(self)
+				
+				self.Body:nanPlay("player_die")
+
 				self.isDead = true
 				Timer(2, false, function()
 					self.Position = Number3(-100000, -100000, -100000)
@@ -235,6 +236,7 @@ playerConstructor.create = function(player)
 	end
 	if player.Body.nanplayer == nil then
 		nanimator.add(player.Body, "player_walk")
+		nanimator.add(player.Body, "player_die")
 	end
 end
 

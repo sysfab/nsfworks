@@ -182,6 +182,7 @@ loadAnimations = {
 	katana_idle = "games/fortcubes/assets/animations/menu/katana_idle.json",
 	pistol_idle = "games/fortcubes/assets/animations/menu/pistol_idle.json",
 	player_walk = "games/fortcubes/assets/animations/game/walk.json",
+	player_die = "games/fortcubes/assets/animations/game/die.json",
 }
 
 shapes = {}
