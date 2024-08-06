@@ -184,6 +184,7 @@ playerConstructor.create = function(player)
 						self.Head.LocalPosition = Number3(0, 6, 0.5)
 						self.Velocity = Number3(0, 0, 0)
 						self.Motion = Number3(0, 0, 0)
+						self.IsHidden = true
 						self.Position = Number3(math.random(20, 80)/100*(game.world.map.Width-16), 10, math.random(20, 80)/100*(game.world.map.Depth-16))*game.world.map.Scale
 						AudioListener:SetParent(Player)
 					end
@@ -191,6 +192,7 @@ playerConstructor.create = function(player)
 				Timer(2.2, false, function()
 					local e = Network.Event("set_health", {player = self.Username, health = 100})
 					e:SendTo(OtherPlayers)
+					self.IsHidden = false
 				end)
 				if self == Player then
 					local e = Network.Event("kill", {player = self.Username, killer = self.lastDamager})
