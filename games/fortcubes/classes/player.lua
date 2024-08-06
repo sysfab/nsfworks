@@ -17,6 +17,7 @@ playerConstructor.create = function(player)
 				player.Animations.Walk:Stop()
 			end
 			rawset(player.Animations, "Walk", {})
+			multi:unlink("ph_" .. player.ID)
 			player.particles = particles.createEmitter()
 			player.particlesTick = 0
 
@@ -171,9 +172,6 @@ playerConstructor.create = function(player)
 				self.healthBarBG.IsHidden = true
 
 				self.isDead = true
-				if self == Player then
-					multi:unlink("ph_" .. self.ID)
-				end
 				Timer(2, false, function()
 					self.Position = Number3(-100000, -100000, -100000)
 					self.health = 100
@@ -181,12 +179,9 @@ playerConstructor.create = function(player)
 					self.healthBar.IsHidden = false
 					self.healthBarBG.IsHidden = false
 					if self == Player then
-						multi:link(self.Head, "ph_" .. self.ID)
-						self.Head.LocalRotation = Rotation(0, 0, 0)
+						self.Body:nanStop()
+						self.Head.Rotation = Rotation(0, 0, 0)
 						self.Head.LocalPosition = Number3(0, 6, 0.5)
-						--multi:sync("ph_" .. self.ID)
-					end
-					if self == Player then
 						self.Velocity = Number3(0, 0, 0)
 						self.Motion = Number3(0, 0, 0)
 						self.Position = Number3(math.random(20, 80)/100*(game.world.map.Width-16), 10, math.random(20, 80)/100*(game.world.map.Depth-16))*game.world.map.Scale
