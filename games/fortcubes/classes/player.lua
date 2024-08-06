@@ -113,7 +113,13 @@ playerConstructor.create = function(player)
 
 			player.bushparticles = particles:createEmitter()
 			player.damageParticles = particles:createEmitter()
-			player.shootParticles = particles.createEmitter()
+			player.shootParticles = particles.createEmitter({
+				position = b.Position + b.Forward*2.5 + b.Down*0.5,
+				scale = Number3(1, 1, 1),
+				color = Color(255, 239, 94),
+				life = 0.5,
+				scale_end = Number3(0, 0, 0),
+			})
 
             player.shootIndicator = Quad()
             player.shootIndicator.Image = images.gradient

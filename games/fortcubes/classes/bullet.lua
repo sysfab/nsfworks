@@ -29,26 +29,7 @@ bullet.create = function(data)
             other:move()
         end
     end
-
-    b.particle = particles.createEmitter({
-        position = b.Position + b.Forward*2.5 + b.Down*0.5,
-        scale = Number3(1, 1, 1),
-        color = Color(255, 239, 94),
-        life = 0.5,
-        scale_end = Number3(0, 0, 0),
-    })
-    for i=1, 10 do
-        if b.owner ~= Player then
-            b.particle:updateConfig({
-                position = b.Position + b.Backward*2.5 + b.Down*0.5,
-            })
-        end
-        b.particle:updateConfig({
-            velocity = (b.Forward*math.random(-10, 10)/15 + b.Right*math.random(-10, 10)/7 + b.Up*math.random(5, 15)/4)*10 + b.owner.Motion*0.75,
-        })
-        b.particle:emit()
-    end
-
+    
     b.lifeTime = 0.5
     b.Tick = errorHandler(function(self, dt)
         local dt_factor = dt*63

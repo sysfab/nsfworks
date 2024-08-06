@@ -10,8 +10,9 @@ connection.onEvent = errorHandler(function(connection, e)
 			local player = getPlayerByUsername(event.data.player)
 			for i=1, 10 do
 				player.shootParticles:updateConfig({
-					position = Number3(event.data.x, event.data.y, event.data.z),
+					position = Number3(player.Head.Position.X+player.Forward.X*10, player.Head.Position.Y-1+player.Forward.Y*10, player.Head.Position.Z+player.Forward.Z*10),
 					velocity = (player.Forward*math.random(-10, 10)/15 + player.Right*math.random(-10, 10)/7 + player.Up*math.random(5, 15)/4)*10 + player.Motion*0.75,
+					
 				})
 				player.shootParticles:emit()
 			end
