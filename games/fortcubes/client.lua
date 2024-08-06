@@ -168,6 +168,7 @@ loadModules = {
 	settings = "games/fortcubes/settings.lua",
 	-- classes
 	bullet = "games/fortcubes/classes/bullet.lua",
+	playerConstructor = "games/fortcubes/classes/player.lua",
 }
 
 animations = {}
