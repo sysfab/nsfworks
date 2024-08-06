@@ -1,5 +1,7 @@
 connection = {}
 
+connection.connected = false
+
 connection.onEvent = errorHandler(function(connection, e)
 	Network:ParseEvent(e, {
 
@@ -169,5 +171,22 @@ connection.onEvent = errorHandler(function(connection, e)
 
 	})
 end, function(err) CRASH("game.connection.onEvent - "..err) end)
+
+connection.disconnect = function(connection)
+	Debug.log("game() - disconnecting...")
+	local e = Network.Event("disconnect", {})
+	e:SendTo(Server)
+	connection.connected = false
+end
+
+connection.connect = function(connection)
+	if connection.connected == false then
+		Debug.log("game() - connecting...")
+		local e = Network.Event("connect", {})
+		e:SendTo(Server)
+	else
+		Debug.error("game() - trying to connect when already connected", 2)
+	end
+end
 
 return connection

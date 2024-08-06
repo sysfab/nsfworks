@@ -8,25 +8,8 @@ function getPlayerByUsername(username)
 	end
 end
 
-game.connection = {}
-game.connection.connected = false
 game.bullets = {}
 
-game.connection.connect = function(connection)
-	if connection.connected == false then
-		Debug.log("game() - connecting...")
-		local e = Network.Event("connect", {})
-		e:SendTo(Server)
-	else
-		Debug.error("game() - trying to connect when already connected", 2)
-	end
-end
-game.connection.disconnect = function(connection)
-	Debug.log("game() - disconnecting...")
-	local e = Network.Event("disconnect", {})
-	e:SendTo(Server)
-	connection.connected = false
-end
 game.connection = gameEvent
 game.ui = {}
 game.ui.created = false
