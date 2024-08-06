@@ -134,7 +134,7 @@ playerConstructor.create = function(player)
 
 			player.OnCollisionBegin = function(self, other)
 				if self ~= Player and other.damage ~= nil then
-					if other.owner == Player then
+					if other.owner == Player and not self.isDead then
 						local e = Network.Event("set_health", {player = self.Username, damage = other.damage})
 						e:SendTo(Players)
 					end
@@ -163,12 +163,20 @@ playerConstructor.create = function(player)
 
 			player.die = function(self)
 				
+				self.Body:nanStop()
+				self.Body:setPlaySpeed(2)
+				self.Body:setLoop(true)
 				self.Body:nanPlay("player_die")
+				self.healthBar.IsHidden = true
+				self.healthBarBG.IsHidden = true
 
 				self.isDead = true
 				Timer(2, false, function()
 					self.Position = Number3(-100000, -100000, -100000)
 					self.health = 100
+					self.isDead = false
+					self.healthBar.IsHidden = false
+					self.healthBarBG.IsHidden = false
 					if self == Player then
 						self.Velocity = Number3(0, 0, 0)
 						self.Motion = Number3(0, 0, 0)
@@ -177,7 +185,6 @@ playerConstructor.create = function(player)
 					end
 				end)
 				Timer(2.2, false, function()
-					self.isDead = false
 					local e = Network.Event("set_health", {player = self.Username, health = 100})
 					e:SendTo(OtherPlayers)
 				end)
@@ -188,12 +195,13 @@ playerConstructor.create = function(player)
 			end
 
 			player.Tick = errorHandler(function(self, dt)
-				self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
-				self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
-				self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
-				self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
-				self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
-
+				if not self.isDead then
+					self.Body.RightArm.LocalRotation = Rotation(-math.pi/2, -math.pi/2-0.3, 0)
+					self.Body.RightHand.LocalRotation = Rotation(0, 0, 0)
+					self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
+					self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
+					self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
+				end
 				self.Body.isMoving = false
 				if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
 					self.Body.isMoving = true
@@ -227,7 +235,9 @@ playerConstructor.create = function(player)
 					self.Body:setPlaySpeed(10)
 					self.Body:nanPlay("player_walk")
 				else
-					self.Body:nanStop()
+					if not self.isDead then
+						self.Body:nanStop()
+					end
 					self.particlesTick = 0
 				end
 			end, function(err) CRASH("player.Tick - "..err) end)
