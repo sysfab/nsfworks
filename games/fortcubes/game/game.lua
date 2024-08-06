@@ -212,7 +212,10 @@ game.tick = errorHandler(function(self, dt)
 			e:SendTo(OtherPlayers)
 
 			self.shootTimer = 0.25
+			Player.shootIndicator.IsHidden = false
 		end
+	else
+		Player.shootIndicator.IsHidden = true
 	end
 end, function(err) CRASH("game.tick - "..err) end)
 

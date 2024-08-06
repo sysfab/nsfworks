@@ -113,6 +113,14 @@ playerConstructor.create = function(player)
 
 			player.bushparticles = particles:createEmitter()
 
+            player.shootIndicator = Quad()
+            player.shootIndicator.Color = Color(255, 255, 255, 127)
+            player.shootIndicator.Scale = Number3(10, 120, 0)
+            player.shootIndicator.Rotation.X = math.pi/2
+            player.shootIndicator.LocalPosition = Number3(-5, 0.5, 0)
+            player.shootIndicator.IsHidden = true
+            player.shootIndicator:SetParent(player)
+
 			player.CollisionBox = Box({-8, 0, -8}, {8, 29, 8})
 
 			player.OnCollisionBegin = function(self, other)
