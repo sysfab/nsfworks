@@ -171,12 +171,19 @@ playerConstructor.create = function(player)
 				self.healthBarBG.IsHidden = true
 
 				self.isDead = true
+				if self == Player then
+					multi:unlink("ph_" .. self.ID)
+				end
 				Timer(2, false, function()
 					self.Position = Number3(-100000, -100000, -100000)
 					self.health = 100
 					self.isDead = false
 					self.healthBar.IsHidden = false
 					self.healthBarBG.IsHidden = false
+					if self == Player then
+						multi:link(self.Head, "ph_" .. self.ID)
+						multi:sync("ph_" .. self.ID)
+					end
 					if self == Player then
 						self.Velocity = Number3(0, 0, 0)
 						self.Motion = Number3(0, 0, 0)
@@ -201,6 +208,8 @@ playerConstructor.create = function(player)
 					self.Body.LeftArm.LocalRotation = Rotation(-math.pi/2, 0, math.pi/2+0.6)
 					self.Body.LeftArm.LocalPosition = Number3(-4, 0, 1)
 					self.Body.LeftHand.LocalRotation = Rotation(0, 0, 0)
+				else
+					self.Head.Rotation.X = self.Head.LocalRotation.X
 				end
 				self.Body.isMoving = false
 				if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
