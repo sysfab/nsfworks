@@ -210,7 +210,9 @@ playerConstructor.create = function(player)
 					self.Body.Head.LocalRotation = Rotation(0, 0, 0)
 					self.Body.Head.LocalPosition = Number3(0, 6, 0.5)
 				else
-					self.Head.LocalPosition = self.Head.LocalPosition + Number3(0, 6, 0.5)
+					if self ~= Player then
+						self.Head.LocalPosition = self.Head.LocalPosition + Number3(0, 6, 0.5)
+					end
 				end
 				self.Body.isMoving = false
 				if self.Motion.X ~= 0 or self.Motion.Z ~= 0 then
