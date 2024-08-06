@@ -14,16 +14,20 @@ game.load = Object()
 function game.load.Tick(self, dt)
 	if game.connection == nil then
 		game.connection = gameEvent
+		Debug.log("game() - game.connection loaded.")
 	end
 	if game.ui == nil then
 		game.ui = gameUI
+		Debug.log("game() - game.ui loaded.")
 	end
 	if game.world == nil then
 		game.world = gameWorld
+		Debug.log("game() - game.world loaded.")
 	end
 	if game.world and game.connection and game.ui then
 		game.load.Tick = nil
 		game.load = nil
+		Debug.log("game() - All parts loaded successfully.")
 	end
 end
 
