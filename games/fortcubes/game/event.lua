@@ -7,6 +7,14 @@ connection.onEvent = errorHandler(function(connection, e)
 
 		bullet = function(event)
 			bullet.create(event.data)
+			local player = getPlayerByUsername(event.data.player)
+			for i=1, 10 do
+				player.shootParticles:updateConfig({
+					position = Number3(event.data.x, event.data.y, event.data.z),
+					velocity = (player.Forward*math.random(-10, 10)/15 + player.Right*math.random(-10, 10)/7 + player.Up*math.random(5, 15)/4)*10 + player.Motion*0.75,
+				})
+				player.shootParticles:emit()
+			end
 		end,
 
 		connected = function(event)

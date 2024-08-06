@@ -112,6 +112,8 @@ playerConstructor.create = function(player)
 			end
 
 			player.bushparticles = particles:createEmitter()
+			player.damageParticles = particles:createEmitter()
+			player.shootParticles = particles.createEmitter()
 
             player.shootIndicator = Quad()
             player.shootIndicator.Image = images.gradient
@@ -132,7 +134,6 @@ playerConstructor.create = function(player)
 					end
 				end
 				if other.owner.Username ~= self.Username and other.damage ~= nil and not self.isDead then
-					self.damageParticles = particles:createEmitter()
 					for i=1, 30 do
 						self.damageParticles:updateConfig({
 							position = self.Position + Number3(math.random(-10, 10)/3, 10+math.random(-10, 10)/3, math.random(-10, 10)/3),
@@ -144,7 +145,6 @@ playerConstructor.create = function(player)
 						})
 						self.damageParticles:emit()
 					end
-					self.damageParticles:remove()
 					other:remove()
 				end
 			end
