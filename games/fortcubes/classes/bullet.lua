@@ -41,7 +41,6 @@ bullet.create = function(data)
         end
     end, function(err) CRASH("b.Tick - "..err) end)
     b.remove = function(self)
-        self.particle:remove()
         self.OnCollisionBegin = nil
         --self.as:SetParent(nil)
         --self.as = nil
