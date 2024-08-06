@@ -1,4 +1,4 @@
-connection = {}
+local connection = {}
 
 connection.connected = false
 

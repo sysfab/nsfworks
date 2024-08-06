@@ -1,4 +1,4 @@
-gameui = {}
+local gameui = {}
 
 gameui.created = false
 gameui.create = function(u)
