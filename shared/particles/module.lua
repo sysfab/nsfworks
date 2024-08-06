@@ -14,6 +14,7 @@ particles.createEmitter = function(config)
         velocity = Number3(0, 0, 0),
         scale_end = Number3(0, 0, 0),
     }
+    
     local merged = {}
     for key, value in pairs(defaultConfig, config) do
         if config[key] ~= nil then
@@ -24,6 +25,7 @@ particles.createEmitter = function(config)
     end
 
     local emitter = Object()
+    emitter.pool = {}
     emitter.config = merged
 
     emitter.updateConfig = function(self, config)
@@ -46,13 +48,19 @@ particles.createEmitter = function(config)
             error("emitter:emit() should be called with ':'!")
         end
 
-        local particle = MutableShape()
-        local b = Block(self.config.color, Number3(0, 0, 0))
-        particle:AddBlock(b)
-        particle.Pivot = Number3(0.5, 0.5, 0.5)
-        particle.Physics = PhysicsMode.Dynamic
-        particle.CollidesWithGroups = CollisionGroups()
-        particle.CollisionGroups = CollisionGroups()
+        local particle = table.remove(self.pool)
+        if not particle then
+            particle = MutableShape()
+            particle.Pivot = Number3(0.5, 0.5, 0.5)
+            particle.Physics = PhysicsMode.Dynamic
+            particle.CollidesWithGroups = CollisionGroups()
+            particle.CollisionGroups = CollisionGroups()
+            local b = Block(self.config.color, Number3(0, 0, 0))
+            particle:AddBlock(b)
+        else
+            local b = particle:GetBlock(Number3(0, 0, 0))
+            b.Color = self.config.color
+        end
         
         particle.Position = self.config.position
         particle.Rotation = self.config.rotation
@@ -67,7 +75,7 @@ particles.createEmitter = function(config)
             if p.life > self.config.life then
                 p.Tick = nil
                 p:SetParent(nil)
-                p = nil
+                table.insert(self.pool, p)
             end
         end
     end
