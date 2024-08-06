@@ -29,7 +29,7 @@ bullet.create = function(data)
             other:move()
         end
     end
-    
+
     b.lifeTime = 0.5
     b.Tick = errorHandler(function(self, dt)
         local dt_factor = dt*63
@@ -37,13 +37,6 @@ bullet.create = function(data)
 
         self.lifeTime = self.lifeTime - dt
         if self.lifeTime <= 0 then
-            for i=1, 10 do
-                self.particle:updateConfig({
-                    position = self.Position,
-                    velocity = Number3(math.random(-10, 10), math.random(-10, 20), math.random(-10, 10)) + self.Forward * dt_factor*50,
-                })
-                self.particle:emit()
-            end
             self:remove()
         end
     end, function(err) CRASH("b.Tick - "..err) end)
