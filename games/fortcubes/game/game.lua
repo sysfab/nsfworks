@@ -497,6 +497,8 @@ game.controls.directionalPad = function(dx, dy, isJoy)
 	game.controls.move = {dx, dy}
 end
 
+game.world = world
+
 game.created = false
 game.screenResize = function(self)
 	if self.created ~= true then return end

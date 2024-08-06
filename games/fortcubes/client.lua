@@ -165,7 +165,7 @@ loadModules = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua",
 	game = "games/fortcubes/game/game.lua",
-	["game.world"] = "games/fortcubes/game/world.lua",
+	world = "games/fortcubes/game/world.lua",
 	settings = "games/fortcubes/settings.lua",
 	-- classes
 	bullet = "games/fortcubes/classes/bullet.lua",
