@@ -819,7 +819,7 @@ game.setplayer = function(player)
 			player.health = 100
 
 			player.healthBarBG = Quad()
-			player.healthBarBG:SetParent(v)
+			player.healthBarBG:SetParent(player)
 			player.healthBarBG.Color = Color(0, 0, 0, 200)
 			player.healthBarBG.Width, player.healthBarBG.Height = 20, 3.5
 			player.healthBarBG.Tick = function(self, dt)
@@ -827,7 +827,7 @@ game.setplayer = function(player)
 				self.Forward = Camera.Backward
 			end
 			player.healthBar = Quad()
-			player.healthBar:SetParent(v)
+			player.healthBar:SetParent(player)
 			player.healthBar.Color = Color(255, 0, 0, 255)
 			player.healthBar.Width, player.healthBar.Height = 19*player.health*0.01, 2
 			player.healthBar.Tick = function(self, dt)
@@ -837,7 +837,7 @@ game.setplayer = function(player)
 			end
 
 			player.bushcollider = Object()
-			player.bushcollider:SetParent(v)
+			player.bushcollider:SetParent(player)
 			player.bushcollider.CollisionBox = Box(Number3(-2.5, 0, -2.5), Number3(2.5, 20, 2.5))
 			player.bushcollider.Physics = PhysicsMode.Trigger
 			player.bushcollider.LocalPosition.Y = 9
@@ -846,7 +846,7 @@ game.setplayer = function(player)
 
 			player.bushcollider.sound = AudioSource("gun_shot_1")
 			player.bushcollider.sound.Sound = audio.bush
-			player.bushcollider.sound:SetParent(v)
+			player.bushcollider.sound:SetParent(player)
 			player.bushcollider.sound.Volume = settings.currentSettings.soundVolume*0.01
 
 			player.bushcollider.OnCollisionBegin = function(self, other)
