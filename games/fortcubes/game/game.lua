@@ -15,7 +15,7 @@ game.ui = gameUI
 
 game.mobileControls = {}
 game.mobileControls.created = false
-game.mobileControls.screenResize = function(controls)
+function game.mobileControls.screenResize(controls)
 	if controls.moveJoystick.loaded == true then
 		controls.moveJoystick:setPos(Number2(10+48, 10+48))
 	end
@@ -23,7 +23,7 @@ game.mobileControls.screenResize = function(controls)
 		controls.shootJoystick:setPos(Number2(Screen.Width-10-176, 10+48))
 	end
 end
-game.mobileControls.create = function(controls)
+function game.mobileControls.create(controls)
 	controls.moveJoystick = joysticks.create({
 		pos = {10+48, 10+48}, -- position on screen.
 		scale = 0.8, -- scale multiplier, 1 = 160 pixels.
@@ -54,7 +54,7 @@ game.mobileControls.create = function(controls)
 
 	controls.created = true
 end
-game.mobileControls.remove = function(controls)
+function game.mobileControls.remove(controls)
 	controls.moveJoystick:remove()
 	controls.shootJoystick:remove()
 	controls.moveJoystick = nil
@@ -64,7 +64,7 @@ end
 
 game.camera = {}
 game.camera.created = false
-game.camera.create = function(camera)
+function game.camera.create(camera)
 	Camera:SetModeFree()
 
 	camera.object = Object()
@@ -77,7 +77,7 @@ game.camera.create = function(camera)
 
 	camera.created = true
 end
-game.camera.remove = function(camera)
+function game.camera.remove(camera)
 	camera.object.Tick = nil
 	camera.object = nil
 	camera.created = false
@@ -85,7 +85,7 @@ end
 
 game.controls = {}
 game.controls.shooting = false
-game.controls.create = function(controls)
+function game.controls.create(controls)
 	if Client.IsMobile == true then
 		Client.DirectionalPad = nil
 		Pointer.Drag = nil
@@ -107,13 +107,13 @@ game.controls.create = function(controls)
 		end
 	end
 end
-game.controls.remove = function(controls)
+function game.controls.remove(controls)
 	Client.DirectionalPad = nil
 	Pointer.Drag = nil
 	Pointer.Down = nil
 	Pointer.Up = nil
 end
-game.controls.analogPad = function(dx, dy, isJoy)
+function game.controls.analogPad(dx, dy, isJoy)
 	if isJoy ~= true then
 		local wh = Screen.Width/Screen.Height
 
@@ -133,7 +133,7 @@ game.controls.analogPad = function(dx, dy, isJoy)
 	end
 	Player.Forward = Number3(dx*dxmul, 0, dy)*25
 end
-game.controls.directionalPad = function(dx, dy, isJoy)
+function game.controls.directionalPad(dx, dy, isJoy)
 	if isJoy == true then
 		local d = Number2(dx, dy)
 		d:Normalize()
@@ -151,7 +151,7 @@ end
 game.world = gameWorld
 
 game.created = false
-game.screenResize = function(self)
+function game.screenResize(self)
 	if self.created ~= true then return end
 
 	self.ui:screenResize()
@@ -200,7 +200,7 @@ game.tick = errorHandler(function(self, dt)
 	end
 end, function(err) CRASH("game.tick - "..err) end)
 
-game.create = function(self)
+function game.create(self)
 
 	self.shootTimer = 0
 
@@ -239,7 +239,7 @@ game.create = function(self)
 	e:SendTo(Server)
     Debug.log("game() - created")
 end
-game.remove = function(self, callback)
+function game.remove(self, callback)
 	self.controls:remove()
 	self.screenResizeListener:Remove()
 	self.eventListener:Remove()

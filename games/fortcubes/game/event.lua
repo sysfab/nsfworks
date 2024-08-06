@@ -172,14 +172,14 @@ connection.onEvent = errorHandler(function(connection, e)
 	})
 end, function(err) CRASH("game.connection.onEvent - "..err) end)
 
-connection.disconnect = function(connection)
+function  connection.disconnect(connection)
 	Debug.log("game() - disconnecting...")
 	local e = Network.Event("disconnect", {})
 	e:SendTo(Server)
 	connection.connected = false
 end
 
-connection.connect = function(connection)
+function connection.connect(connection)
 	if connection.connected == false then
 		Debug.log("game() - connecting...")
 		local e = Network.Event("connect", {})

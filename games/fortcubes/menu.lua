@@ -592,7 +592,7 @@ function menu.remove(self, callback)
     end)
 end
 
-menu.loadModels = function(self)
+function menu.loadModels(self)
 
     ---- MAN1 ANIMATION ----
 
@@ -891,12 +891,7 @@ menu.loadModels = function(self)
     menu.book.soundVolume.left.quad.LocalPosition = Number3(-1, -1, 0)
     menu.book.soundVolume.left.quad.Physics = PhysicsMode.Static
 
---[[
-    for k, v in pairs(menu.bushes) do
-        v:SetParent(nil)
-        v = nil
-    end
-]]
+
     local bushes = {
         {pos = Number3(-9, 1, 60), rot = Rotation(0, -math.pi-0.6, 0), scale = 0.45},
         {pos = Number3(-1, 0.9, 64), rot = Rotation(0, 0.2, 0), scale = 0.58},
@@ -1050,12 +1045,7 @@ menu.loadModels = function(self)
 
         table.insert(menu.bushes, bush)
     end
---[[
-    for k, v in pairs(menu.trees) do
-        v:SetParent(nil)
-        v = nil
-    end
-]]
+
     local trees = {
         {pos = Number3(-49, 0, 60), rot = Rotation(0, 0.2, 0), scale = 0.75},
         {pos = Number3(-42, -0.5, 65), rot = Rotation(0, -2.9, 0), scale = 0.65},

@@ -1,7 +1,7 @@
 local gameui = {}
 
 gameui.created = false
-gameui.create = function(u)
+function gameui.create(u)
 	u.theme = {
         button = {
             borders = true,
@@ -111,7 +111,7 @@ gameui.create = function(u)
 
 	u.created = true
 end
-gameui.remove = function(u, callback)
+function gameui.remove(u, callback)
     if u.created == nil then
         error("game.ui.remove() should be called with ':'!", 2)
     end
@@ -141,7 +141,7 @@ gameui.remove = function(u, callback)
         if callback ~= nil then callback() end
     end)
 end
-gameui.screenResize = function(u)
+function gameui.screenResize(u)
 	if u.created == nil then
         error("menu.update() should be called with ':'!", 2)
     end

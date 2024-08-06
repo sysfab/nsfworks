@@ -1,6 +1,6 @@
 local gameworld = {}
 
-gameworld.create = function(world, scale)
+function gameworld.create(world, scale)
 	Debug.log("game() - Generating world...")
 	world.map = MutableShape()
 	world.map.Scale = 5
@@ -132,7 +132,7 @@ gameworld.create = function(world, scale)
 	Player.Position.Y = 10000
 	Player:SetParent(World)
 end
-gameworld.remove = function(world)
+function gameworld.remove(world)
 
 	for i=1, #world.map.rocks do
 		world.map.rocks[i]:SetParent(nil)
