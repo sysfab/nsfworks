@@ -176,7 +176,7 @@ playerConstructor.create = function(player)
 					self.Position = Number3(-100000, -100000, -100000)
 					self.health = 100
 					self.isDead = false
-					multi:link("p_" .. self.ID)
+					multi:link(self, "p_" .. self.ID)
 					self.healthBar.IsHidden = false
 					self.healthBarBG.IsHidden = false
 					if self == Player then
