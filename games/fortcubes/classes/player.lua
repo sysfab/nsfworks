@@ -171,7 +171,6 @@ playerConstructor.create = function(player)
 				self.healthBarBG.IsHidden = true
 
 				self.isDead = true
-				multi:unlink("p_" .. self.ID)
 				Timer(2, false, function()
 					self.Position = Number3(-100000, -100000, -100000)
 					self.health = 100
@@ -188,7 +187,6 @@ playerConstructor.create = function(player)
 				Timer(2.2, false, function()
 					local e = Network.Event("set_health", {player = self.Username, health = 100})
 					e:SendTo(OtherPlayers)
-					multi:link(self, "p_" .. self.ID)
 				end)
 				if self == Player then
 					local e = Network.Event("kill", {player = self.Username, killer = self.lastDamager})
