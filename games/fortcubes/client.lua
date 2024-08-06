@@ -164,10 +164,12 @@ loadingBG.parentDidResize()
 loadModules = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	menu = "games/fortcubes/menu.lua",
+	settings = "games/fortcubes/settings.lua",
+	-- game
 	game = "games/fortcubes/game/game.lua",
 	gameWorld = "games/fortcubes/game/world.lua",
 	gameEvent = "games/fortcubes/game/event.lua",
-	settings = "games/fortcubes/settings.lua",
+	gameUI = "games/fortcubes/game/ui.lua",
 	-- classes
 	bullet = "games/fortcubes/classes/bullet.lua",
 	playerConstructor = "games/fortcubes/classes/player.lua",
