@@ -166,10 +166,10 @@ loadModules = {
 	menu = "games/fortcubes/menu.lua",
 	settings = "games/fortcubes/settings.lua",
 	-- game
-	game = "games/fortcubes/game/game.lua",
 	gameWorld = "games/fortcubes/game/world.lua",
 	gameEvent = "games/fortcubes/game/event.lua",
 	gameUI = "games/fortcubes/game/ui.lua",
+	game = "games/fortcubes/game/game.lua",
 	-- classes
 	bullet = "games/fortcubes/classes/bullet.lua",
 	playerConstructor = "games/fortcubes/classes/player.lua",
