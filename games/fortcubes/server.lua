@@ -27,7 +27,7 @@ set("CRASH", function(message)
 end)
 
 -- CONFIG
-set("VERSION", "v1.0")
+set("VERSION", "v1.1")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 set("BOT_COUNT", 1)
 
