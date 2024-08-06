@@ -182,6 +182,8 @@ playerConstructor.create = function(player)
 					self.healthBarBG.IsHidden = false
 					if self == Player then
 						multi:link(self.Head, "ph_" .. self.ID)
+						self.Head.LocalRotation = Rotation(0, 0, 0)
+						self.Head.LocalPosition = Number3(0, 6, 0.5)
 						--multi:sync("ph_" .. self.ID)
 					end
 					if self == Player then
