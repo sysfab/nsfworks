@@ -7,8 +7,11 @@ game.create = function(self)
     Player.Velocity = Number3(0, 0, 0)
 
     self.map = Shape(shapes.map, {includeChildren = true})
-    self.map.Scale = 15
-    self.map.Physics = PhysicsMode.StaticPerBlock
+    self.map.Scale = 10
+    local ha = require("hierarchyactions")
+    ha:applyToDescendants(self.map, {includeRoot = true}, function(s)
+        s.Physics = PhysicsMode.StaticPerBlock
+    end)
     self.map:SetParent(World)
     self.map.Position = Number3(0, 0, 0)
 
@@ -19,9 +22,9 @@ game.create = function(self)
         Player.LocalRotation.Y = Player.Head.Rotation.Y
     
         if Player.Head.Rotation.X < 3 then
-            Player.Head.Rotation.X = math.max(Player.Head.Rotation.X + -pe.DY * 0.01, (3.14 / 2) * 0.9)
+            Player.Head.Rotation.X = math.min(Player.Head.Rotation.X + -pe.DY * 0.01, (3.14 / 2) * 0.9)
         else
-            Player.Head.Rotation.X = math.min(Player.Head.Rotation.X + -pe.DY * 0.01, 4.72 * 1.02)
+            Player.Head.Rotation.X = math.max(Player.Head.Rotation.X + -pe.DY * 0.01, 4.72 * 1.02)
         end
     end
 end
