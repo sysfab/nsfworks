@@ -74,7 +74,7 @@ playerConstructor.create = function(player)
 					if self.collides and not self:GetParent().Body.isMoving then
 						self.t = self.t + 63*dt
 
-						if self.t > 60 then
+						if self.t > 10 then
 							if not self.inbush then
 								self.inbush = true
 								self:GetParent().inbush = true
@@ -170,6 +170,10 @@ playerConstructor.create = function(player)
 				self.Body:nanPlay("player_die")
 				self.healthBar.IsHidden = true
 				self.healthBarBG.IsHidden = true
+				if self == Player then
+					Player.Motion = Number3(0, 0, 0)
+					game.controls.move = {0, 0}
+				end
 
 				self.isDead = true
 				Timer(2, false, function()
