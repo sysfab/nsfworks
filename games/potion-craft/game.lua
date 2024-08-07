@@ -1,7 +1,7 @@
 local game = {}
 
 game.create = function(self)
-    Camera:SetModeFree()
+    --Camera:SetModeFree()
     Camera:SetParent(World)
     Player:SetParent(World)
 

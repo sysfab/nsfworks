@@ -223,6 +223,8 @@ function doneLoading()
 		loadingBG:remove()
 		loadingBG = nil
 	end
+	
+	game:create()
 end
 
 function checkLoading()
