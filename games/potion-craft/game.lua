@@ -4,6 +4,7 @@ game.create = function(self)
     --Camera:SetModeFree()
     Camera:SetParent(World)
     Player:SetParent(World)
+    Player.Velocity = Number3(0, 0, 0)
 
     self.map = Shape(shapes.map, {includeChildren = true})
     self.map.Scale = 5
