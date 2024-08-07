@@ -163,17 +163,15 @@ playerConstructor.create = function(player)
 			end
 
 			player.die = function(self)
-				
+				if self == Player then
+					game.controls.directionalPad(0, 0, false)
+				end
 				self.Body:nanStop()
 				self.Body:setPlaySpeed(2)
 				self.Body:setLoop(true)
 				self.Body:nanPlay("player_die")
 				self.healthBar.IsHidden = true
 				self.healthBarBG.IsHidden = true
-				if self == Player then
-					Player.Motion = Number3(0, 0, 0)
-					game.controls.move = {0, 0}
-				end
 
 				self.isDead = true
 				Timer(2, false, function()
