@@ -19,7 +19,8 @@ randomEasterLogs = {
 	"Hello    anyone??",
 	"Im watching you <0>",
 	"TOP SECRET",
-	"If it breaks, im not guilty"
+	"If it breaks, im not guilty",
+	"AHHAHAHAHHAHAH"
 }
 
 Player.Position = Number3(-1000, -1000, -1000)
