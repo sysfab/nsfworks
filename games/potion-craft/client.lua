@@ -216,7 +216,13 @@ function doneLoading()
 		toast:create({message = "Game launched with Debug enabled."})
 	end
 
-	game:create()
+	if loading_screen.created == true then
+		loading_screen:remove()
+	end
+	if loadingBG ~= nil then
+		loadingBG:remove()
+		loadingBG = nil
+	end
 end
 
 function checkLoading()
