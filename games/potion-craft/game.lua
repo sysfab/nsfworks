@@ -42,7 +42,7 @@ game.create = function(self)
     end
 
     Player.Tick = function(s, dt)
-        Player.Motion = Player.Forward * 40 * dy + Player.Right * 40 * dx
+        Player.Motion = (Player.Forward * 40 * dpadY) + (Player.Right * 40 * dpadX)
     end
 end
 
