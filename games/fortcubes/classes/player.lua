@@ -74,7 +74,7 @@ playerConstructor.create = function(player)
 					if self.collides and not self:GetParent().Body.isMoving then
 						self.t = self.t + 63*dt
 
-						if self.t > 10 then
+						if self.t > 5 then
 							if not self.inbush then
 								self.inbush = true
 								self:GetParent().inbush = true
