@@ -12,7 +12,7 @@ game.create = function(self)
     self.map:SetParent(World)
     self.map.Position = Number3(0, 0, 0)
 
-    Player.Position = Number3(self.map.Width/2, self.map.Height, self.map.Depth/2)*self.map.Size
+    Player.Position = Number3(self.map.Width/2, self.map.Height, self.map.Depth/2)
 end
 
 game.remove = function(self)
