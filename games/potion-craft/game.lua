@@ -7,7 +7,7 @@ game.create = function(self)
     Player.Velocity = Number3(0, 0, 0)
 
     self.map = Shape(shapes.map, {includeChildren = true})
-    self.map.Scale = 10
+    self.map.Scale = 6
     local ha = require("hierarchyactions")
     ha:applyToDescendants(self.map, {includeRoot = true}, function(s)
         s.Physics = PhysicsMode.StaticPerBlock
@@ -15,7 +15,7 @@ game.create = function(self)
     self.map:SetParent(World)
     self.map.Position = Number3(0, 0, 0)
 
-    Player.Position = Number3(self.map.Width/2, self.map.Height, self.map.Depth*0.35)
+    Player.Position = Number3(self.map.Width/2, self.map.Height, self.map.Depth*0.4)
 
     Pointer.Drag = function(pe)
         Player.Head.Rotation.Y = Player.Head.Rotation.Y + pe.DX * 0.01
