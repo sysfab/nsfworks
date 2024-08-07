@@ -5,7 +5,7 @@ game.create = function(self)
     Camera:SetParent(World)
     Player:SetParent(World)
 
-    self.map = MutableShape(shapes.map, {includeChildren = true})
+    self.map = Shape(shapes.map, {includeChildren = true})
     self.map.Scale = 5
     self.map.Physics = PhysicsMode.StaticPerBlock
     self.map:SetParent(World)
