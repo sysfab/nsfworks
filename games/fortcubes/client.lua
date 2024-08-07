@@ -1,4 +1,4 @@
-Debug.enabled = true
+Debug.enabled = false
 Debug.log("client() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..nsfwhash.."'")
 Debug.log("client() - Starting '"..game.."'...")
 

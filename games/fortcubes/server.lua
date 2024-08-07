@@ -1,4 +1,4 @@
-Debug.enabled = true
+Debug.enabled = false
 Debug.log("server() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'")
 Debug.log("server() - Starting '"..game.."' server...")
 
