@@ -15,7 +15,7 @@ game.create = function(self)
     self.map:SetParent(World)
     self.map.Position = Number3(0, 0, 0)
 
-    Player.Position = Number3(self.map.Width/2, self.map.Height*0.9, self.map.Depth*0.65)
+    Player.Position = Number3(self.map.Width/2, self.map.Height*0.9, self.map.Depth*0.4)
 
     dpadX = 0
     dpadY = 0
