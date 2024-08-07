@@ -15,7 +15,7 @@ game.create = function(self)
     self.map:SetParent(World)
     self.map.Position = Number3(0, 0, 0)
 
-    Player.Position = Number3(self.map.Width/2, self.map.Height*0.9, self.map.Depth*0.4)
+    Player.Position = Number3(95, -170, -160)
 
     dpadX = 0
     dpadY = 0
@@ -39,6 +39,12 @@ game.create = function(self)
     Client.DirectionalPad = function(dx, dy)
         dpadX = dx
         dpadY = dy
+    end
+
+    Client.Action1 = function()
+        if Player.IsOnGround then
+            Player.Velocity.Y = 100
+        end
     end
 
     Player.Tick = function(s, dt)
