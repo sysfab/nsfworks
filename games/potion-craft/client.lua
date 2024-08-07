@@ -176,6 +176,7 @@ loaded_shapes = 0
 
 loadModules = {
 	loading_screen = "games/potion-craft/loading_screen.lua",
+	game = "games/potion-craft/game.lua",
 }
 
 animations = {}
@@ -186,6 +187,7 @@ loadAnimations = {
 shapes = {}
 loadShapes = {
 	potion = "nsfworks.potion1",
+	map = "voxels.treeworld",
 }
 
 audio = {}
@@ -213,6 +215,9 @@ function doneLoading()
 	if Debug.enabled == true then
 		toast:create({message = "Game launched with Debug enabled."})
 	end
+
+	loading_screen:remove()
+	game:create()
 end
 
 function checkLoading()
