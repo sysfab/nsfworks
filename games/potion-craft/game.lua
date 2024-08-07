@@ -15,9 +15,17 @@ game.create = function(self)
     self.map:SetParent(World)
     self.map.Position = Number3(0, 0, 0)
 
-    Player.Position = Number3(self.map.Width/2, self.map.Height, self.map.Depth*0.4)
+    Player.Position = Number3(self.map.Width/2, self.map.Height*0.9, self.map.Depth*0.65)
+
+    dpadX = 0
+    dpadY = 0
+    apadX = 0
+    apadY = 0
 
     Pointer.Drag = function(pe)
+        apadX = pe.DX
+        apadY = pe.DY
+
         Player.Head.Rotation.Y = Player.Head.Rotation.Y + pe.DX * 0.01
         Player.LocalRotation.Y = Player.Head.Rotation.Y
     
@@ -27,12 +35,22 @@ game.create = function(self)
             Player.Head.Rotation.X = math.max(Player.Head.Rotation.X + -pe.DY * 0.01, 4.72 * 1.02)
         end
     end
+
+    Client.DirectionalPad = function(dx, dy)
+        dpadX = dx
+        dpadY = dy
+    end
+
+    Player.Tick = function(s, dt)
+        Player.Motion = Player.Forward * 40 * dy + Player.Right * 40 * dx
+    end
 end
 
 game.remove = function(self)
     self.map:SetParent(nil)
     self.map = nil
     Pointer.Drag = nil
+    Player.Tick = nil
 end
 
 return game
