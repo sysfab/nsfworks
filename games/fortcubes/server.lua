@@ -182,7 +182,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	kill = function(event)
 		if game.players[event.data.player].deaths == nil or game.players[event.data.player].kills == nil then
 			Debug.log("server() - kill event got nil player.")
-			break
+			return
 		end
 		game.players[event.data.player].deaths = game.players[event.data.player].deaths + 1
 		game.players[event.data.killer].kills = game.players[event.data.killer].kills + 1
