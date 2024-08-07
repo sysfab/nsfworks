@@ -160,9 +160,21 @@ loadingBG.parentDidResize = function(_)
 end
 loadingBG.parentDidResize()
 
+need_to_load = 0
+need_to_load_animations = 0
+need_to_load_audios = 0
+need_to_load_images = 0
+need_to_load_modules = 0
+need_to_load_shapes = 0
+loaded_animations = 0
+loaded_audios = 0
+loaded_images = 0
+loaded_modules = 0
+loaded_shapes = 0
+
 
 loadModules = {
-	loading_screen = "games/porion-craft/loading_screen.lua",
+	loading_screen = "games/potion-craft/loading_screen.lua",
 }
 
 animations = {}
