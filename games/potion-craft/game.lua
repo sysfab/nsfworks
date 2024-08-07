@@ -9,8 +9,9 @@ game.create = function(self)
     self.map.Scale = 5
     self.map.Physics = PhysicsMode.StaticPerBlock
     self.map:SetParent(World)
+    self.map.Position = Number3(0, 0, 0)
 
-    Player.Position = self.map.Position + Number3(self.map.Width/2, self.map.Height, self.map.Depth/2)*self.map.Size
+    Player.Position = Number3(self.map.Width/2, self.map.Height, self.map.Depth/2)*self.map.Size
 end
 
 game.remove = function(self)
