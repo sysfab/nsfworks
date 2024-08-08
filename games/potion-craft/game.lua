@@ -1,6 +1,7 @@
 local game = {}
 
 game.create = function(self)
+    Debug.log("game() - creating...")
     --Camera:SetModeFree()
     Camera:SetParent(World)
     Player:SetParent(World)
@@ -27,6 +28,7 @@ game.create = function(self)
     baseBounciness = 0
 
     resetPlayer = function()
+        Debug.log("game() - resseting player...")
         Player.Position = Number3(95, -170, -160)
         Player.Velocity = Number3(0, 0, 0)
         Player.movementSpeed = baseMovementSpeed
@@ -69,6 +71,7 @@ game.create = function(self)
 end
 
 game.remove = function(self)
+    Debug.log("game() - removing...")
     self.map:SetParent(nil)
     self.map = nil
     Pointer.Drag = nil
