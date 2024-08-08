@@ -154,7 +154,7 @@ function menu.create(self)
                 menu.music.Volume = lerp(menu.music.Volume, 0, 0.05*delta)
             end
         end
-        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil and menu.workinprogress ~= nil then
+        if menu.music ~= nil and menu.sysfab ~= nil and menu.nanskip ~= nil and menu.yard ~= nil then
             if loading_screen.created then
                 loading_screen:remove()
             end
@@ -569,9 +569,6 @@ function menu.remove(self, callback)
         self.play = nil
         self.back:remove()
         self.back = nil
-
-        self.workinprogress:SetParent(nil)
-        self.workinprogress = nil
 
         menu.pointer:Remove()
 
@@ -1155,22 +1152,6 @@ function menu.loadModels(self)
 
         table.insert(menu.trees, tree)
     end
-
-    HTTP:Get("https://cdn.pixabay.com/photo/2012/04/01/18/55/work-in-progress-24027_1280.png", function(res)
-        if res.StatusCode ~= 200 then
-            error("Error on downloading work in progress image: " .. res.StatusCode)
-        end
-
-        if menu.created then
-            menu.workinprogress = Quad()
-            menu.workinprogress.Color.A = 254
-            menu.workinprogress.Image = res.Body
-            menu.workinprogress.Width, menu.workinprogress.Height = 10, 10
-            menu.workinprogress.Position = Number3(40, 2, 20)
-            menu.workinprogress.Rotation = Rotation(0, math.pi/2-0.5, 0)
-            menu.workinprogress:SetParent(World)
-        end
-    end)
 end
 
 return menu
