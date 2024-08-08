@@ -1,0 +1,3 @@
+local armory = {}
+
+return armory
