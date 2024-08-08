@@ -888,10 +888,8 @@ function menu.loadModels(self)
     menu.book.soundVolume.left.quad.LocalPosition = Number3(-1, -1, 0)
     menu.book.soundVolume.left.quad.Physics = PhysicsMode.Static
 
-    menu.bushes = globalBushes
-
     menu.bushes = {}
-    for k, v in pairs(bushes) do
+    for k, v in pairs(globalBushes) do
         local bush = Shape(shapes.bush, {includeChildren = true})
         bush.Position = v.pos
         bush.Rotation = v.rot
@@ -903,10 +901,8 @@ function menu.loadModels(self)
         table.insert(menu.bushes, bush)
     end
 
-    menu.trees = globalTrees
-
     menu.trees = {}
-    for k, v in pairs(trees) do
+    for k, v in pairs(globalTrees) do
         local tree = Shape(shapes.tree, {includeChildren = true})
         tree.Position = v.pos
         tree.Rotation = v.rot
