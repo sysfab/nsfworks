@@ -19,13 +19,12 @@ game.create = function(self)
     apadX = 0
     apadY = 0
 
-    baseMovementSpeed = 40
+    baseMovementSpeed = 80
     baseJumpHeight = 100
     baseJumpMidAir = false
     baseRotationSensivity = 1
     baseScale = 0.5
     baseBounciness = 0
-    baseFriction = 1
 
     resetPlayer = function()
         Player.Position = Number3(95, -170, -160)
@@ -36,7 +35,6 @@ game.create = function(self)
         Player.rotationSensivity = baseRotationSensivity
         Player.Scale = baseScale
         Player.Bounciness = baseBounciness
-        Player.Friction = baseFriction
     end
     resetPlayer()
 
