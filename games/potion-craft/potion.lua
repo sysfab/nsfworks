@@ -16,6 +16,4 @@ potion.create = function(self, config)
     return p
 end
 
-setmetatable(potion, {__call = function(self, ...) self:create(...)  end})
-
 return potion
