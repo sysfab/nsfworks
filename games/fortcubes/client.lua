@@ -165,6 +165,8 @@ loadModules = {
 	loading_screen = "games/fortcubes/loading_screen.lua",
 	-- menu
 	menu = "games/fortcubes/menu/menu.lua",
+	globalTrees = "games/fortcubes/menu/data/trees.lua",
+	globalBushes = "games/fortcubes/menu/data/bushes.lua",
 	armory = "games/fortcubes/menu/armory.lua",
 	settings = "games/fortcubes/settings.lua",
 	-- game
