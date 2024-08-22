@@ -1,4 +1,4 @@
 # Fortcubes
-PVP Game
+Top-down fast-paced PVP game
 
-(Our first NSFWorks game btw)
+(Our first NSFWorks game)
