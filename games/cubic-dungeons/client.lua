@@ -231,7 +231,7 @@ function doneLoading()
 			local wp_config = copyTable(part)
 			for i, effect in ipairs(part.stat_effects) do
 				local code = effect:gsub("([%w_]+)%s*([%+%-/%*])=%s*([%w_]+)", "%1 = %1 %2 %3")
-				Debug.log("Loaded effect: "..code)
+				Debug.log("Loaded effect: '"..code.."' from '"..effect.."'")
 				wp_config.stat_effects[i] = function(stats)
 					loadFunction(code, stats)()
 				end
