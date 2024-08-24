@@ -8,6 +8,7 @@ weapons.new = function(self, config)
     w.Type = config.type
     w.Name = config.name
     w.Description = config.description
+    w.Rarity = config.rarity
     w.Parts = config.parts or {}
 
 

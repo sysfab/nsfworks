@@ -1,5 +1,6 @@
 {
     "wood_handle": {
+        "type": "sword",
         "description": "Weak, but universal",
         "stat_effects": [
             "damage = 1",
@@ -7,6 +8,7 @@
         ]
     },
     "iron_handle": {
+        "type": "sword",
         "description": "Strong, but heavy",
         "stat_effects": [
             "damage = 2",
@@ -15,12 +17,14 @@
     },
 
     "wood_blade": {
+        "type": "sword",
         "description": "Weak blade made out of wood",
         "stat_effects": [
             "damage += 1"
         ]
     },
     "iron_blade": {
+        "type": "sword",
         "description": "Heavy iron blade",
         "stat_effects": [
             "damage += 4",
@@ -29,6 +33,7 @@
     },
 
     "poison1_enchantment": {
+        "type": "enchantment",
         "description": "Poisons enemies",
         "stat_effects": [
             "poison_damage = 1",

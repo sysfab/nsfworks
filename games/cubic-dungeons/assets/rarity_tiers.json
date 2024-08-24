@@ -1,0 +1,18 @@
+{
+    "common": {
+        "name": "Common",
+        "color": [135, 135, 134]
+    },
+    "rare": {
+        "name": "Rare",
+        "color": [194, 217, 255]
+    },
+    "mythic": {
+        "name": "Mythic",
+        "color": [212, 84, 255]
+    },
+    "legendary": {
+        "name": "Legendary",
+        "color": [255, 144, 59]
+    }
+}

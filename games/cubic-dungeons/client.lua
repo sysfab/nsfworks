@@ -168,6 +168,7 @@ loadModules = {
 	-- classes
 	weapons = "games/cubic-dungeons/classes/weapons.lua",
 	weapon_parts = "games/cubic-dungeons/classes/weapon_parts.lua",
+	rarity_tiers = "games/cubic-dungeons/classes/rarity_tiers.lua",
 }
 
 animations = {}
@@ -194,6 +195,7 @@ json = {}
 loadJsons = {
 	weapons = "games/cubic-dungeons/assets/weapons/weapons.json",
 	weapon_parts = "games/cubic-dungeons/assets/weapons/parts/parts.json",
+	rarity_tiers = "games/cubic-dungeons/assets/rarity_tiers.json",
 }
 
 
@@ -221,6 +223,19 @@ function doneLoading()
 
 	if Debug.enabled == true then
 		toast:create({message = "Game launched with Debug enabled."})
+	end
+
+	Debug.log("Loading rarity tiers...")
+	for id, tier in pairs(json.rarity_tiers) do
+		errorHandler(function()
+			Debug.log("Loading rarity tier '"..id.."'...")
+
+			local rt_config = copyTable(tier)
+			rt_config.color = Color(rt_config.color[1], rt_config.color[2], rt_config.color[3])
+
+			local rt = rarity_tier(rt_config)
+			rarity_tiers[id] = rt
+		end, function(err) CRASH("Failed to load rarity tier ".. id .." - "..err) end)()
 	end
 
 	Debug.log("Loading weapon parts...")
@@ -254,6 +269,7 @@ function doneLoading()
 
 			local wp_config = copyTable(weapon_json)
 			wp_config.parts = parts
+			wp_config.rarity = rarity_tiers[wp_config.rarity]
 
 			local wp = weapon(wp_config)
 			
