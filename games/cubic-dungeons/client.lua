@@ -232,9 +232,8 @@ function doneLoading()
 			for i, effect in ipairs(part.stat_effects) do
 				if effect[1] == "func" then
 					local code = effect[2]
-					code = code .. " return stats"
 					wp_config.stat_effects[i][2] = function(stats)
-						local v = loadFunction(code, {stats = stats})()
+						loadFunction(code, {stats = stats})()
 					end
 				end
 			end
