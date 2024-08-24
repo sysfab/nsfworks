@@ -245,9 +245,6 @@ for key, value in pairs(loadModules) do
 		loaded = loaded + 1
 
 		if loaded_modules >= need_to_load_modules then
-			if loaded == need_to_load then
-				checkLoading()
-			end
 			Debug.log("client() - Loaded all modules.")
 			if loading_screen.created then
 				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
