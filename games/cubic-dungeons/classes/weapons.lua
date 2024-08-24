@@ -16,7 +16,7 @@ weapons.new = function(self, config)
             local effects = part.StatsEffects
 
             for _, effect in ipairs(effects) do
-                effect[1](s.Stats)
+                effect(s.Stats)
             end
         end
     end
