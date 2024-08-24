@@ -10,7 +10,7 @@ weapon_parts.new = function(self, config)
 
     w.Texture = images[w.TextureName]
     if w.Texture == nil then
-        error("weapon_parts:new(config) - config.texture_name, texture not found in images table", 2)
+        error("weapon_parts:new(config) - config.texture_name, texture '"..tostring(w.TextureName).."' not found in images table", 2)
     end
 
     setmetatable(w, {type="weapon_part"})
