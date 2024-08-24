@@ -1,5 +1,5 @@
 {
-    "wood_handle": {
+    "sword_wood_handle": {
         "type": "sword",
         "texture": "sword_wood_handle",
         "name": "Wooden handle",
@@ -11,7 +11,7 @@
             "attack_duration = 0.2"
         ]
     },
-    "stone_handle": {
+    "sword_stone_handle": {
         "type": "sword",
         "texture": "sword_stone_handle",
         "name": "Stone handle",
@@ -23,7 +23,7 @@
             "attack_duration = 0.2"
         ]
     },
-    "copper_handle": {
+    "sword_copper_handle": {
         "type": "sword",
         "texture": "sword_copper_handle",
         "name": "Copper handle",
@@ -35,7 +35,7 @@
             "attack_duration = 0.2"
         ]
     },
-    "iron_handle": {
+    "sword_iron_handle": {
         "type": "sword",
         "texture": "sword_iron_handle",
         "name": "Iron handle",
@@ -48,7 +48,7 @@
         ]
     },
 
-    "wood_blade": {
+    "sword_wood_blade": {
         "type": "sword",
         "texture": "sword_wood_blade",
         "name": "Wooden blade",
@@ -58,7 +58,7 @@
             "damage += 1"
         ]
     },
-    "stone_blade": {
+    "sword_stone_blade": {
         "type": "sword",
         "texture": "sword_stone_blade",
         "name": "Stone blade",
@@ -70,7 +70,7 @@
             "attack_duration *= 2"
         ]
     },
-    "copper_blade": {
+    "sword_copper_blade": {
         "type": "sword",
         "texture": "sword_copper_blade",
         "name": "Copper blade",
@@ -82,7 +82,7 @@
             "attack_duration *= 0.8"
         ]
     },
-    "iron_blade": {
+    "sword_iron_blade": {
         "type": "sword",
         "texture": "sword_iron_blade",
         "name": "Iron blade",
@@ -95,7 +95,7 @@
         ]
     },
 
-    "wood_guard": {
+    "sword_wood_guard": {
         "type": "sword",
         "texture": "sword_wood_guard",
         "name": "Wooden guard",
@@ -105,9 +105,9 @@
             "attack_speed *= 1.2"
         ]
     },
-    "stone_guard": {
+    "sword_stone_guard": {
         "type": "sword",
-        "texture": "sword_wood_guard",
+        "texture": "sword_stone_guard",
         "name": "Stone guard",
         "description": "Heavy and increases damage",
         "rarity": "common",
@@ -117,9 +117,9 @@
             "damage *= 1.2"
         ]
     },
-    "copper_guard": {
+    "sword_copper_guard": {
         "type": "sword",
-        "texture": "sword_wood_guard",
+        "texture": "sword_copper_guard",
         "name": "Copper guard",
         "description": "Lightweight guard",
         "rarity": "common",
@@ -129,9 +129,9 @@
             "damage *= 0.9"
         ]
     },
-    "iron_guard": {
+    "sword_iron_guard": {
         "type": "sword",
-        "texture": "sword_wood_guard",
+        "texture": "sword_iron_guard",
         "name": "Iron guard",
         "description": "Very comfortable guard for strong and fast attacks",
         "rarity": "common",
@@ -142,7 +142,7 @@
         ]
     },
 
-    "wood_pommel": {
+    "sword_wood_pommel": {
         "type": "sword",
         "texture": "sword_wood_pommel",
         "name": "Wooden pommel",
@@ -152,9 +152,9 @@
             "attack_speed *= 1.1"
         ]
     },
-    "stone_pommel": {
+    "sword_stone_pommel": {
         "type": "sword",
-        "texture": "sword_wood_pommel",
+        "texture": "sword_stone_pommel",
         "name": "Stone pommel",
         "description": "Heavy pommel",
         "rarity": "common",
@@ -163,9 +163,9 @@
             "attack_duration *= 0.9"
         ]
     },
-    "copper_pommel": {
+    "sword_copper_pommel": {
         "type": "sword",
-        "texture": "sword_wood_pommel",
+        "texture": "sword_copper_pommel",
         "name": "Copper pommel",
         "description": "Lightweight pommel",
         "rarity": "common",
@@ -173,26 +173,15 @@
             "attack_speed *= 1.1"
         ]
     },
-    "iron_pommel": {
+    "sword_iron_pommel": {
         "type": "sword",
-        "texture": "sword_wood_pommel",
+        "texture": "sword_iron_pommel",
         "name": "Iron pommel",
         "description": "Good pommel for faster attacks",
         "rarity": "common",
         "stat_effects": [
             "attack_speed *= 1.2",
             "attack_duration *= 0.9"
-        ]
-    },
-
-    "poison1_enchantment": {
-        "type": "enchantment",
-        "name": "Poison Enchantment [I]",
-        "description": "Poisons enemies",
-        "rarity": "rare",
-        "stat_effects": [
-            "poison_damage = 1",
-            "poison_time = 2"
         ]
     }
 }
