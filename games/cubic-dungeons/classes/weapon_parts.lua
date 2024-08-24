@@ -6,6 +6,7 @@ weapon_parts.new = function(self, config)
     local w = {}
 
     w.Type = config.type
+    w.StatsEffects = config.stat_effects or {}
     w.TextureName = config.texture_name
 
     w.Texture = images[w.TextureName]
