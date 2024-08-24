@@ -10,6 +10,6 @@ weapons.new = function(self, config)
     return w
 end
 
-rawset(_ENV, "weapon", function(...) weapons:new(...) end)
+rawset(_ENV, "weapon", function(...) return weapons:new(...) end)
 
 return weapons
