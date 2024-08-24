@@ -331,16 +331,17 @@ for key, value in pairs(loadModules) do
 		loaded_modules = loaded_modules + 1
 		loaded = loaded + 1
 
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
 		if loaded_modules >= need_to_load_modules then
 			Debug.log("client() - Loaded all modules.")
-			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
-			elseif loading_screen ~= nil then
-				loading_screen:create()
-				
-				loadingBG:remove()
-				loadingBG = nil
-			end
 		end
 		if loaded >= need_to_load then
 			checkLoading()
@@ -363,16 +364,17 @@ for key, value in pairs(loadAnimations) do
 		loaded_animations = loaded_animations + 1
 		loaded = loaded + 1
 
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
 		if loaded_animations >= need_to_load_animations then
 			Debug.log("client() - Loaded all animations.")
-			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
-			elseif loading_screen ~= nil then
-				loading_screen:create()
-				
-				loadingBG:remove()
-				loadingBG = nil
-			end
 		end
 		if loaded >= need_to_load then
 			checkLoading()
@@ -395,16 +397,17 @@ for key, value in pairs(loadShapes) do
 		loaded_shapes = loaded_shapes + 1
 		loaded = loaded + 1
 
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
 		if loaded_shapes >= need_to_load_shapes then
 			Debug.log("client() - Loaded all shapes.")
-			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
-			elseif loading_screen ~= nil then
-				loading_screen:create()
-				
-				loadingBG:remove()
-				loadingBG = nil
-			end
 		end
 		if loaded >= need_to_load then
 			checkLoading()
@@ -427,16 +430,17 @@ for key, value in pairs(loadAudios) do
 		loaded_audios = loaded_audios + 1
 		loaded = loaded + 1
 
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
 		if loaded_audios >= need_to_load_audios then
 			Debug.log("client() - Loaded all audios.")
-			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
-			elseif loading_screen ~= nil then
-				loading_screen:create()
-				
-				loadingBG:remove()
-				loadingBG = nil
-			end
 		end
 		if loaded >= need_to_load then
 			checkLoading()
@@ -459,16 +463,17 @@ for key, value in pairs(loadImages) do
 		loaded_images = loaded_images + 1
 		loaded = loaded + 1
 
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
 		if loaded_images >= need_to_load_images then
 			Debug.log("client() - Loaded all images.")
-			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
-			elseif loading_screen ~= nil then
-				loading_screen:create()
-				
-				loadingBG:remove()
-				loadingBG = nil
-			end
 		end
 		if loaded >= need_to_load then
 			checkLoading()
@@ -491,16 +496,17 @@ for key, value in pairs(loadJsons) do
 		loaded_jsons = loaded_jsons + 1
 		loaded = loaded + 1
 
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
 		if loaded_jsons >= need_to_load_jsons then
 			Debug.log("client() - Loaded all jsons.")
-			if loading_screen.created then
-				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
-			elseif loading_screen ~= nil then
-				loading_screen:create()
-				
-				loadingBG:remove()
-				loadingBG = nil
-			end
 		end
 		if loaded >= need_to_load then
 			checkLoading()
