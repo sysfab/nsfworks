@@ -55,7 +55,7 @@ utils.init = function(self, env)
 				copy = {}
 				copies[orig] = copy
 				for orig_key, orig_value in next, orig, nil do
-					copy[deepcopy(orig_key, copies)] = deepcopy(orig_value, copies)
+					copy[deepcopy(orig_key, copies)] = self.env.copyTable(orig_value, copies)
 				end
 				setmetatable(copy, deepcopy(getmetatable(orig), copies))
 			end
