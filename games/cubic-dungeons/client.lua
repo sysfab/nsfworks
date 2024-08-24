@@ -232,9 +232,7 @@ function doneLoading()
 			for i, effect in ipairs(part.stat_effects) do
 				if effect[1] == "func" then
 					local code = effect[2]
-					code = "function(stats) " .. code .. " end"
-					Debug.log("Loaded func stat with code: "..code)
-					wp_config.stat_effects[i][2] = loadFunction(code, {})
+					wp_config.stat_effects[i][2] = loadFunction(code, {stats = part.stat_effects})
 				end
 			end
 
