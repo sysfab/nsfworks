@@ -231,6 +231,23 @@ function doneLoading()
 		weapon_parts[id] = wp
 	end
 
+	Debug.log("Loading weapons...")
+	for id, weapon in pairs(json.weapons) do
+		Debug.log("Loading weapon '"..id.."'...")
+
+		local parts = {}
+		for i, part_name in ipairs(weapon.parts) do
+			table.insert(parts, weapon_parts[part_name])
+		end
+
+		local wp_config = copyTable(weapon)
+		wp_config.parts = parts
+
+		local wp = weapon(wp_config)
+		
+		weapons[id] = wp
+	end
+
 	if loading_screen.created then loading_screen:remove() end
 	settings:load()
 	menu:create()

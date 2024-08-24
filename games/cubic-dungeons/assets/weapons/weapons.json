@@ -1,1 +1,6 @@
-{}
+{
+    "test_sword": {
+        "type": "sword",
+        "parts": ["wood_handle", "iron_blade"]
+    }
+}
