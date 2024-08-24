@@ -167,7 +167,7 @@ loadModules = {
 	settings = "games/cubic-dungeons/settings.lua",
 
 	-- classes
-
+	weapons = "games/cubic-dungeons/classes/weapons.lua",
 }
 
 animations = {}
