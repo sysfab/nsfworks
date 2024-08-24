@@ -30,7 +30,7 @@ Clouds.On = false
 
 Debug.log("client() - loading cubzh modules...")
 multi = require("multi")
-ui = uikit_loader()
+ui = require("uikit")
 toast = require("ui_toast")
 Debug.log("client() - loaded cubzh modules")
 
