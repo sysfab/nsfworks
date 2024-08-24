@@ -52,7 +52,6 @@ visualizer.create = function(weapon)
 
         for i, part in ipairs(v.weapon.Parts) do
             local p = v["part "..part.Name]
-            p:remove()
             v["part "..part.Name] = nil
         end
 
