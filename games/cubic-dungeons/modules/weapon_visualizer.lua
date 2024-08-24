@@ -1,6 +1,6 @@
 local visualizer = {}
 
-visualizer.create(weapon)
+visualizer.create = function(weapon)
     local v = {}
 
     v.window = ui:createFrame(Color(0, 0, 0, 125))
