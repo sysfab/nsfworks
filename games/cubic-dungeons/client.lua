@@ -225,36 +225,40 @@ function doneLoading()
 
 	Debug.log("Loading weapon parts...")
 	for id, part in pairs(json.weapon_parts) do
-		Debug.log("Loading weapon part '"..id.."'...")
+		errorHandler(function()
+			Debug.log("Loading weapon part '"..id.."'...")
 
-		local wp_config = copyTable(part)
-		for i, effect in ipairs(part.stat_effects) do
-			if effect[1] == "func" then
-				local code = effect[2]
-				code = "function(stats) " .. code .. " end"
-				wp_config.stat_effects[i][2] = loadFunction(code, {})
+			local wp_config = copyTable(part)
+			for i, effect in ipairs(part.stat_effects) do
+				if effect[1] == "func" then
+					local code = effect[2]
+					code = "function(stats) " .. code .. " end"
+					wp_config.stat_effects[i][2] = loadFunction(code, {})
+				end
 			end
-		end
 
-		local wp = weapon_part(wp_config)
-		weapon_parts[id] = wp
+			local wp = weapon_part(wp_config)
+			weapon_parts[id] = wp
+		end, function(err) CRASH("Failed to load weapon part ".. id .." - "..err) end)
 	end
 
 	Debug.log("Loading weapons...")
 	for id, weapon_json in pairs(json.weapons) do
-		Debug.log("Loading weapon '"..id.."'...")
+		errorHandler(function()
+			Debug.log("Loading weapon '"..id.."'...")
 
-		local parts = {}
-		for i, part_name in ipairs(weapon_json.parts) do
-			table.insert(parts, weapon_parts[part_name])
-		end
+			local parts = {}
+			for i, part_name in ipairs(weapon_json.parts) do
+				table.insert(parts, weapon_parts[part_name])
+			end
 
-		local wp_config = copyTable(weapon_json)
-		wp_config.parts = parts
+			local wp_config = copyTable(weapon_json)
+			wp_config.parts = parts
 
-		local wp = weapon(wp_config)
-		
-		weapons[id] = wp
+			local wp = weapon(wp_config)
+			
+			weapons[id] = wp
+		end, function(err) CRASH("Failed to load weapon ".. id .." - "..err) end)
 	end
 
 	if loading_screen.created then loading_screen:remove() end
