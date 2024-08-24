@@ -232,15 +232,15 @@ function doneLoading()
 	end
 
 	Debug.log("Loading weapons...")
-	for id, weapon in pairs(json.weapons) do
+	for id, weapon_json in pairs(json.weapons) do
 		Debug.log("Loading weapon '"..id.."'...")
 
 		local parts = {}
-		for i, part_name in ipairs(weapon.parts) do
+		for i, part_name in ipairs(weapon_json.parts) do
 			table.insert(parts, weapon_parts[part_name])
 		end
 
-		local wp_config = copyTable(weapon)
+		local wp_config = copyTable(weapon_json)
 		wp_config.parts = parts
 
 		local wp = weapon(wp_config)
