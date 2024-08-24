@@ -168,6 +168,7 @@ loadModules = {
 
 	-- classes
 	weapons = "games/cubic-dungeons/classes/weapons.lua",
+	weapon_parts = "games/cubic-dungeons/classes/weapon_parts.lua",
 }
 
 animations = {}
@@ -187,7 +188,13 @@ loadAudios = {
 
 images = {}
 loadImages = {
+	--wp_name = "games/cubic-dungeons/assets/weapons/parts/textures/name",
+}
 
+json = {}
+loadJsons = {
+	weapons = "games/cubic-dungeons/assets/weapons/weapons.json",
+	weapon_parts = "games/cubic-dungeons/assets/weapons/parts/parts.json",
 }
 
 
@@ -199,6 +206,7 @@ need_to_load_audios = 0
 need_to_load_images = 0
 need_to_load_modules = 0
 need_to_load_shapes = 0
+need_to_load_jsons = 0
 
 isLoaded = false
 
@@ -389,6 +397,38 @@ for key, value in pairs(loadImages) do
 	end)
 end
 Debug.log("client() - Loading " .. need_to_load_images .. " images..")
+
+for key, value in pairs(loadJsons) do
+	if need_to_load_jsons == nil then need_to_load_jsons = 0 end
+	need_to_load_jsons = need_to_load_jsons + 1
+	need_to_load = need_to_load + 1
+
+	Loader:LoadText(value, function(data)
+		Debug.log("client() - Loaded '".. value .."'")
+
+		json[key] = JSON:Decode(data)
+
+		if loaded_jsons == nil then loaded_jsons = 0 end
+		loaded_jsons = loaded_jsons + 1
+		loaded = loaded + 1
+
+		if loaded_jsons >= need_to_load_jsons then
+			Debug.log("client() - Loaded all jsons.")
+			if loading_screen.created then
+				loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+			elseif loading_screen ~= nil then
+				loading_screen:create()
+				
+				loadingBG:remove()
+				loadingBG = nil
+			end
+		end
+		if loaded >= need_to_load then
+			checkLoading()
+		end
+	end)
+end
+Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
