@@ -239,7 +239,7 @@ function doneLoading()
 
 			local wp = weapon_part(wp_config)
 			weapon_parts[id] = wp
-		end, function(err) CRASH("Failed to load weapon part ".. id .." - "..err) end)
+		end, function(err) CRASH("Failed to load weapon part ".. id .." - "..err) end)()
 	end
 
 	Debug.log("Loading weapons...")
@@ -258,7 +258,7 @@ function doneLoading()
 			local wp = weapon(wp_config)
 			
 			weapons[id] = wp
-		end, function(err) CRASH("Failed to load weapon ".. id .." - "..err) end)
+		end, function(err) CRASH("Failed to load weapon ".. id .." - "..err) end)()
 	end
 
 	if loading_screen.created then loading_screen:remove() end
