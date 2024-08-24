@@ -14,13 +14,13 @@
 
     "wood_blade": {
         "stat_effects": [
-            "damage = damage + 1"
+            "damage += 1"
         ]
     },
     "iron_blade": {
         "stat_effects": [
-            "damage = damage + 4",
-            "attack_speed = attack_speed * 0.4"
+            "damage += 4",
+            "attack_speed *= 0.4"
         ]
     },
 
