@@ -10,7 +10,7 @@ weapon_parts.new = function(self, config)
     w.Description = config.description
     w.Rarity = config.rarity
     w.StatsEffects = config.stat_effects or {}
-    w.TextureName = config.texture_name
+    w.TextureName = config.texture
 
     w.Texture = images["wp_"..w.TextureName]
     if w.Texture == nil then
