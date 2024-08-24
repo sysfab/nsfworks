@@ -1,11 +1,13 @@
 {
     "wood_handle": {
+        "description": "Weak, but universal",
         "stat_effects": [
             "damage = 1",
             "attack_speed = 1"
         ]
     },
     "iron_handle": {
+        "description": "Strong, but heavy",
         "stat_effects": [
             "damage = 2",
             "attack_speed = 0.5"
@@ -13,11 +15,13 @@
     },
 
     "wood_blade": {
+        "description": "Weak blade made out of wood",
         "stat_effects": [
             "damage += 1"
         ]
     },
     "iron_blade": {
+        "description": "Heavy iron blade",
         "stat_effects": [
             "damage += 4",
             "attack_speed *= 0.4"
@@ -25,6 +29,7 @@
     },
 
     "poison1_enchantment": {
+        "description": "Poisons enemies",
         "stat_effects": [
             "poison_damage = 1",
             "poison_time = 2"
