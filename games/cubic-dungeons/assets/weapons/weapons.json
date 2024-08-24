@@ -1,16 +1,34 @@
 {
-    "test": {
+    "wood_sword": {
         "type": "sword",
-        "name": "Test sword 1",
+        "name": "Wood Sword",
+        "description": "We all started from something",
         "rarity": "common",
-        "parts": ["wood_handle", "iron_blade"]
-    },
 
-    "test2": {
+        "parts": ["wood_sword_handle", "wood_sword_blade", "wood_sword_pommel", "wood_sword_guard"]
+    },
+    "stone_sword": {
         "type": "sword",
-        "name": "Test sword 2",
+        "name": "Stone Sword",
+        "description": "Better, but still bad",
+        "rarity": "rare",
+
+        "parts": ["stone_sword_handle", "stone_sword_blade", "stone_sword_pommel", "stone_sword_guard"]
+    },
+    "copper_sword": {
+        "type": "sword",
+        "name": "Copper Sword",
+        "description": "Good sword for any needs",
         "rarity": "mythic",
-        "description": "Test sword 1, but poisoned",
-        "parts": ["wood_handle", "iron_blade", "poison1_enchantment"]
+
+        "parts": ["copper_sword_handle", "copper_sword_blade", "copper_sword_pommel", "copper_sword_guard"]
+    },
+    "iron_sword": {
+        "type": "sword",
+        "name": "Iron Sword",
+        "description": "Best sword",
+        "rarity": "legendary",
+
+        "parts": ["iron_sword_handle", "iron_sword_blade", "iron_sword_pommel", "iron_sword_guard"]
     }
 }
