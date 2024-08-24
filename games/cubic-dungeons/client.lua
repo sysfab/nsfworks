@@ -200,7 +200,11 @@ need_to_load_images = 0
 need_to_load_modules = 0
 need_to_load_shapes = 0
 
+isLoaded = false
+
 function doneLoading()
+	isLoaded = true
+
 	Camera:SetParent(World)
 	Debug.log("")
 	Debug.log("GAME LOADED")
@@ -218,7 +222,7 @@ function doneLoading()
 end
 
 function checkLoading()
-	if playerJoined and loaded >= need_to_load then
+	if isLoaded ~= true and playerJoined and loaded >= need_to_load then
 		doneLoading()
 	end
 end
