@@ -169,6 +169,9 @@ loadModules = {
 	weapons = "games/cubic-dungeons/classes/weapons.lua",
 	weapon_parts = "games/cubic-dungeons/classes/weapon_parts.lua",
 	rarity_tiers = "games/cubic-dungeons/classes/rarity_tiers.lua",
+
+	-- modules
+	weapon_visualizer = "games/cubic-dungeons/modules/weapon_visualizer.lua",
 }
 
 animations = {}
