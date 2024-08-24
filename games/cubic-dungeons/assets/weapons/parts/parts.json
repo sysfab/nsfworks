@@ -1,32 +1,33 @@
 {
     "wood_handle": {
         "stat_effects": [
-            ["set", "damage", 1],
-            ["set", "attack_speed", 1]
+            "damage = 1",
+            "attack_speed = 1"
         ]
     },
     "iron_handle": {
         "stat_effects": [
-            ["set", "damage", 2],
-            ["set", "attack_speed", 0.5]
+            "damage = 2",
+            "attack_speed = 0.5"
         ]
     },
 
     "wood_blade": {
         "stat_effects": [
-            ["add", "damage", 1]
+            "damage = damage + 1"
         ]
     },
     "iron_blade": {
         "stat_effects": [
-            ["add", "damage", 4],
-            ["mul", "attack_speed", 0.5]
+            "damage = damage + 4",
+            "attack_speed = attack_speed * 0.4"
         ]
     },
 
     "poison1_enchantment": {
         "stat_effects": [
-            ["func", "poison_damage = 1 poison_time = 2"]
+            "poison_damage = 1",
+            "poison_time = 2"
         ]
     }
 }
