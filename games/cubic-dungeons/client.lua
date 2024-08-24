@@ -233,7 +233,7 @@ function doneLoading()
 			local rt_config = copyTable(tier)
 			rt_config.color = Color(rt_config.color[1], rt_config.color[2], rt_config.color[3])
 
-			local rt = rarity_tier(rt_config)
+			local rt = rarity(rt_config)
 			rarity_tiers[id] = rt
 		end, function(err) CRASH("Failed to load rarity tier ".. id .." - "..err) end)()
 	end
