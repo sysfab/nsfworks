@@ -183,16 +183,5 @@
             "attack_speed *= 1.2",
             "attack_duration *= 0.9"
         ]
-    },
-
-    "poison1_enchantment": {
-        "type": "enchantment",
-        "name": "Poison Enchantment [I]",
-        "description": "Poisons enemies",
-        "rarity": "rare",
-        "stat_effects": [
-            "poison_damage = 1",
-            "poison_time = 2"
-        ]
     }
 }
