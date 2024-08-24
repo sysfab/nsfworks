@@ -3,8 +3,8 @@
 
 local utils = {}
 
-utils.init = function(self, env)
-	self.env = env
+utils.init = function(self, e)
+	self.env = e
 
 	self.env.lerp = function(a, b, w)
 		return a + (b-a)*w
