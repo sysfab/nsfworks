@@ -40,7 +40,7 @@ utils.init = function(self, env)
 	end
 
 	self.env.loadFunction = function(func_or_string, env)
-		return load(func_or_string, nil, "bt", self.env)
+		return load(func_or_string, nil, "bt", env or self.env)
 	end
 
 	--http://lua-users.org/wiki/CopyTable
