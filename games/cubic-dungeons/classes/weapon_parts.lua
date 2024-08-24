@@ -6,7 +6,9 @@ weapon_parts.new = function(self, config)
     local w = {}
 
     w.Type = config.type
+    w.Name = config.name
     w.Description = config.description
+    w.Rarity = config.rarity
     w.StatsEffects = config.stat_effects or {}
     w.TextureName = config.texture_name
 

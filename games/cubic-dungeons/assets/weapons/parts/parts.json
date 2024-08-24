@@ -1,7 +1,9 @@
 {
     "wood_handle": {
         "type": "sword",
+        "name": "Wood handle",
         "description": "Weak, but universal",
+        "rarity": "common",
         "stat_effects": [
             "damage = 1",
             "attack_speed = 1"
@@ -9,7 +11,9 @@
     },
     "iron_handle": {
         "type": "sword",
+        "name": "Iron handle",
         "description": "Strong, but heavy",
+        "rarity": "common",
         "stat_effects": [
             "damage = 2",
             "attack_speed = 0.5"
@@ -18,14 +22,18 @@
 
     "wood_blade": {
         "type": "sword",
+        "name": "Wood blade",
         "description": "Weak blade made out of wood",
+        "rarity": "common",
         "stat_effects": [
             "damage += 1"
         ]
     },
     "iron_blade": {
         "type": "sword",
+        "name": "Iron blade",
         "description": "Heavy iron blade",
+        "rarity": "common",
         "stat_effects": [
             "damage += 4",
             "attack_speed *= 0.4"
@@ -34,7 +42,9 @@
 
     "poison1_enchantment": {
         "type": "enchantment",
+        "name": "Poison Enchantment [I]",
         "description": "Poisons enemies",
+        "rarity": "rare",
         "stat_effects": [
             "poison_damage = 1",
             "poison_time = 2"
