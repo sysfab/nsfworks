@@ -7,6 +7,7 @@ weapons.new = function(self, config)
 
     w.Parts = config.parts or {}
 
+    setmetatable(w, {type="weapon"})
     return w
 end
 
