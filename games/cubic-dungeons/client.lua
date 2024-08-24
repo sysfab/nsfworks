@@ -194,6 +194,12 @@ loadImages = {
 loaded = 0
 need_to_load = 0
 
+need_to_load_animations = 0
+need_to_load_audios = 0
+need_to_load_images = 0
+need_to_load_modules = 0
+need_to_load_shapes = 0
+
 function doneLoading()
 	Camera:SetParent(World)
 	Debug.log("")
