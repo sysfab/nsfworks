@@ -27,16 +27,18 @@ visualizer.create = function(weapon)
     v.description:parentDidResize()
 
     for i, part in ipairs(v.weapon.Parts) do
-        v["part "..part.Name] = ui:createFrame()
+        v["part "..part.Name] = ui:createFrame(Color(255, 255, 255, 254))
         local p = v["part "..part.Name]
 
         p:setImage(part.Texture)
         p:setParent(v.window)
         p.parentDidResize = function(s)
-            local wh = math.min(Screen.Width/3, Screen.Height/3)
+            local wh = math.min(Screen.Width/2.6, Screen.Height/2.6)
 
             p.Width = wh
             p.Height = wh
+
+            p.pos = Number2(Screen.Width/2-p.Width/2, Screen.Height/2-p.Height/2)
         end
         p:parentDidResize()
     end
