@@ -12,7 +12,7 @@ weapon_parts.new = function(self, config)
     w.StatsEffects = config.stat_effects or {}
     w.TextureName = config.texture_name
 
-    w.Texture = images[w.TextureName]
+    w.Texture = images["wp_"..w.TextureName]
     if w.Texture == nil then
         --error("weapon_parts:new(config) - config.texture_name, texture '"..tostring(w.TextureName).."' not found in images table", 2)
     end
