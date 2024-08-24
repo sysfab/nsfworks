@@ -27,7 +27,7 @@ visualizer.create = function(weapon)
     v.description:parentDidResize()
 
     for i, part in ipairs(v.weapon.Parts) do
-        v["part "..part.Name] = ui:createFrame(Color(255, 255, 255, 254))
+        v["part "..part.Name] = ui:createFrame(Color(1.0, 1.0, 1.0, 0.99))
         local p = v["part "..part.Name]
 
         p:setImage(part.Texture)
