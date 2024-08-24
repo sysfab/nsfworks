@@ -33,6 +33,8 @@ visualizer.create = function(weapon)
         p:setImage(part.Texture)
         p:setParent(v.window)
         p.parentDidResize = function(s)
+            s.object.Color = Color(1.0, 1.0, 1.0, 0.99)
+
             local wh = math.min(Screen.Width/2.6, Screen.Height/2.6)
 
             p.Width = wh
