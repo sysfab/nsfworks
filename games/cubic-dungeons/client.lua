@@ -230,8 +230,9 @@ function doneLoading()
 		local wp_config = copyTable(part)
 		for i, effect in ipairs(part.stat_effects) do
 			if effect[1] == "func" then
-				effect[2] = "function(stats) " .. effect[2] .. " end"
-				effect[2] = loadFunction(effect[2], {})
+				local code = effect[2]
+				code = "function(stats) " .. code .. " end"
+				part.stat_effects[i][2] = loadFunction(code, {})
 			end
 		end
 
