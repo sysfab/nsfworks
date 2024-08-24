@@ -1,12 +1,13 @@
 {
     "test": {
         "type": "sword",
-        "description": "Test sword 1",
+        "name": "Test sword 1",
         "parts": ["wood_handle", "iron_blade"]
     },
 
     "test2": {
         "type": "sword",
+        "name": "Test sword 2",
         "description": "Test sword 1, but poisoned",
         "parts": ["wood_handle", "iron_blade", "poison1_enchantment"]
     }
