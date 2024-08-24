@@ -1,1 +1,26 @@
-{}
+{
+    "wood_handle": {
+        "stat_effects": [
+            ["set", "damage", 1],
+            ["set", "attack_speed", 1]
+        ]
+    },
+    "iron_handle": {
+        "stat_effects": [
+            ["set", "damage", 2],
+            ["set", "attack_speed", 0.5]
+        ]
+    },
+
+    "wood_blade": {
+        "stat_effects": [
+            ["add", "damage", 1]
+        ]
+    },
+    "iron_blade": {
+        "stat_effects": [
+            ["add", "damage", 4],
+            ["mul", "attack_speed", 0.5]
+        ]
+    }
+}
