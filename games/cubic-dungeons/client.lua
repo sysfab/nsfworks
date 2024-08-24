@@ -212,6 +212,7 @@ function doneLoading()
 		toast:create({message = "Game launched with Debug enabled."})
 	end
 
+	loading_screen:remove()
 	settings:load()
 	menu:create()
 end
