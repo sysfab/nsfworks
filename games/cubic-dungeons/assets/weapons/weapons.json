@@ -10,7 +10,7 @@
     "stone_sword": {
         "type": "sword",
         "name": "Stone Sword",
-        "description": "Better, but still bad",
+        "description": "Better than wood but still bad",
         "rarity": "rare",
 
         "parts": ["stone_sword_handle", "stone_sword_blade", "stone_sword_pommel", "stone_sword_guard"]
@@ -18,7 +18,7 @@
     "copper_sword": {
         "type": "sword",
         "name": "Copper Sword",
-        "description": "Good sword for any needs",
+        "description": "Light sword with small damage",
         "rarity": "mythic",
 
         "parts": ["copper_sword_handle", "copper_sword_blade", "copper_sword_pommel", "copper_sword_guard"]
@@ -26,9 +26,18 @@
     "iron_sword": {
         "type": "sword",
         "name": "Iron Sword",
-        "description": "Best sword",
+        "description": "Heavy sword with best damage",
         "rarity": "legendary",
 
         "parts": ["iron_sword_handle", "iron_sword_blade", "iron_sword_pommel", "iron_sword_guard"]
+    },
+
+    "test_sword": {
+        "type": "sword",
+        "name": "Test Sword",
+        "description": "Lorem ipsum",
+        "rarity": "legendary",
+
+        "parts": ["wood_sword_handle", "stone_sword_blade", "copper_sword_pommel", "iron_sword_guard"]
     }
 }
