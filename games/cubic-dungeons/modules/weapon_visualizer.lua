@@ -31,7 +31,6 @@ visualizer.create = function(weapon)
         local p = v["part "..part.Name]
 
         p:setImage(part.Texture)
-        p:setParent(v.window)
         p.parentDidResize = function(s)
             s.object.Color = Color(255, 255, 255, 254)
 
