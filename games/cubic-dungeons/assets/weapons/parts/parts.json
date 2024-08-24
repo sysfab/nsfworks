@@ -22,5 +22,11 @@
             ["add", "damage", 4],
             ["mul", "attack_speed", 0.5]
         ]
+    },
+
+    "poison1_enchantment": {
+        "stat_effects": [
+            ["func", "stats.poison_damage = 1 stats.poison_time = 2"]
+        ]
     }
 }

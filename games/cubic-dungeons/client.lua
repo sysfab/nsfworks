@@ -227,7 +227,15 @@ function doneLoading()
 	for id, part in pairs(json.weapon_parts) do
 		Debug.log("Loading weapon part '"..id.."'...")
 
-		local wp = weapon_part(part)
+		local wp_config = copyTable(part)
+		for i, effect in ipairs(part.stat_effects) do
+			if effect[1] == "func" then
+				effect[2] = "function(stats) " .. effect[2] .. " end"
+				effect[2] = loadFunction(effect[2], {})
+			end
+		end
+
+		local wp = weapon_part(wp_config)
 		weapon_parts[id] = wp
 	end
 
