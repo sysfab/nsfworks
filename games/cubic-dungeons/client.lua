@@ -223,6 +223,14 @@ function doneLoading()
 		toast:create({message = "Game launched with Debug enabled."})
 	end
 
+	Debug.log("Loading weapon parts...")
+	for id, part in pairs(json.weapon_parts) do
+		Debug.log("Loading weapon part '"..id.."'...")
+
+		local wp = weapon_part(part)
+		weapon_parts[id] = wp
+	end
+
 	if loading_screen.created then loading_screen:remove() end
 	settings:load()
 	menu:create()
