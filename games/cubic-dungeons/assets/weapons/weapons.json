@@ -31,7 +31,15 @@
 
         "parts": ["sword_iron_handle", "sword_iron_blade", "sword_iron_pommel", "sword_iron_guard"]
     },
+    "gold_sword": {
+        "type": "sword",
+        "name": "Gold Sword",
+        "description": "Very expensive and heavy sword",
+        "rarity": "legendary",
 
+        "parts": ["sword_gold_handle", "sword_gold_blade", "sword_gold_pommel", "sword_gold_guard"]
+    },
+    
     "test_sword": {
         "type": "sword",
         "name": "Test Sword",

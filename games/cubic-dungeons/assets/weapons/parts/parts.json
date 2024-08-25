@@ -47,6 +47,18 @@
             "attack_duration = 0.2"
         ]
     },
+    "sword_gold_handle": {
+        "type": "sword",
+        "texture": "sword_gold_handle",
+        "name": "Golden handle",
+        "description": "Costs alot but so heavy",
+        "rarity": "rare",
+        "stat_effects": [
+            "damage = 3",
+            "attack_speed = 0.5",
+            "attack_duration = 2"
+        ]
+    },
 
     "sword_wood_blade": {
         "type": "sword",
@@ -92,6 +104,18 @@
             "damage += 4",
             "attack_speed *= 0.4",
             "attack_duration *= 1.2"
+        ]
+    },
+    "sword_gold_blade": {
+        "type": "sword",
+        "texture": "sword_gold_blade",
+        "name": "Golden blade",
+        "description": "Very heavy golden blade",
+        "rarity": "rare",
+        "stat_effects": [
+            "damage += 6",
+            "attack_speed *= 0.3",
+            "attack_duration *= 2"
         ]
     },
 
@@ -141,6 +165,18 @@
             "damage *= 1.5"
         ]
     },
+    "sword_gold_guard": {
+        "type": "sword",
+        "texture": "sword_gold_guard",
+        "name": "Iron guard",
+        "description": "Heavier than other guards but good for damaging",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 0.8",
+            "attack_duration *= 1.2",
+            "damage *= 2"
+        ]
+    },
 
     "sword_wood_pommel": {
         "type": "sword",
@@ -182,6 +218,17 @@
         "stat_effects": [
             "attack_speed *= 1.2",
             "attack_duration *= 0.9"
+        ]
+    },
+    "sword_gold_pommel": {
+        "type": "sword",
+        "texture": "sword_gold_pommel",
+        "name": "Golden pommel",
+        "description": "Very nice pommel for increasing attack speed",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 1.3",
+            "attack_duration *= 0.7"
         ]
     }
 }
